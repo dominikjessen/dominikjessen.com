@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card';
+import RevealCanvas from '../components/RevealCanvas';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -8,6 +9,7 @@ import Card from '../components/Card';
 		<div class="flex flex-col gap-8">
 			<h1>This is my Astro site</h1>
 			<Card title='This is a card' textColor='text-slate-500' />
+			<RevealCanvas client:load revealText='Reveal me'/>
 		</div>
 		
 	</main>
