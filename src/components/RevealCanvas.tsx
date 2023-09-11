@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface RevealCanvasProps {
-  revealText: string;
+  revealContent: string;
   eraserRadius?: number;
 }
 
-export default function RevealCanvas({ revealText, eraserRadius = 25 }: RevealCanvasProps) {
+export default function RevealCanvas({ revealContent, eraserRadius = 40 }: RevealCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [renderReveal, setRenderReveal] = useState(false);
   const [isErasing, setIsErasing] = useState(false);
@@ -58,7 +58,12 @@ export default function RevealCanvas({ revealText, eraserRadius = 25 }: RevealCa
   return (
     <div className="flex flex-col gap-4 items-center">
       <div className="w-[30rem] h-[36rem] flex justify-center items-center border-[16px] border-primary rounded-tl-full rounded-tr-full">
-        {renderReveal && <span className="absolute text-2xl z-10 select-none text-green-500">{revealText}</span>}
+        {renderReveal && (
+          <div className="w-[28rem] h-[34rem] flex flex-col justify-end items-center select-none">
+            <span className="text-8xl mb-64">🌵</span>
+            <img className="absolute z-10 w-[28rem]" src={revealContent} alt="Hidden Image" />
+          </div>
+        )}
         <canvas
           ref={canvasRef}
           className="absolute z-20 w-[28rem] h-[34rem] rounded-tl-full rounded-tr-full"
@@ -80,3 +85,23 @@ export default function RevealCanvas({ revealText, eraserRadius = 25 }: RevealCa
     </div>
   );
 }
+
+// let x = canvas.width * 0.5;
+// let y = canvas.height * 0.5;
+// let dx = 0;
+// let dy = 0;
+
+// ctx.fillStyle = "green";
+
+// function render() {
+//   ctx.clearRect(0, 0, canvas.width, canvas.height);
+//   ctx.fillRect(x, y, dx, dy);
+//   x -= 1;
+//   y -= 1;
+//   dx += 2;
+//   dy += 2;
+//   if (x <= 0) return;
+//   requestAnimationFrame(render);
+// }
+
+// requestAnimationFrame(render);
