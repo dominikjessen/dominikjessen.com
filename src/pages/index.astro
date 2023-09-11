@@ -2,15 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card';
 import RevealCanvas from '../components/RevealCanvas';
+
+const revealText = "Reveal me";
 ---
 
 <Layout title="Welcome to Astro.">
-	<main>
-		<div class="flex flex-col gap-8">
-			<h1>This is my Astro site</h1>
-			<Card title='This is a card' textColor='text-slate-500' />
-			<RevealCanvas client:load revealText='Reveal me'/>
-		</div>
-		
-	</main>
+	<div class="flex flex-col gap-8">
+		<section id="intro" class="flex gap-8 justify-around items-center">
+			<div class="flex flex-col gap-4 w-2/5">
+				<span class="text-6xl">👋🏻</span>
+				<h2 class="font-bold text-2xl">Hi there, I'm Dominik</h2>
+				<p class="text-gray-400">I'm a software engineer from Europe, who is in the arena trying stuff. On here I show you what that stuff is, what I'm thinking about and other shenanigans. If you like what you see - or even better, don't - then send me a message.</p>
+				<button>Click me</button>
+			</div>
+			<RevealCanvas client:load revealText={revealText} />
+		</section>
+		<!-- <Card title='This is a card' textColor='text-slate-500' /> -->
+	</div>
 </Layout>
