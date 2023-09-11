@@ -10,11 +10,11 @@ const revealSource = '/public/waves-1.svg'
 
 <Layout title="Welcome to Astro.">
 	<div class="flex flex-col gap-8">
-		<section id="intro" class="flex gap-8 justify-around items-center">
-			<div class="flex flex-col gap-4 w-2/5">
-				<span class="text-6xl">👋🏻</span>
-				<h2 class="font-bold text-2xl">Hi there, I'm Dominik</h2>
-				<p class="text-gray-400">I'm a software engineer from Europe, who is in the arena trying stuff. On here I show you what that stuff is, what I'm thinking about and other shenanigans. If you like what you see - or even better, don't - then send me a message.</p>
+		<section id="intro" class="flex gap-8 justify-around items-center py-12">
+			<div class="flex flex-col gap-6 w-2/5">
+				<span class="text-7xl animate-wave origin-[70%_70%] w-fit">👋🏻</span>
+				<h2 class="font-bold text-6xl mb-4">Hi there, I'm Dominik</h2>
+				<p class="text-gray-400 text-2xl leading-relaxed">I'm a software engineer from Europe, who is in the arena trying stuff. On here I show you what that stuff is, what I'm thinking about and other shenanigans. If you like what you see - or even better, don't - then send me a message.</p>
 				<button>Click me</button>
 			</div>
 			<RevealCanvas client:load revealContent={revealSource} />
