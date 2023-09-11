@@ -56,7 +56,7 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40 }: Revea
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 items-center">
+    <div className="hidden md:flex flex-col gap-4 items-center">
       <div className="w-[30rem] h-[36rem] flex justify-center items-center border-[16px] border-primary rounded-tl-full rounded-tr-full">
         {renderReveal && (
           <div className="w-[28rem] h-[34rem] flex flex-col justify-end items-center select-none">
