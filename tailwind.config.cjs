@@ -17,10 +17,20 @@ module.exports = {
           '37.5%': { transform: 'rotate(16deg)' },
           '50%': { transform: 'rotate(-10deg)' },
           '62.5%': { transform: 'rotate(16deg)' }
+        },
+        marquee_rtl: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(calc(-100% - 4rem))' }
+        },
+        marquee_ltr: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(100%)' }
         }
       },
       animation: {
-        wave: 'wave 2s ease-in-out infinite'
+        wave: 'wave 2s ease-in-out infinite',
+        marquee_rtl: 'marquee_rtl 10s linear infinite',
+        marquee_ltr: 'marquee_ltr 10s linear infinite'
       }
     }
   },
