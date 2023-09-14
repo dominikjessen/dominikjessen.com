@@ -1,4 +1,9 @@
 ---
+import '@fontsource-variable/signika';
+// import '@fontsource-variable/josefin-sans';
+// import '@fontsource/ubuntu';
+// import '@fontsource-variable/inter';
+
 import Nav from '../components/Nav';
 interface Props {
 	title: string;
@@ -17,28 +22,19 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg-background text-foreground">
 		<main>
-			<Nav />
-			<slot />
+			<Nav client:load />
+			<slot class="px-10"/>
 		</main>
 	</body>
 </html>
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+	h1, h2 {
+		font-family: 'Signika Variable', 'Josefin Sans Variable', sans-serif;
+		font-weight: 700;
 	}
-	html {
-		font-family: system-ui, sans-serif;
-	}
+
 	code {
 		font-family:
 			Menlo,

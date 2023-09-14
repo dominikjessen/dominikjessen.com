@@ -12,6 +12,10 @@
   "dependencies": {
     "@astrojs/react": "^3.0.2",
     "@astrojs/tailwind": "^5.0.0",
+    "@fontsource-variable/inter": "^5.0.8",
+    "@fontsource-variable/josefin-sans": "^5.0.13",
+    "@fontsource-variable/signika": "^5.0.12",
+    "@fontsource/ubuntu": "^5.0.8",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "astro": "^3.0.12",

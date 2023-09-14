@@ -10,7 +10,7 @@ export default function Nav() {
         <aside className="sm:hidden grid grid-cols-1 justify-items-center gap-8 px-10 py-6 fixed h-screen w-screen bg-background text-primary text-4xl ">
           <div className="grid grid-cols-3 gap-8 justify-between items-center mb-20 w-full">
             <div>
-              <button className="z-50 p-4 text-foreground rounded-xl hover:bg-accent" aria-label="Close menu" onClick={() => setMenuOpen(false)}>
+              <button className="z-50 p-4 text-foreground rounded-xl hover:bg-primary" aria-label="Close menu" onClick={() => setMenuOpen(false)}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -45,7 +45,7 @@ export default function Nav() {
 
         <div>
           <button
-            className="block sm:hidden z-50 p-4 text-foreground rounded-xl hover:bg-accent"
+            className="block sm:hidden z-50 p-4 text-foreground rounded-xl hover:bg-primary"
             aria-label="Open menu"
             onClick={() => setMenuOpen((prev) => !prev)}
           >

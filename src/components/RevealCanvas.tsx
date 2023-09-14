@@ -75,10 +75,10 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40 }: Revea
         ></canvas>
       </div>
       <div className="flex gap-8">
-        <button className="h-9 rounded-md px-3 border-2 border-accent text-accent hover:bg-accent hover:text-white" onClick={clearCanvas}>
+        <button className="h-9 rounded-md px-3 border-2 border-primary text-primary hover:bg-primary hover:text-white" onClick={clearCanvas}>
           Reveal
         </button>
-        <button className="h-9 rounded-md px-3 border-2 border-accent text-accent hover:bg-accent hover:text-white" onClick={fillCanvas}>
+        <button className="h-9 rounded-md px-3 border-2 border-primary text-primary hover:bg-primary hover:text-white" onClick={fillCanvas}>
           Reset
         </button>
       </div>

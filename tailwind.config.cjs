@@ -1,13 +1,20 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter Variable', ...defaultTheme.fontFamily.sans]
+      },
       colors: {
-        background: 'hsl(52 94% 94%)',
-        foreground: 'hsl(78 71% 3%)',
-        primary: 'hsl(13 58% 63%)',
-        accent: 'hsl(158 49% 39%)'
+        background: 'hsl(72 99% 98%)', // #fdfff5
+        foreground: 'hsl(70 5% 7%)', // #121311
+        foreground_lighter: 'hsl(70 11% 11%)', // #1d1e18
+        primary: 'hsl(119 19% 42%)', // #588157
+        accent_seagreen: 'hsl(150 66% 75%)', // #93e9be
+        brass: 'hsl(43 66% 66%)' // #E1C16E
       },
       keyframes: {
         wave: {
