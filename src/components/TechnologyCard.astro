@@ -1,8 +1,15 @@
 ---
-const { item } = Astro.props;
+import Icon from './Icon.astro';
+
+export interface TechnologyCardProps {
+  item: any;
+  fillColor?: string;
+}
+
+const { item, fillColor } = Astro.props as TechnologyCardProps;
 ---
 
 <a href={item.url} target="_blank" class="grid grid-cols-1 place-items-center justify-items-center gap-1 p-8 hover:bg-background rounded">
-  <img src={item.imgSrc} alt={item.name} class="w-16" />
+  <Icon src={item.imgSrc} className={`w-16 ${fillColor}`} />
   <span class="uppercase leading-relaxed font-bold text-2xl">{item.name}</span>
 </a>
