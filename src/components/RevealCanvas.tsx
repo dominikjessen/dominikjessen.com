@@ -38,14 +38,14 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40 }: Revea
     }
   }
 
-  // TODO: Can we animate this?
+  // TODO: Animate this?
   function fillCanvas() {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
 
     if (ctx) {
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'black';
+      ctx.fillStyle = 'hsl(180 17% 93% / 0.95)'; // #eaf0f0
       ctx.fillRect(0, 0, canvas?.width!, canvas?.height!);
     }
   }
