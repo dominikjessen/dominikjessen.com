@@ -1,7 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import RevealCanvas from '../components/RevealCanvas';
+import TechnologyCard from '../components/TechnologyCard.astro';
+import CurrentlyCard from '../components/CurrentlyCard.astro';
+
 import technologies from '../data/technologies.json';
+import currently from '../data/currently.json';
+
 const revealSource = '/waves-1.svg';
 
 const revealText = 'Reveal me';
@@ -19,6 +24,8 @@ const revealText = 'Reveal me';
       </div>
       <RevealCanvas client:load revealContent={revealSource} />
     </section>
+
+    <!-- Technologies Section -->
     <section>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319" class="h-30"
         ><path
@@ -28,12 +35,13 @@ const revealText = 'Reveal me';
         >
         </path>
       </svg>
+      <h2>Technologies I love</h2>
       <!-- Marquee tech stack -->
       <div class="-mt-8 sm:-mt-16 md:-mt-24 lg:-mt-32 xl:-mt-32 py-8 bg-primary flex overflow-hidden gap-[4rem] select-none h-28 group">
         <div
           class="flex justify-around items-center w-full min-w-full shrink-0 gap-[4rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
         >
-          {technologies.map((item, _index) => <TechnologyCard item={item} />)}
+          {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-foreground" />)}
         </div>
         <div
           class="flex justify-around items-center w-full min-w-full shrink-0 gap-[4rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
@@ -44,5 +52,12 @@ const revealText = 'Reveal me';
       </div>
     </section>
     <!-- <Card title='This is a card' textColor='text-slate-500' viewBox="0 0 1440 319"  /> -->
+    <section class="w-2/5 flex flex-col self-center items-center gap-6">
+      <h2 class="text-6xl text-primary mb-4">Currently</h2>
+      <CurrentlyCard heading="Vibing to" item={currently.listening[0]} iconType="fill" />
+      <CurrentlyCard heading="Watching" item={currently.watching[0]} iconType="fill" />
+      <CurrentlyCard heading="Reading" item={currently.reading[0]} iconType="text" />
+      <CurrentlyCard heading="Surviving on" item={currently.drinking[0]} iconType="text" />
+    </section>
   </div>
 </Layout>

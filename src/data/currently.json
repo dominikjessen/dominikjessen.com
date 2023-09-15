@@ -1,0 +1,62 @@
+{
+  "reading": [
+    {
+      "title": "Hail Mary Project",
+      "by": "Andy Weir",
+      "url": "https://www.goodreads.com/book/show/54493401-project-hail-mary",
+      "icon": "/book-open.svg"
+    },
+    {
+      "title": "Designing Your Life",
+      "by": "Bill Burnett, Dave Evans",
+      "url": "https://www.goodreads.com/book/show/61130244-designing-your-life---how-to-build-a-well-lived-joyful-life",
+      "icon": "/book-open.svg"
+    }
+  ],
+  "listening": [
+    {
+      "title": "Jungle",
+      "by": "Petit Biscuit",
+      "url": "https://open.spotify.com/track/6MSd4awjGA81m2HP863Ip3?si=bb829f685982401e",
+      "icon": "/public/logos/spotify.svg"
+    },
+    {
+      "title": "Somebody Like You",
+      "by": "Giant Rooks",
+      "url": "https: //open.spotify.com/track/7jLAYW3N25Piy6lEI4WczE?si=7c874372614d4606",
+      "icon": "/public/logos/spotify.svg"
+    },
+    {
+      "title": "Catching Eyes",
+      "by": "49th & Main",
+      "url": "https://open.spotify.com/track/22Vsz6sIdD97KROSX7oAyq?si=6f3747632be04a66",
+      "icon": "/public/logos/spotify.svg"
+    },
+    {
+      "title": "Because You Move Me",
+      "by": "Tinlicker, Helsloot",
+      "url": "https://open.spotify.com/track/05GvwwTLLID738BbKN1ze0?si=845be426c17c4e45",
+      "icon": "/public/logos/spotify.svg"
+    },
+    {
+      "title": "Soldi",
+      "by": "Mahmood",
+      "url": "https://open.spotify.com/track/4szQkW1CDHqbRZGltXJdd3?si=e539d19fc1ee4fb5",
+      "icon": "/public/logos/spotify.svg"
+    }
+  ],
+  "watching": [
+    {
+      "title": "One Piece (Live Action)",
+      "url": "https://www.netflix.com/watch/80218003",
+      "icon": "/public/logos/netflix.svg"
+    }
+  ],
+  "drinking": [
+    {
+      "title": "1 cup of coffee a day",
+      "url": "https://www.youtube.com/watch?v=o3xoApLQnv4",
+      "icon": "/coffee.svg"
+    }
+  ]
+}
