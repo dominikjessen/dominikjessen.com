@@ -41,14 +41,14 @@ const revealText = 'Reveal me';
         Technologies I love
       </h2>
       <!-- Marquee tech stack -->
-      <div class="-mt-8 sm:-mt-16 md:-mt-24 lg:-mt-32 xl:-mt-32 py-8 bg-primary flex overflow-hidden gap-[4rem] select-none group">
+      <div class="-mt-8 sm:-mt-16 md:-mt-24 lg:-mt-32 xl:-mt-32 py-8 bg-primary flex overflow-hidden gap-[1rem] select-none group">
         <div
-          class="flex justify-around items-center w-full min-w-full shrink-0 gap-[4rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
+          class="flex justify-around items-center w-full min-w-full shrink-0 gap-[1rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
         >
           {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-background" />)}
         </div>
         <div
-          class="flex justify-around items-center w-full min-w-full shrink-0 gap-[4rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
+          class="flex justify-around items-center w-full min-w-full shrink-0 gap-[1rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
           aria-hidden="true"
         >
           {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-background" />)}
