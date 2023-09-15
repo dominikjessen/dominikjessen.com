@@ -1,0 +1,32 @@
+[
+  {
+		"name": "Typescript",
+		"url": "https://www.typescriptlang.org/",
+		"imgSrc": "/public/logos/typescript.svg"
+	},
+	{
+		"name": "React",
+		"url": "https://react.dev/",
+		"imgSrc": "/public/logos/react.svg"
+	},
+	{
+		"name": "Next.js",
+		"url": "https://nextjs.org/",
+		"imgSrc": "/public/logos/nextdotjs.svg"
+	},
+	{
+		"name": "Astro",
+		"url": "https://astro.build/",
+		"imgSrc": "/public/logos/astro.svg"
+	},
+	{
+		"name": "Tailwind",
+		"url": "https://tailwindcss.com/",
+		"imgSrc": "/public/logos/tailwindcss.svg"
+	},
+	{
+		"name": "Node.js",
+		"url": "https://nodejs.org/",
+		"imgSrc": "/public/logos/nodedotjs.svg"
+	}
+]

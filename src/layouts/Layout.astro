@@ -6,7 +6,7 @@ import '@fontsource-variable/signika';
 
 import Nav from '../components/Nav';
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -14,36 +14,37 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class="bg-background text-foreground">
-		<main>
-			<Nav client:load />
-			<slot class="px-10"/>
-		</main>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-background text-foreground">
+    <main>
+      <Nav client:load />
+      <slot class="px-10" />
+    </main>
+  </body>
 </html>
 <style is:global>
-	h1, h2 {
-		font-family: 'Signika Variable', 'Josefin Sans Variable', sans-serif;
-		font-weight: 700;
-	}
+  h1,
+  h2 {
+    font-family: 'Signika Variable', sans-serif;
+    font-weight: 700;
+  }
 
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
 </style>
