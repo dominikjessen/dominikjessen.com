@@ -15,9 +15,9 @@ const revealText = 'Reveal me';
 <Layout title="Dominik Jessen - Product Engineer">
   <div class="flex flex-col gap-8">
     <section id="intro" class="flex gap-8 justify-around items-center py-12">
-      <div class="flex flex-col gap-6 w-2/5">
+      <div class="flex flex-col gap-6">
         <span class="text-7xl animate-wave origin-[70%_70%] w-fit">👋🏻</span>
-        <h1 class="font-bold text-6xl mb-4 text-primary">Hi, I'm Dominik.</h1>
+        <h1 class="font-bold text-8xl mb-4 text-primary">Hi, I'm Dominik.</h1>
         <p class="text-foreground_lighter text-2xl leading-relaxed">
           I'm a software engineer from Europe, who is in the arena trying stuff. Fueled by ☕️ and loves all things product, design & engineering.
         </p>
@@ -26,7 +26,7 @@ const revealText = 'Reveal me';
     </section>
 
     <!-- Technologies Section -->
-    <section>
+    <section class="w-screen self-center h-[22rem] mb-8 sm:mb-16 md:mb-24 lg:mb-32 xl:mb-32">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319" class="h-30"
         ><path
           class="w-screen fill-primary"
@@ -35,19 +35,23 @@ const revealText = 'Reveal me';
         >
         </path>
       </svg>
-      <h2>Technologies I love</h2>
+      <h2
+        class="relative bottom-8 sm:bottom-16 md:bottom-24 lg:bottom-28 xl:bottom-32 text-3xl md:text-5xl lg:text-6xl text-background w-full text-center bg-primary"
+      >
+        Technologies I love
+      </h2>
       <!-- Marquee tech stack -->
-      <div class="-mt-8 sm:-mt-16 md:-mt-24 lg:-mt-32 xl:-mt-32 py-8 bg-primary flex overflow-hidden gap-[4rem] select-none h-28 group">
+      <div class="-mt-8 sm:-mt-16 md:-mt-24 lg:-mt-32 xl:-mt-32 py-8 bg-primary flex overflow-hidden gap-[4rem] select-none group">
         <div
           class="flex justify-around items-center w-full min-w-full shrink-0 gap-[4rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
         >
-          {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-foreground" />)}
+          {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-background" />)}
         </div>
         <div
           class="flex justify-around items-center w-full min-w-full shrink-0 gap-[4rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
           aria-hidden="true"
         >
-          {technologies.map((item, _index) => <TechnologyCard item={item} />)}
+          {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-background" />)}
         </div>
       </div>
     </section>

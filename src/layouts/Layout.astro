@@ -23,9 +23,9 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="bg-background text-foreground">
-    <main>
-      <Nav client:load />
-      <slot class="px-10" />
+    <Nav client:load />
+    <main class="w-5/6 mx-auto">
+      <slot />
     </main>
   </body>
 </html>
@@ -36,7 +36,7 @@ const { title } = Astro.props;
     font-weight: 700;
   }
 
-  code {
+  main code {
     font-family:
       Menlo,
       Monaco,
