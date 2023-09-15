@@ -33,35 +33,13 @@ const revealText = 'Reveal me';
         <div
           class="flex justify-around items-center w-full min-w-full shrink-0 gap-[4rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
         >
-          {
-            technologies.map((item, _index) => (
-              <a
-                href={item.url}
-                target="_blank"
-                class="grid grid-cols-1 place-items-center justify-items-center gap-1 p-8 hover:bg-background rounded"
-              >
-                <img src={item.imgSrc} alt={item.name} class="w-16" />
-                <span class="uppercase leading-relaxed font-bold text-2xl">{item.name}</span>
-              </a>
-            ))
-          }
+          {technologies.map((item, _index) => <TechnologyCard item={item} />)}
         </div>
         <div
           class="flex justify-around items-center w-full min-w-full shrink-0 gap-[4rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
           aria-hidden="true"
         >
-          {
-            technologies.map((item, _index) => (
-              <a
-                href={item.url}
-                target="_blank"
-                class="grid grid-cols-1 place-items-center justify-items-center gap-1 p-8 hover:bg-background rounded"
-              >
-                <img src={item.imgSrc} alt={item.name} class="w-16" />
-                <span class="uppercase leading-relaxed font-bold text-2xl">{item.name}</span>
-              </a>
-            ))
-          }
+          {technologies.map((item, _index) => <TechnologyCard item={item} />)}
         </div>
       </div>
     </section>

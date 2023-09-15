@@ -1,0 +1,8 @@
+---
+const { item } = Astro.props;
+---
+
+<a href={item.url} target="_blank" class="grid grid-cols-1 place-items-center justify-items-center gap-1 p-8 hover:bg-background rounded">
+  <img src={item.imgSrc} alt={item.name} class="w-16" />
+  <span class="uppercase leading-relaxed font-bold text-2xl">{item.name}</span>
+</a>
