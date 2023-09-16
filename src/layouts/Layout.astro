@@ -4,7 +4,7 @@ import '@fontsource-variable/signika';
 // import '@fontsource/ubuntu';
 // import '@fontsource-variable/inter';
 
-import Nav from '../components/Nav';
+import Nav from '../components/Nav.astro';
 interface Props {
   title: string;
 }
@@ -23,7 +23,8 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="bg-background text-foreground">
-    <Nav client:load />
+    <Nav />
+    <!-- <Nav client:load /> -->
     <main class="w-5/6 mx-auto">
       <slot />
     </main>
