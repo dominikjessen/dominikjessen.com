@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        signika: ['Signika Variable', ...defaultTheme.fontFamily.sans],
         sans: ['Inter Variable', ...defaultTheme.fontFamily.sans]
       },
       colors: {
@@ -27,7 +28,7 @@ module.exports = {
         },
         marquee_rtl: {
           '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(calc(-100% - 4rem))' }
+          '100%': { transform: 'translateX(calc(-100% - 1rem))' }
         },
         marquee_ltr: {
           '0%': { transform: 'translateX(0)' },
