@@ -1,0 +1,15 @@
+---
+import RevealCanvas from '../components/RevealCanvas';
+const revealSource = '/waves-1.svg';
+---
+
+<section id="intro" class="flex gap-8 justify-around items-center py-12">
+  <div class="flex flex-col gap-6">
+    <span class="text-7xl animate-wave origin-[70%_70%] w-fit">👋🏻</span>
+    <h1 class="font-bold text-8xl mb-4 text-primary">Hi, I'm Dominik.</h1>
+    <p class="text-foreground_lighter text-2xl leading-relaxed">
+      I'm a software engineer from Europe, who is in the arena trying stuff. Fueled by ☕️ and loves all things product, design & engineering.
+    </p>
+  </div>
+  <RevealCanvas client:load revealContent={revealSource} />
+</section>

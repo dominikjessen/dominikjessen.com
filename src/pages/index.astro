@@ -1,67 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import RevealCanvas from '../components/RevealCanvas';
-import TechnologyCard from '../components/TechnologyCard.astro';
-import CurrentlyCard from '../components/CurrentlyCard.astro';
-
-import technologies from '../data/technologies.json';
-import currently from '../data/currently.json';
-
-const revealSource = '/waves-1.svg';
-
-const revealText = 'Reveal me';
+import Intro from '../sections/intro.astro';
+import Currently from '../sections/currently.astro';
+import Technologies from '../sections/technologies.astro';
 ---
 
 <Layout title="Dominik Jessen - Product Engineer">
   <div class="flex flex-col gap-8">
-    <section id="intro" class="flex gap-8 justify-around items-center py-12">
-      <div class="flex flex-col gap-6">
-        <span class="text-7xl animate-wave origin-[70%_70%] w-fit">👋🏻</span>
-        <h1 class="font-bold text-8xl mb-4 text-primary">Hi, I'm Dominik.</h1>
-        <p class="text-foreground_lighter text-2xl leading-relaxed">
-          I'm a software engineer from Europe, who is in the arena trying stuff. Fueled by ☕️ and loves all things product, design & engineering.
-        </p>
-      </div>
-      <RevealCanvas client:load revealContent={revealSource} />
-    </section>
-
-    <!-- Technologies Section -->
-    <section class="w-screen self-center h-[22rem] mb-8 sm:mb-16 md:mb-24 lg:mb-32 xl:mb-32">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319" class="h-30"
-        ><path
-          class="w-screen fill-primary"
-          fill-opacity="1"
-          d="M0,64L48,58.7C96,53,192,43,288,48C384,53,480,75,576,101.3C672,128,768,160,864,149.3C960,139,1056,85,1152,58.7C1248,32,1344,32,1392,32L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-        >
-        </path>
-      </svg>
-      <h2
-        class="relative bottom-8 sm:bottom-16 md:bottom-24 lg:bottom-28 xl:bottom-32 text-3xl md:text-5xl lg:text-6xl text-background w-full text-center bg-primary"
-      >
-        Technologies I love
-      </h2>
-      <!-- Marquee tech stack -->
-      <div class="-mt-8 sm:-mt-16 md:-mt-24 lg:-mt-32 xl:-mt-32 py-8 bg-primary flex overflow-hidden gap-[1rem] select-none group">
-        <div
-          class="flex justify-around items-center w-full min-w-full shrink-0 gap-[1rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
-        >
-          {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-background" />)}
-        </div>
-        <div
-          class="flex justify-around items-center w-full min-w-full shrink-0 gap-[1rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
-          aria-hidden="true"
-        >
-          {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-background" />)}
-        </div>
-      </div>
-    </section>
-    <!-- <Card title='This is a card' textColor='text-slate-500' viewBox="0 0 1440 319"  /> -->
-    <section class="w-2/5 flex flex-col self-center items-center gap-6">
-      <h2 class="text-6xl text-primary mb-4">Currently</h2>
-      <CurrentlyCard heading="Vibing to" item={currently.listening[0]} iconType="fill" />
-      <CurrentlyCard heading="Watching" item={currently.watching[0]} iconType="fill" />
-      <CurrentlyCard heading="Reading" item={currently.reading[0]} iconType="text" />
-      <CurrentlyCard heading="Surviving on" item={currently.drinking[0]} iconType="text" />
-    </section>
+    <Intro />
+    <Technologies />
+    <Currently />
   </div>
 </Layout>
