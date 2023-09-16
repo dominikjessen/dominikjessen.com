@@ -3,7 +3,7 @@ import currently from '../data/currently.json';
 import CurrentlyCard from '../components/CurrentlyCard.astro';
 ---
 
-<section class="w-2/5 flex flex-col self-center items-center gap-6">
+<section id="currently" class="w-2/5 flex flex-col self-center items-center gap-6">
   <h2 class="text-6xl text-primary mb-4">Currently</h2>
   <CurrentlyCard heading="Vibing to" item={currently.listening[0]} iconType="fill" />
   <CurrentlyCard heading="Watching" item={currently.watching[0]} iconType="fill" />
