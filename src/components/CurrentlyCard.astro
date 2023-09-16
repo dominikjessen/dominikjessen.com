@@ -16,11 +16,11 @@ export interface CurrentlyCardProps extends HTMLAttributes<'div'> {
 const { heading, item, iconType } = Astro.props as CurrentlyCardProps;
 ---
 
-<div class="flex gap-6 p-6 rounded-3xl w-full border bg-primary/10 backdrop-blur-xl">
-  <Icon src={item.icon} className={`w-10 ${iconType}-primary`} />
+<div class="flex gap-4 md:gap-6 p-3 md:p-6 rounded-3xl w-full border bg-primary/10 backdrop-blur-xl">
+  <Icon src={item.icon} className={`w-6 md:w-10 ${iconType}-primary`} />
   <div class="flex flex-col gap-2 grow">
-    <h3 class="text-primary uppercase tracking-wider">{heading}</h3>
-    <a href={item.url} target="_blank" class="font-bold text-primary hover:text-primary/80 tracking-wide"
+    <h3 class="text-primary uppercase text-sm md:text-base tracking-wide md:tracking-wider">{heading}</h3>
+    <a href={item.url} target="_blank" class="text-sm md:text-base font-bold text-primary hover:text-primary/80 tracking-wide"
       >{item.title}{item.by ? ` by ${item.by}` : ''}</a
     >
   </div>
