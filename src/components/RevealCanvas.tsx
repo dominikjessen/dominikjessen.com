@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 interface RevealCanvasProps {
   revealContent: string;
   eraserRadius?: number;
+  className?: string;
 }
 
-export default function RevealCanvas({ revealContent, eraserRadius = 40 }: RevealCanvasProps) {
+export default function RevealCanvas({ revealContent, eraserRadius = 40, className }: RevealCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [renderReveal, setRenderReveal] = useState(false);
   const [isErasing, setIsErasing] = useState(false);
@@ -55,8 +56,10 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40 }: Revea
     setRenderReveal(true);
   }, []);
 
+  // TODO: useMediaQuery to get screen size and set w/h of canvas accordingly for breakpoints
+
   return (
-    <div className="hidden md:flex flex-col gap-4 items-center">
+    <div className={`${className} flex-col gap-4 items-center`}>
       <div className="w-[30rem] h-[36rem] flex justify-center items-center border-[16px] border-primary rounded-tl-full rounded-tr-full">
         {renderReveal && (
           <div className="w-[28rem] h-[34rem] flex flex-col justify-end items-center select-none">

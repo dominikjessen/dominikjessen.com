@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Intro from '../sections/intro.astro';
 import Currently from '../sections/currently.astro';
 import Technologies from '../sections/technologies.astro';
+import RevealCanvas from '../components/RevealCanvas';
+
+const revealSource = '/waves-1.svg';
 ---
 
 <Layout title="Dominik Jessen - Product Engineer">
@@ -10,5 +13,6 @@ import Technologies from '../sections/technologies.astro';
     <Intro />
     <Technologies />
     <Currently />
+    <!-- <RevealCanvas client:load revealContent={revealSource} className="flex lg:hidden" /> -->
   </div>
 </Layout>
