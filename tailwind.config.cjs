@@ -33,12 +33,17 @@ module.exports = {
         marquee_ltr: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(100%)' }
+        },
+        slow_spin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
         }
       },
       animation: {
         wave: 'wave 2s ease-in-out infinite',
         marquee_rtl: 'marquee_rtl 10s linear infinite',
-        marquee_ltr: 'marquee_ltr 10s linear infinite'
+        marquee_ltr: 'marquee_ltr 10s linear infinite',
+        slow_spin: 'slow_spin 30s linear infinite'
       }
     }
   },

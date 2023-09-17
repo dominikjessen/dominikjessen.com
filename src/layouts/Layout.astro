@@ -22,7 +22,7 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-background text-foreground">
+  <body class="bg-background text-foreground overflow-x-hidden">
     <Nav />
     <!-- <Nav client:load /> -->
     <main class="w-5/6 mx-auto">
@@ -47,5 +47,13 @@ const { title } = Astro.props;
       Bitstream Vera Sans Mono,
       Courier New,
       monospace;
+  }
+
+  .aurora-mesh {
+    background-color: rgb(254, 243, 199);
+    background-image: radial-gradient(at 30% 34%, rgb(196, 181, 253) 0, transparent 78%),
+      radial-gradient(at 3% 57%, rgb(124, 45, 18) 0, transparent 72%), radial-gradient(at 32% 67%, rgb(107, 114, 128) 0, transparent 18%),
+      radial-gradient(at 14% 19%, rgb(71, 85, 105) 0, transparent 61%), radial-gradient(at 12% 31%, rgb(253, 186, 116) 0, transparent 5%),
+      radial-gradient(at 14% 46%, rgb(250, 232, 255) 0, transparent 6%);
   }
 </style>
