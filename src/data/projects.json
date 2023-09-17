@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Cinemojis",
+    "description": "Cinemojis is a game for movie buffs and emoji lovers. Guess a movie in 5 tries using 1 to 5 emojis. Users can also sign up and create their own movie-emoji sets to play or share with their friends and challenge them.",
+    "url": "https://cinemojis.com/",
+    "github": "https://github.com/dominikjessen",
+    "imgSrc": "/projects/cinemojis/03_Cinemojis_Home_Desktop.png",
+    "imgAlt": "Cinemojis home screen",
+    "bgColor": "bg-[#f2fcf7]",
+    "techStack": [
+      "Next.js",
+      "Typescript",
+      "Tailwind",
+      "Supabase"
+    ]
+  },
+  {
+    "name": "Shortout",
+    "description": "Shortout is a (Chrome) browser extension that allows users to sort out shorts from their YouTube subscription box. Until YT's July 2023 update, when they moved Shorts into their own section on the subscription page, Shorts would pollute your page. To make sure people do still see Shorts for channels they care about it allows users to whitelist channels by name. This extension no longer works so is not available publicly.",
+    "github": "https://github.com/dominikjessen/shortout",
+    "imgSrc": "/projects/shortout/01_Shortout_LightMode.png",
+    "imgAlt": "Shortout popup screen",
+    "bgColor": "bg-[#fef1f1]",
+    "techStack": [
+      "Typescript",
+      "Tailwind",
+      "Webpack"
+    ]
+  },
+  {
+    "name": "Nutrient",
+    "description": "Nutrient is a (Chrome) browser extension that lets you grab ingredients from recipe websites and let OpenAI tell you the calories per serving and per ingredient. Simply hook up your OpenAI API Key locally and get started.",
+    "url": "https://github.com/dominikjessen",
+    "imgSrc": "/projects/cinemojis/02_Cinemojis_Landing_Desktop.png",
+    "imgAlt": "ADD ALT TEXT",
+    "bgColor": "bg-[#f0f8ff]",
+    "techStack": [
+      "React",
+      "Typescript",
+      "Tailwind",
+      "OpenAI"
+    ]
+  }
+]
