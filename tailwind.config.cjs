@@ -3,6 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  safelist: ['bg-[#fef1f1]', 'bg-[#f2fcf7]', 'bg-[#f0f8ff]'],
   theme: {
     extend: {
       fontFamily: {
@@ -16,7 +17,10 @@ module.exports = {
         primary: 'hsl(119 19% 42%)', // #588157
         accent_seagreen: 'hsl(150 66% 75%)', // #93e9be
         brass: 'hsl(43 66% 66%)', // #E1C16E
-        rose: 'hsl(0 87% 91%)' // #fcd4d4
+        rose: 'hsl(0 87% 91%)', // #fcd4d4
+        mint: 'hsl(150 66% 97%)', // #f2fcf7
+        blush: 'hsl(0 87% 97%)', // #fef1f1
+        aliceblue: 'hsl(208 100% 97%)' //#f0f8ff
       },
       keyframes: {
         wave: {

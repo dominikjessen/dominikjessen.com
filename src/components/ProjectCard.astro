@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { Project } from '../types/data';
+import Icon from './Icon.astro';
+
+export interface ProjectCardProps extends HTMLAttributes<'div'> {
+  project: Project;
+}
+
+const { project } = Astro.props as ProjectCardProps;
+---
+
+<div class={`${project.bgColor} flex flex-col justify-center sm:justify-start gap-4 md:gap-6 p-12 rounded-3xl w-full border border-primary/10`}>
+  <div class="flex gap-6 items-baseline mb-4">
+    <h3 class="text-4xl text-foreground font-bold">{project.name}</h3>
+    {
+      project.github && (
+        <a href={project.github} target="_blank" class={`flex items-center justify-center w-12 h-12 rounded-full hover:bg-foreground/10`}>
+          <Icon src="/logos/github.svg" className="w-6 h-6" />
+        </a>
+      )
+    }
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-center w-full">
+    <div class="flex flex-col gap-6 w-full">
+      <div class="flex gap-1 md:gap-2 overflow-x-auto">
+        {project.techStack?.map((tech) => <div class="px-4 py-2 text-sm md:text-base rounded-full bg-foreground/5 text-foreground/80">{tech}</div>)}
+      </div>
+      <h3 class="xl:text-lg xl:leading-loose leading-loose tracking-widest text-foreground/80">{project.description}</h3>
+      <div class="flex gap-6 w-full items-center">
+        {
+          project.url && (
+            <a href={project.url} target="_blank">
+              Go to project
+            </a>
+          )
+        }
+      </div>
+    </div>
+    <img src={project.imgSrc} alt={project.imgAlt} class="max-h-[36rem] rounded-xl shadow" />
+  </div>
+</div>
