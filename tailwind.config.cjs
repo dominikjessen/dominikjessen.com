@@ -15,7 +15,8 @@ module.exports = {
         foreground_lighter: 'hsl(70 11% 11%)', // #1d1e18
         primary: 'hsl(119 19% 42%)', // #588157
         accent_seagreen: 'hsl(150 66% 75%)', // #93e9be
-        brass: 'hsl(43 66% 66%)' // #E1C16E
+        brass: 'hsl(43 66% 66%)', // #E1C16E
+        rose: 'hsl(0 87% 91%)' // #fcd4d4
       },
       keyframes: {
         wave: {
