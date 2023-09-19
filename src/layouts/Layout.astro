@@ -64,6 +64,21 @@ const { title } = Astro.props;
     animation-range: entry 20% cover 50%;
   }
 
+  .navitem-active {
+    --primary: 119 19% 42%;
+    background-color: hsl(var(--primary) / 0.1);
+  }
+
+  .nav-scrolled {
+    --background: hsl(72 99% 98%);
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+
+    background-color: var(--background);
+    border-width: 1px;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
   @keyframes fade-in {
     from {
       opacity: 0;

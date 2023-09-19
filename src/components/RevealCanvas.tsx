@@ -59,7 +59,7 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
   // TODO: useMediaQuery to get screen size and set w/h of canvas accordingly for breakpoints
 
   return (
-    <div className={`${className} flex-col gap-4 items-center`}>
+    <div id="revealCanvasWrapper" className={`${className} flex-col gap-4 items-center intersect-target`}>
       <div className="w-[30rem] h-[36rem] flex justify-center items-center border-[16px] border-primary rounded-tl-full rounded-tr-full">
         {renderReveal && (
           <div className="w-[28rem] h-[34rem] flex flex-col justify-end items-center select-none">
