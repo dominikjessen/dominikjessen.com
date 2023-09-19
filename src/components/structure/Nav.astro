@@ -3,7 +3,7 @@
 ---
 
 <header class="fixed z-50 w-full">
-  <nav id="nav" class="nav-scrolled mx-auto px-4 md:px-6 py-2 rounded-full text-foreground w-11/12 sm:w-4/6 xl:w-2/5 justify-between mt-4">
+  <nav id="nav" class="mx-auto px-4 md:px-6 py-2 rounded-full text-foreground w-11/12 sm:w-4/6 xl:w-2/5 justify-between mt-4">
     <ul class="flex gap-2 py-1 md:py-2 md:gap-3 lg:gap-5 xl:gap-6 justify-between items-center text-primary text-base md:text-lg font-signika">
       <li>
         <a href="/" data-ref="intro" class="px-5 md:px-6 py-2 md:py-3 rounded-full cursor-pointer hover:bg-primary/10">👋🏻</a>
@@ -55,22 +55,31 @@
   //////////////////
   const scrollTargets = [...document.getElementsByClassName('intersect-target')];
   if (nav && navRect && scrollTargets.length) {
+    const intersectRatios = new Map<string, number>(); // To remove nav scroll styling when all elements no longer intersect
+
     const scrollCallback: IntersectionObserverCallback = (entries, _observer) => {
       entries.forEach((entry) => {
-        // console.log('target y:', entry.target.getBoundingClientRect().y);
-        // console.log('target b:', entry.target.getBoundingClientRect().bottom);
-        // console.log('nav y:', navRect.y);
-        // console.log('nav b:', navRect.bottom);
+        intersectRatios.set(entry.target.nodeName, entry.intersectionRatio); // This only works because my nodeNames are unique
 
-        // TODO: Figure out correct stuff here
         const itemsOverlapping = entry.target.getBoundingClientRect().y <= navRect.bottom;
         if (itemsOverlapping) {
-          console.log('overlapping');
+          nav.classList.add('nav-scrolled');
         }
       });
+
+      let intersectSum = 0;
+      intersectRatios.forEach((value) => {
+        intersectSum += value;
+      });
+
+      // All elements below header
+      if (intersectSum === 3) {
+        nav.classList.remove('nav-scrolled');
+      }
     };
 
     const scrollIO = new IntersectionObserver(scrollCallback, {
+      rootMargin: `-${navRect.bottom}px 0px 0px 0px`, // Header width for correct intersectionRatio
       threshold: 1
     });
     scrollTargets.forEach((target) => scrollIO.observe(target));
