@@ -25,7 +25,7 @@ const { title } = Astro.props;
   </head>
   <body class="bg-background text-foreground overflow-x-hidden">
     <Nav />
-    <main class="w-5/6 mx-auto">
+    <main class="w-5/6 mx-auto pt-8 pb-24">
       <slot />
     </main>
     <Footer />
@@ -52,6 +52,10 @@ const { title } = Astro.props;
       Bitstream Vera Sans Mono,
       Courier New,
       monospace;
+  }
+
+  .mask-left-right {
+    mask-image: linear-gradient(to right, hsl(0 0% 0% / 0), hsl(0 0% 0% / 1) 10%, hsl(0 0% 0% / 1) 90%, hsl(0 0% 0% / 0));
   }
 
   .scroll-fade-in {
