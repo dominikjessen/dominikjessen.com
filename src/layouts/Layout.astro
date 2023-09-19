@@ -54,6 +54,21 @@ const { title } = Astro.props;
       monospace;
   }
 
+  .scroll-fade-in {
+    animation: fade-in 2s linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 50%;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   .aurora-mesh-purple {
     background-color: rgb(254, 243, 199);
     background-image: radial-gradient(at 30% 34%, rgb(196, 181, 253) 0, transparent 78%),

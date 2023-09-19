@@ -11,12 +11,13 @@ export interface CurrentlyCardProps extends HTMLAttributes<'div'> {
   };
   heading?: string;
   iconType: 'text' | 'fill'; // TODO: Not sure this is a good idea instead of on data json
+  className?: string;
 }
 
-const { heading, item, iconType } = Astro.props as CurrentlyCardProps;
+const { heading, item, iconType, className } = Astro.props as CurrentlyCardProps;
 ---
 
-<div class="flex gap-4 md:gap-6 p-3 md:p-6 rounded-3xl w-full border bg-primary/10 backdrop-blur-xl">
+<div class={`${className} flex gap-4 md:gap-6 p-3 md:p-6 rounded-3xl w-full border bg-primary/10 backdrop-blur-xl`}>
   <Icon src={item.icon} className={`w-6 md:w-10 ${iconType}-primary`} />
   <div class="flex flex-col gap-2 grow">
     <h3 class="text-primary uppercase text-sm md:text-base tracking-wide md:tracking-wider">{heading}</h3>
