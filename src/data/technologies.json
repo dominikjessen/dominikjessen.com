@@ -28,5 +28,10 @@
 		"name": "Node.js",
 		"url": "https://nodejs.org/",
 		"imgSrc": "/public/logos/nodedotjs.svg"
+	},
+	{
+		"name": "Supabase",
+		"url": "https://supabase.com/",
+		"imgSrc": "/public/logos/supabase.svg"
 	}
 ]
