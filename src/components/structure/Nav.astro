@@ -53,7 +53,12 @@
   //////////////////
   // Nav scrolled //
   //////////////////
-  const scrollTargets = [...document.getElementsByClassName('intersect-target')];
+  // TODO: This doesn't react to resizing, but do I want to add a resizeChange here?
+  const canvasVisible = window.matchMedia('(min-width: 1024px)');
+  const scrollTargets = canvasVisible.matches
+    ? [...document.querySelectorAll('.intersect-target')]
+    : [...document.querySelectorAll('.intersect-target:not(#revealCanvasWrapper)')];
+
   if (nav && navRect && scrollTargets.length) {
     const intersectRatios = new Map<string, number>(); // To remove nav scroll styling when all elements no longer intersect
 
@@ -73,7 +78,7 @@
       });
 
       // All elements below header
-      if (intersectSum === 3) {
+      if (intersectSum === scrollTargets.length) {
         nav.classList.remove('nav-scrolled');
       }
     };
