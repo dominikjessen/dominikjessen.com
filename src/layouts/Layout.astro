@@ -32,6 +32,16 @@ const { title } = Astro.props;
   </body>
 </html>
 <style is:global>
+  html {
+    --background: 72 99% 98%;
+    --primary: 119 19% 42%;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--background));
+  }
+
   h1,
   h2 {
     font-family: 'Signika Variable', sans-serif;
@@ -65,7 +75,6 @@ const { title } = Astro.props;
   }
 
   .navitem-active {
-    --primary: 119 19% 42%;
     background-color: hsl(var(--primary) / 0.1);
   }
 
