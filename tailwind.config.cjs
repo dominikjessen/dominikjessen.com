@@ -3,6 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
   safelist: ['bg-[#fef1f1]', 'bg-[#f2fcf7]', 'bg-[#f0f8ff]'],
   theme: {
     extend: {
@@ -11,16 +12,16 @@ module.exports = {
         sans: ['Inter Variable', ...defaultTheme.fontFamily.sans]
       },
       colors: {
-        background: 'hsl(72 99% 98%)', // #fdfff5
-        foreground: 'hsl(70 5% 7%)', // #121311
-        foreground_lighter: 'hsl(70 11% 11%)', // #1d1e18
-        primary: 'hsl(119 19% 42%)', // #588157
-        accent_seagreen: 'hsl(150 66% 75%)', // #93e9be
-        brass: 'hsl(43 66% 66%)', // #E1C16E
-        rose: 'hsl(0 87% 91%)', // #fcd4d4
-        mint: 'hsl(150 66% 97%)', // #f2fcf7
-        blush: 'hsl(0 87% 97%)', // #fef1f1
-        aliceblue: 'hsl(208 100% 97%)' //#f0f8ff
+        background: 'hsl(var(--background))', // #fdfff5
+        foreground: 'hsl(var(--foreground))', // #121311
+        foreground_lighter: 'hsl(var(--foreground_lighter))', // #1d1e18
+        primary: 'hsl(var(--primary))', // #588157
+        accent_seagreen: 'hsl(var(--accent_seagreen))', // #93e9be
+        brass: 'hsl(var(--brass))', // #E1C16E
+        rose: 'hsl(var(--rose))', // #fcd4d4
+        mint: 'hsl(var(--mint))', // #f2fcf7
+        blush: 'hsl(var(--blush))', // #fef1f1
+        aliceblue: 'hsl(var(--aliceblue))' //#f0f8ff
       },
       keyframes: {
         wave: {
