@@ -4,7 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
-  safelist: ['bg-[#fef1f1]', 'bg-[#f2fcf7]', 'bg-[#f0f8ff]'],
+  safelist: ['bg-[#fef1f1]', 'bg-[#f2fcf7]', 'bg-[#f0f8ff], fill-primary'],
   theme: {
     extend: {
       fontFamily: {
