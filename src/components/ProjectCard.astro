@@ -32,7 +32,7 @@ const { project } = Astro.props as ProjectCardProps;
           <a
             href={project.url}
             target="_blank"
-            class={`group animated-underline w-fit relative pr-2 pb-2 hover:text-foreground/90 font-bold flex items-center gap-2`}
+            class={`group animated-underline w-fit relative pr-2 pb-2 text-foreground/90 font-bold flex items-center gap-2`}
           >
             <span class="text-xl">Visit Site</span>
             <svg
@@ -55,12 +55,11 @@ const { project } = Astro.props as ProjectCardProps;
 
 <style>
   .animated-underline:after {
-    --foreground: 70 5% 7%;
     content: '';
     position: absolute;
     left: 0;
     bottom: 0;
-    background: hsl(var(--foreground) / 0.8);
+    background: hsl(var(--foreground) / 0.9);
     width: 0%;
     height: 6px;
     border-radius: 3px;

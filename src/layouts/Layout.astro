@@ -34,7 +34,15 @@ const { title } = Astro.props;
 <style is:global>
   html {
     --background: 72 99% 98%;
+    --foreground: 70 5% 7%;
+    --foreground_lighter: 70 11% 11%;
     --primary: 119 19% 42%;
+    --accent_seagreen: 150 66% 75%;
+    --brass: 43 66% 66%;
+    --rose: 0 87% 91%;
+    --mint: 150 66% 97%;
+    --blush: 0 87% 97%;
+    --aliceblue: 208 100% 97%;
   }
 
   ::selection {
@@ -79,11 +87,10 @@ const { title } = Astro.props;
   }
 
   .nav-scrolled {
-    --background: hsl(72 99% 98%);
     --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
 
-    background-color: var(--background);
+    background-color: hsl(var(--background));
     border-width: 1px;
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
