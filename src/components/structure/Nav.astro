@@ -18,6 +18,21 @@
   </nav>
 </header>
 
+<style>
+  .navitem-active {
+    background-color: hsl(var(--primary) / 0.1);
+  }
+
+  .nav-scrolled {
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+
+    background-color: hsl(var(--background));
+    border-width: 1px;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+</style>
+
 <script>
   const nav = document.getElementById('nav');
   const navRect = nav?.getBoundingClientRect();
