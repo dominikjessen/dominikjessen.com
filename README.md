@@ -1,54 +1,29 @@
-# Astro Starter Kit: Basics
+<p align="center">
+  <a href="https://dominikjessen.com">
+   <img src="/public/readme_wave_hello.png" alt="Hi, I'm Dominik." />
+  </a>
+  <div align="center">
+    <span>Built with</span>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 64px)); gap: 1rem;">
+      <img width="64px" height="64px" src="/public/logos/colored/astro-color.svg" alt="Astro" />
+      <img width="64px" height="64px" src="/public/logos/colored/typescript-color.svg" alt="Typescript" />
+      <img width="64px" height="64px" src="/public/logos/colored/html5-color.svg" alt="HTML5" />
+      <img width="64px" height="64px" src="/public/logos/colored/css3-color.svg" alt="CSS3" />
+      <img width="64px" height="64px" src="/public/logos/colored/tailwindcss-color.svg" alt="Tailwind" />
+    </div>
+  </div>
+</p>
 
-```
-npm create astro@latest -- --template basics
-```
+## About Me
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+I'm a software engineer with a passion for product & design from Europe (currently splitting my time between Amsterdam & Hamburg). I used to work as a Product Manager but have since seen the light and returned to Engineering to get my hands dirty again and enjoy some flow time while coding (or curse at my screen when things don't quite work the way they should only to find a small bug somewhere 1 sip of coffee later).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Feel free to reach out to me and visit my website for even more information about me (like what game I'm currently watching or which songs you'll find me vibing to) 👋🏻
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## About My Website
 
-## 🚀 Project Structure
+I built my website with Astro (🚀), HTML5/CSS3 (including animations), and Tailwind. There is currently still one React component, which I may or may not migrate to Astro as well. Eventually I might write up some of my thoughts on various things more or less related to the tech world, which will then live somewhere on my site too.
 
-Inside of your Astro project, you'll see the following folders and files:
+I also do want to play around with even more animation stuff and design every now and then.
 
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+<a style="color: #588157;" href='https://dominikjessen.com'>Check it out and say hello</a>
