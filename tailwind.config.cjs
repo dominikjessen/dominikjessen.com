@@ -4,7 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}'],
   darkMode: 'class',
-  safelist: ['fill-primary, bg-[hsl(var(--mint))], bg-[hsl(var(--blush))], bg-[hsl(var(--aliceblue))]'],
+  safelist: ['bg-[hsl(var(--mint))], bg-[hsl(var(--blush))], bg-[hsl(var(--aliceblue))], fill-primary'],
   theme: {
     extend: {
       fontFamily: {
