@@ -16,7 +16,7 @@ const { project } = Astro.props as ProjectCardProps;
     {
       project.github && (
         <a href={project.github} target="_blank" class={`flex items-center justify-center w-12 h-12 rounded-full hover:bg-foreground/10`}>
-          <Icon src="/logos/github.svg" className="w-6 h-6" />
+          <Icon src="/logos/github.svg" className="w-6 h-6 dark:fill-foreground" />
         </a>
       )
     }
@@ -49,7 +49,7 @@ const { project } = Astro.props as ProjectCardProps;
         )
       }
     </div>
-    <img src={project.imgSrc} alt={project.imgAlt} class="max-h-[36rem] rounded-xl shadow" />
+    <img src={project.imgSrc} alt={project.imgAlt} class="max-h-[36rem] rounded-xl shadow dark:opacity-90" />
   </div>
 </div>
 

@@ -47,19 +47,23 @@ const { title } = Astro.props;
     --mint: 150 66% 97%;
     --blush: 0 87% 97%;
     --aliceblue: 208 100% 97%;
+
+    --header-background: 72 99% 98%; /* Like background for light mode */
   }
 
   html.dark {
-    --background: 70 5% 7%;
+    --background: 119 19% 5%;
     --foreground: 72 99% 98%;
-    --foreground_lighter: 72 99% 100%;
+    --foreground_lighter: 72 99% 90%;
     --primary: 119 19% 42%; /* Might have to be lighter */
     --accent_seagreen: 150 66% 75%; /* TBD */
     --brass: 43 66% 66%; /* TBD */
     --rose: 0 87% 91%; /* TBD */
-    --mint: 150 66% 97%; /* TBD */
-    --blush: 0 87% 97%; /* TBD */
-    --aliceblue: 208 100% 97%; /* TBD */
+    --mint: 150 66% 5%; /* TBD */
+    --blush: 0 87% 2%; /* TBD */
+    --aliceblue: 208 100% 2%; /* TBD */
+
+    --header-background: 119 19% 42%; /* Green background for dark mode */
   }
 
   ::selection {

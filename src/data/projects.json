@@ -6,7 +6,7 @@
     "github": "https://github.com/dominikjessen",
     "imgSrc": "/projects/cinemojis/03_Cinemojis_Home_Desktop.png",
     "imgAlt": "Cinemojis home screen",
-    "bgColor": "bg-[#f2fcf7]",
+    "bgColor": "bg-[hsl(var(--mint))]",
     "techStack": [
       "Next.js",
       "Typescript",
@@ -20,7 +20,7 @@
     "github": "https://github.com/dominikjessen/shortout",
     "imgSrc": "/projects/shortout/01_Shortout_LightMode.png",
     "imgAlt": "Shortout popup screen",
-    "bgColor": "bg-[#fef1f1]",
+    "bgColor": "bg-[hsl(var(--blush))]",
     "techStack": [
       "Typescript",
       "Tailwind",
@@ -33,7 +33,7 @@
     "url": "https://github.com/dominikjessen",
     "imgSrc": "/projects/cinemojis/02_Cinemojis_Landing_Desktop.png",
     "imgAlt": "ADD ALT TEXT",
-    "bgColor": "bg-[#f0f8ff]",
+    "bgColor": "bg-[hsl(var(--aliceblue))]",
     "techStack": [
       "React",
       "Typescript",

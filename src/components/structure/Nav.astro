@@ -3,8 +3,10 @@
 ---
 
 <header class="fixed z-50 w-full">
-  <nav id="nav" class="mx-auto px-4 md:px-6 py-2 rounded-full text-foreground w-11/12 sm:w-4/6 xl:w-2/5 justify-between mt-4">
-    <ul class="flex gap-2 py-1 md:py-2 md:gap-3 lg:gap-5 xl:gap-6 justify-between items-center text-primary text-base md:text-lg font-signika">
+  <nav id="nav" class="mx-auto px-4 md:px-6 py-2 rounded-full w-11/12 sm:w-4/6 xl:w-2/5 justify-between mt-4">
+    <ul
+      class="flex gap-2 py-1 md:py-2 md:gap-3 lg:gap-5 xl:gap-6 justify-between items-center text-primary dark:text-foreground text-base md:text-lg font-signika"
+    >
       <li>
         <a href="/" data-ref="intro" class="px-5 md:px-6 py-2 md:py-3 rounded-full cursor-pointer hover:bg-primary/10">👋🏻</a>
       </li>
@@ -27,8 +29,9 @@
     --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
 
-    background-color: hsl(var(--background));
+    background-color: hsl(var(--header-background));
     border-width: 1px;
+    border-color: hsl(var(--foreground) / 0.1);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
 </style>
