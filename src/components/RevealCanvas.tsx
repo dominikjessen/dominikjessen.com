@@ -29,7 +29,7 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
     }
   }
 
-  // TODO: Can we animate this?
+  // TODO: Might not want this functionality at all
   function clearCanvas() {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -39,7 +39,6 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
     }
   }
 
-  // TODO: Animate this?
   function fillCanvas() {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -52,11 +51,12 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
   }
 
   useEffect(() => {
+    // TODO: If I want this to be responsive on resizing I will need a resizeObserver
+    console.log(`Window is: ${window.innerWidth} x ${window.innerHeight}`);
+
     fillCanvas();
     setRenderReveal(true);
   }, []);
-
-  // TODO: useMediaQuery to get screen size and set w/h of canvas accordingly for breakpoints
 
   return (
     <div id="revealCanvasWrapper" className={`${className} flex-col gap-4 items-center intersect-target`}>
@@ -73,38 +73,18 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
           onMouseDown={() => setIsErasing(true)}
           onMouseUp={() => setIsErasing(false)}
           onMouseMove={(event) => eraseCanvas(event)}
-          width={464} // TODO: How to make this dynamic?
+          width={464}
           height={560}
         ></canvas>
       </div>
-      <div className="flex gap-8">
+      {/* <div className="flex gap-8">
         <button className="h-9 rounded-md px-3 border-2 border-primary text-primary hover:bg-primary hover:text-white" onClick={clearCanvas}>
           Reveal
         </button>
         <button className="h-9 rounded-md px-3 border-2 border-primary text-primary hover:bg-primary hover:text-white" onClick={fillCanvas}>
           Reset
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
-
-// let x = canvas.width * 0.5;
-// let y = canvas.height * 0.5;
-// let dx = 0;
-// let dy = 0;
-
-// ctx.fillStyle = "green";
-
-// function render() {
-//   ctx.clearRect(0, 0, canvas.width, canvas.height);
-//   ctx.fillRect(x, y, dx, dy);
-//   x -= 1;
-//   y -= 1;
-//   dx += 2;
-//   dy += 2;
-//   if (x <= 0) return;
-//   requestAnimationFrame(render);
-// }
-
-// requestAnimationFrame(render);
