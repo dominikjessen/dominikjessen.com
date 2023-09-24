@@ -48,6 +48,17 @@ module.exports = {
           '0%': { transform: 'rotate(0deg) translate(-5%, -10%)' },
           '50%': { transform: 'rotate(180deg) translate(10%, 10%)' },
           '100%': { transform: 'rotate(360deg) translate(-5%, -10%)' }
+        },
+        grow: {
+          '0%': {
+            transform: 'scale(1)'
+          },
+          '30%': {
+            transform: 'scale(1.05)'
+          },
+          '60%': {
+            transform: 'scale(1)'
+          }
         }
       },
       animation: {
@@ -55,7 +66,8 @@ module.exports = {
         marquee_rtl: 'marquee_rtl 20s linear infinite',
         marquee_ltr: 'marquee_ltr 20s linear infinite',
         slow_spin: 'slow_spin 30s linear infinite',
-        spin_move: 'spin_move 30s linear infinite'
+        spin_move: 'spin_move 30s linear infinite',
+        grow: 'grow 5s ease-in-out infinite'
       }
     }
   },
