@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import ThemeToggle from '../ui/ThemeToggle.astro';
 ---
 
 <footer class="w-full py-16 flex flex-col gap-12 items-center bg-primary/5">
@@ -16,6 +17,7 @@ import { Image } from 'astro:assets';
       <a id="email" href="">Email</a>
     </div>
   </div>
+  <ThemeToggle />
   <div class="text-sm text-foreground/50">©️ 2023 Dominik Jessen. All rights reserved.</div>
 </footer>
 
