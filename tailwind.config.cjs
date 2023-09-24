@@ -54,7 +54,7 @@ module.exports = {
             transform: 'scale(1)'
           },
           '30%': {
-            transform: 'scale(1.05)'
+            transform: 'scale(1.1)'
           },
           '60%': {
             transform: 'scale(1)'

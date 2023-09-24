@@ -1,5 +1,5 @@
 import { Image } from 'astro:assets';
-import HighlightArrow from '../images/Highlight_Arrow.png';
+import HighlightArrow from '../images/Highlight_Arrow_topRight.png';
 import { useEffect, useRef, useState } from 'react';
 
 interface RevealCanvasProps {
@@ -79,7 +79,7 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
           height={560}
         ></canvas>
       </div>
-      <img src={HighlightArrow.src} alt="Highlight arrow" className="absolute top-[82vh] lg:left-[16vw] xl:left-[28vw] animate-grow" />
+      <img src={HighlightArrow.src} alt="Highlight arrow" className="absolute top-[10%] right-[10%] motion-safe:animate-grow" />
     </div>
   );
 }
