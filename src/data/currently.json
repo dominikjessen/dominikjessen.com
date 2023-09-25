@@ -4,13 +4,22 @@
       "title": "Hail Mary Project",
       "by": "Andy Weir",
       "url": "https://www.goodreads.com/book/show/54493401-project-hail-mary",
-      "icon": "/book-open.svg"
+      "icon": "/book-open.svg",
+      "iconType": "text"
     },
     {
       "title": "Designing Your Life",
       "by": "Bill Burnett, Dave Evans",
       "url": "https://www.goodreads.com/book/show/61130244-designing-your-life---how-to-build-a-well-lived-joyful-life",
-      "icon": "/book-open.svg"
+      "icon": "/book-open.svg",
+      "iconType": "text"
+    },
+    {
+      "title": "Hooked",
+      "by": "Nir Eyal",
+      "url": "https://www.goodreads.com/en/book/show/22668729",
+      "icon": "/book-open.svg",
+      "iconType": "text"
     }
   ],
   "listening": [
@@ -18,45 +27,99 @@
       "title": "Jungle",
       "by": "Petit Biscuit",
       "url": "https://open.spotify.com/track/6MSd4awjGA81m2HP863Ip3?si=bb829f685982401e",
-      "icon": "/public/logos/spotify.svg"
+      "icon": "/logos/spotify.svg",
+      "iconType": "fill"
     },
     {
       "title": "Somebody Like You",
       "by": "Giant Rooks",
       "url": "https: //open.spotify.com/track/7jLAYW3N25Piy6lEI4WczE?si=7c874372614d4606",
-      "icon": "/public/logos/spotify.svg"
+      "icon": "/logos/spotify.svg",
+      "iconType": "fill"
     },
     {
       "title": "Catching Eyes",
       "by": "49th & Main",
       "url": "https://open.spotify.com/track/22Vsz6sIdD97KROSX7oAyq?si=6f3747632be04a66",
-      "icon": "/public/logos/spotify.svg"
+      "icon": "/logos/spotify.svg",
+      "iconType": "fill"
     },
     {
       "title": "Because You Move Me",
       "by": "Tinlicker, Helsloot",
       "url": "https://open.spotify.com/track/05GvwwTLLID738BbKN1ze0?si=845be426c17c4e45",
-      "icon": "/public/logos/spotify.svg"
+      "icon": "/logos/spotify.svg",
+      "iconType": "fill"
     },
     {
       "title": "Soldi",
       "by": "Mahmood",
       "url": "https://open.spotify.com/track/4szQkW1CDHqbRZGltXJdd3?si=e539d19fc1ee4fb5",
-      "icon": "/public/logos/spotify.svg"
+      "icon": "/logos/spotify.svg",
+      "iconType": "fill"
+    },
+    {
+      "title": "Bind",
+      "by": "Howling",
+      "url": "https://open.spotify.com/track/5SKQlsVC41xO7KLmAqqoij?si=6d9126f3f7264137",
+      "icon": "/logos/spotify.svg",
+      "iconType": "fill"
+    },
+    {
+      "title": "YaYaYa",
+      "by": "Ry X",
+      "url": "https://open.spotify.com/track/1gmj9SGmFea50SyyVYgFkP?si=419ac611200244d9",
+      "icon": "/logos/spotify.svg",
+      "iconType": "fill"
+    },
+    {
+      "title": "Oceans",
+      "by": "Ry X, Ólafur Arnalds",
+      "url": "https://open.spotify.com/track/2eVofaQRJvddSUBfcub7Gz?si=c9691d59e9094d18",
+      "icon": "/logos/spotify.svg",
+      "iconType": "fill"
     }
   ],
   "watching": [
     {
       "title": "One Piece (Live Action)",
       "url": "https://www.netflix.com/watch/80218003",
-      "icon": "/public/logos/netflix.svg"
+      "icon": "/logos/netflix.svg",
+      "iconType": "fill"
+    },
+    {
+      "title": "The Bear",
+      "url": "https://www.disneyplus.com/en-gb/series/the-bear/52m6nx7HoP5F",
+      "icon": "/film.svg",
+      "iconType": "text"
+    },
+    {
+      "title": "The Great",
+      "url": "https://www.primevideo.com/detail/The-Great/0L49YBTPFJI9OTD8OYHE6VB8NX",
+      "icon": "/film.svg",
+      "iconType": "text"
     }
   ],
   "drinking": [
     {
       "title": "1 cup of coffee a day",
       "url": "https://www.youtube.com/watch?v=o3xoApLQnv4",
-      "icon": "/coffee.svg"
+      "icon": "/coffee.svg",
+      "iconType": "text"
+    }
+  ],
+  "playing": [
+    {
+      "title": "Octopath Traveler 2",
+      "url": "https://octopathtraveler2.square-enix-games.com/en-us/",
+      "icon": "/logos/nintendoswitch.svg",
+      "iconType": "fill"
+    },
+    {
+      "title": "Hades",
+      "url": "https://www.supergiantgames.com/games/hades/",
+      "icon": "/logos/nintendoswitch.svg",
+      "iconType": "fill"
     }
   ]
 }

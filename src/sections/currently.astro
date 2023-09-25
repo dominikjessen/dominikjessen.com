@@ -5,13 +5,15 @@ import CurrentlyCard from '../components/CurrentlyCard.astro';
 const listening = currently.listening[Math.floor(Math.random() * currently.listening.length)];
 const watching = currently.watching[Math.floor(Math.random() * currently.watching.length)];
 const reading = currently.reading[Math.floor(Math.random() * currently.reading.length)];
+const playing = currently.playing[Math.floor(Math.random() * currently.playing.length)];
 const drinking = currently.drinking[0]; // Always just one item
 ---
 
 <section id="currently" class="w-full md:w-3/5 lg:w-2/5 flex flex-col self-center items-center gap-6">
   <h2 class="text-6xl text-primary mb-4">Currently</h2>
-  <CurrentlyCard heading="Vibing to" item={listening} iconType="fill" className="scroll-fade-in" />
-  <CurrentlyCard heading="Watching" item={watching} iconType="fill" className="scroll-fade-in" />
-  <CurrentlyCard heading="Reading" item={reading} iconType="text" className="scroll-fade-in" />
-  <CurrentlyCard heading="Surviving on" item={drinking} iconType="text" className="scroll-fade-in" />
+  <CurrentlyCard heading="Vibing to" item={listening} iconType={listening.iconType} className="scroll-fade-in" />
+  <CurrentlyCard heading="Watching" item={watching} iconType={watching.iconType} className="scroll-fade-in" />
+  <CurrentlyCard heading="Reading" item={reading} iconType={reading.iconType} className="scroll-fade-in" />
+  <CurrentlyCard heading="Playing" item={playing} iconType={playing.iconType} className="scroll-fade-in" />
+  <CurrentlyCard heading="Surviving on" item={drinking} iconType={drinking.iconType} className="scroll-fade-in" />
 </section>
