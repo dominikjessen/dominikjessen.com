@@ -9,11 +9,14 @@ const playing = currently.playing[Math.floor(Math.random() * currently.playing.l
 const drinking = currently.drinking[0]; // Always just one item
 ---
 
-<section id="currently" class="w-full md:w-3/5 lg:w-2/5 flex flex-col self-center items-center gap-6">
-  <h2 class="text-6xl text-primary mb-4">Currently</h2>
-  <CurrentlyCard heading="Vibing to" item={listening} iconType={listening.iconType} className="scroll-fade-in" />
-  <CurrentlyCard heading="Watching" item={watching} iconType={watching.iconType} className="scroll-fade-in" />
-  <CurrentlyCard heading="Reading" item={reading} iconType={reading.iconType} className="scroll-fade-in" />
-  <CurrentlyCard heading="Playing" item={playing} iconType={playing.iconType} className="scroll-fade-in" />
-  <CurrentlyCard heading="Surviving on" item={drinking} iconType={drinking.iconType} className="scroll-fade-in" />
+<section id="currently" class="flex flex-col self-center items-center gap-6">
+  <h2 class="text-6xl text-primary">Currently</h2>
+  <p class="text-2xl text-foreground/60 mb-8">Some of the things I'm enjoying these days and always down to chat about!</p>
+  <div class="w-5/6 md:w-3/5 lg:w-3/5 flex flex-col items-center gap-6">
+    <CurrentlyCard heading="Vibing to" item={listening} iconType={listening.iconType} className="scroll-fade-in" />
+    <CurrentlyCard heading="Watching" item={watching} iconType={watching.iconType} className="scroll-fade-in" />
+    <CurrentlyCard heading="Reading" item={reading} iconType={reading.iconType} className="scroll-fade-in" />
+    <CurrentlyCard heading="Playing" item={playing} iconType={playing.iconType} className="scroll-fade-in" />
+    <CurrentlyCard heading="Surviving on" item={drinking} iconType={drinking.iconType} className="scroll-fade-in" />
+  </div>
 </section>
