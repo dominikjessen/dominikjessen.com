@@ -6,28 +6,28 @@
         "title": "Hail Mary Project",
         "by": "Andy Weir",
         "url": "https://www.goodreads.com/book/show/54493401-project-hail-mary",
-        "icon": "/book-open.svg",
+        "icon": "/icons/book-open.svg",
         "iconType": "text"
       },
       {
         "title": "Designing Your Life",
         "by": "Bill Burnett, Dave Evans",
         "url": "https://www.goodreads.com/book/show/61130244-designing-your-life---how-to-build-a-well-lived-joyful-life",
-        "icon": "/book-open.svg",
+        "icon": "/icons/book-open.svg",
         "iconType": "text"
       },
       {
         "title": "Hooked",
         "by": "Nir Eyal",
         "url": "https://www.goodreads.com/en/book/show/22668729",
-        "icon": "/book-open.svg",
+        "icon": "/icons/book-open.svg",
         "iconType": "text"
       },
       {
         "title": "Make Time",
         "by": "Jake Knapp, John Zeratsky",
         "url": "https://www.goodreads.com/book/show/37880811-make-time",
-        "icon": "/book-open.svg",
+        "icon": "/icons/book-open.svg",
         "iconType": "text"
       }
     ]
@@ -105,13 +105,13 @@
       {
         "title": "The Bear",
         "url": "https://www.disneyplus.com/en-gb/series/the-bear/52m6nx7HoP5F",
-        "icon": "/film.svg",
+        "icon": "/icons/film.svg",
         "iconType": "text"
       },
       {
         "title": "The Great",
         "url": "https://www.primevideo.com/detail/The-Great/0L49YBTPFJI9OTD8OYHE6VB8NX",
-        "icon": "/film.svg",
+        "icon": "/icons/film.svg",
         "iconType": "text"
       }
     ]
@@ -122,7 +122,7 @@
       {
         "title": "1 cup of coffee a day",
         "url": "https://www.youtube.com/watch?v=o3xoApLQnv4",
-        "icon": "/coffee.svg",
+        "icon": "/icons/coffee.svg",
         "iconType": "text"
       }
     ]

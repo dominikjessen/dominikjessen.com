@@ -2,36 +2,36 @@
 	{
 		"name": "Typescript",
 		"url": "https://www.typescriptlang.org/",
-		"imgSrc": "/public/logos/typescript.svg"
+		"imgSrc": "/logos/typescript.svg"
 	},
 	{
 		"name": "React",
 		"url": "https://react.dev/",
-		"imgSrc": "/public/logos/react.svg"
+		"imgSrc": "/logos/react.svg"
 	},
 	{
 		"name": "Next.js",
 		"url": "https://nextjs.org/",
-		"imgSrc": "/public/logos/nextdotjs.svg"
+		"imgSrc": "/logos/nextdotjs.svg"
 	},
 	{
 		"name": "Astro",
 		"url": "https://astro.build/",
-		"imgSrc": "/public/logos/astro.svg"
+		"imgSrc": "/logos/astro.svg"
 	},
 	{
 		"name": "Tailwind",
 		"url": "https://tailwindcss.com/",
-		"imgSrc": "/public/logos/tailwindcss.svg"
+		"imgSrc": "/logos/tailwindcss.svg"
 	},
 	{
 		"name": "Node.js",
 		"url": "https://nodejs.org/",
-		"imgSrc": "/public/logos/nodedotjs.svg"
+		"imgSrc": "/logos/nodedotjs.svg"
 	},
 	{
 		"name": "Supabase",
 		"url": "https://supabase.com/",
-		"imgSrc": "/public/logos/supabase.svg"
+		"imgSrc": "/logos/supabase.svg"
 	}
 ]

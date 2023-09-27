@@ -8,9 +8,11 @@ export interface Props {
 
 async function getSVG(src: string) {
   try {
-    const { default: rootHTML } = await import(`${src}?raw`);
+    const imgSrc = `../images${src}`;
+    const images = import.meta.glob<ImageMetadata>('../images/*/*', { as: 'raw' });
 
-    const root = parse(rootHTML);
+    const img = await images[imgSrc]();
+    const root = parse(img);
     const svg = root.querySelector('svg');
 
     if (svg) {
@@ -20,7 +22,9 @@ async function getSVG(src: string) {
       throw new Error('No SVG found');
     }
   } catch (error) {
-    console.error(error);
+    console.log('error', src);
+
+    // console.error(error);
     return { attributes: {}, innerHTML: null };
   }
 }
