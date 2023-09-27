@@ -8,16 +8,15 @@
       class="flex gap-2 py-1 md:py-2 md:gap-3 lg:gap-5 xl:gap-6 justify-between items-center text-primary dark:text-foreground text-base md:text-lg font-signika"
     >
       <li>
-        <a href="/" data-ref="intro" class="px-5 md:px-6 py-2 md:py-3 rounded-full cursor-pointer hover:bg-primary/10">👋🏻</a>
+        <a href="/" data-ref="intro" class="px-5 md:px-6 py-2 md:py-3 rounded-full cursor-pointer hover:bg-primary/10">👋🏻 Hi</a>
       </li>
       <li>
         <a href="/#projects" data-ref="projects" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-primary/10">Projects</a>
       </li>
       <li>
-        <a href="/#currently" data-ref="currently" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-primary/10">Currently</a>
-      </li>
-      <li>
-        <a href="/2023_CV_DominikJessen.pdf" data-ref="cv" target="_blank" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-primary/10">CV</a>
+        <a href="/2023_CV_DominikJessen.pdf" data-ref="footer" target="_blank" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-primary/10"
+          >CV</a
+        >
       </li>
     </ul>
   </nav>
@@ -47,6 +46,10 @@
   // Active nav link //
   /////////////////////
   const sections = [...document.getElementsByTagName('section')];
+  const footer = document.getElementById('footer');
+  if (footer) {
+    sections.push(footer);
+  }
 
   function highlightSection(entry: IntersectionObserverEntry) {
     const id = entry.target.id;
