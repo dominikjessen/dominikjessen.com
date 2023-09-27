@@ -8,7 +8,7 @@ export interface Props {
 
 async function getSVG(src: string) {
   try {
-    const { default: rootHTML } = await import(`/${src}.svg?raw`);
+    const { default: rootHTML } = await import(`${src}?raw`);
 
     const root = parse(rootHTML);
     const svg = root.querySelector('svg');
