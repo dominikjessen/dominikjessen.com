@@ -5,11 +5,11 @@
   <div align="center">
     <span>Built with</span>
     <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 64px)); gap: 1rem;">
-      <img width="64px" height="64px" src="/public/logos/colored/astro-color.svg" alt="Astro" />
-      <img width="64px" height="64px" src="/public/logos/colored/typescript-color.svg" alt="Typescript" />
-      <img width="64px" height="64px" src="/public/logos/colored/html5-color.svg" alt="HTML5" />
-      <img width="64px" height="64px" src="/public/logos/colored/css3-color.svg" alt="CSS3" />
-      <img width="64px" height="64px" src="/public/logos/colored/tailwindcss-color.svg" alt="Tailwind" />
+      <img width="64px" height="64px" src="/src/images/logos/colored/astro-color.svg" alt="Astro" />
+      <img width="64px" height="64px" src="/src/images/logos/colored/typescript-color.svg" alt="Typescript" />
+      <img width="64px" height="64px" src="/src/images/logos/colored/html5-color.svg" alt="HTML5" />
+      <img width="64px" height="64px" src="/src/images/logos/colored/css3-color.svg" alt="CSS3" />
+      <img width="64px" height="64px" src="/src/images/logos/colored/tailwindcss-color.svg" alt="Tailwind" />
     </div>
   </div>
 </p>
