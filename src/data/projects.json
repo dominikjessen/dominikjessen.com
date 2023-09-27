@@ -3,7 +3,7 @@
     "name": "Cinemojis",
     "description": "Cinemojis is a game for movie buffs and emoji lovers. Guess a movie in 5 tries using 1 to 5 emojis. Users can also sign up and create their own movie-emoji sets to play or share with their friends and challenge them.",
     "url": "https://cinemojis.com/",
-    "github": "https://github.com/dominikjessen",
+    "github": null,
     "imgSrc": "/projects/cinemojis/03_Cinemojis_Home_Desktop.png",
     "imgAlt": "Cinemojis home screen",
     "bgColor": "bg-[hsl(var(--mint))]",
@@ -25,21 +25,6 @@
       "Typescript",
       "Tailwind",
       "Webpack"
-    ]
-  },
-  {
-    "name": "Nutrient",
-    "description": "Nutrient is a (Chrome) browser extension that lets you grab ingredients from recipe websites and let GPT tell you the calories per serving and per ingredient. Simply hook up your OpenAI API key locally and get started.",
-    "url": "https://github.com/dominikjessen",
-    "imgSrc": "/projects/cinemojis/02_Cinemojis_Landing_Desktop.png",
-    "imgAlt": "ADD ALT TEXT",
-    "bgColor": "bg-[hsl(var(--aliceblue))]",
-    "techStack": [
-      "React",
-      "Typescript",
-      "Tailwind",
-      "Webpack",
-      "OpenAI"
     ]
   }
 ]
