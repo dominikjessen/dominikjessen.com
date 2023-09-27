@@ -78,7 +78,7 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
           height={560}
         ></canvas>
       </div>
-      <img src={HighlightArrow.src} alt="Highlight arrow" className="absolute top-[10%] right-[10%]" />
+      <img src={HighlightArrow.src} alt="" className="absolute top-[10%] right-[10%] select-none" />
     </div>
   );
 }
