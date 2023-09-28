@@ -1,8 +1,5 @@
 ---
 import RevealCanvas from '../components/RevealCanvas';
-import revealContent from '../data/revealContent.json';
-
-const selectedJoke = revealContent[Math.floor(Math.random() * revealContent.length)];
 ---
 
 <section id="intro" class="grid grid-cols-1 lg:grid-cols-2 gap-4 justify-end items-center pt-12 mt-24">
@@ -14,5 +11,5 @@ const selectedJoke = revealContent[Math.floor(Math.random() * revealContent.leng
       by ☕️ and always busy building out a variety of projects.
     </p>
   </div>
-  <RevealCanvas client:load revealContent={selectedJoke} className="hidden lg:flex" />
+  <RevealCanvas client:load className="hidden lg:flex" />
 </section>

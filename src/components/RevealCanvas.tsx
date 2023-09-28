@@ -1,19 +1,17 @@
 import HighlightArrow from '../images/Highlight_Arrow_topRight.svg';
+import revealOptions from '../data/revealContent.json';
 import { useEffect, useRef, useState } from 'react';
 
 interface RevealCanvasProps {
-  revealContent: {
-    emoji: string;
-    message: string;
-  };
   eraserRadius?: number;
   className?: string;
 }
 
-export default function RevealCanvas({ revealContent, eraserRadius = 40, className }: RevealCanvasProps) {
+export default function RevealCanvas({ eraserRadius = 40, className }: RevealCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [renderReveal, setRenderReveal] = useState(false);
   const [isErasing, setIsErasing] = useState(false);
+  const [reveal, setReveal] = useState<(typeof revealOptions)[0]>();
 
   function eraseCanvas(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
     if (isErasing) {
@@ -49,7 +47,7 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
 
     if (ctx) {
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'hsl(180 17% 93% / 0.95)'; // #eaf0f0
+      ctx.fillStyle = 'hsl(180 17% 93% / 0.99)'; // #eaf0f0
       ctx.fillRect(0, 0, canvas?.width!, canvas?.height!);
     }
   }
@@ -59,6 +57,7 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
     // console.log(`Window is: ${window.innerWidth} x ${window.innerHeight}`);
 
     fillCanvas();
+    setReveal(revealOptions[Math.floor(Math.random() * revealOptions.length)]);
     setRenderReveal(true);
   }, []);
 
@@ -68,8 +67,8 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
         {renderReveal && (
           <div className="w-[28rem] h-[34rem] flex flex-col justify-end items-center select-none">
             <div className="mb-56 flex flex-col items-center gap-10">
-              <span className="text-6xl">{revealContent.emoji}</span>
-              <p className="text-2xl text-center px-6 leading-relaxed text-primary">{revealContent.message}</p>
+              <span className="text-6xl">{reveal?.emoji}</span>
+              <p className="text-2xl text-center px-6 leading-relaxed text-primary">{reveal?.message}</p>
             </div>
             <img className="absolute z-10 w-[28rem]" src="/waves-1.svg" alt="" />
           </div>
