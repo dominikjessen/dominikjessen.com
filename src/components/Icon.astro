@@ -22,9 +22,7 @@ async function getSVG(src: string) {
       throw new Error('No SVG found');
     }
   } catch (error) {
-    console.log('error', src);
-
-    // console.error(error);
+    console.error(error);
     return { attributes: {}, innerHTML: null };
   }
 }

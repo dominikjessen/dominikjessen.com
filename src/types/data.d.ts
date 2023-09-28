@@ -14,4 +14,5 @@ export type CurrentlyItem = {
   by?: string;
   url?: string;
   icon: string;
+  iconType?: 'text' | 'fill';
 };
