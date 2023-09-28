@@ -2,7 +2,10 @@ import HighlightArrow from '../images/Highlight_Arrow_topRight.svg';
 import { useEffect, useRef, useState } from 'react';
 
 interface RevealCanvasProps {
-  revealContent: string;
+  revealContent: {
+    emoji: string;
+    message: string;
+  };
   eraserRadius?: number;
   className?: string;
 }
@@ -53,7 +56,7 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
 
   useEffect(() => {
     // TODO: If I want this to be responsive on resizing I will need a resizeObserver
-    console.log(`Window is: ${window.innerWidth} x ${window.innerHeight}`);
+    // console.log(`Window is: ${window.innerWidth} x ${window.innerHeight}`);
 
     fillCanvas();
     setRenderReveal(true);
@@ -64,8 +67,11 @@ export default function RevealCanvas({ revealContent, eraserRadius = 40, classNa
       <div className="w-[30rem] h-[36rem] flex justify-center items-center border-[16px] border-primary rounded-tl-full rounded-tr-full">
         {renderReveal && (
           <div className="w-[28rem] h-[34rem] flex flex-col justify-end items-center select-none">
-            <span className="text-8xl mb-64">🌵</span>
-            <img className="absolute z-10 w-[28rem]" src={revealContent} alt="Hidden Image" />
+            <div className="mb-56 flex flex-col items-center gap-10">
+              <span className="text-6xl">{revealContent.emoji}</span>
+              <p className="text-2xl text-center px-6 leading-relaxed text-primary">{revealContent.message}</p>
+            </div>
+            <img className="absolute z-10 w-[28rem]" src="/waves-1.svg" alt="" />
           </div>
         )}
         <canvas
