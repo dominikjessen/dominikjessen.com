@@ -16,7 +16,7 @@ import TechnologyCard from '../components/TechnologyCard.astro';
       class="flex justify-around items-center w-full min-w-full shrink-0 gap-[1rem] animate-marquee_rtl group-hover:[animation-play-state:paused] h-full"
       aria-hidden="true"
     >
-      {technologies.map((item, _index) => <TechnologyCard item={item} fillColor="fill-background" />)}
+      {technologies.map((item, _index) => <TechnologyCard tabindex={-1} item={item} fillColor="fill-background" />)}
     </div>
   </div>
 </section>
