@@ -47,7 +47,7 @@ export default function RevealCanvas({ eraserRadius = 40, className }: RevealCan
 
     if (ctx) {
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'hsl(180 17% 93% / 0.99)'; // #eaf0f0
+      ctx.fillStyle = 'hsl(180 17% 93% / 0.97)'; // #eaf0f0
       ctx.fillRect(0, 0, canvas?.width!, canvas?.height!);
     }
   }
@@ -83,7 +83,13 @@ export default function RevealCanvas({ eraserRadius = 40, className }: RevealCan
           height={560}
         ></canvas>
       </div>
-      <img src={HighlightArrow.src} alt="" className="absolute top-[10%] right-[10%] select-none" />
+      <img
+        src={HighlightArrow.src}
+        alt=""
+        width={HighlightArrow.width * 1.25}
+        height={HighlightArrow.height * 1.25}
+        className="absolute top-[8%] right-[7%] select-none"
+      />
     </div>
   );
 }
