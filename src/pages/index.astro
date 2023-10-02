@@ -5,6 +5,7 @@ import Currently from '../sections/currently.astro';
 import Projects from '../sections/projects.astro';
 import Technologies from '../sections/technologies.astro';
 import RevealCanvas from '../components/RevealCanvas';
+import CurrentlyReact from '../sections/currentlyReact';
 
 const revealSource = '/waves-1.svg';
 ---
@@ -20,7 +21,7 @@ const revealSource = '/waves-1.svg';
     </div>
     <Technologies />
     <Projects />
-    <Currently />
+    <CurrentlyReact client:load />
     <!-- <RevealCanvas client:load revealContent={revealSource} className="flex lg:hidden" /> -->
   </div>
 </Layout>
