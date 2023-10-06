@@ -14,10 +14,16 @@
         <a href="/#projects" data-ref="projects" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground/5">Projects</a>
       </li>
       <li>
-        <a href="/#footer" data-ref="footer" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground/5">Contact</a>
+        <a href="/#currently" data-ref="currently" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground/5">About</a>
       </li>
       <li>
-        <a href="/2023_CV_DominikJessen.pdf" data-ref="cv" target="_blank" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground/5">CV</a>
+        <a
+          id="cv-nav"
+          href="/2023_CV_DominikJessen.pdf"
+          data-ref="cv"
+          target="_blank"
+          class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground/5">CV</a
+        >
       </li>
     </ul>
   </nav>
@@ -114,4 +120,32 @@
     });
     scrollTargets.forEach((target) => scrollIO.observe(target));
   }
+
+  //////////////////////
+  // Nav click scroll //
+  //////////////////////
+
+  function onNavLinkClicked(e: Event, link: Element) {
+    e.preventDefault();
+    const targetId = link.getAttribute('data-ref') ?? '';
+    const scrollTarget = document.getElementById(targetId);
+
+    if (!scrollTarget || !nav) return;
+
+    if (targetId === 'intro') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const offset =
+      scrollTarget.getBoundingClientRect().top + window.scrollY - (nav.getBoundingClientRect().height + 2 * nav.getBoundingClientRect().top);
+    window.scrollTo({ top: offset, behavior: 'smooth' }); // will scroll to 4th h3 element
+  }
+
+  const navLinks = document.querySelectorAll('#nav a:not(#cv-nav)');
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      onNavLinkClicked(e, link);
+    });
+  });
 </script>
