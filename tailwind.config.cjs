@@ -63,8 +63,8 @@ module.exports = {
       },
       animation: {
         wave: 'wave 2s ease-in-out infinite',
-        marquee_rtl: 'marquee_rtl 20s linear infinite',
-        marquee_ltr: 'marquee_ltr 20s linear infinite',
+        marquee_rtl: 'marquee_rtl 40s linear infinite',
+        marquee_ltr: 'marquee_ltr 40s linear infinite',
         slow_spin: 'slow_spin 30s linear infinite',
         spin_move: 'spin_move 30s linear infinite',
         grow: 'grow 5s ease-in-out infinite'
