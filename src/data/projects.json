@@ -2,8 +2,8 @@
   {
     "name": "Yes, Chef!",
     "description": "With Yes, Chef! you never have to spend more than a few clicks on figuring out what to make for dinner this week. It's a mealplan generator, random recipe discovery tool, and can serve as your own recipe book - all in one.",
-    "url": null,
-    "github": null,
+    "url": "https://yeschef.recipes",
+    "github": "https://github.com/dominikjessen/yeschef",
     "imgSrc": "/projects/yeschef/01_YesChef_Mealplan.png",
     "imgAlt": "Yes, Chef! mealplan screen",
     "bgColor": "bg-[hsl(var(--aliceblue))]",
