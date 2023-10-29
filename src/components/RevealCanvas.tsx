@@ -31,16 +31,6 @@ export default function RevealCanvas({ eraserRadius = 40, className }: RevealCan
     }
   }
 
-  // TODO: Might not want this functionality at all
-  function clearCanvas() {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-
-    if (ctx) {
-      ctx.clearRect(0, 0, canvas?.width!, canvas?.height!);
-    }
-  }
-
   function fillCanvas() {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -53,9 +43,6 @@ export default function RevealCanvas({ eraserRadius = 40, className }: RevealCan
   }
 
   useEffect(() => {
-    // TODO: If I want this to be responsive on resizing I will need a resizeObserver
-    // console.log(`Window is: ${window.innerWidth} x ${window.innerHeight}`);
-
     fillCanvas();
     setReveal(revealOptions[Math.floor(Math.random() * revealOptions.length)]);
     setRenderReveal(true);

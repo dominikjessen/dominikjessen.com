@@ -84,7 +84,6 @@
   //////////////////
   // Nav scrolled //
   //////////////////
-  // TODO: This doesn't react to resizing, but do I want to add a resizeChange here?
   const canvasVisible = window.matchMedia('(min-width: 1024px)');
   const scrollTargets = canvasVisible.matches
     ? [...document.querySelectorAll('.intersect-target')]
@@ -95,7 +94,7 @@
 
     const scrollCallback: IntersectionObserverCallback = (entries, _observer) => {
       entries.forEach((entry) => {
-        intersectRatios.set(entry.target.nodeName, entry.intersectionRatio); // This only works because my nodeNames are unique
+        intersectRatios.set(entry.target.nodeName, entry.intersectionRatio); // Note: This only works because my nodeNames are unique
 
         const itemsOverlapping = entry.target.getBoundingClientRect().y <= navRect.bottom;
         if (itemsOverlapping) {
