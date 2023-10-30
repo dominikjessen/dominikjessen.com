@@ -141,6 +141,12 @@
         "url": "https://www.supergiantgames.com/games/hades/",
         "icon": "/logos/nintendoswitch.svg",
         "iconType": "fill"
+      },
+      {
+        "title": "Alan Wake 2",
+        "url": "https://www.alanwake.com/",
+        "icon": "/logos/playstation.svg",
+        "iconType": "fill"
       }
     ]
   }
