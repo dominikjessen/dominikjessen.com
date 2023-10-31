@@ -33,5 +33,10 @@
 		"name": "Supabase",
 		"url": "https://supabase.com/",
 		"imgSrc": "/logos/supabase.svg"
+	},
+	{
+		"name": "MySQL",
+		"url": "https://www.mysql.com/",
+		"imgSrc": "/logos/mysql.svg"
 	}
 ]
