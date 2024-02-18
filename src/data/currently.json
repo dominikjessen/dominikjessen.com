@@ -64,13 +64,6 @@
         "iconType": "fill"
       },
       {
-        "title": "Soldi",
-        "by": "Mahmood",
-        "url": "https://open.spotify.com/track/4szQkW1CDHqbRZGltXJdd3?si=e539d19fc1ee4fb5",
-        "icon": "/logos/spotify.svg",
-        "iconType": "fill"
-      },
-      {
         "title": "Bind",
         "by": "Howling",
         "url": "https://open.spotify.com/track/5SKQlsVC41xO7KLmAqqoij?si=6d9126f3f7264137",
@@ -97,10 +90,10 @@
     "heading": "Watching",
     "items": [
       {
-        "title": "One Piece (Live Action)",
-        "url": "https://www.netflix.com/watch/80218003",
-        "icon": "/logos/netflix.svg",
-        "iconType": "fill"
+        "title": "Reacher",
+        "url": "https://www.amazon.com/Reacher-Season-1/dp/B09MKZTJF4",
+        "icon": "/logos/film.svg",
+        "iconType": "text"
       },
       {
         "title": "The Bear",
