@@ -15,6 +15,11 @@
 		"imgSrc": "/logos/nextdotjs.svg"
 	},
 	{
+		"name": "Vue.js",
+		"url": "https://vuejs.org/",
+		"imgSrc": "/logos/vuedotjs.svg"
+	},
+	{
 		"name": "Astro",
 		"url": "https://astro.build/",
 		"imgSrc": "/logos/astro.svg"
