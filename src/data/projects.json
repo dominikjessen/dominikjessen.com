@@ -1,21 +1,5 @@
 [
   {
-    "name": "Yes, Chef!",
-    "description": "With Yes, Chef! you never have to spend more than a few clicks on figuring out what to make for dinner this week. It's a mealplan generator, random recipe discovery tool, and can serve as your own recipe book - all in one.",
-    "url": "https://yeschef.recipes",
-    "github": "https://github.com/dominikjessen/yeschef",
-    "imgSrc": "/projects/yeschef/01_YesChef_Mealplan.png",
-    "imgAlt": "Yes, Chef! mealplan screen",
-    "bgColor": "bg-[hsl(var(--aliceblue))]",
-    "techStack": [
-      "Next.js",
-      "Typescript",
-      "MySQL",
-      "Prisma",
-      "Tailwind"
-    ]
-  },
-  {
     "name": "Cinemojis",
     "description": "Cinemojis is a game for movie buffs and emoji lovers. Guess a movie in 5 tries using 1 to 5 emojis. Users can also sign up and create their own movie-emoji sets to play or share with their friends and challenge them.",
     "url": "https://cinemojis.com/",
@@ -28,6 +12,21 @@
       "Typescript",
       "Tailwind",
       "Supabase"
+    ]
+  },
+  {
+    "name": "Yes, Chef!",
+    "description": "With Yes, Chef! you never have to spend more than a few clicks on figuring out what to make for dinner this week. It's a mealplan generator, random recipe discovery tool, and can serve as your own recipe book - all in one.",
+    "github": "https://github.com/dominikjessen/yeschef",
+    "imgSrc": "/projects/yeschef/01_YesChef_Mealplan.png",
+    "imgAlt": "Yes, Chef! mealplan screen",
+    "bgColor": "bg-[hsl(var(--aliceblue))]",
+    "techStack": [
+      "Next.js",
+      "Typescript",
+      "MySQL",
+      "Prisma",
+      "Tailwind"
     ]
   },
   {
