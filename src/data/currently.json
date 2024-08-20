@@ -50,16 +50,9 @@
         "iconType": "fill"
       },
       {
-        "title": "Catching Eyes",
-        "by": "49th & Main",
-        "url": "https://open.spotify.com/track/22Vsz6sIdD97KROSX7oAyq?si=6f3747632be04a66",
-        "icon": "/logos/spotify.svg",
-        "iconType": "fill"
-      },
-      {
-        "title": "Because You Move Me",
-        "by": "Tinlicker, Helsloot",
-        "url": "https://open.spotify.com/track/05GvwwTLLID738BbKN1ze0?si=845be426c17c4e45",
+        "title": "Rote Flaggen",
+        "by": "Berq",
+        "url": "https://open.spotify.com/track/5SyMIueLnvZ7dQNGWcU3Wf?si=693ee13cb4424f3f",
         "icon": "/logos/spotify.svg",
         "iconType": "fill"
       },
@@ -78,9 +71,9 @@
         "iconType": "fill"
       },
       {
-        "title": "Oceans",
+        "title": "Colorblind",
         "by": "Ry X, Ólafur Arnalds",
-        "url": "https://open.spotify.com/track/2eVofaQRJvddSUBfcub7Gz?si=c9691d59e9094d18",
+        "url": "https://open.spotify.com/track/3Y0JYgo90grFrexvP4X7f7?si=61c5c7fda9b44bdc",
         "icon": "/logos/spotify.svg",
         "iconType": "fill"
       }
@@ -119,33 +112,10 @@
     "heading": "Surviving on",
     "items": [
       {
-        "title": "1 cup of coffee a day",
+        "title": "2 cups of coffee a day",
         "url": "https://www.youtube.com/watch?v=o3xoApLQnv4",
         "icon": "/icons/coffee.svg",
         "iconType": "text"
-      }
-    ]
-  },
-  "playing": {
-    "heading": "Playing",
-    "items": [
-      {
-        "title": "Octopath Traveler 2",
-        "url": "https://octopathtraveler2.square-enix-games.com/en-us/",
-        "icon": "/logos/nintendoswitch.svg",
-        "iconType": "fill"
-      },
-      {
-        "title": "Backpack Battles",
-        "url": "https://store.steampowered.com/app/2427700/Backpack_Battles/",
-        "icon": "/logos/steam.svg",
-        "iconType": "fill"
-      },
-      {
-        "title": "Alan Wake 2",
-        "url": "https://www.alanwake.com/",
-        "icon": "/logos/playstation.svg",
-        "iconType": "fill"
       }
     ]
   }
