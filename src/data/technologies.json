@@ -1,8 +1,8 @@
 [
 	{
-		"name": "Typescript",
-		"url": "https://www.typescriptlang.org/",
-		"imgSrc": "/logos/typescript.svg"
+		"name": "Next.js",
+		"url": "https://nextjs.org/",
+		"imgSrc": "/logos/nextdotjs.svg"
 	},
 	{
 		"name": "React",
@@ -10,29 +10,19 @@
 		"imgSrc": "/logos/react.svg"
 	},
 	{
-		"name": "Next.js",
-		"url": "https://nextjs.org/",
-		"imgSrc": "/logos/nextdotjs.svg"
-	},
-	{
 		"name": "Vue.js",
 		"url": "https://vuejs.org/",
 		"imgSrc": "/logos/vuedotjs.svg"
 	},
 	{
+		"name": "Typescript",
+		"url": "https://www.typescriptlang.org/",
+		"imgSrc": "/logos/typescript.svg"
+	},
+	{
 		"name": "Laravel",
 		"url": "https://laravel.com/",
 		"imgSrc": "/logos/laravel.svg"
-	},
-	{
-		"name": "Node.js",
-		"url": "https://nodejs.org/",
-		"imgSrc": "/logos/nodedotjs.svg"
-	},
-	{
-		"name": "Tailwind",
-		"url": "https://tailwindcss.com/",
-		"imgSrc": "/logos/tailwindcss.svg"
 	},
 	{
 		"name": "Supabase",
