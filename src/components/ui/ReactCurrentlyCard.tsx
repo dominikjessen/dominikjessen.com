@@ -8,7 +8,7 @@ export interface ReactCurrentlyCardProps {
   className?: string;
 }
 
-export default function ReactCurrentlyCard({ item, heading, iconType, className }: any) {
+export default function ReactCurrentlyCard({ item, heading, iconType, className }: ReactCurrentlyCardProps) {
   return (
     <div className={`${className} flex gap-4 md:gap-6 p-3 md:p-6 rounded-3xl w-full border border-foreground/10 bg-primary/10 backdrop-blur-xl`}>
       <ReactSVGIcon src={item.icon} className={`w-6 md:w-10 ${iconType}-primary`} />
