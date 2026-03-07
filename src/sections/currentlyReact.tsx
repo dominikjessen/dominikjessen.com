@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import currently from '../data/currently.json';
 import type { CurrentlyItem } from '../types/data';
 import ReactCurrentlyCard from '../components/ui/ReactCurrentlyCard';
-type CurrentlyOptions = 'watching' | 'listening' | 'drinking' | 'playing' | 'reading';
+type CurrentlyOptions = 'watching' | 'listening' | 'drinking' | 'reading';
 
 interface CardsData {
   heading: string;

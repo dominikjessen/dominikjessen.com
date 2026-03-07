@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Fonts */
+  --font-signika: "Signika Variable", system-ui, sans-serif;
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+
+  /* Colors backed by CSS variables in Layout.astro */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-foreground_lighter: hsl(var(--foreground_lighter));
+  --color-primary: hsl(var(--primary));
+  --color-accent_seagreen: hsl(var(--accent_seagreen));
+  --color-brass: hsl(var(--brass));
+  --color-rose: hsl(var(--rose));
+  --color-mint: hsl(var(--mint));
+  --color-blush: hsl(var(--blush));
+  --color-aliceblue: hsl(var(--aliceblue));
+
+  /* Animations (names must match existing utility classes) */
+  @keyframes wave {
+    0%,
+    75%,
+    100% {
+      transform: rotate(0deg);
+    }
+    12.5% {
+      transform: rotate(16deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    37.5% {
+      transform: rotate(16deg);
+    }
+    50% {
+      transform: rotate(-10deg);
+    }
+    62.5% {
+      transform: rotate(16deg);
+    }
+  }
+
+  @keyframes marquee_rtl {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% - 1rem));
+    }
+  }
+
+  @keyframes marquee_ltr {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes slow_spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spin_move {
+    0% {
+      transform: rotate(0deg) translate(-5%, -10%);
+    }
+    50% {
+      transform: rotate(180deg) translate(10%, 10%);
+    }
+    100% {
+      transform: rotate(360deg) translate(-5%, -10%);
+    }
+  }
+
+  @keyframes grow {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.1);
+    }
+    60% {
+      transform: scale(1);
+    }
+  }
+
+  --animate-wave: wave 2s ease-in-out infinite;
+  --animate-marquee_rtl: marquee_rtl 40s linear infinite;
+  --animate-marquee_ltr: marquee_ltr 40s linear infinite;
+  --animate-slow_spin: slow_spin 30s linear infinite;
+  --animate-spin_move: spin_move 30s linear infinite;
+  --animate-grow: grow 5s ease-in-out infinite;
+}
+

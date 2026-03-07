@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import BookIcon from '../../images/icons/book-open.svg?react';
 import useDynamicSVGImport from '../../hooks/useDynamicSVGImport';
 
 export interface ReactSVGIconProps {

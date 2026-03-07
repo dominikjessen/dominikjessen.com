@@ -8,10 +8,18 @@ export interface Props {
 
 async function getSVG(src: string) {
   try {
-    const imgSrc = `../images${src}`;
-    const images = import.meta.glob<ImageMetadata>('../images/*/*', { as: 'raw' });
-
-    const img = await images[imgSrc]();
+    const pathSuffix = src.startsWith('/') ? src.slice(1) : src;
+    const images = import.meta.glob<string>('../images/*/*', {
+      query: '?raw',
+      import: 'default'
+    });
+    const key = Object.keys(images).find((k) =>
+      k.replace(/\\/g, '/').endsWith(pathSuffix)
+    );
+    if (!key) {
+      return { attributes: {}, innerHTML: null };
+    }
+    const img = await images[key]();
     const root = parse(img);
     const svg = root.querySelector('svg');
 
