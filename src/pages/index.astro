@@ -1,9 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Intro from '../sections/intro.astro';
-import Currently from '../sections/currently.astro';
 import Projects from '../sections/projects.astro';
-import Technologies from '../sections/technologies.astro';
 import CurrentlyReact from '../sections/currentlyReact';
 ---
 
@@ -16,7 +14,6 @@ import CurrentlyReact from '../sections/currentlyReact';
       </div>
       <Intro />
     </div>
-    <Technologies />
     <Projects />
     <CurrentlyReact client:load />
     <!-- <RevealCanvas client:load revealContent={revealSource} className="flex lg:hidden" /> -->

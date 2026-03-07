@@ -2,7 +2,7 @@
 
 ## 1. Project Purpose
 
-This repository is a **personal portfolio and marketing site** for Dominik Jessen (dominikjessen.com). It serves visitors who want to learn about the author as a product engineer, see selected projects, and get in touch. The site solves the need for a single, static, fast-loading presence that showcases intro copy, a “tech I love” marquee, work-in-progress projects, and a “Currently” section (randomized reading/listening/watching/drinking items). There is no backend or database; all content is driven by JSON data and Astro pages. The project is maintained by a solo developer with a product-engineering focus (see `.cursorrules`).
+This repository is a **personal portfolio and marketing site** for Dominik Jessen (dominikjessen.com). It serves visitors who want to learn about the author as a product engineer, see selected projects, and get in touch. The site solves the need for a single, static, fast-loading presence that showcases intro copy, work-in-progress projects, and a “Currently” section (randomized reading/listening/watching/drinking items). There is no backend or database; all content is driven by JSON data and Astro pages. The project is maintained by a solo developer with a product-engineering focus (see `.cursorrules`).
 
 ## 2. Tech Stack & Dependencies
 
@@ -33,7 +33,7 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 - **Data flow**
   1. User requests a page (e.g. `/`).
   2. Astro builds the page: it imports layout, sections, and data (e.g. `projects.json`, `currently.json`).
-  3. For the home page, sections render in order: Intro, Technologies (marquee), Projects (cards), Currently (React island with `client:load` that randomizes items from `currently.json`).
+  3. For the home page, sections render in order: Intro, Projects (cards), Currently (React island with `client:load` that randomizes items from `currently.json`).
   4. No runtime API calls; analytics (Vercel) run in the browser after hydration where used.
 
 - **Patterns**
@@ -45,9 +45,9 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 - **Folder structure**
   - `src/pages/` — Routes (`index.astro`, `thoughts.astro`).
   - `src/layouts/` — `Layout.astro` (shell, theme, Nav, Footer).
-  - `src/sections/` — Full-width sections composed by pages (e.g. `intro.astro`, `projects.astro`, `technologies.astro`, `currently.astro`, `currentlyReact.tsx`).
-  - `src/components/` — Reusable pieces: `ProjectCard.astro`, `TechnologyCard.astro`, `CurrentlyCard.astro`, `Icon.astro`, `RevealCanvas.tsx`; `structure/Nav.astro`, `Footer.astro`; `ui/ThemeToggle.astro`, `ReactCurrentlyCard.tsx`, `ReactSVGIcon.tsx`.
-  - `src/data/` — `projects.json`, `currently.json`, `technologies.json`, `revealContent.json`.
+  - `src/sections/` — Full-width sections composed by pages (e.g. `intro.astro`, `projects.astro`, `currently.astro`, `currentlyReact.tsx`).
+  - `src/components/` — Reusable pieces: `ProjectCard.astro`, `CurrentlyCard.astro`, `Icon.astro`, `RevealCanvas.tsx`; `structure/Nav.astro`, `Footer.astro`; `ui/ThemeToggle.astro`, `ReactCurrentlyCard.tsx`, `ReactSVGIcon.tsx`.
+  - `src/data/` — `projects.json`, `currently.json`, `revealContent.json`.
   - `src/types/` — `data.d.ts` (shared types for data).
   - `src/styles/` — `tailwind.css` (Tailwind entry, `@theme`, keyframes).
   - `src/hooks/` — React-only hooks (e.g. `useDynamicSVGImport.ts`).
@@ -87,7 +87,7 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 Use this playbook when adding a feature end-to-end. There are no DB migrations or API routes; the main work is data, types, components, and pages.
 
 1. **Define or extend the data model**
-   - If the feature needs new content, add or extend a JSON file in `src/data/` (e.g. `projects.json`, `currently.json`, `technologies.json`) or introduce a new file (e.g. `testimonials.json`).
+   - If the feature needs new content, add or extend a JSON file in `src/data/` (e.g. `projects.json`, `currently.json`) or introduce a new file (e.g. `testimonials.json`).
    - Document the shape in `src/types/data.d.ts` (e.g. add or extend `Project`, `CurrentlyItem`, or a new type). Keep types and JSON in sync.
 
 2. **No database or migrations**
@@ -119,7 +119,6 @@ Use this playbook when adding a feature end-to-end. There are no DB migrations o
 **Concrete paths**
 - New project: edit `src/data/projects.json` and ensure `Project` in `src/types/data.d.ts` matches; `ProjectCard.astro` and `src/sections/projects.astro` already consume it.
 - New “Currently” category or item: edit `src/data/currently.json`; ensure each item has `title`, `icon`, `iconType`, and optional `by`/`url`; `CurrentlyItem` and `currentlyReact.tsx` / `ReactCurrentlyCard.tsx` use it.
-- New tech in marquee: add SVG under `src/images/logos/` (e.g. `nextdotjs.svg`), then add an entry in `src/data/technologies.json` with `name`, `url`, and `imgSrc` (e.g. `/logos/nextdotjs.svg`). `TechnologyCard.astro` and `src/sections/technologies.astro` consume it via `Icon.astro`.
 - New page: create `src/pages/<route>.astro`, use `<Layout title="...">`, add content; optionally add a link in `src/components/structure/Nav.astro`.
 
 - **Blog / thoughts (planned)**: The route `/thoughts` exists (`src/pages/thoughts.astro`) as a placeholder. When adding real blog or thought posts, use Astro Content Collections: add `src/content/thoughts/` (or `src/content/blog/`) with a collection schema, write posts in Markdown or MDX, then update `src/pages/thoughts.astro` (or a dedicated `src/pages/thoughts/[...slug].astro`) to fetch and render the collection. Add a type in `src/types/` if needed and link the thoughts index from Nav/Footer.
