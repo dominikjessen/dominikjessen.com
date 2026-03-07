@@ -1,0 +1,78 @@
+[
+  {
+    "emoji": "🚀",
+    "company": "Vesper",
+    "year": 2025,
+    "metric": ">$1MM ARR",
+    "description": "Led discovery, architecture, and delivery of Vesper's highest-impact enterprise feature - from problem framing through to production.",
+    "bgColor": "bg-achievement-blue"
+  },
+  {
+    "emoji": "🔐",
+    "company": "Vesper",
+    "year": 2025,
+    "metric": "95% drop in account sharing",
+    "description": "Diagnosed account sharing as a problem vector, wrote the RFC, and shipped 2FA end-to-end. Security posture improved and account sharing went down.",
+    "bgColor": "bg-achievement-rose"
+  },
+  {
+    "emoji": "⚡️",
+    "company": "Vesper",
+    "year": 2024,
+    "metric": "5x faster dashboards",
+    "description": "Rebuilt the caching and query layer in core dashboard controllers. Dashboards that used to take seconds now load in a fraction of the time; engagement on key flows went up 60%.",
+    "bgColor": "bg-achievement-mint"
+  },
+  {
+    "emoji": "💰",
+    "company": "Vesper",
+    "year": 2024,
+    "metric": "50% higher ACV",
+    "description": "Designed and shipped role-based access control (RBAC) so we could sell team and enterprise tiers. The system became the foundation for premium pricing and upsells.",
+    "bgColor": "bg-achievement-yellow"
+  },
+  {
+    "emoji": "📋",
+    "company": "Tractable",
+    "year": 2022,
+    "metric": "$2MM saved annually",
+    "description": "Shipped an internal tool that automated a manual, error-prone step in the claims pipeline. Cut intervention by 85% and freed the team to focus on edge cases that actually needed humans.",
+    "bgColor": "bg-achievement-peach"
+  },
+  {
+    "emoji": "🤖",
+    "company": "Tractable",
+    "year": 2022,
+    "metric": "10x claims volume",
+    "description": "Drove ML accuracy and pipeline improvements for the claims product. The system could handle an order of magnitude more claims at the same quality bar.",
+    "bgColor": "bg-achievement-lavender"
+  },
+  {
+    "emoji": "📈",
+    "company": "Uni-Life",
+    "year": 2021,
+    "metric": "175% ARR growth YoY",
+    "description": "Led product and growth strategy across a 3-year stretch of ARR growth. Owned roadmap, prioritization, and the link between what we built and what we measured.",
+    "bgColor": "bg-achievement-sky"
+  },
+  {
+    "emoji": "🎮",
+    "company": "Cinemojis",
+    "year": "",
+    "metric": "150 monthly page visits",
+    "description": "Designed and built an emoji-to-movie guessing game. Users can create and share custom packs or play a daily challenge; the loop is built for replay and discovery.",
+    "bgColor": "bg-achievement-sage"
+  },
+  {
+    "emoji": "🎉",
+    "company": "",
+    "year": "",
+    "metric": "Your challenge here...",
+    "description": "Think my next achievement should be at your company? Get in touch.",
+    "bgColor": "bg-primary",
+    "isCta": true,
+    "tagLabel": "You made it!",
+    "ctaLabel": "Say hello",
+    "ctaUrl": "mailto:dominikjessencodes@gmail.com"
+  }
+]

@@ -14,5 +14,18 @@ export type CurrentlyItem = {
   by?: string;
   url?: string;
   icon: string;
-  iconType?: 'text' | 'fill';
+  iconType?: "text" | "fill";
+};
+
+export type Achievement = {
+  emoji: string;
+  company: string;
+  year: number | string;
+  metric: string;
+  description: string;
+  bgColor: string;
+  isCta?: boolean;
+  tagLabel?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
 };
