@@ -50,13 +50,6 @@
         "iconType": "fill"
       },
       {
-        "title": "Rote Flaggen",
-        "by": "Berq",
-        "url": "https://open.spotify.com/track/5SyMIueLnvZ7dQNGWcU3Wf?si=693ee13cb4424f3f",
-        "icon": "/logos/spotify.svg",
-        "iconType": "fill"
-      },
-      {
         "title": "Bind",
         "by": "Howling",
         "url": "https://open.spotify.com/track/5SKQlsVC41xO7KLmAqqoij?si=6d9126f3f7264137",
@@ -91,12 +84,6 @@
       {
         "title": "The Bear",
         "url": "https://www.disneyplus.com/en-gb/series/the-bear/52m6nx7HoP5F",
-        "icon": "/icons/film.svg",
-        "iconType": "text"
-      },
-      {
-        "title": "Only Murders in the Building",
-        "url": "https://www.disneyplus.com/en-gb/series/only-murders-in-the-building/2EfP45PYWY5s",
         "icon": "/icons/film.svg",
         "iconType": "text"
       },
