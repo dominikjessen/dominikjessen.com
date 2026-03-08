@@ -107,12 +107,25 @@
     }
   }
 
+  @keyframes blob_breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.65;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+  }
+
   --animate-wave: wave 2s ease-in-out infinite;
   --animate-marquee_rtl: marquee_rtl 40s linear infinite;
   --animate-marquee_ltr: marquee_ltr 40s linear infinite;
   --animate-slow_spin: slow_spin 30s linear infinite;
   --animate-spin_move: spin_move 30s linear infinite;
   --animate-grow: grow 5s ease-in-out infinite;
+  --animate-blob_breathe: blob_breathe 4.5s ease-in-out infinite;
 }
 
 @keyframes achievement-fly-out {
