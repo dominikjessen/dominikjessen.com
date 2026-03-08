@@ -11,10 +11,22 @@ export type Project = {
 
 export type CurrentlyItem = {
   title: string;
-  by?: string;
   url?: string;
   icon: string;
   iconType?: "text" | "fill";
+};
+
+export type CurrentlyCategoryKey =
+  | "building"
+  | "thinking"
+  | "reading"
+  | "listening"
+  | "watching"
+  | "drinking";
+
+export type CurrentlyCategory = {
+  heading: string;
+  items: CurrentlyItem[];
 };
 
 export type Achievement = {

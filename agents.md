@@ -45,8 +45,8 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 - **Folder structure**
   - `src/pages/` — Routes (`index.astro`, `thoughts.astro`).
   - `src/layouts/` — `Layout.astro` (shell, theme, Nav, Footer).
-  - `src/sections/` — Full-width sections composed by pages (e.g. `intro.astro`, `work.astro`, `projects.astro`, `currently.astro`, `currentlyReact.tsx`).
-  - `src/components/` — Reusable pieces: `ProjectCard.astro`, `WorkCard.astro`, `CurrentlyCard.astro`, `Icon.astro`, `RevealCanvas.tsx`; `structure/Nav.astro`, `Footer.astro`; `ui/ThemeToggle.astro`, `ReactCurrentlyCard.tsx`, `ReactSVGIcon.tsx`.
+  - `src/sections/` — Full-width sections composed by pages (e.g. `intro.astro`, `work.astro`, `projects.astro`, `currentlyReact.tsx`).
+  - `src/components/` — Reusable pieces: `ProjectCard.astro`, `WorkCard.astro`, `Icon.astro`, `RevealCanvas.tsx`; `structure/Nav.astro`, `Footer.astro`; `ui/ThemeToggle.astro`, `ReactCurrentlyCard.tsx`, `ReactSVGIcon.tsx`.
   - `src/data/` — `projects.json`, `work.json`, `currently.json`, `revealContent.json`.
   - `src/types/` — `data.d.ts` (shared types for data).
   - `src/styles/` — `tailwind.css` (Tailwind entry, `@theme`, keyframes).
