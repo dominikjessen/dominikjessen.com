@@ -12,8 +12,7 @@ export type Project = {
 export type CurrentlyItem = {
   title: string;
   url?: string;
-  icon: string;
-  iconType?: "text" | "fill";
+  emoji: string;
 };
 
 export type CurrentlyCategoryKey =

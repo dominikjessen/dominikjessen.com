@@ -54,7 +54,6 @@ export default function CurrentlyReact() {
             key={`${data.heading}-${data.item.title}`}
             heading={data.heading}
             item={data.item}
-            iconType={data.item.iconType}
             className="scroll-fade-in"
           />
         ))}

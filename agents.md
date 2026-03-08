@@ -39,19 +39,19 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 - **Patterns**
   - **Static-first**: Astro components by default; React only where interactivity is required (`client:load` in `index.astro` for `CurrentlyReact` and `RevealCanvas`).
   - **Data co-located with type**: JSON in `src/data/`, TypeScript types in `src/types/data.d.ts` (`Project`, `CurrentlyItem`). Sections and components import JSON and types directly.
-  - **SVG handling**: Two paths — (1) Astro `Icon.astro`: `import.meta.glob` with `?raw`, `node-html-parser` to inject SVG into the page; (2) React: `useDynamicSVGImport` + `ReactSVGIcon` using Vite’s `import.meta.glob` with `?react` (SVGs under `src/images/`).
+  - **SVG handling**: Astro `Icon.astro` uses `import.meta.glob` with `?raw` and `node-html-parser` to inline SVGs (e.g. in ProjectCard). React components use emojis or other assets as needed (e.g. Currently cards use per-item emoji).
   - **Layout**: Single `Layout.astro` wraps all pages; provides global CSS variables (light/dark), fonts, Tailwind, Nav, Footer, and Analytics. Page-level styles are scoped in `<style>` or use Tailwind.
 
 - **Folder structure**
   - `src/pages/` — Routes (`index.astro`, `thoughts.astro`).
   - `src/layouts/` — `Layout.astro` (shell, theme, Nav, Footer).
   - `src/sections/` — Full-width sections composed by pages (e.g. `intro.astro`, `work.astro`, `projects.astro`, `currentlyReact.tsx`).
-  - `src/components/` — Reusable pieces: `ProjectCard.astro`, `WorkCard.astro`, `Icon.astro`, `RevealCanvas.tsx`; `structure/Nav.astro`, `Footer.astro`; `ui/ThemeToggle.astro`, `ReactCurrentlyCard.tsx`, `ReactSVGIcon.tsx`.
+  - `src/components/` — Reusable pieces: `ProjectCard.astro`, `WorkCard.astro`, `Icon.astro`, `RevealCanvas.tsx`; `structure/Nav.astro`, `Footer.astro`; `ui/ThemeToggle.astro`, `ReactCurrentlyCard.tsx`.
   - `src/data/` — `projects.json`, `work.json`, `currently.json`, `revealContent.json`.
   - `src/types/` — `data.d.ts` (shared types for data).
   - `src/styles/` — `tailwind.css` (Tailwind entry, `@theme`, keyframes).
-  - `src/hooks/` — React-only hooks (e.g. `useDynamicSVGImport.ts`).
-  - `src/images/` — SVG assets (logos, icons) used by Icon/ReactSVGIcon.
+  - `src/hooks/` — React-only hooks (none currently; add as needed for client logic).
+  - `src/images/` — SVG assets used by Icon.astro (e.g. logos for project cards).
   - `public/` — Favicon, PDFs, static assets served as-is.
 
 - **Boundaries to preserve**
@@ -129,7 +129,7 @@ Use this playbook when adding a feature end-to-end. There are no DB migrations o
 - **Frameworks**: No test suite is used or planned for this project. It is a personal static site; the maintainer is comfortable shipping without automated tests.
 
 - **What to test (if tests are added later)**  
-  - **Unit**: Utilities and pure logic (e.g. data shape validation, formatters). React hooks like `useDynamicSVGImport` could be unit-tested with Vitest.  
+  - **Unit**: Utilities and pure logic (e.g. data shape validation, formatters). React hooks could be unit-tested with Vitest if added.  
   - **Integration**: Astro components that consume `src/data/` and render sections could be tested by rendering and asserting on output.  
   - **E2E**: Critical paths (e.g. load home, nav to sections, theme toggle) with Playwright.
 
@@ -149,7 +149,7 @@ Use this playbook when adding a feature end-to-end. There are no DB migrations o
 
 - **Don’t remove or stub without being asked**: Do not delete or comment out existing behavior (e.g. sections, nav items, or React islands) unless the user explicitly requests it.
 
-- **Choose the approach already in the codebase**: When two options are both valid, use the one already used (e.g. Astro for static content; React only where client interactivity is needed; SVG via `Icon.astro` for Astro and `ReactSVGIcon` for React).
+  - **Choose the approach already in the codebase**: When two options are both valid, use the one already used (e.g. Astro for static content; React only where client interactivity is needed; SVG via `Icon.astro` for Astro components).
 
 - **State assumptions**: If you assume something about the data shape, the meaning of a prop, or the deploy target, say so briefly (e.g. “Assumed `projects.json` is the single source of projects and is not fetched from an API.”).
 

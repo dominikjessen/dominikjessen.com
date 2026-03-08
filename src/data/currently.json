@@ -5,26 +5,22 @@
       {
         "title": "Project Hail Mary by Andy Weir",
         "url": "https://www.goodreads.com/book/show/54493401-project-hail-mary",
-        "icon": "/icons/book-open.svg",
-        "iconType": "text"
+        "emoji": "📖"
       },
       {
         "title": "Designing Your Life by Bill Burnett, Dave Evans",
         "url": "https://www.goodreads.com/book/show/61130244-designing-your-life---how-to-build-a-well-lived-joyful-life",
-        "icon": "/icons/book-open.svg",
-        "iconType": "text"
+        "emoji": "📖"
       },
       {
         "title": "Hooked by Nir Eyal",
         "url": "https://www.goodreads.com/en/book/show/22668729",
-        "icon": "/icons/book-open.svg",
-        "iconType": "text"
+        "emoji": "📖"
       },
       {
         "title": "Make Time by Jake Knapp, John Zeratsky",
         "url": "https://www.goodreads.com/book/show/37880811-make-time",
-        "icon": "/icons/book-open.svg",
-        "iconType": "text"
+        "emoji": "📖"
       }
     ]
   },
@@ -34,32 +30,27 @@
       {
         "title": "Jungle by Petit Biscuit",
         "url": "https://open.spotify.com/track/6MSd4awjGA81m2HP863Ip3?si=bb829f685982401e",
-        "icon": "/logos/spotify.svg",
-        "iconType": "fill"
+        "emoji": "🎵"
       },
       {
         "title": "Somebody Like You by Giant Rooks",
         "url": "https://open.spotify.com/track/7jLAYW3N25Piy6lEI4WczE?si=7c874372614d4606",
-        "icon": "/logos/spotify.svg",
-        "iconType": "fill"
+        "emoji": "🎵"
       },
       {
         "title": "Bind by Howling",
         "url": "https://open.spotify.com/track/5SKQlsVC41xO7KLmAqqoij?si=6d9126f3f7264137",
-        "icon": "/logos/spotify.svg",
-        "iconType": "fill"
+        "emoji": "🎵"
       },
       {
         "title": "YaYaYa by Ry X",
         "url": "https://open.spotify.com/track/1gmj9SGmFea50SyyVYgFkP?si=419ac611200244d9",
-        "icon": "/logos/spotify.svg",
-        "iconType": "fill"
+        "emoji": "🎵"
       },
       {
         "title": "Colorblind by Ry X, Ólafur Arnalds",
         "url": "https://open.spotify.com/track/3Y0JYgo90grFrexvP4X7f7?si=61c5c7fda9b44bdc",
-        "icon": "/logos/spotify.svg",
-        "iconType": "fill"
+        "emoji": "🎵"
       }
     ]
   },
@@ -69,20 +60,17 @@
       {
         "title": "Reacher",
         "url": "https://www.amazon.com/Reacher-Season-1/dp/B09MKZTJF4",
-        "icon": "/logos/film.svg",
-        "iconType": "text"
+        "emoji": "📺"
       },
       {
         "title": "The Bear",
         "url": "https://www.disneyplus.com/en-gb/series/the-bear/52m6nx7HoP5F",
-        "icon": "/icons/film.svg",
-        "iconType": "text"
+        "emoji": "📺"
       },
       {
         "title": "The Great",
         "url": "https://www.primevideo.com/detail/The-Great/0L49YBTPFJI9OTD8OYHE6VB8NX",
-        "icon": "/icons/film.svg",
-        "iconType": "text"
+        "emoji": "📺"
       }
     ]
   },
@@ -92,13 +80,11 @@
       {
         "title": "2 cups of coffee a day",
         "url": "https://www.youtube.com/watch?v=o3xoApLQnv4",
-        "icon": "/icons/coffee.svg",
-        "iconType": "text"
+        "emoji": "☕"
       },
       {
         "title": "Just water is fine, thanks",
-        "icon": "/icons/coffee.svg",
-        "iconType": "text"
+        "emoji": "💧"
       }
     ]
   },
@@ -108,8 +94,7 @@
       {
         "title": "This website",
         "url": "https://github.com/dominikjessen/personal-website",
-        "icon": "/logos/github.svg",
-        "iconType": "text"
+        "emoji": "🛠️"
       }
     ]
   },
@@ -118,8 +103,7 @@
     "items": [
       {
         "title": "How to ship more often",
-        "icon": "/icons/book-open.svg",
-        "iconType": "text"
+        "emoji": "💭"
       }
     ]
   }
