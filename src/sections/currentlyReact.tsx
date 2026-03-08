@@ -48,7 +48,7 @@ export default function CurrentlyReact() {
         Some of the things I'm enjoying these days and always down to chat
         about!
       </p>
-      <div className="w-5/6 md:w-3/5 lg:w-3/5 flex flex-col items-center gap-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {cardsData?.map((data) => (
           <ReactCurrentlyCard
             key={`${data.heading}-${data.item.title}`}
