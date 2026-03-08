@@ -118,4 +118,37 @@ const { title } = Astro.props;
       opacity: 1;
     }
   }
+
+  .blob-fill {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(at 30% 34%, rgb(252, 212, 212) 0, transparent 78%),
+      radial-gradient(at 3% 57%, rgb(196, 181, 253) 0, transparent 72%),
+      radial-gradient(at 32% 67%, rgb(107, 114, 128) 0, transparent 18%),
+      radial-gradient(at 14% 19%, rgb(71, 85, 105) 0, transparent 61%),
+      radial-gradient(at 12% 31%, rgb(253, 186, 116) 0, transparent 5%),
+      radial-gradient(at 14% 46%, rgb(250, 232, 255) 0, transparent 6%);
+  }
+
+  html.dark .blob-fill {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(at 30% 34%, hsl(var(--primary) / 0.18) 0, transparent 78%),
+      radial-gradient(at 3% 57%, hsl(263 52% 45% / 0.2) 0, transparent 72%),
+      radial-gradient(at 32% 67%, hsl(var(--foreground_lighter) / 0.08) 0, transparent 18%),
+      radial-gradient(at 14% 19%, hsl(var(--accent_seagreen) / 0.12) 0, transparent 61%),
+      radial-gradient(at 12% 31%, hsl(var(--brass) / 0.1) 0, transparent 5%),
+      radial-gradient(at 14% 46%, hsl(263 52% 60% / 0.08) 0, transparent 6%);
+    animation: blob_breathe_dark 4.5s ease-in-out infinite;
+  }
+
+  @keyframes blob_breathe_dark {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.6;
+    }
+  }
 </style>

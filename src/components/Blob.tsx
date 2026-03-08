@@ -4,18 +4,6 @@ import { useRef, useEffect } from "react";
 const LERP_K = 0.002;
 const LERP_MAX_FACTOR = 0.08;
 
-const BLOB_STYLE: React.CSSProperties = {
-  backgroundColor: "hsl(var(--background))",
-  backgroundImage: `
-    radial-gradient(at 30% 34%, rgb(252, 212, 212) 0, transparent 78%),
-    radial-gradient(at 3% 57%, rgb(196, 181, 253) 0, transparent 72%),
-    radial-gradient(at 32% 67%, rgb(107, 114, 128) 0, transparent 18%),
-    radial-gradient(at 14% 19%, rgb(71, 85, 105) 0, transparent 61%),
-    radial-gradient(at 12% 31%, rgb(253, 186, 116) 0, transparent 5%),
-    radial-gradient(at 14% 46%, rgb(250, 232, 255) 0, transparent 6%)
-  `,
-};
-
 export default function Blob() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<{ x: number; y: number } | null>(null);
@@ -84,8 +72,7 @@ export default function Blob() {
       aria-hidden
     >
       <div
-        className="h-full w-full rounded-full blur-[80px] animate-blob_breathe opacity-75"
-        style={BLOB_STYLE}
+        className="blob-fill h-full w-full rounded-full blur-[80px] animate-blob_breathe opacity-75"
       />
     </div>
   );
