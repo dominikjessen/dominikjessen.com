@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { WorkEntry } from '../types/data';
+
+export interface WorkCardProps extends HTMLAttributes<'article'> {
+  entry: WorkEntry;
+}
+
+const { entry } = Astro.props as WorkCardProps;
+---
+
+<article class="flex flex-col gap-3 md:gap-4 p-6 md:p-8 rounded-3xl w-full border border-foreground/10 bg-primary/5 dark:bg-primary/10 scroll-fade-in">
+  <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+    <a
+      href={entry.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-2xl md:text-3xl font-bold text-primary font-signika hover:opacity-80"
+    >
+      {entry.company}
+    </a>
+    <span class="text-foreground/60 text-base md:text-lg">{entry.period}</span>
+  </div>
+  <p class="text-lg md:text-xl font-semibold text-foreground/90">{entry.role}</p>
+  <p class="text-foreground/80 text-base md:text-lg leading-relaxed">{entry.highlight}</p>
+</article>

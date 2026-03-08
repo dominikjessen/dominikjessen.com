@@ -1,0 +1,23 @@
+[
+  {
+    "company": "Vesper",
+    "role": "Senior Fullstack Engineer",
+    "period": "2024 - present",
+    "highlight": "Building product and infrastructure for professionals navigating commodities markets. Shipped enterprise features, 2FA, and RBAC; led discovery through to production.",
+    "url": "https://vespertool.com/"
+  },
+  {
+    "company": "Tractable",
+    "role": "Product Manager",
+    "period": "2021 - 2022",
+    "highlight": "Drove ML and tooling for the claims pipeline. Shipped internal tools that automated manual steps and scaled claim volume by an order of magnitude; cut intervention by 85%.",
+    "url": "https://tractable.com/"
+  },
+  {
+    "company": "Uni-Life",
+    "role": "Product & Growth",
+    "period": "2019 - 2021",
+    "highlight": "Led product and growth strategy across a 3-year stretch. Owned roadmap, prioritization, and the link between what we built and what we measured.",
+    "url": "https://uni-life.nl/"
+  }
+]

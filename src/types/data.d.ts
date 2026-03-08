@@ -29,3 +29,11 @@ export type Achievement = {
   ctaLabel?: string;
   ctaUrl?: string;
 };
+
+export type WorkEntry = {
+  company: string;
+  role: string;
+  period: string;
+  highlight: string;
+  url: string;
+};
