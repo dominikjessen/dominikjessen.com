@@ -194,9 +194,27 @@
 }
 
 .achievement-exit {
+  transform-origin: right center;
   animation: achievement-fly-out 380ms cubic-bezier(0.55, 0, 1, 0.45) forwards;
   z-index: 20;
   pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .achievement-exit {
+    animation: achievement-fly-out-mobile 380ms cubic-bezier(0.55, 0, 1, 0.45)
+      forwards;
+  }
+}
+@keyframes achievement-fly-out-mobile {
+  0% {
+    transform: rotate(0deg) translateX(0) translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(12deg) translateX(120%) translateY(-1.875rem) scale(1);
+    opacity: 0;
+  }
 }
 
 .achievement-emoji-spin {

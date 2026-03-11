@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import achievementsData from "../data/achievements.json";
 import type { Achievement } from "../types/data";
 import AchievementCard from "./AchievementCard";
@@ -18,6 +18,7 @@ export default function AchievementCards({
   className = "",
 }: AchievementCardsProps) {
   const touchStartXRef = useRef(0);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [exitingIndex, setExitingIndex] = useState<number | null>(null);
   const [hoverTilt, setHoverTilt] = useState<React.CSSProperties>({});
@@ -79,6 +80,10 @@ export default function AchievementCards({
     [activeIndex, total],
   );
 
+  useEffect(() => {
+    setIsTouchDevice(typeof window !== "undefined" && "ontouchstart" in window);
+  }, []);
+
   const contextLabel = "Things I've shipped...";
   const counterText = isCta ? "" : `${activeIndex + 1} / ${total - 1}`;
   const hintContent = isCta ? (
@@ -97,7 +102,7 @@ export default function AchievementCards({
       >
         <path d="M5 12h14M12 5l7 7-7 7" />
       </svg>
-      click to flip
+      {isTouchDevice ? "tap or swipe" : "click to flip"}
     </>
   );
 
