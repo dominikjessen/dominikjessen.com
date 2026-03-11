@@ -63,6 +63,21 @@ const { title } = Astro.props;
     --max-width-achievement-desc: 20rem;
 
     --header-background: 72 99% 98%; /* Light background for light mode */
+
+    /* Semantic tints/surfaces (no opacity; blob-friendly) */
+    --primary-light: 119 25% 96%;
+    --primary-soft: 119 20% 92%;
+    --primary-muted: 119 19% 52%;
+    --foreground-subtle: 70 5% 48%;
+    --foreground-muted: 70 6% 35%;
+    --foreground-soft: 70 8% 22%;
+    --foreground-strong: 70 5% 12%;
+    --foreground-surface: 70 5% 97%;
+    --foreground-surface-strong: 70 5% 93%;
+    --foreground-border: 70 5% 91%;
+    --accent_seagreen-hover: 150 66% 68%;
+    /* Card surface: soft mix of primary + background, very light (for Work + Currently cards). Light: ~rgb(237,240,230). */
+    --surface-card: 78 25% 92%;
   }
 
   html.dark {
@@ -87,6 +102,20 @@ const { title } = Astro.props;
     --achievement-sage: 120 20% 16%;
 
     --header-background: 119 19% 50%; /* Green background for dark mode */
+
+    /* Semantic tints/surfaces (dark mode) */
+    --primary-light: 120 19% 16%;
+    --primary-soft: 120 19% 22%;
+    --primary-muted: 120 19% 65%;
+    --foreground-subtle: 40 6% 70%;
+    --foreground-muted: 40 6% 70%;
+    --foreground-soft: 90 6% 82%;
+    --foreground-strong: 90 6% 96%;
+    --foreground-surface: 120 2% 16%;
+    --foreground-surface-strong: 120 2% 20%;
+    --foreground-border: 120 2% 22%;
+    --accent_seagreen-hover: 150 66% 70%;
+    --surface-card: 115 8% 18%;
   }
 
   ::selection {

@@ -52,15 +52,18 @@ export default function AchievementCard({
         {emoji}
       </span>
       {badgeLabel && (
-        <span
+        <>
+          {/* Intentional opacity: CTA badge uses text-white/65 and bg-white/15 for overlay-on-card contrast. baseClass uses border-white/65. Consider overlay-on-card semantic colors if you want to remove opacity. */}
+          <span
           className={
             isCtaCard
               ? "text-xs uppercase tracking-widest font-semibold text-white/65 bg-white/15 px-2.5 py-1 rounded-2xl backdrop-blur-sm whitespace-nowrap"
-              : "text-xs uppercase tracking-widest font-semibold text-foreground/70 bg-white/55 dark:bg-foreground/15 px-2.5 py-1 rounded-2xl backdrop-blur-sm whitespace-nowrap"
+              : "text-xs uppercase tracking-widest font-semibold text-foreground-muted bg-foreground-surface px-2.5 py-1 rounded-2xl backdrop-blur-sm whitespace-nowrap"
           }
         >
           {badgeLabel}
         </span>
+        </>
       )}
     </div>
   );
@@ -80,15 +83,15 @@ export default function AchievementCard({
         className={
           isCtaCard
             ? "text-sm lg:text-base font-medium text-white/72 leading-snug max-w-50 lg:max-w-achievement-desc"
-            : "text-sm lg:text-base font-medium text-foreground/70 dark:text-foreground_lighter/90 leading-snug max-w-full lg:max-w-achievement-desc"
+            : "text-sm lg:text-base font-medium text-foreground-muted dark:text-foreground-strong leading-snug max-w-full lg:max-w-achievement-desc"
         }
       >
         {description}
       </p>
       {isCtaCard && ctaLabel && ctaUrl && (
         <a
-          href={ctaUrl}
-          className="mt-2 inline-flex items-center gap-2 bg-accent_seagreen text-foreground font-semibold text-sm py-2.5 px-4.5 rounded-full border-0 no-underline self-start transition-all hover:bg-accent_seagreen/90 hover:-translate-y-0.5 hover:shadow-lg shadow-md"
+        href={ctaUrl}
+        className="mt-2 inline-flex items-center gap-2 bg-accent_seagreen text-foreground font-semibold text-sm py-2.5 px-4.5 rounded-full border-0 no-underline self-start transition-all hover:bg-accent_seagreen-hover hover:-translate-y-0.5 hover:shadow-lg shadow-md"
           aria-label={ctaLabel}
         >
           <svg

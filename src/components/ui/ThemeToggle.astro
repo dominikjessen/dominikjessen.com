@@ -10,7 +10,7 @@ const { className } = Astro.props as ThemeToggleProps;
   <button
     id="lightMode"
     aria-label="Switch to light mode"
-    class:list={['z-50 p-3 flex items-center justify-center rounded-full hover:bg-foreground/5', className]}
+    class:list={['z-50 p-3 flex items-center justify-center rounded-full hover:bg-foreground-surface', className]}
   >
     <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
@@ -23,7 +23,7 @@ const { className } = Astro.props as ThemeToggleProps;
   <button
     id="darkMode"
     aria-label="Switch to dark mode"
-    class:list={['z-50 p-3 flex items-center justify-center rounded-full hover:bg-foreground/5', className]}
+    class:list={['z-50 p-3 flex items-center justify-center rounded-full hover:bg-foreground-surface', className]}
   >
     <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
@@ -36,7 +36,7 @@ const { className } = Astro.props as ThemeToggleProps;
   <button
     id="systemMode"
     aria-label="Use your system's color scheme"
-    class:list={['z-50 p-3 flex items-center justify-center rounded-full hover:bg-foreground/5', className]}
+    class:list={['z-50 p-3 flex items-center justify-center rounded-full hover:bg-foreground-surface', className]}
   >
     <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"
       ><path
@@ -89,6 +89,6 @@ document.getElementById('systemMode').addEventListener('click', switchToSystemMo
 
 <style>
   .theme-active {
-    background: hsl(var(--foreground) / 0.05);
+    background: hsl(var(--foreground-surface));
   }
 </style>

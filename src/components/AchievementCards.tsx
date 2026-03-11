@@ -105,7 +105,7 @@ export default function AchievementCards({
     <div
       className={`flex flex-col items-center gap-3.5 w-full max-w-(--width-achievement-stack-sm) lg:max-w-(--width-achievement-stack-lg) ${className}`}
     >
-      <p className="text-xs tracking-widest uppercase font-semibold text-foreground/60">
+      <p className="text-xs tracking-widest uppercase font-semibold text-foreground-subtle">
         {contextLabel}
       </p>
 
@@ -140,7 +140,7 @@ export default function AchievementCards({
       <div className="flex items-center justify-between w-full min-h-5 mt-5">
         {counterText ? (
           <span
-            className="text-xs tracking-wider font-semibold text-foreground/60"
+            className="text-xs tracking-wider font-semibold text-foreground-subtle"
             aria-live="polite"
           >
             {counterText}
@@ -148,7 +148,7 @@ export default function AchievementCards({
         ) : (
           <span aria-hidden />
         )}
-        <span className="text-xs text-foreground/60 flex items-center gap-1.5 ml-auto">
+        <span className="text-xs text-foreground-subtle flex items-center gap-1.5 ml-auto">
           {hintContent}
         </span>
       </div>

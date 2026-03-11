@@ -44,7 +44,7 @@ export default function CurrentlyReact() {
       <h2 className="text-5xl md:text-6xl text-primary text-center">
         Currently
       </h2>
-      <p className="text-xl md:text-2xl text-foreground/60 mb-4 md:mb-8 text-center">
+      <p className="text-xl md:text-2xl text-foreground-subtle mb-4 md:mb-8 text-center">
         Some of the things I'm enjoying these days and always down to chat
         about!
       </p>

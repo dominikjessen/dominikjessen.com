@@ -9,7 +9,7 @@ export interface WorkCardProps extends HTMLAttributes<'article'> {
 const { entry } = Astro.props as WorkCardProps;
 ---
 
-<article class="flex flex-col gap-3 md:gap-4 p-6 md:p-8 rounded-3xl w-full border border-foreground/10 bg-primary/5 dark:bg-primary/10 scroll-fade-in">
+<article class="flex flex-col gap-3 md:gap-4 p-6 md:p-8 rounded-3xl w-full border border-foreground-border bg-surface-card scroll-fade-in">
   <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
     <a
       href={entry.url}
@@ -19,8 +19,8 @@ const { entry } = Astro.props as WorkCardProps;
     >
       {entry.company}
     </a>
-    <span class="text-foreground/60 text-base md:text-lg">{entry.period}</span>
+    <span class="text-foreground-subtle text-base md:text-lg">{entry.period}</span>
   </div>
-  <p class="text-lg md:text-xl font-semibold text-foreground/90">{entry.role}</p>
-  <p class="text-foreground/80 text-base md:text-lg leading-relaxed">{entry.highlight}</p>
+  <p class="text-lg md:text-xl font-semibold text-foreground-strong">{entry.role}</p>
+  <p class="text-foreground-soft text-base md:text-lg leading-relaxed">{entry.highlight}</p>
 </article>
