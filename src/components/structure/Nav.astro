@@ -3,9 +3,22 @@
 ---
 
 <header class="fixed z-50 w-full">
-  <nav id="nav" class="mx-auto px-4 md:px-6 py-2 rounded-full w-11/12 sm:w-4/6 xl:w-2/5 justify-between mt-4">
+  <nav id="nav" class="relative mx-auto px-4 md:px-6 py-2 rounded-full w-2/5 md:w-4/6 xl:w-2/5 flex items-center justify-center md:justify-between mt-4">
+    <button
+      type="button"
+      id="nav-trigger"
+      class="md:hidden flex items-center gap-2 py-2 px-4 rounded-full text-primary dark:text-foreground text-base font-signika hover:bg-foreground-surface"
+      aria-controls="nav-dropdown"
+      aria-label="Open menu"
+    >
+      <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden>
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <span>Menu</span>
+    </button>
     <ul
-      class="flex gap-2 py-1 md:py-2 md:gap-3 lg:gap-5 xl:gap-6 justify-between items-center text-primary dark:text-foreground text-base md:text-lg font-signika"
+      id="nav-links-desktop"
+      class="hidden md:flex flex-1 gap-2 py-1 md:py-2 md:gap-3 lg:gap-5 xl:gap-6 justify-between items-center text-primary dark:text-foreground text-base md:text-lg font-signika"
     >
       <li>
         <a href="/" data-ref="intro" class="px-5 md:px-6 py-2 md:py-3 rounded-full cursor-pointer hover:bg-foreground-surface" aria-label="Home">👋🏻</a>
@@ -29,12 +42,39 @@
         >
       </li>
     </ul>
+    <div
+      id="nav-dropdown"
+      class="nav-dropdown hidden absolute top-full left-0 right-0 mt-2 py-2 rounded-2xl border border-foreground-border shadow-lg md:hidden"
+      aria-hidden="true"
+    >
+      <ul class="flex flex-col text-primary dark:text-foreground text-base font-signika">
+        <li>
+          <a href="/" data-ref="intro" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface" aria-label="Home">👋🏻 Home</a>
+        </li>
+        <li>
+          <a href="/#work" data-ref="work" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface">Work</a>
+        </li>
+        <li>
+          <a href="/#projects" data-ref="projects" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface">Projects</a>
+        </li>
+        <li>
+          <a href="/#currently" data-ref="currently" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface">About</a>
+        </li>
+        <li>
+          <a href="/CV_DominikJessen.pdf" data-ref="cv" target="_blank" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface">CV</a>
+        </li>
+      </ul>
+    </div>
   </nav>
 </header>
 
 <style>
   .navitem-active {
     background-color: hsl(var(--foreground-surface));
+  }
+
+  .nav-dropdown {
+    background-color: hsl(var(--header-background));
   }
 
   .nav-scrolled {
@@ -51,6 +91,8 @@
 <script>
   const nav = document.getElementById('nav');
   const navRect = nav?.getBoundingClientRect();
+  const navDropdown = document.getElementById('nav-dropdown');
+  const navTrigger = document.getElementById('nav-trigger');
 
   /////////////////////
   // Active nav link //
@@ -63,15 +105,11 @@
 
   function highlightSection(entry: IntersectionObserverEntry) {
     const id = entry.target.id;
-    const currentlyActive = document.querySelector('.navitem-active');
-    const shouldBeActive = document.querySelector(`nav li a[data-ref="${id}"]`);
+    const currentlyActive = document.querySelectorAll('.navitem-active');
+    const shouldBeActive = document.querySelectorAll(`#nav a[data-ref="${id}"]`);
 
-    if (currentlyActive && shouldBeActive) {
-      currentlyActive.classList.remove('navitem-active');
-    }
-    if (shouldBeActive) {
-      shouldBeActive.classList.add('navitem-active');
-    }
+    currentlyActive.forEach((el) => el.classList.remove('navitem-active'));
+    shouldBeActive.forEach((el) => el.classList.add('navitem-active'));
   }
 
   const highlightCallback: IntersectionObserverCallback = (entries, _observer) => {
@@ -93,11 +131,11 @@
     : [...document.querySelectorAll('.intersect-target:not(#revealCanvasWrapper)')];
 
   if (nav && navRect && scrollTargets.length) {
-    const intersectRatios = new Map<string, number>(); // To remove nav scroll styling when all elements no longer intersect
+    const intersectRatios = new Map<string, number>();
 
     const scrollCallback: IntersectionObserverCallback = (entries, _observer) => {
       entries.forEach((entry) => {
-        intersectRatios.set(entry.target.nodeName, entry.intersectionRatio); // Note: This only works because my nodeNames are unique
+        intersectRatios.set(entry.target.nodeName, entry.intersectionRatio);
 
         const itemsOverlapping = entry.target.getBoundingClientRect().y <= navRect.bottom;
         if (itemsOverlapping) {
@@ -110,14 +148,13 @@
         intersectSum += value;
       });
 
-      // All elements below header
       if (intersectSum === scrollTargets.length) {
         nav.classList.remove('nav-scrolled');
       }
     };
 
     const scrollIO = new IntersectionObserver(scrollCallback, {
-      rootMargin: `-${navRect.bottom}px 0px 0px 0px`, // Header width for correct intersectionRatio
+      rootMargin: `-${navRect.bottom}px 0px 0px 0px`,
       threshold: 1
     });
     scrollTargets.forEach((target) => scrollIO.observe(target));
@@ -128,26 +165,75 @@
   //////////////////////
 
   function onNavLinkClicked(e: Event, link: Element) {
-    e.preventDefault();
     const targetId = link.getAttribute('data-ref') ?? '';
+    if (targetId === 'cv') {
+      if (navDropdown && navTrigger) {
+        navDropdown.classList.add('hidden');
+        navDropdown.setAttribute('aria-hidden', 'true');
+        navTrigger.setAttribute('aria-expanded', 'false');
+        navTrigger.setAttribute('aria-label', 'Open menu');
+      }
+      return;
+    }
+
+    e.preventDefault();
     const scrollTarget = document.getElementById(targetId);
 
     if (!scrollTarget || !nav) return;
 
     if (targetId === 'intro') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
+    } else {
+      const offset =
+        scrollTarget.getBoundingClientRect().top + window.scrollY - (nav.getBoundingClientRect().height + 2 * nav.getBoundingClientRect().top);
+      window.scrollTo({ top: offset, behavior: 'smooth' });
     }
 
-    const offset =
-      scrollTarget.getBoundingClientRect().top + window.scrollY - (nav.getBoundingClientRect().height + 2 * nav.getBoundingClientRect().top);
-    window.scrollTo({ top: offset, behavior: 'smooth' }); // will scroll to 4th h3 element
+    if (navDropdown && navTrigger) {
+      navDropdown.classList.add('hidden');
+      navDropdown.setAttribute('aria-hidden', 'true');
+      navTrigger.setAttribute('aria-expanded', 'false');
+      navTrigger.setAttribute('aria-label', 'Open menu');
+    }
   }
 
-  const navLinks = document.querySelectorAll('#nav a:not(#cv-nav)');
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      onNavLinkClicked(e, link);
+  const navLinks = document.querySelectorAll('#nav a[data-ref]');
+  navLinks.forEach((linkEl) => {
+    linkEl.addEventListener('click', (e: Event) => {
+      onNavLinkClicked(e, linkEl);
     });
   });
+
+  //////////////////////
+  // Mobile dropdown  //
+  //////////////////////
+  if (navTrigger && navDropdown) {
+    navTrigger.setAttribute('aria-expanded', 'false');
+    navTrigger.addEventListener('click', () => {
+      const isOpen = !navDropdown.classList.contains('hidden');
+      navDropdown.classList.toggle('hidden', isOpen);
+      navDropdown.setAttribute('aria-hidden', String(isOpen));
+      navTrigger.setAttribute('aria-expanded', String(!isOpen));
+      navTrigger.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+    });
+
+    document.addEventListener('click', (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (navDropdown.classList.contains('hidden')) return;
+      if (navTrigger.contains(target) || navDropdown.contains(target)) return;
+      navDropdown.classList.add('hidden');
+      navDropdown.setAttribute('aria-hidden', 'true');
+      navTrigger.setAttribute('aria-expanded', 'false');
+      navTrigger.setAttribute('aria-label', 'Open menu');
+    });
+
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      if (navDropdown.classList.contains('hidden')) return;
+      navDropdown.classList.add('hidden');
+      navDropdown.setAttribute('aria-hidden', 'true');
+      navTrigger.setAttribute('aria-expanded', 'false');
+      navTrigger.setAttribute('aria-label', 'Open menu');
+    });
+  }
 </script>
