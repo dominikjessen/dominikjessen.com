@@ -1,13 +1,13 @@
 [
   {
-    "name": "Cinemojis",
-    "description": "Cinemojis is a game for movie buffs and emoji lovers. Guess a movie in 5 tries using 1 to 5 emojis. Users can also sign up and create their own movie-emoji sets to play or share with their friends and challenge them.",
-    "url": "https://cinemojis.com/",
-    "github": "https://github.com/dominikjessen/cinemojis",
-    "imgSrc": "/projects/cinemojis/03_Cinemojis_Home_Desktop.png",
-    "imgAlt": "Cinemojis home screen",
-    "bgColor": "bg-[hsl(var(--mint))]",
-    "techStack": ["Next.js", "Typescript", "Tailwind", "Supabase"]
+    "name": "Rent/Buy wealth modeler",
+    "description": "A rent-vs-buy wealth simulator that compares net worth over time across multiple scenarios. Configure rent or buy legs with rent growth, home appreciation and more to see which scenario comes out ahead.",
+    "url": "https://wealth-modeler.vercel.app/",
+    "github": "https://github.com/dominikjessen/wealth-modeler",
+    "imgSrc": "/projects/wealth-modeler/01_WealthModeler_Desktop_Homescreen.png",
+    "imgAlt": "Wealth modeler home screen",
+    "bgColor": "bg-[hsl(var(--blush))]",
+    "techStack": ["Next.js", "TypeScript", "Tailwind", "Recharts", "Zustand"]
   },
   {
     "name": "Yes, Chef!",
@@ -20,12 +20,13 @@
     "techStack": ["Next.js", "Typescript", "MySQL", "Prisma", "Tailwind"]
   },
   {
-    "name": "Shortout",
-    "description": "Shortout is a (Chrome) browser extension that allows users to sort out shorts from their YouTube subscription page. YT's July 2023 update made the extension obsolete with a new subscription layout. Apart from just hiding Shorts, you could also whitelist channels to keep their Shorts from being removed.",
-    "github": "https://github.com/dominikjessen/shortout",
-    "imgSrc": "/projects/shortout/01_Shortout_LightMode.png",
-    "imgAlt": "Shortout popup screen",
-    "bgColor": "bg-[hsl(var(--blush))]",
-    "techStack": ["Typescript", "Tailwind", "Webpack"]
+    "name": "Cinemojis",
+    "description": "Cinemojis is a game for movie buffs and emoji lovers. Guess a movie in 5 tries using 1 to 5 emojis. Users can also sign up and create their own movie-emoji sets to play or share with their friends and challenge them.",
+    "url": "https://cinemojis.com/",
+    "github": "https://github.com/dominikjessen/cinemojis",
+    "imgSrc": "/projects/cinemojis/03_Cinemojis_Home_Desktop.png",
+    "imgAlt": "Cinemojis home screen",
+    "bgColor": "bg-[hsl(var(--mint))]",
+    "techStack": ["Next.js", "Typescript", "Tailwind", "Supabase"]
   }
 ]
