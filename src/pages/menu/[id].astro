@@ -1,0 +1,190 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { ALLERGEN_LABELS, MEAL_TYPE_LABELS } from '../../types/recipes';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes', ({ data }) => !data.draft);
+  return recipes.map((recipe) => ({
+    params: { id: recipe.id },
+    props: { recipe },
+  }));
+}
+
+interface Props {
+  recipe: CollectionEntry<'recipes'>;
+}
+
+const { recipe } = Astro.props;
+const { Content } = await render(recipe);
+const {
+  title,
+  summary,
+  mealType,
+  categories,
+  ingredients,
+  allergens,
+  tags,
+  timeMinutes,
+  servings,
+  heroImage,
+  heroImageAlt,
+} = recipe.data;
+
+function formatLabel(value: string): string {
+  return value
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+---
+
+<Layout title={`${title} - Menu`} showNav={false}>
+  <article class="flex flex-col gap-10 md:gap-14">
+    <p>
+      <a
+        href="/menu"
+        class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+      >
+        ← Back to menu
+      </a>
+    </p>
+
+    <div class="overflow-hidden rounded-3xl border border-foreground-border bg-primary-soft">
+      <Image
+        src={heroImage}
+        alt={heroImageAlt}
+        width={1440}
+        height={900}
+        class="w-full aspect-[3/2] md:aspect-[21/9] object-cover"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <header class="flex flex-col gap-4 max-w-3xl">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-3 py-1 text-sm rounded-full bg-foreground-surface text-foreground-soft">
+          {MEAL_TYPE_LABELS[mealType]}
+        </span>
+        {
+          timeMinutes !== undefined && (
+            <span class="text-sm text-foreground-subtle">{timeMinutes} min</span>
+          )
+        }
+        {
+          servings !== undefined && (
+            <span class="text-sm text-foreground-subtle">
+              {servings} {servings === 1 ? 'serving' : 'servings'}
+            </span>
+          )
+        }
+      </div>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h1>
+      <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">{summary}</p>
+      {
+        (categories.length > 0 || (tags?.length ?? 0) > 0) && (
+          <ul class="flex flex-wrap gap-2" aria-label="Categories and tags">
+            {categories.map((category) => (
+              <li class="px-3 py-1 text-sm rounded-full border border-foreground-border text-foreground-muted">
+                {formatLabel(category)}
+              </li>
+            ))}
+            {tags?.map((tag) => (
+              <li class="px-3 py-1 text-sm rounded-full border border-foreground-border text-foreground-muted">
+                {formatLabel(tag)}
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    {
+      allergens.length > 0 && (
+        <aside
+          class="rounded-3xl border border-foreground-border bg-surface-card px-5 py-4 md:px-6 md:py-5"
+          aria-label="Allergens"
+        >
+          <p class="font-signika text-sm uppercase tracking-wider text-foreground-subtle mb-3">Contains</p>
+          <ul class="flex flex-wrap gap-2">
+            {allergens.map((allergen) => (
+              <li class="px-3 py-1 text-sm rounded-full bg-foreground-surface text-foreground-soft">
+                {ALLERGEN_LABELS[allergen]}
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,18rem)_1fr] gap-10 lg:gap-14 items-start">
+      <section aria-labelledby="ingredients-heading">
+        <h2 id="ingredients-heading" class="text-2xl md:text-3xl text-primary mb-4">
+          Ingredients
+        </h2>
+        <ul class="flex flex-col gap-3">
+          {
+            ingredients.map((ingredient) => (
+              <li class="flex gap-3 text-base md:text-lg text-foreground-soft leading-snug border-b border-foreground-border pb-3 last:border-0">
+                <span class="grow">
+                  {ingredient.name}
+                  {ingredient.optional && (
+                    <span class="text-foreground-subtle"> (optional)</span>
+                  )}
+                </span>
+                {ingredient.amount && (
+                  <span class="shrink-0 text-foreground-muted tabular-nums">{ingredient.amount}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section aria-labelledby="method-heading" class="recipe-method min-w-0">
+        <h2 id="method-heading" class="text-2xl md:text-3xl text-primary mb-4">Method</h2>
+        <div class="text-lg md:text-xl text-foreground_lighter leading-relaxed">
+          <Content />
+        </div>
+      </section>
+    </div>
+
+    <p class="pt-2 flex flex-wrap gap-6">
+      <a
+        href="/menu"
+        class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+      >
+        ← Back to menu
+      </a>
+      <a
+        href="/"
+        class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+      >
+        Go home
+      </a>
+    </p>
+  </article>
+</Layout>
+
+<style>
+  .recipe-method :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .recipe-method :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .recipe-method :global(ul),
+  .recipe-method :global(ol) {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+  }
+
+  .recipe-method :global(li) {
+    margin-bottom: 0.5rem;
+  }
+</style>
