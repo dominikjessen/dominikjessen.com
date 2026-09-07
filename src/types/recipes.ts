@@ -1,3 +1,9 @@
+/**
+ * Recipe URL ids are opaque 8-char hex strings set in frontmatter (`id`),
+ * not derived from the title — so you can have multiple shakshukas.
+ * Generate with: `python3 -c "import uuid; print(uuid.uuid4().hex[:8])"`
+ */
+
 /** Canonical meal types for the house menu. */
 export const MEAL_TYPES = [
   "breakfast",

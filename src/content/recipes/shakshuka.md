@@ -1,4 +1,5 @@
 ---
+id: 36aed2c4
 title: Shakshuka for Two
 summary: Eggs poached in a smoky tomato-pepper sauce. Weekend breakfast energy on a weeknight.
 mealType: breakfast

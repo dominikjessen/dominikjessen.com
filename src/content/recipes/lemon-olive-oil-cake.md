@@ -1,4 +1,5 @@
 ---
+id: aa503afd
 title: Lemon Olive Oil Cake
 summary: A simple loaf that tastes like sunshine. Good with coffee, better the next day.
 mealType: dessert

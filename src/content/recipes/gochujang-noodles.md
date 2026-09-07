@@ -1,4 +1,5 @@
 ---
+id: 9a6ae3c2
 title: Weeknight Gochujang Noodles
 summary: Chewy noodles, sticky-spicy sauce, whatever greens are in the fridge. Fifteen minutes, zero ceremony.
 mealType: dinner
