@@ -8,42 +8,29 @@ const recipes = (await getCollection('recipes', ({ data }) => !data.draft)).sort
 );
 ---
 
-<Layout title="Dominik Jessen - Menu">
-  <div class="relative flex flex-col gap-12 md:gap-16 pt-20 md:pt-24">
-    <header class="menu-hero relative overflow-hidden rounded-3xl border border-foreground-border px-6 py-10 md:px-12 md:py-14">
-      <div class="menu-hero-wash pointer-events-none absolute inset-0" aria-hidden="true"></div>
-      <div class="relative z-10 flex flex-col gap-4 max-w-2xl">
-        <p class="font-signika text-sm md:text-base uppercase tracking-[0.2em] text-primary">House menu</p>
-        <h1 class="text-5xl md:text-6xl lg:text-7xl text-primary leading-none">What's cooking</h1>
-        <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">
-          The dishes I actually make — for friends at the table, or whoever scanned the QR code.
-        </p>
-        <p class="text-base md:text-lg text-foreground-subtle">
-          {recipes.length} {recipes.length === 1 ? 'dish' : 'dishes'} on the board
-        </p>
-      </div>
+<Layout title="Dominik Jessen - Menu" showNav={false}>
+  <div class="flex flex-col gap-12 md:gap-16">
+    <header class="flex flex-col gap-4 max-w-2xl">
+      <h1 class="text-5xl md:text-6xl lg:text-7xl text-primary leading-none">What's cooking</h1>
+      <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">
+        The dishes I actually make — for friends at the table, or whoever scanned the QR code.
+      </p>
+      <p class="text-base md:text-lg text-foreground-subtle">
+        {recipes.length} {recipes.length === 1 ? 'dish' : 'dishes'} on the board
+      </p>
     </header>
 
     <section aria-label="Recipes" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
       {recipes.map((recipe) => <RecipeCard recipe={recipe} />)}
     </section>
+
+    <p class="pt-4">
+      <a
+        href="/"
+        class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+      >
+        ← Go home
+      </a>
+    </p>
   </div>
 </Layout>
-
-<style>
-  .menu-hero-wash {
-    background-color: hsl(var(--primary-light));
-    background-image:
-      radial-gradient(at 12% 20%, hsl(var(--mint)) 0, transparent 55%),
-      radial-gradient(at 88% 10%, hsl(var(--blush)) 0, transparent 50%),
-      radial-gradient(at 70% 90%, hsl(var(--aliceblue)) 0, transparent 55%);
-  }
-
-  :global(html.dark) .menu-hero-wash {
-    background-color: hsl(var(--primary-light));
-    background-image:
-      radial-gradient(at 12% 20%, hsl(var(--primary) / 0.22) 0, transparent 55%),
-      radial-gradient(at 88% 10%, hsl(var(--rose) / 0.12) 0, transparent 50%),
-      radial-gradient(at 70% 90%, hsl(var(--accent_seagreen) / 0.12) 0, transparent 55%);
-  }
-</style>
