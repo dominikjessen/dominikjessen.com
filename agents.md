@@ -7,7 +7,7 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 ## 2. Tech Stack & Dependencies
 
 - **Frontend**
-  - **Framework**: Astro 5.x with Vite 6. Astro is the primary UI layer; React 18 is used only for interactive islands (e.g. the “Currently” section with client-side randomization, `RevealCanvas`).
+  - **Framework**: Astro 7.x with Vite 8. Astro is the primary UI layer; React 19 is used only for interactive islands (e.g. the “Currently” section with client-side randomization, `RevealCanvas`).
   - **UI / styling**: Tailwind CSS 4 (`@tailwindcss/vite`), custom theme and keyframes in `src/styles/tailwind.css`. Design tokens (e.g. `--background`, `--primary`, `--accent_seagreen`) are defined in `Layout.astro` and referenced via `@theme` in Tailwind. No component library; custom Astro and React components.
   - **State**: No global state library. React components use local `useState`/`useEffect` where needed (e.g. `currentlyReact.tsx`).
   - **Fonts**: `@fontsource-variable/signika`, `inter`, `josefin-sans`, `ubuntu` (see `package.json`).
