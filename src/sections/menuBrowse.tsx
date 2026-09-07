@@ -1,9 +1,19 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ReactRecipeCard from "../components/menu/ReactRecipeCard";
 import {
+  EMPTY_MENU_FILTERS,
+  hasActiveMenuFilters,
+  parseMenuFiltersFromSearch,
+  syncMenuFiltersToUrl,
+  type MenuFilters,
+} from "../components/menu/menuFilters";
+import {
+  ALLERGEN_LABELS,
+  ALLERGENS,
   MEAL_TYPE_LABELS,
   MEAL_TYPES,
   formatRecipeLabel,
+  type Allergen,
   type MealType,
   type RecipeListItem,
 } from "../types/recipes";
@@ -44,8 +54,18 @@ function FilterPill({
 }
 
 export default function MenuBrowse({ recipes }: MenuBrowseProps) {
-  const [mealTypes, setMealTypes] = useState<readonly MealType[]>([]);
-  const [categories, setCategories] = useState<readonly string[]>([]);
+  const [filters, setFilters] = useState<MenuFilters>(EMPTY_MENU_FILTERS);
+  const [urlReady, setUrlReady] = useState(false);
+
+  useEffect(() => {
+    setFilters(parseMenuFiltersFromSearch(window.location.search));
+    setUrlReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!urlReady) return;
+    syncMenuFiltersToUrl(filters);
+  }, [filters, urlReady]);
 
   const availableMealTypes = useMemo(() => {
     const present = new Set(recipes.map((recipe) => recipe.mealType));
@@ -60,27 +80,76 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
     return [...present].sort((a, b) => a.localeCompare(b));
   }, [recipes]);
 
+  const availableAllergens = useMemo(() => {
+    const present = new Set<Allergen>();
+    recipes.forEach((recipe) => {
+      recipe.allergens.forEach((allergen) => present.add(allergen));
+    });
+    return ALLERGENS.filter((allergen) => present.has(allergen));
+  }, [recipes]);
+
   const filteredRecipes = useMemo(() => {
+    const query = filters.ingredientQuery.trim().toLowerCase();
+
     return recipes.filter((recipe) => {
       const matchesMealType =
-        mealTypes.length === 0 || mealTypes.includes(recipe.mealType);
+        filters.mealTypes.length === 0 || filters.mealTypes.includes(recipe.mealType);
       const matchesCategory =
-        categories.length === 0 ||
-        categories.some((category) => recipe.categories.includes(category));
-      return matchesMealType && matchesCategory;
-    });
-  }, [recipes, mealTypes, categories]);
+        filters.categories.length === 0 ||
+        filters.categories.some((category) => recipe.categories.includes(category));
+      const matchesIngredient =
+        query.length === 0 ||
+        recipe.ingredientNames.some((name) => name.toLowerCase().includes(query));
+      const matchesAllergens =
+        filters.excludedAllergens.length === 0 ||
+        !filters.excludedAllergens.some((allergen) => recipe.allergens.includes(allergen));
 
-  const hasActiveFilters = mealTypes.length > 0 || categories.length > 0;
+      return matchesMealType && matchesCategory && matchesIngredient && matchesAllergens;
+    });
+  }, [recipes, filters]);
+
+  const hasActiveFilters = hasActiveMenuFilters(filters);
 
   function clearFilters(): void {
-    setMealTypes([]);
-    setCategories([]);
+    setFilters(EMPTY_MENU_FILTERS);
+  }
+
+  function setMealTypes(mealTypes: readonly MealType[]): void {
+    setFilters((current) => ({ ...current, mealTypes }));
+  }
+
+  function setCategories(categories: readonly string[]): void {
+    setFilters((current) => ({ ...current, categories }));
+  }
+
+  function setExcludedAllergens(excludedAllergens: readonly Allergen[]): void {
+    setFilters((current) => ({ ...current, excludedAllergens }));
+  }
+
+  function setIngredientQuery(ingredientQuery: string): void {
+    setFilters((current) => ({ ...current, ingredientQuery }));
   }
 
   return (
     <div className="flex flex-col gap-8 md:gap-10">
       <div className="flex flex-col gap-6 sticky top-4 z-20 rounded-3xl border border-foreground-border bg-background/95 backdrop-blur-md px-4 py-5 md:px-6 md:py-6">
+        <div className="flex flex-col gap-3">
+          <label
+            htmlFor="menu-ingredient-search"
+            className="font-signika text-sm uppercase tracking-wider text-foreground-subtle"
+          >
+            Ingredients
+          </label>
+          <input
+            id="menu-ingredient-search"
+            type="search"
+            value={filters.ingredientQuery}
+            onChange={(event) => setIngredientQuery(event.target.value)}
+            placeholder="e.g. gochujang, lemon, eggs"
+            className="w-full max-w-md rounded-full border border-foreground-border bg-foreground-surface px-4 py-2.5 text-base text-foreground-soft placeholder:text-foreground-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          />
+        </div>
+
         <div className="flex flex-col gap-3">
           <p className="font-signika text-sm uppercase tracking-wider text-foreground-subtle">
             Meal type
@@ -90,8 +159,8 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
               <FilterPill
                 key={mealType}
                 label={MEAL_TYPE_LABELS[mealType]}
-                pressed={mealTypes.includes(mealType)}
-                onClick={() => setMealTypes(toggleValue(mealTypes, mealType))}
+                pressed={filters.mealTypes.includes(mealType)}
+                onClick={() => setMealTypes(toggleValue(filters.mealTypes, mealType))}
               />
             ))}
           </div>
@@ -107,8 +176,28 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
                 <FilterPill
                   key={category}
                   label={formatRecipeLabel(category)}
-                  pressed={categories.includes(category)}
-                  onClick={() => setCategories(toggleValue(categories, category))}
+                  pressed={filters.categories.includes(category)}
+                  onClick={() => setCategories(toggleValue(filters.categories, category))}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {availableAllergens.length > 0 && (
+          <div className="flex flex-col gap-3">
+            <p className="font-signika text-sm uppercase tracking-wider text-foreground-subtle">
+              Exclude allergens
+            </p>
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Exclude allergens">
+              {availableAllergens.map((allergen) => (
+                <FilterPill
+                  key={allergen}
+                  label={ALLERGEN_LABELS[allergen]}
+                  pressed={filters.excludedAllergens.includes(allergen)}
+                  onClick={() =>
+                    setExcludedAllergens(toggleValue(filters.excludedAllergens, allergen))
+                  }
                 />
               ))}
             </div>

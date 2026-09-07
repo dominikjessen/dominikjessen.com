@@ -92,6 +92,7 @@ export type RecipeListItem = {
   readonly mealType: MealType;
   readonly categories: readonly string[];
   readonly allergens: readonly Allergen[];
+  readonly ingredientNames: readonly string[];
   readonly timeMinutes?: number;
   readonly heroImageSrc: string;
   readonly heroImageAlt: string;
