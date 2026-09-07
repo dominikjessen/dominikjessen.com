@@ -83,3 +83,23 @@ export const ALLERGEN_LABELS: Record<Allergen, string> = {
   sesame: "Sesame",
   fish: "Fish",
 };
+
+/** Serializable recipe card data for the client browse island. */
+export type RecipeListItem = {
+  readonly id: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly mealType: MealType;
+  readonly categories: readonly string[];
+  readonly allergens: readonly Allergen[];
+  readonly timeMinutes?: number;
+  readonly heroImageSrc: string;
+  readonly heroImageAlt: string;
+};
+
+export function formatRecipeLabel(value: string): string {
+  return value
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}

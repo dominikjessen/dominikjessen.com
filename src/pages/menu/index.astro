@@ -1,10 +1,34 @@
 ---
+import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import RecipeCard from '../../components/menu/RecipeCard.astro';
+import MenuBrowse from '../../sections/menuBrowse';
+import type { RecipeListItem } from '../../types/recipes';
 
-const recipes = (await getCollection('recipes', ({ data }) => !data.draft)).sort((a, b) =>
+const collection = (await getCollection('recipes', ({ data }) => !data.draft)).sort((a, b) =>
   a.data.title.localeCompare(b.data.title)
+);
+
+const recipes: RecipeListItem[] = await Promise.all(
+  collection.map(async (recipe) => {
+    const optimized = await getImage({
+      src: recipe.data.heroImage,
+      width: 720,
+      height: 480,
+    });
+
+    return {
+      id: recipe.id,
+      title: recipe.data.title,
+      summary: recipe.data.summary,
+      mealType: recipe.data.mealType,
+      categories: recipe.data.categories,
+      allergens: recipe.data.allergens,
+      timeMinutes: recipe.data.timeMinutes,
+      heroImageSrc: optimized.src,
+      heroImageAlt: recipe.data.heroImageAlt,
+    };
+  })
 );
 ---
 
@@ -15,14 +39,9 @@ const recipes = (await getCollection('recipes', ({ data }) => !data.draft)).sort
       <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">
         The dishes I actually make — for friends at the table, or whoever scanned the QR code.
       </p>
-      <p class="text-base md:text-lg text-foreground-subtle">
-        {recipes.length} {recipes.length === 1 ? 'dish' : 'dishes'} on the board
-      </p>
     </header>
 
-    <section aria-label="Recipes" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
-      {recipes.map((recipe) => <RecipeCard recipe={recipe} />)}
-    </section>
+    <MenuBrowse client:load recipes={recipes} />
 
     <p class="pt-4">
       <a
