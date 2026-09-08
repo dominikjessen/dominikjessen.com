@@ -31,6 +31,14 @@ export function CloseIcon({ className }: IconProps) {
   );
 }
 
+export function ChevronDownIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 export function LeafIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
