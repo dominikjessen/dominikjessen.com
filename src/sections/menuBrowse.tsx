@@ -117,29 +117,31 @@ function FilterDropdown({
           id={menuId}
           role="listbox"
           aria-multiselectable="true"
-          className="absolute left-0 top-full z-30 mt-2 min-w-[14rem] max-h-72 overflow-auto rounded-2xl border border-foreground-border bg-background p-2 shadow-lg"
+          className="absolute left-0 top-full z-30 mt-2 min-w-[15rem] max-h-80 overflow-auto rounded-2xl border border-foreground-border bg-background p-2.5 shadow-lg"
         >
-          {options.map((option) => {
-            const isSelected = selected.includes(option.value);
-            return (
-              <button
-                key={option.value}
-                type="button"
-                role="option"
-                aria-selected={isSelected}
-                onClick={() => onToggle(option.value)}
-                className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-sm md:text-base transition duration-100 ${
-                  isSelected
-                    ? "bg-primary text-background"
-                    : "text-foreground-soft hover:bg-foreground-surface"
-                }`}
-              >
-                <span className="shrink-0 opacity-90">{option.icon}</span>
-                <span className="grow">{option.label}</span>
-                {isSelected && <CloseIcon className="size-3.5 shrink-0 opacity-80" />}
-              </button>
-            );
-          })}
+          <div className="flex flex-col gap-1.5">
+            {options.map((option) => {
+              const isSelected = selected.includes(option.value);
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  role="option"
+                  aria-selected={isSelected}
+                  onClick={() => onToggle(option.value)}
+                  className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left text-sm md:text-base transition duration-100 ${
+                    isSelected
+                      ? "bg-primary-soft text-primary ring-1 ring-inset ring-primary/20"
+                      : "text-foreground-soft hover:bg-foreground-surface"
+                  }`}
+                >
+                  <span className="shrink-0 opacity-90">{option.icon}</span>
+                  <span className="grow">{option.label}</span>
+                  {isSelected && <CloseIcon className="size-3.5 shrink-0 opacity-70" />}
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
@@ -159,12 +161,12 @@ function ActiveFilterChip({
     <button
       type="button"
       onClick={onDismiss}
-      className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary-soft px-3 py-1.5 text-sm text-primary transition duration-150 hover:border-primary/50 hover:bg-primary hover:text-background"
+      className="inline-flex items-center gap-2 rounded-full border border-foreground-border bg-foreground-surface px-3 py-1.5 text-sm text-foreground-soft transition duration-150 hover:border-primary/30 hover:bg-primary-soft hover:text-primary"
       aria-label={`Remove ${label} filter`}
     >
       <span className="shrink-0 opacity-90">{icon}</span>
       <span>{label}</span>
-      <CloseIcon className="size-3.5 shrink-0 opacity-80" />
+      <CloseIcon className="size-3.5 shrink-0 opacity-70" />
     </button>
   );
 }
