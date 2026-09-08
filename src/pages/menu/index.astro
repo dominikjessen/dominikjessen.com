@@ -23,7 +23,6 @@ const recipes: RecipeListItem[] = await Promise.all(
       summary: recipe.data.summary,
       mealType: recipe.data.mealType,
       categories: recipe.data.categories,
-      allergens: recipe.data.allergens,
       ingredientNames: recipe.data.ingredients.map((ingredient) => ingredient.name),
       timeMinutes: recipe.data.timeMinutes,
       heroImageSrc: optimized.src,

@@ -25,11 +25,6 @@ ingredients:
   - name: soft-boiled egg
     amount: "1"
     optional: true
-allergens:
-  - gluten
-  - soy
-  - sesame
-  - eggs
 tags:
   - quick
   - spicy

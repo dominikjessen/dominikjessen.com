@@ -16,20 +16,6 @@ export const MEAL_TYPES = [
 
 export type MealType = (typeof MEAL_TYPES)[number];
 
-/** Author-declared allergens (not inferred from ingredients). */
-export const ALLERGENS = [
-  "gluten",
-  "dairy",
-  "eggs",
-  "nuts",
-  "shellfish",
-  "soy",
-  "sesame",
-  "fish",
-] as const;
-
-export type Allergen = (typeof ALLERGENS)[number];
-
 /** Shared category vocabulary — keep spellings consistent when authoring. */
 export const RECIPE_CATEGORIES = [
   "pasta",
@@ -73,17 +59,6 @@ export const MEAL_TYPE_LABELS: Record<MealType, string> = {
   drink: "Drink",
 };
 
-export const ALLERGEN_LABELS: Record<Allergen, string> = {
-  gluten: "Gluten",
-  dairy: "Dairy",
-  eggs: "Eggs",
-  nuts: "Nuts",
-  shellfish: "Shellfish",
-  soy: "Soy",
-  sesame: "Sesame",
-  fish: "Fish",
-};
-
 /** Serializable recipe card data for the client browse island. */
 export type RecipeListItem = {
   readonly id: string;
@@ -91,7 +66,6 @@ export type RecipeListItem = {
   readonly summary: string;
   readonly mealType: MealType;
   readonly categories: readonly string[];
-  readonly allergens: readonly Allergen[];
   readonly ingredientNames: readonly string[];
   readonly timeMinutes?: number;
   readonly heroImageSrc: string;

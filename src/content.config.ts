@@ -1,7 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
-import { ALLERGENS, MEAL_TYPES } from "./types/recipes";
+import { MEAL_TYPES } from "./types/recipes";
 
 const ingredientSchema = z.object({
   name: z.string(),
@@ -33,7 +33,6 @@ const recipes = defineCollection({
       mealType: z.enum(MEAL_TYPES),
       categories: z.array(z.string()).default([]),
       ingredients: z.array(ingredientSchema).min(1),
-      allergens: z.array(z.enum(ALLERGENS)).default([]),
       tags: z.array(z.string()).default([]),
       timeMinutes: z.number().int().positive().optional(),
       servings: z.number().int().positive().optional(),

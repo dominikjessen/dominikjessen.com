@@ -1,16 +1,11 @@
-import {
-  ALLERGEN_LABELS,
-  MEAL_TYPE_LABELS,
-  type RecipeListItem,
-} from "../../types/recipes";
+import { MEAL_TYPE_LABELS, type RecipeListItem } from "../../types/recipes";
 
 export type ReactRecipeCardProps = {
   recipe: RecipeListItem;
 };
 
 export default function ReactRecipeCard({ recipe }: ReactRecipeCardProps) {
-  const { id, title, summary, mealType, allergens, heroImageSrc, heroImageAlt, timeMinutes } =
-    recipe;
+  const { id, title, summary, mealType, heroImageSrc, heroImageAlt, timeMinutes } = recipe;
 
   return (
     <article className="group flex flex-col h-full rounded-3xl border border-foreground-border bg-surface-card overflow-hidden transition duration-200 ease-out hover:-translate-y-1 hover:border-primary/30">
@@ -43,18 +38,6 @@ export default function ReactRecipeCard({ recipe }: ReactRecipeCardProps) {
           <p className="text-base md:text-lg text-foreground-soft leading-relaxed grow">
             {summary}
           </p>
-          {allergens.length > 0 && (
-            <ul className="flex flex-wrap gap-2 mt-1" aria-label="Contains allergens">
-              {allergens.map((allergen) => (
-                <li
-                  key={allergen}
-                  className="px-3 py-1 text-xs md:text-sm rounded-full border border-foreground-border text-foreground-muted"
-                >
-                  {ALLERGEN_LABELS[allergen]}
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       </a>
     </article>

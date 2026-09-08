@@ -24,10 +24,6 @@ ingredients:
     amount: pinch
   - name: milk
     amount: 60 ml
-allergens:
-  - gluten
-  - eggs
-  - dairy
 tags:
   - vegetarian
   - make-ahead

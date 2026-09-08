@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { ALLERGEN_LABELS, MEAL_TYPE_LABELS } from '../../types/recipes';
+import { MEAL_TYPE_LABELS } from '../../types/recipes';
 
 export async function getStaticPaths() {
   const recipes = await getCollection('recipes', ({ data }) => !data.draft);
@@ -25,7 +25,6 @@ const {
   mealType,
   categories,
   ingredients,
-  allergens,
   tags,
   timeMinutes,
   servings,
@@ -101,24 +100,6 @@ function formatLabel(value: string): string {
         )
       }
     </header>
-
-    {
-      allergens.length > 0 && (
-        <aside
-          class="rounded-3xl border border-foreground-border bg-surface-card px-5 py-4 md:px-6 md:py-5"
-          aria-label="Allergens"
-        >
-          <p class="font-signika text-sm uppercase tracking-wider text-foreground-subtle mb-3">Contains</p>
-          <ul class="flex flex-wrap gap-2">
-            {allergens.map((allergen) => (
-              <li class="px-3 py-1 text-sm rounded-full bg-foreground-surface text-foreground-soft">
-                {ALLERGEN_LABELS[allergen]}
-              </li>
-            ))}
-          </ul>
-        </aside>
-      )
-    }
 
     <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,18rem)_1fr] gap-10 lg:gap-14 items-start">
       <section aria-labelledby="ingredients-heading">

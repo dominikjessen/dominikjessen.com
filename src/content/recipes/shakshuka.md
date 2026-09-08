@@ -27,10 +27,6 @@ ingredients:
     optional: true
   - name: crusty bread
     amount: to serve
-allergens:
-  - eggs
-  - dairy
-  - gluten
 tags:
   - vegetarian
   - one-pot
