@@ -57,13 +57,21 @@ const recipes: RecipeListItem[] = collection.map(({ id, data }) => ({
 
     <MenuBrowse client:load recipes={recipes} />
 
-    <p class="pt-4">
+    <!-- Fine print, like the bottom of a real menu. Closes with the same double rule as the masthead. -->
+    <footer
+      class="flex flex-col items-center gap-8 border-t-[5px] border-double border-primary/30 pt-8 text-center"
+    >
+      <ul aria-label="The fine print" class="flex flex-col gap-1.5 text-sm italic text-foreground-subtle">
+        <li>* Service not included. Doing the dishes very much appreciated.</li>
+        <li>** Kitchen closes when the wine runs out.</li>
+        <li>*** Don't forget to give your compliments to the chef ;)</li>
+      </ul>
       <a
         href="/"
         class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
       >
         ← Go home
       </a>
-    </p>
+    </footer>
   </div>
 </Layout>

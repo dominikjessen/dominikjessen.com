@@ -5,8 +5,11 @@
  */
 const CHEF_WHATSAPP_NUMBER = "";
 
+function whatsAppUrl(text: string): string {
+  return `https://wa.me/${CHEF_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
+
 /** WhatsApp link with a ready-made "can you make this?" message for the chef. */
 export function chefRequestUrl(title: string): string {
-  const text = `Dom, can you make the ${title} next time?`;
-  return `https://wa.me/${CHEF_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  return whatsAppUrl(`Dom, can you make the ${title} next time?`);
 }

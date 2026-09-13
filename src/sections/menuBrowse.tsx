@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ChefsChoice from "../components/menu/ChefsChoice";
+import CourseDoodle from "../components/menu/CourseDoodle";
 import MenuDishRow from "../components/menu/MenuDishRow";
 import {
   EMPTY_MENU_FILTERS,
@@ -232,7 +233,7 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
           <div
             className={`max-w-3xl ${courses.length > 1 ? "lg:max-w-none lg:columns-2 lg:gap-x-16" : ""}`}
           >
-            {courses.map(({ mealType, recipes: courseRecipes, startIndex }) => (
+            {courses.map(({ mealType, recipes: courseRecipes, startIndex }, courseIndex) => (
               <section
                 key={mealType}
                 aria-labelledby={`course-${mealType}`}
@@ -240,10 +241,17 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
               >
                 <h2
                   id={`course-${mealType}`}
-                  className="mb-2 flex items-center gap-4 font-sans text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-foreground-subtle"
+                  className="mb-2 flex items-center gap-3 font-sans text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-foreground-subtle"
                 >
+                  {/* Alternate the tilt so the doodles look drawn, not stamped. */}
+                  <CourseDoodle
+                    mealType={mealType}
+                    className={`size-7 shrink-0 text-primary dark:text-primary-muted ${
+                      courseIndex % 2 === 0 ? "-rotate-6" : "rotate-6"
+                    }`}
+                  />
                   {MEAL_TYPE_LABELS[mealType]}
-                  <span aria-hidden className="h-px grow bg-foreground-border" />
+                  <span aria-hidden className="menu-squiggle ml-1 h-2 grow text-foreground-subtle/35" />
                 </h2>
                 <ul className="flex flex-col">
                   {courseRecipes.map((recipe, i) => (
