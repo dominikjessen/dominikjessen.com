@@ -43,6 +43,23 @@ export const RECIPE_TAGS = [
 
 export type RecipeTag = (typeof RECIPE_TAGS)[number];
 
+/** Tags shown as icons on the menu, in display order. */
+export const MENU_ICON_TAGS = [
+  "vegan",
+  "vegetarian",
+  "spicy",
+  "quick",
+  "make-ahead",
+  "one-pot",
+] as const satisfies readonly RecipeTag[];
+
+/** A dish's icon tags in display order. Vegan supersedes vegetarian, like a printed menu. */
+export function menuIconTags(tags: readonly string[]): RecipeTag[] {
+  const present = new Set(tags);
+  if (present.has("vegan")) present.delete("vegetarian");
+  return MENU_ICON_TAGS.filter((tag) => present.has(tag));
+}
+
 export type RecipeIngredient = {
   readonly name: string;
   readonly amount?: string;

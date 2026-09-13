@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import type { MealType } from "../../types/recipes";
+import type { MealType, RecipeTag } from "../../types/recipes";
 
 type IconProps = {
   className?: string;
@@ -266,10 +266,9 @@ function VegetarianIcon({ className }: IconProps) {
 function VeganIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
-      <path d="M7 20h10" />
-      <path d="M12 20V10" />
-      <path d="M12 10c3.5 0 6-2 7-5-4 0-7 2-7 5Z" />
-      <path d="M12 10c-3.5 0-6-2-7-5 4 0 7 2 7 5Z" />
+      <path d="M12 21v-9" />
+      <path d="M12 12c0-4 2.5-7 8-7 0 4.5-3 7-8 7Z" />
+      <path d="M12 15c0-3-2-5.5-6.5-5.5 0 3.5 2.5 5.5 6.5 5.5Z" />
     </svg>
   );
 }
@@ -289,5 +288,61 @@ const CATEGORY_ICONS: Record<string, (props: IconProps) => JSX.Element> = {
 
 export function CategoryIcon({ category, className }: IconProps & { category: string }) {
   const Icon = CATEGORY_ICONS[category] ?? TagIcon;
+  return <Icon className={className} />;
+}
+
+function ChilliIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <path d="M15.5 7c0-2 1-3.5 3-4" />
+      <path d="M12.8 8c1.2 1 3.2 1 4.4 0" />
+      <path d="M15.5 7c2.5 1 3 4 1 7-2.5 3.5-7.5 6.5-12.5 6.5 4-3 6.5-7.5 8-12 .5-1.5 1.5-2 3.5-1.5Z" />
+    </svg>
+  );
+}
+
+function BoltIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
+    </svg>
+  );
+}
+
+function CalendarIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <rect x="3.5" y="5" width="17" height="15" rx="2" />
+      <path d="M8 3v4" />
+      <path d="M16 3v4" />
+      <path d="M3.5 10h17" />
+      <path d="m9 15 2 2 4-4" />
+    </svg>
+  );
+}
+
+function PotIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <path d="M4 10h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-6Z" />
+      <path d="M2 10h2" />
+      <path d="M20 10h2" />
+      <path d="M7 7h10" />
+      <path d="M12 4v3" />
+    </svg>
+  );
+}
+
+const RECIPE_TAG_ICONS: Record<RecipeTag, (props: IconProps) => JSX.Element> = {
+  vegetarian: VegetarianIcon,
+  vegan: VeganIcon,
+  spicy: ChilliIcon,
+  quick: BoltIcon,
+  "make-ahead": CalendarIcon,
+  "one-pot": PotIcon,
+};
+
+export function RecipeTagIcon({ tag, className }: IconProps & { tag: RecipeTag }) {
+  const Icon = RECIPE_TAG_ICONS[tag];
   return <Icon className={className} />;
 }

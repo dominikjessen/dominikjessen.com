@@ -8,10 +8,13 @@ import {
   syncMenuFiltersToUrl,
   type MenuFilters,
 } from "../components/menu/menuFilters";
-import { CloseIcon, DiceIcon, SearchIcon } from "../components/menu/MenuIcons";
+import { CloseIcon, DiceIcon, RecipeTagIcon, SearchIcon } from "../components/menu/MenuIcons";
 import {
   MEAL_TYPE_LABELS,
   MEAL_TYPES,
+  MENU_ICON_TAGS,
+  formatRecipeLabel,
+  menuIconTags,
   type MealType,
   type RecipeListItem,
 } from "../types/recipes";
@@ -69,6 +72,12 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
   }, [recipes]);
 
   const featured = useMemo(() => recipes.find((recipe) => recipe.featured), [recipes]);
+
+  // Only explain the icons that actually appear on the menu.
+  const legendTags = useMemo(() => {
+    const used = new Set(recipes.flatMap((recipe) => menuIconTags(recipe.tags)));
+    return MENU_ICON_TAGS.filter((tag) => used.has(tag));
+  }, [recipes]);
 
   const filteredRecipes = useMemo(() => {
     const query = filters.query.trim().toLowerCase();
@@ -213,9 +222,18 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
         </div>
 
         {courses.length > 0 ? (
-          <div className="flex max-w-3xl flex-col gap-10 md:gap-12">
+          <>
+          {/* Two columns on wide screens, filled top-to-bottom like a folded menu; courses never split.
+              A single course stays one column so it doesn't sit lopsided on the left. */}
+          <div
+            className={`max-w-3xl ${courses.length > 1 ? "lg:max-w-none lg:columns-2 lg:gap-x-16" : ""}`}
+          >
             {courses.map(({ mealType, recipes: courseRecipes }) => (
-              <section key={mealType} aria-labelledby={`course-${mealType}`}>
+              <section
+                key={mealType}
+                aria-labelledby={`course-${mealType}`}
+                className="mb-8 break-inside-avoid md:mb-10"
+              >
                 <h2
                   id={`course-${mealType}`}
                   className="mb-2 flex items-center gap-4 font-sans text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-foreground-subtle"
@@ -231,6 +249,21 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
               </section>
             ))}
           </div>
+
+          {legendTags.length > 0 && (
+            <ul
+              aria-label="Key"
+              className="flex max-w-3xl flex-wrap gap-x-5 gap-y-2 border-t border-foreground-border pt-5 text-sm text-foreground-subtle lg:max-w-none"
+            >
+              {legendTags.map((tag) => (
+                <li key={tag} className="inline-flex items-center gap-1.5">
+                  <RecipeTagIcon tag={tag} className="size-4 text-primary dark:text-primary-muted" />
+                  {formatRecipeLabel(tag)}
+                </li>
+              ))}
+            </ul>
+          )}
+          </>
         ) : (
           <div className="flex max-w-3xl flex-col items-center gap-3 py-14 text-center">
             <SearchIcon className="size-8 text-foreground-subtle" />
