@@ -6,6 +6,8 @@
   /* Fonts */
   --font-signika: "Signika Variable", system-ui, sans-serif;
   --font-sans: "Inter Variable", system-ui, sans-serif;
+  /* Handwritten accents (menu sign-off). Font is imported only on the pages that use it. */
+  --font-hand: "Caveat Variable", "Bradley Hand", cursive;
 
   /* Colors backed by CSS variables in Layout.astro */
   --color-background: hsl(var(--background));
