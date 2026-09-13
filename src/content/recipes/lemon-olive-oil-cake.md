@@ -29,9 +29,11 @@ tags:
   - make-ahead
 timeMinutes: 55
 servings: 8
-heroImage: ./placeholders/mint.png
-heroImageAlt: Placeholder for lemon olive oil cake
+menuLine: olive oil, lemon zest and juice, thick slices
 draft: false
 ---
 
-Whisk wet ingredients with zest and juice. Fold in dry ingredients and milk until just combined. Bake until golden and a skewer comes out clean. Cool in the tin, then slice thick.
+1. Whisk the wet ingredients with the zest and juice.
+2. Fold in the dry ingredients and milk until just combined.
+3. Bake until golden and a skewer comes out clean.
+4. Cool in the tin, then slice thick.

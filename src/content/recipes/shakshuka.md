@@ -32,9 +32,13 @@ tags:
   - one-pot
 timeMinutes: 35
 servings: 2
-heroImage: ./placeholders/blush.png
-heroImageAlt: Placeholder for shakshuka
+menuLine: eggs, smoky tomato, red pepper, feta
+note: Pull the pan off the heat while the yolks still wobble — they keep cooking on the way to the table.
 draft: false
 ---
 
-Warm the olive oil, soften onion and pepper, then bloom the spices. Add tomatoes and simmer until thick. Nestle in the eggs, cover until the whites set, and finish with feta and bread.
+1. Warm the olive oil, then soften the onion and pepper.
+2. Bloom the garlic, cumin, and smoked paprika for a minute.
+3. Add the tomatoes and simmer until thick.
+4. Nestle in the eggs and cover until the whites set.
+5. Finish with feta and serve with crusty bread.

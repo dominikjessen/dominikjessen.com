@@ -1,23 +1,41 @@
 ---
 import { Image } from 'astro:assets';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { MEAL_TYPE_LABELS } from '../../types/recipes';
+import { getMenuRecipes } from '../../components/menu/menuRecipes';
+import { MEAL_TYPE_LABELS, formatRecipeLabel, type MealType } from '../../types/recipes';
+
+type NextDish = {
+  id: string;
+  title: string;
+  mealType: MealType;
+};
 
 export async function getStaticPaths() {
-  const recipes = await getCollection('recipes', ({ data }) => !data.draft);
-  return recipes.map((recipe) => ({
-    params: { id: recipe.id },
-    props: { recipe },
-  }));
+  const recipes = await getMenuRecipes();
+  return recipes.map((recipe, index) => {
+    // Wrap around so the last dish points back to the first.
+    const next = recipes[(index + 1) % recipes.length];
+    return {
+      params: { id: recipe.id },
+      props: {
+        recipe,
+        next:
+          next.id === recipe.id
+            ? undefined
+            : { id: next.id, title: next.data.title, mealType: next.data.mealType },
+      },
+    };
+  });
 }
 
 interface Props {
   recipe: CollectionEntry<'recipes'>;
+  next?: NextDish;
 }
 
-const { recipe } = Astro.props;
+const { recipe, next } = Astro.props;
 const { Content } = await render(recipe);
 const {
   title,
@@ -28,19 +46,16 @@ const {
   tags,
   timeMinutes,
   servings,
+  note,
   heroImage,
   heroImageAlt,
 } = recipe.data;
 
-function formatLabel(value: string): string {
-  return value
-    .split('-')
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ');
-}
+// Categories and tags overlap (e.g. "vegetarian" in both) — show each label once.
+const labels = [...new Set([...categories, ...tags])];
 ---
 
-<Layout title={`${title} - Menu`} showNav={false}>
+<Layout title={`${title} - Menu`} showNav={false} paper>
   <article class="flex flex-col gap-10 md:gap-14">
     <p>
       <a
@@ -51,17 +66,21 @@ function formatLabel(value: string): string {
       </a>
     </p>
 
-    <div class="overflow-hidden rounded-3xl border border-foreground-border bg-primary-soft">
-      <Image
-        src={heroImage}
-        alt={heroImageAlt}
-        width={1440}
-        height={900}
-        class="w-full aspect-[3/2] md:aspect-[21/9] object-cover"
-        loading="eager"
-        fetchpriority="high"
-      />
-    </div>
+    {
+      heroImage && (
+        <div class="overflow-hidden rounded-3xl border border-foreground-border bg-primary-soft">
+          <Image
+            src={heroImage}
+            alt={heroImageAlt ?? ''}
+            width={1440}
+            height={900}
+            class="w-full aspect-[3/2] md:aspect-[5/2] object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+      )
+    }
 
     <header class="flex flex-col gap-4 max-w-3xl">
       <div class="flex flex-wrap items-center gap-2">
@@ -84,19 +103,27 @@ function formatLabel(value: string): string {
       <h1 class="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h1>
       <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">{summary}</p>
       {
-        (categories.length > 0 || (tags?.length ?? 0) > 0) && (
+        labels.length > 0 && (
           <ul class="flex flex-wrap gap-2" aria-label="Categories and tags">
-            {categories.map((category) => (
+            {labels.map((label) => (
               <li class="px-3 py-1 text-sm rounded-full border border-foreground-border text-foreground-muted">
-                {formatLabel(category)}
-              </li>
-            ))}
-            {tags?.map((tag) => (
-              <li class="px-3 py-1 text-sm rounded-full border border-foreground-border text-foreground-muted">
-                {formatLabel(tag)}
+                {formatRecipeLabel(label)}
               </li>
             ))}
           </ul>
+        )
+      }
+      {
+        note && (
+          <aside
+            aria-label="Note from Dominik"
+            class="mt-2 flex flex-col gap-1.5 rounded-2xl border border-primary/15 bg-primary-light px-5 py-4 md:px-6 md:py-5"
+          >
+            <span class="font-signika text-sm font-semibold text-primary dark:text-primary-muted">
+              From Dominik
+            </span>
+            <p class="text-base md:text-lg italic text-foreground-soft leading-relaxed">{note}</p>
+          </aside>
         )
       }
     </header>
@@ -126,27 +153,50 @@ function formatLabel(value: string): string {
       </section>
 
       <section aria-labelledby="method-heading" class="recipe-method min-w-0">
-        <h2 id="method-heading" class="text-2xl md:text-3xl text-primary mb-4">Method</h2>
+        <h2 id="method-heading" class="text-2xl md:text-3xl text-primary mb-6">Method</h2>
         <div class="text-lg md:text-xl text-foreground_lighter leading-relaxed">
           <Content />
         </div>
       </section>
     </div>
 
-    <p class="pt-2 flex flex-wrap gap-6">
-      <a
-        href="/menu"
-        class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
-      >
-        ← Back to menu
-      </a>
-      <a
-        href="/"
-        class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
-      >
-        Go home
-      </a>
-    </p>
+    <nav
+      aria-label="More from the menu"
+      class="flex flex-col gap-6 border-t border-foreground-border pt-10 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="flex flex-wrap gap-6">
+        <a
+          href="/menu"
+          class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+        >
+          ← Back to menu
+        </a>
+        <a
+          href="/"
+          class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+        >
+          Go home
+        </a>
+      </p>
+      {
+        next && (
+          <a
+            href={`/menu/${next.id}`}
+            class="group flex flex-col gap-1 rounded-2xl border border-foreground-border bg-surface-card px-6 py-4 transition duration-200 ease-out hover:border-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:min-w-72 sm:text-right"
+          >
+            <span class="text-sm text-foreground-subtle">
+              Next up · {MEAL_TYPE_LABELS[next.mealType]}
+            </span>
+            <span class="font-signika text-xl md:text-2xl font-semibold text-foreground-strong leading-snug transition-colors group-hover:text-primary">
+              {next.title}
+              <span aria-hidden class="inline-block transition duration-150 group-hover:translate-x-1">
+                →
+              </span>
+            </span>
+          </a>
+        )
+      }
+    </nav>
   </article>
 </Layout>
 
@@ -159,13 +209,41 @@ function formatLabel(value: string): string {
     margin-bottom: 0;
   }
 
-  .recipe-method :global(ul),
-  .recipe-method :global(ol) {
+  .recipe-method :global(ul) {
     margin: 0 0 1rem;
     padding-left: 1.25rem;
   }
 
-  .recipe-method :global(li) {
+  .recipe-method :global(ul > li) {
     margin-bottom: 0.5rem;
+  }
+
+  /* Numbered steps: big sage numbers so you can find your place mid-cook. */
+  .recipe-method :global(ol) {
+    list-style: none;
+    counter-reset: step;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  /* Number and step text sit in a two-column grid, aligned on the first line's baseline. */
+  .recipe-method :global(ol > li) {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  .recipe-method :global(ol > li::before) {
+    content: counter(step);
+    font-family: var(--font-signika, system-ui, sans-serif);
+    font-weight: 700;
+    font-size: 1.75em;
+    line-height: 1;
+    color: hsl(var(--primary));
+    font-variant-numeric: tabular-nums;
   }
 </style>

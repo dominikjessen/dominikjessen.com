@@ -31,9 +31,12 @@ tags:
   - vegetarian
 timeMinutes: 15
 servings: 2
-heroImage: ./placeholders/sage.png
-heroImageAlt: Placeholder for gochujang noodles
+featured: true
+menuLine: chewy noodles, gochujang, sesame, whatever greens
 draft: false
 ---
 
-Boil the noodles. Whisk gochujang, soy, sesame oil, and grated garlic into a sauce. Toss drained noodles with sauce and wilted greens. Top with spring onion and an egg if you have one.
+1. Boil the noodles.
+2. Whisk gochujang, soy, sesame oil, and grated garlic into a sauce.
+3. Toss the drained noodles with the sauce and wilted greens.
+4. Top with spring onion, and an egg if you have one.
