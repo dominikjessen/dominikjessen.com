@@ -31,7 +31,6 @@ tags:
   - vegetarian
 timeMinutes: 15
 servings: 2
-featured: true
 menuLine: chewy noodles, gochujang, sesame, whatever greens
 draft: false
 ---

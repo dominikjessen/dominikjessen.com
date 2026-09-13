@@ -41,11 +41,14 @@ const recipes: RecipeListItem[] = collection.map(({ id, data }) => ({
         Open most nights
       </p>
       <div class="mt-2 flex flex-col items-center">
-        <p class="max-w-xl font-hand text-2xl md:text-3xl text-foreground-subtle leading-snug">
+        <p
+          class="max-w-xl font-hand text-2xl md:text-3xl text-foreground-subtle leading-snug motion-safe:animate-menu-fade-up"
+        >
           Pull up a chair and I'll whip us something up.
         </p>
+        <!-- The signature writes itself in after the tagline appears. -->
         <p
-          class="-mt-1 translate-x-16 -rotate-6 font-hand text-4xl md:translate-x-32 md:text-5xl text-primary dark:text-primary-muted"
+          class="-mt-1 translate-x-16 -rotate-6 font-hand text-4xl md:translate-x-32 md:text-5xl text-primary dark:text-primary-muted motion-safe:animate-write-in"
         >
           ~Dom
         </p>

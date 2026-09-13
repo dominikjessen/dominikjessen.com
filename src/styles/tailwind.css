@@ -140,6 +140,82 @@
   --animate-spin_move: spin_move 30s linear infinite;
   --animate-grow: grow 5s ease-in-out infinite;
   --animate-blob_breathe: blob_breathe 4.5s ease-in-out infinite;
+
+  /* Menu: entrances, the "Surprise me" dice moment, and the handwritten sign-off. */
+  @keyframes menu-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes menu-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes dice-roll {
+    0% {
+      transform: rotate(0deg) translateY(0);
+    }
+    25% {
+      transform: rotate(90deg) translateY(-14px);
+    }
+    50% {
+      transform: rotate(180deg) translateY(0);
+    }
+    75% {
+      transform: rotate(270deg) translateY(-8px);
+    }
+    100% {
+      transform: rotate(360deg) translateY(0);
+    }
+  }
+
+  @keyframes dice-land {
+    from {
+      transform: rotate(-40deg) scale(1.25);
+    }
+    to {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.85) translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Reveals text left to right, like it's being written. */
+  @keyframes write-in {
+    from {
+      clip-path: inset(-20% 100% -20% 0);
+    }
+    to {
+      clip-path: inset(-20% 0 -20% 0);
+    }
+  }
+
+  --animate-menu-fade-up: menu-fade-up 450ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-menu-fade-in: menu-fade-in 200ms ease-out both;
+  --animate-dice-roll: dice-roll 600ms ease-in-out infinite;
+  --animate-dice-land: dice-land 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-pop-in: pop-in 450ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-write-in: write-in 900ms cubic-bezier(0.4, 0, 0.2, 1) 400ms both;
 }
 
 @keyframes achievement-fly-out {

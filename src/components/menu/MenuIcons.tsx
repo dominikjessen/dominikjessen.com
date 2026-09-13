@@ -345,6 +345,17 @@ export function TallyIcon({ className }: IconProps) {
   );
 }
 
+export function ChatIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12Z" />
+      <path d="M8.5 12h.01" />
+      <path d="M12 12h.01" />
+      <path d="M15.5 12h.01" />
+    </svg>
+  );
+}
+
 /** Hand-drawn arrow that points back up at the dish, for margin notes. */
 export function CurlyArrowIcon({ className }: IconProps) {
   return (

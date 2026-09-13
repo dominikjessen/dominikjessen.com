@@ -4,14 +4,23 @@ import RecipeBadge from "./RecipeBadge";
 
 export type MenuDishRowProps = {
   recipe: RecipeListItem;
+  /** Position in the whole menu, for the staggered entrance. */
+  index: number;
 };
 
-export default function MenuDishRow({ recipe }: MenuDishRowProps) {
+/** Cap the stagger so dishes far down the menu don't wait around to appear. */
+const MAX_STAGGER_STEPS = 16;
+const STAGGER_MS = 30;
+
+export default function MenuDishRow({ recipe, index }: MenuDishRowProps) {
   const { id, title, timeMinutes, menuLine, tags, badges, marginNote } = recipe;
   const iconTags = menuIconTags(tags);
 
   return (
-    <li>
+    <li
+      className="motion-safe:animate-menu-fade-up"
+      style={{ animationDelay: `${Math.min(index, MAX_STAGGER_STEPS) * STAGGER_MS}ms` }}
+    >
       <a
         href={`/menu/${id}`}
         className="group -mx-3 flex flex-col gap-0.5 rounded-xl px-3 py-2.5 transition duration-150 ease-out hover:bg-primary-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"

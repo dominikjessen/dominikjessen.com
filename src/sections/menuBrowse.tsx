@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import ChefsChoice from "../components/menu/ChefsChoice";
 import MenuDishRow from "../components/menu/MenuDishRow";
 import {
   EMPTY_MENU_FILTERS,
@@ -52,6 +53,8 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
   const [urlReady, setUrlReady] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
+  const [choosing, setChoosing] = useState(false);
+  const closeChefsChoice = useCallback(() => setChoosing(false), []);
 
   useEffect(() => {
     const parsed = parseMenuFiltersFromSearch(window.location.search);
@@ -91,14 +94,20 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
     });
   }, [recipes, filters]);
 
-  const courses = useMemo(
-    () =>
-      MEAL_TYPES.map((mealType) => ({
-        mealType,
-        recipes: filteredRecipes.filter((recipe) => recipe.mealType === mealType),
-      })).filter((course) => course.recipes.length > 0),
-    [filteredRecipes]
-  );
+  // Each course also knows where its rows start, so the entrance stagger runs across the whole menu.
+  const courses = useMemo(() => {
+    let startIndex = 0;
+    return MEAL_TYPES.map((mealType) => ({
+      mealType,
+      recipes: filteredRecipes.filter((recipe) => recipe.mealType === mealType),
+    }))
+      .filter((course) => course.recipes.length > 0)
+      .map((course) => {
+        const withStart = { ...course, startIndex };
+        startIndex += course.recipes.length;
+        return withStart;
+      });
+  }, [filteredRecipes]);
 
   const hasActiveFilters = hasActiveMenuFilters(filters);
 
@@ -120,14 +129,15 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
     setSearchOpen(false);
   }
 
-  function surpriseMe(): void {
-    const pool = filteredRecipes.length > 0 ? filteredRecipes : recipes;
-    const pick = pool[Math.floor(Math.random() * pool.length)];
-    if (pick) window.location.href = `/menu/${pick.id}`;
-  }
+  // The chef picks from whatever is on screen, or the whole menu if the filters match nothing.
+  const surprisePool = filteredRecipes.length > 0 ? filteredRecipes : recipes;
 
   return (
     <div className="flex flex-col gap-6 md:gap-8">
+      {choosing && surprisePool.length > 0 && (
+        <ChefsChoice pool={surprisePool} onClose={closeChefsChoice} />
+      )}
+
       <div className="sticky top-4 z-20 flex items-center gap-2 rounded-full border border-foreground-border bg-background/95 p-1.5 backdrop-blur-md">
         {searchOpen ? (
           <div className="relative min-w-0 flex-1">
@@ -186,11 +196,11 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
         )}
         <button
           type="button"
-          onClick={surpriseMe}
+          onClick={() => setChoosing(true)}
           aria-label="Surprise me with a random dish"
-          className="inline-flex shrink-0 items-center gap-2 rounded-full border border-foreground-border bg-foreground-surface px-3 py-2 font-signika text-sm md:text-base text-foreground-soft transition duration-150 hover:border-primary/40 hover:text-primary sm:px-4"
+          className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-foreground-border bg-foreground-surface px-3 py-2 font-signika text-sm md:text-base text-foreground-soft transition duration-150 hover:border-primary/40 hover:text-primary sm:px-4"
         >
-          <DiceIcon className="size-4" />
+          <DiceIcon className="size-4 transition-transform duration-300 ease-out group-hover:rotate-90" />
           <span className="hidden sm:inline">Surprise me</span>
         </button>
       </div>
@@ -222,7 +232,7 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
           <div
             className={`max-w-3xl ${courses.length > 1 ? "lg:max-w-none lg:columns-2 lg:gap-x-16" : ""}`}
           >
-            {courses.map(({ mealType, recipes: courseRecipes }) => (
+            {courses.map(({ mealType, recipes: courseRecipes, startIndex }) => (
               <section
                 key={mealType}
                 aria-labelledby={`course-${mealType}`}
@@ -236,8 +246,8 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
                   <span aria-hidden className="h-px grow bg-foreground-border" />
                 </h2>
                 <ul className="flex flex-col">
-                  {courseRecipes.map((recipe) => (
-                    <MenuDishRow key={recipe.id} recipe={recipe} />
+                  {courseRecipes.map((recipe, i) => (
+                    <MenuDishRow key={recipe.id} recipe={recipe} index={startIndex + i} />
                   ))}
                 </ul>
               </section>
