@@ -83,13 +83,9 @@ export type RecipeListItem = {
   readonly summary: string;
   readonly mealType: MealType;
   readonly tags: readonly string[];
-  readonly featured: boolean;
   readonly menuLine: string;
   readonly ingredientNames: readonly string[];
   readonly timeMinutes?: number;
-  /** Only resolved for the Chef's pick — the menu list itself has no photos. */
-  readonly heroImageSrc?: string;
-  readonly heroImageAlt?: string;
 };
 
 export function formatRecipeLabel(value: string): string {

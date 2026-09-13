@@ -1,5 +1,4 @@
 ---
-import { getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import { getMenuRecipes } from '../../components/menu/menuRecipes';
 import MenuBrowse from '../../sections/menuBrowse';
@@ -10,43 +9,30 @@ const MENU_LINE_INGREDIENTS = 4;
 
 const collection = await getMenuRecipes();
 
-const recipes: RecipeListItem[] = await Promise.all(
-  collection.map(async ({ id, data }) => {
-    // Only the Chef's pick shows a photo on the index.
-    const image =
-      data.featured && data.heroImage
-        ? await getImage({ src: data.heroImage, width: 960, height: 720 })
-        : undefined;
-
-    return {
-      id,
-      title: data.title,
-      summary: data.summary,
-      mealType: data.mealType,
-      tags: data.tags,
-      featured: data.featured,
-      menuLine:
-        data.menuLine ??
-        data.ingredients
-          .filter((ingredient) => !ingredient.optional)
-          .slice(0, MENU_LINE_INGREDIENTS)
-          .map((ingredient) => ingredient.name)
-          .join(', '),
-      ingredientNames: data.ingredients.map((ingredient) => ingredient.name),
-      timeMinutes: data.timeMinutes,
-      heroImageSrc: image?.src,
-      heroImageAlt: data.heroImageAlt,
-    };
-  })
-);
+const recipes: RecipeListItem[] = collection.map(({ id, data }) => ({
+  id,
+  title: data.title,
+  summary: data.summary,
+  mealType: data.mealType,
+  tags: data.tags,
+  menuLine:
+    data.menuLine ??
+    data.ingredients
+      .filter((ingredient) => !ingredient.optional)
+      .slice(0, MENU_LINE_INGREDIENTS)
+      .map((ingredient) => ingredient.name)
+      .join(', '),
+  ingredientNames: data.ingredients.map((ingredient) => ingredient.name),
+  timeMinutes: data.timeMinutes,
+}));
 ---
 
-<Layout title="Dominik Jessen - Menu" showNav={false} paper>
+<Layout title="Chez Dom" showNav={false} paper>
   <div class="flex flex-col gap-10 md:gap-14">
-    <header class="flex flex-col gap-4 max-w-2xl">
-      <h1 class="text-5xl md:text-6xl lg:text-7xl text-primary leading-none">What's cooking</h1>
+    <header class="flex flex-col gap-3 max-w-2xl">
+      <h1 class="text-5xl md:text-6xl lg:text-7xl text-primary leading-none">Chez Dom</h1>
       <p class="text-lg md:text-2xl text-foreground_lighter leading-relaxed">
-        The dishes I actually make — for friends at the table, or whoever scanned the QR code.
+        Pull up a chair and I'll whip us something up.
       </p>
     </header>
 

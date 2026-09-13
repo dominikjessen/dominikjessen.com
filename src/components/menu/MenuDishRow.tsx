@@ -1,12 +1,12 @@
 import { formatRecipeLabel, menuIconTags, type RecipeListItem } from "../../types/recipes";
-import { RecipeTagIcon, StarIcon } from "./MenuIcons";
+import { RecipeTagIcon } from "./MenuIcons";
 
 export type MenuDishRowProps = {
   recipe: RecipeListItem;
 };
 
 export default function MenuDishRow({ recipe }: MenuDishRowProps) {
-  const { id, title, timeMinutes, menuLine, tags, featured } = recipe;
+  const { id, title, timeMinutes, menuLine, tags } = recipe;
   const iconTags = menuIconTags(tags);
 
   return (
@@ -19,12 +19,6 @@ export default function MenuDishRow({ recipe }: MenuDishRowProps) {
         <div className="flex items-baseline-last gap-3">
           <h3 className="min-w-0 font-signika text-lg md:text-xl font-semibold text-foreground-strong leading-snug transition-colors group-hover:text-primary">
             {title}
-            {featured && (
-              <>
-                <StarIcon className="ml-1.5 inline size-4 -translate-y-0.5 fill-current text-brass" />
-                <span className="sr-only"> (Chef's pick)</span>
-              </>
-            )}
             {iconTags.length > 0 && (
               <>
                 <span className="ml-2 inline-flex -translate-y-px items-center gap-1 whitespace-nowrap align-middle text-primary dark:text-primary-muted">
