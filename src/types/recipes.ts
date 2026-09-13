@@ -49,16 +49,36 @@ export const MENU_ICON_TAGS = [
   "vegetarian",
   "spicy",
   "quick",
-  "make-ahead",
-  "one-pot",
 ] as const satisfies readonly RecipeTag[];
 
+export type MenuIconTag = (typeof MENU_ICON_TAGS)[number];
+
 /** A dish's icon tags in display order. Vegan supersedes vegetarian, like a printed menu. */
-export function menuIconTags(tags: readonly string[]): RecipeTag[] {
+export function menuIconTags(tags: readonly string[]): MenuIconTag[] {
   const present = new Set(tags);
   if (present.has("vegan")) present.delete("vegetarian");
   return MENU_ICON_TAGS.filter((tag) => present.has(tag));
 }
+
+/** Set-once personality badges shown above a dish on the menu. */
+export const RECIPE_BADGES = ["chefs-special"] as const;
+
+export type RecipeBadge = (typeof RECIPE_BADGES)[number];
+
+export const RECIPE_BADGE_LABELS: Record<RecipeBadge, string> = {
+  "chefs-special": "Chef's special",
+};
+
+/** How much effort a dish takes, in plain words rather than minutes. */
+export const RECIPE_EFFORTS = ["weeknight", "lazy-sunday", "showing-off"] as const;
+
+export type RecipeEffort = (typeof RECIPE_EFFORTS)[number];
+
+export const RECIPE_EFFORT_LABELS: Record<RecipeEffort, string> = {
+  weeknight: "Weeknight",
+  "lazy-sunday": "Lazy Sunday",
+  "showing-off": "Showing off",
+};
 
 export type RecipeIngredient = {
   readonly name: string;
@@ -83,7 +103,9 @@ export type RecipeListItem = {
   readonly summary: string;
   readonly mealType: MealType;
   readonly tags: readonly string[];
+  readonly badges: readonly RecipeBadge[];
   readonly menuLine: string;
+  readonly marginNote?: string;
   readonly ingredientNames: readonly string[];
   readonly timeMinutes?: number;
 };

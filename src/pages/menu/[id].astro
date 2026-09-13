@@ -1,10 +1,18 @@
 ---
+import '@fontsource-variable/caveat';
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { MealTypeIcon, TallyIcon } from '../../components/menu/MenuIcons';
+import RecipeBadge from '../../components/menu/RecipeBadge';
 import { getMenuRecipes } from '../../components/menu/menuRecipes';
-import { MEAL_TYPE_LABELS, formatRecipeLabel, type MealType } from '../../types/recipes';
+import {
+  MEAL_TYPE_LABELS,
+  RECIPE_EFFORT_LABELS,
+  formatRecipeLabel,
+  type MealType,
+} from '../../types/recipes';
 
 type NextDish = {
   id: string;
@@ -47,9 +55,20 @@ const {
   timeMinutes,
   servings,
   note,
+  badges,
+  marginNote,
+  effort,
+  pairsWith,
+  timesMade,
   heroImage,
   heroImageAlt,
 } = recipe.data;
+
+const details = [
+  timeMinutes !== undefined && `${timeMinutes} min`,
+  servings !== undefined && `${servings} ${servings === 1 ? 'serving' : 'servings'}`,
+  effort && RECIPE_EFFORT_LABELS[effort],
+].filter((detail): detail is string => Boolean(detail));
 
 // Categories and tags overlap (e.g. "vegetarian" in both) — show each label once.
 const labels = [...new Set([...categories, ...tags])];
@@ -87,20 +106,31 @@ const labels = [...new Set([...categories, ...tags])];
         <span class="px-3 py-1 text-sm rounded-full bg-foreground-surface text-foreground-soft">
           {MEAL_TYPE_LABELS[mealType]}
         </span>
+        {badges.map((badge) => <RecipeBadge badge={badge} />)}
         {
-          timeMinutes !== undefined && (
-            <span class="text-sm text-foreground-subtle">{timeMinutes} min</span>
+          details.length > 0 && (
+            <span class="text-sm text-foreground-subtle">{details.join(' · ')}</span>
           )
         }
         {
-          servings !== undefined && (
-            <span class="text-sm text-foreground-subtle">
-              {servings} {servings === 1 ? 'serving' : 'servings'}
+          timesMade !== undefined && (
+            <span class="inline-flex items-center gap-1.5 text-sm text-foreground-subtle">
+              <TallyIcon className="size-4" />
+              Made {timesMade}+ times
             </span>
           )
         }
       </div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h1>
+      <div class="flex flex-col gap-1">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h1>
+        {
+          marginNote && (
+            <p class="origin-left -rotate-2 font-hand text-2xl md:text-3xl text-primary dark:text-primary-muted">
+              {marginNote}
+            </p>
+          )
+        }
+      </div>
       <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">{summary}</p>
       {
         labels.length > 0 && (
@@ -150,6 +180,16 @@ const labels = [...new Set([...categories, ...tags])];
             ))
           }
         </ul>
+        {
+          pairsWith && (
+            <p class="mt-6 flex items-center gap-2 text-base text-foreground-muted">
+              <MealTypeIcon mealType="drink" className="size-5 shrink-0 text-primary dark:text-primary-muted" />
+              <span>
+                Pairs with <span class="text-foreground-soft">{pairsWith}</span>
+              </span>
+            </p>
+          )
+        }
       </section>
 
       <section aria-labelledby="method-heading" class="recipe-method min-w-0">

@@ -1,7 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
-import { MEAL_TYPES } from "./types/recipes";
+import { MEAL_TYPES, RECIPE_BADGES, RECIPE_EFFORTS } from "./types/recipes";
 
 const ingredientSchema = z.object({
   name: z.string(),
@@ -38,6 +38,16 @@ const recipes = defineCollection({
       servings: z.number().int().positive().optional(),
       /** Italic one-liner under the dish on the menu. Falls back to the first few ingredients. */
       menuLine: z.string().optional(),
+      /** Personality badges above the dish on the menu, e.g. "chefs-special". */
+      badges: z.array(z.enum(RECIPE_BADGES)).default([]),
+      /** Short handwritten scribble on the menu and recipe page, e.g. "ask for seconds". */
+      marginNote: z.string().optional(),
+      /** Effort in plain words, shown next to the time on the recipe page. */
+      effort: z.enum(RECIPE_EFFORTS).optional(),
+      /** Drink suggestion, e.g. "a cold lager". */
+      pairsWith: z.string().optional(),
+      /** Rough count, shown as "Made 30+ times". */
+      timesMade: z.number().int().positive().optional(),
       /** Personal note, rendered as a "From Dominik" callout on the recipe page. */
       note: z.string().optional(),
       heroImage: image().optional(),

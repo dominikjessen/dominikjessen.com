@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import type { MealType, RecipeTag } from "../../types/recipes";
+import type { MealType, MenuIconTag, RecipeBadge } from "../../types/recipes";
 
 type IconProps = {
   className?: string;
@@ -301,40 +301,56 @@ function BoltIcon({ className }: IconProps) {
   );
 }
 
-function CalendarIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
-      <rect x="3.5" y="5" width="17" height="15" rx="2" />
-      <path d="M8 3v4" />
-      <path d="M16 3v4" />
-      <path d="M3.5 10h17" />
-      <path d="m9 15 2 2 4-4" />
-    </svg>
-  );
-}
-
-function PotIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
-      <path d="M4 10h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-6Z" />
-      <path d="M2 10h2" />
-      <path d="M20 10h2" />
-      <path d="M7 7h10" />
-      <path d="M12 4v3" />
-    </svg>
-  );
-}
-
-const RECIPE_TAG_ICONS: Record<RecipeTag, (props: IconProps) => JSX.Element> = {
+const RECIPE_TAG_ICONS: Record<MenuIconTag, (props: IconProps) => JSX.Element> = {
   vegetarian: VegetarianIcon,
   vegan: VeganIcon,
   spicy: ChilliIcon,
   quick: BoltIcon,
-  "make-ahead": CalendarIcon,
-  "one-pot": PotIcon,
 };
 
-export function RecipeTagIcon({ tag, className }: IconProps & { tag: RecipeTag }) {
+export function RecipeTagIcon({ tag, className }: IconProps & { tag: MenuIconTag }) {
   const Icon = RECIPE_TAG_ICONS[tag];
   return <Icon className={className} />;
+}
+
+function ChefHatIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <path d="M6 13.5V20h12v-6.5" />
+      <path d="M6 13.5A4 4 0 0 1 7.5 6a4.5 4.5 0 0 1 9 0A4 4 0 0 1 18 13.5Z" />
+      <path d="M6 17h12" />
+    </svg>
+  );
+}
+
+const RECIPE_BADGE_ICONS: Record<RecipeBadge, (props: IconProps) => JSX.Element> = {
+  "chefs-special": ChefHatIcon,
+};
+
+export function RecipeBadgeIcon({ badge, className }: IconProps & { badge: RecipeBadge }) {
+  const Icon = RECIPE_BADGE_ICONS[badge];
+  return <Icon className={className} />;
+}
+
+/** Four strokes and a slash — for "Made 30+ times". */
+export function TallyIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <path d="M6 5v14" />
+      <path d="M10 5v14" />
+      <path d="M14 5v14" />
+      <path d="M18 5v14" />
+      <path d="M3.5 16 20.5 8" />
+    </svg>
+  );
+}
+
+/** Hand-drawn arrow that points back up at the dish, for margin notes. */
+export function CurlyArrowIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
+      <path d="M20 20c-7 0-12-4-13-11" />
+      <path d="m4 11 3-3 3 3" />
+    </svg>
+  );
 }

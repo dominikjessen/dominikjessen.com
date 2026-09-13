@@ -16,6 +16,8 @@ const recipes: RecipeListItem[] = collection.map(({ id, data }) => ({
   summary: data.summary,
   mealType: data.mealType,
   tags: data.tags,
+  badges: data.badges,
+  marginNote: data.marginNote,
   menuLine:
     data.menuLine ??
     data.ingredients
