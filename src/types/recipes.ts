@@ -59,17 +59,20 @@ export const MEAL_TYPE_LABELS: Record<MealType, string> = {
   drink: "Drink",
 };
 
-/** Serializable recipe card data for the client browse island. */
+/** Serializable recipe data for the client menu island. */
 export type RecipeListItem = {
   readonly id: string;
   readonly title: string;
   readonly summary: string;
   readonly mealType: MealType;
-  readonly categories: readonly string[];
+  readonly tags: readonly string[];
+  readonly featured: boolean;
+  readonly menuLine: string;
   readonly ingredientNames: readonly string[];
   readonly timeMinutes?: number;
-  readonly heroImageSrc: string;
-  readonly heroImageAlt: string;
+  /** Only resolved for the Chef's pick — the menu list itself has no photos. */
+  readonly heroImageSrc?: string;
+  readonly heroImageAlt?: string;
 };
 
 export function formatRecipeLabel(value: string): string {

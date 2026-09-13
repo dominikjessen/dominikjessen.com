@@ -1,12 +1,6 @@
-import {
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
-import ReactRecipeCard from "../components/menu/ReactRecipeCard";
+import { useEffect, useMemo, useRef, useState } from "react";
+import ChefsPick from "../components/menu/ChefsPick";
+import MenuDishRow from "../components/menu/MenuDishRow";
 import {
   EMPTY_MENU_FILTERS,
   hasActiveMenuFilters,
@@ -14,19 +8,10 @@ import {
   syncMenuFiltersToUrl,
   type MenuFilters,
 } from "../components/menu/menuFilters";
-import {
-  CategoryIcon,
-  ChevronDownIcon,
-  CloseIcon,
-  MealTypeIcon,
-  PlateIcon,
-  SearchIcon,
-  TagIcon,
-} from "../components/menu/MenuIcons";
+import { CloseIcon, DiceIcon, SearchIcon } from "../components/menu/MenuIcons";
 import {
   MEAL_TYPE_LABELS,
   MEAL_TYPES,
-  formatRecipeLabel,
   type MealType,
   type RecipeListItem,
 } from "../types/recipes";
@@ -35,138 +20,27 @@ export type MenuBrowseProps = {
   recipes: readonly RecipeListItem[];
 };
 
-type DropdownOption = {
-  value: string;
-  label: string;
-  icon: ReactNode;
-};
-
-function toggleValue<T extends string>(selected: readonly T[], value: T): T[] {
-  return selected.includes(value)
-    ? selected.filter((item) => item !== value)
-    : [...selected, value];
-}
-
-function FilterDropdown({
+function CoursePill({
   label,
-  icon,
-  options,
-  selected,
-  onToggle,
+  active,
+  onClick,
 }: {
   label: string;
-  icon: ReactNode;
-  options: readonly DropdownOption[];
-  selected: readonly string[];
-  onToggle: (value: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const menuId = useId();
-  const selectedCount = selected.length;
-
-  useEffect(() => {
-    if (!open) return;
-
-    function onPointerDown(event: MouseEvent): void {
-      if (!rootRef.current?.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-
-    function onKeyDown(event: KeyboardEvent): void {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
-
-  return (
-    <div ref={rootRef} className="relative shrink-0">
-      <button
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-controls={menuId}
-        onClick={() => setOpen((current) => !current)}
-        className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm md:text-base transition duration-150 ease-out ${
-          selectedCount > 0
-            ? "border-primary/40 bg-primary-soft text-primary"
-            : "border-foreground-border bg-foreground-surface text-foreground-soft hover:border-primary/40"
-        }`}
-      >
-        <span className="shrink-0 opacity-90">{icon}</span>
-        <span className="font-signika whitespace-nowrap">
-          {label}
-          {selectedCount > 0 ? ` · ${selectedCount}` : ""}
-        </span>
-        <ChevronDownIcon
-          className={`size-4 shrink-0 text-foreground-subtle transition duration-150 ${open ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      {open && (
-        <div
-          id={menuId}
-          role="listbox"
-          aria-multiselectable="true"
-          className="absolute left-0 top-full z-30 mt-2 min-w-[15rem] max-h-80 overflow-auto rounded-2xl border border-foreground-border bg-background p-2.5 shadow-lg"
-        >
-          <div className="flex flex-col gap-1.5">
-            {options.map((option) => {
-              const isSelected = selected.includes(option.value);
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  role="option"
-                  aria-selected={isSelected}
-                  onClick={() => onToggle(option.value)}
-                  className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left text-sm md:text-base transition duration-100 ${
-                    isSelected
-                      ? "bg-primary-soft text-primary ring-1 ring-inset ring-primary/20"
-                      : "text-foreground-soft hover:bg-foreground-surface"
-                  }`}
-                >
-                  <span className="shrink-0 opacity-90">{option.icon}</span>
-                  <span className="grow">{option.label}</span>
-                  {isSelected && <CloseIcon className="size-3.5 shrink-0 opacity-70" />}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ActiveFilterChip({
-  label,
-  icon,
-  onDismiss,
-}: {
-  label: string;
-  icon: ReactNode;
-  onDismiss: () => void;
+  active: boolean;
+  onClick: () => void;
 }) {
   return (
     <button
       type="button"
-      onClick={onDismiss}
-      className="inline-flex items-center gap-2 rounded-full border border-foreground-border bg-foreground-surface px-3 py-1.5 text-sm text-foreground-soft transition duration-150 hover:border-primary/30 hover:bg-primary-soft hover:text-primary"
-      aria-label={`Remove ${label} filter`}
+      aria-pressed={active}
+      onClick={onClick}
+      className={`shrink-0 rounded-full px-4 py-2 font-signika text-sm md:text-base whitespace-nowrap transition duration-150 ease-out ${
+        active
+          ? "bg-primary-soft text-primary ring-1 ring-inset ring-primary/20 dark:text-primary-muted"
+          : "text-foreground-soft hover:bg-foreground-surface-strong"
+      }`}
     >
-      <span className="shrink-0 opacity-90">{icon}</span>
-      <span>{label}</span>
-      <CloseIcon className="size-3.5 shrink-0 opacity-70" />
+      {label}
     </button>
   );
 }
@@ -174,9 +48,13 @@ function ActiveFilterChip({
 export default function MenuBrowse({ recipes }: MenuBrowseProps) {
   const [filters, setFilters] = useState<MenuFilters>(EMPTY_MENU_FILTERS);
   const [urlReady, setUrlReady] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setFilters(parseMenuFiltersFromSearch(window.location.search));
+    const parsed = parseMenuFiltersFromSearch(window.location.search);
+    setFilters(parsed);
+    setSearchOpen(parsed.query.length > 0);
     setUrlReady(true);
   }, []);
 
@@ -190,187 +68,178 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
     return MEAL_TYPES.filter((mealType) => present.has(mealType));
   }, [recipes]);
 
-  const availableCategories = useMemo(() => {
-    const present = new Set<string>();
-    recipes.forEach((recipe) => {
-      recipe.categories.forEach((category) => present.add(category));
-    });
-    return [...present].sort((a, b) => a.localeCompare(b));
-  }, [recipes]);
-
-  const mealTypeOptions = useMemo<DropdownOption[]>(
-    () =>
-      availableMealTypes.map((mealType) => ({
-        value: mealType,
-        label: MEAL_TYPE_LABELS[mealType],
-        icon: <MealTypeIcon mealType={mealType} className="size-4" />,
-      })),
-    [availableMealTypes]
-  );
-
-  const categoryOptions = useMemo<DropdownOption[]>(
-    () =>
-      availableCategories.map((category) => ({
-        value: category,
-        label: formatRecipeLabel(category),
-        icon: <CategoryIcon category={category} className="size-4" />,
-      })),
-    [availableCategories]
-  );
+  const featured = useMemo(() => recipes.find((recipe) => recipe.featured), [recipes]);
 
   const filteredRecipes = useMemo(() => {
-    const query = filters.ingredientQuery.trim().toLowerCase();
+    const query = filters.query.trim().toLowerCase();
 
     return recipes.filter((recipe) => {
       const matchesMealType =
         filters.mealTypes.length === 0 || filters.mealTypes.includes(recipe.mealType);
-      const matchesCategory =
-        filters.categories.length === 0 ||
-        filters.categories.some((category) => recipe.categories.includes(category));
-      const matchesIngredient =
+      const matchesQuery =
         query.length === 0 ||
+        recipe.title.toLowerCase().includes(query) ||
         recipe.ingredientNames.some((name) => name.toLowerCase().includes(query));
 
-      return matchesMealType && matchesCategory && matchesIngredient;
+      return matchesMealType && matchesQuery;
     });
   }, [recipes, filters]);
 
+  const courses = useMemo(
+    () =>
+      MEAL_TYPES.map((mealType) => ({
+        mealType,
+        recipes: filteredRecipes.filter((recipe) => recipe.mealType === mealType),
+      })).filter((course) => course.recipes.length > 0),
+    [filteredRecipes]
+  );
+
   const hasActiveFilters = hasActiveMenuFilters(filters);
-  const trimmedQuery = filters.ingredientQuery.trim();
 
-  function clearFilters(): void {
-    setFilters(EMPTY_MENU_FILTERS);
+  function setMealType(mealType: MealType | null): void {
+    setFilters((current) => ({ ...current, mealTypes: mealType ? [mealType] : [] }));
   }
 
-  function setMealTypes(mealTypes: readonly MealType[]): void {
-    setFilters((current) => ({ ...current, mealTypes }));
+  function setQuery(query: string): void {
+    setFilters((current) => ({ ...current, query }));
   }
 
-  function setCategories(categories: readonly string[]): void {
-    setFilters((current) => ({ ...current, categories }));
+  function openSearch(): void {
+    setSearchOpen(true);
+    requestAnimationFrame(() => searchRef.current?.focus());
   }
 
-  function setIngredientQuery(ingredientQuery: string): void {
-    setFilters((current) => ({ ...current, ingredientQuery }));
+  function closeSearch(): void {
+    setQuery("");
+    setSearchOpen(false);
+  }
+
+  function surpriseMe(): void {
+    const pool = filteredRecipes.length > 0 ? filteredRecipes : recipes;
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    if (pick) window.location.href = `/menu/${pick.id}`;
   }
 
   return (
-    <div className="flex flex-col gap-6 md:gap-8">
-      <div className="sticky top-4 z-20 flex flex-col gap-3 rounded-2xl border border-foreground-border bg-background/95 backdrop-blur-md px-3 py-3 md:px-4 md:py-3.5">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center">
-          <div className="flex flex-wrap items-center gap-2 shrink-0">
-            <FilterDropdown
-              label="Meal type"
-              icon={<PlateIcon className="size-4" />}
-              options={mealTypeOptions}
-              selected={filters.mealTypes}
-              onToggle={(value) =>
-                setMealTypes(toggleValue(filters.mealTypes, value as MealType))
-              }
-            />
-            {categoryOptions.length > 0 && (
-              <FilterDropdown
-                label="Category"
-                icon={<TagIcon className="size-4" />}
-                options={categoryOptions}
-                selected={filters.categories}
-                onToggle={(value) => setCategories(toggleValue(filters.categories, value))}
+    <div className="flex flex-col gap-10 md:gap-14">
+      {featured && <ChefsPick recipe={featured} />}
+
+      <div className="flex flex-col gap-6 md:gap-8">
+        <div className="sticky top-4 z-20 flex items-center gap-2 rounded-full border border-foreground-border bg-background/95 p-1.5 backdrop-blur-md">
+          {searchOpen ? (
+            <div className="relative min-w-0 flex-1">
+              <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-foreground-subtle" />
+              <input
+                ref={searchRef}
+                id="menu-search"
+                type="search"
+                value={filters.query}
+                onChange={(event) => setQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") closeSearch();
+                }}
+                placeholder="Search dishes or ingredients…"
+                aria-label="Search dishes or ingredients"
+                className="w-full rounded-full bg-foreground-surface py-2 pl-10 pr-10 text-sm md:text-base text-foreground-soft placeholder:text-foreground-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-search-cancel-button]:hidden"
               />
-            )}
-          </div>
-
-          <div className="relative min-w-0 flex-1 md:max-w-sm md:ml-auto">
-            <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-foreground-subtle" />
-            <input
-              id="menu-ingredient-search"
-              type="search"
-              value={filters.ingredientQuery}
-              onChange={(event) => setIngredientQuery(event.target.value)}
-              placeholder="Search ingredients…"
-              className="w-full rounded-full border border-foreground-border bg-foreground-surface pl-10 pr-10 py-2 text-sm md:text-base text-foreground-soft placeholder:text-foreground-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-search-cancel-button]:hidden"
-            />
-            {trimmedQuery.length > 0 && (
               <button
                 type="button"
-                onClick={() => setIngredientQuery("")}
+                onClick={closeSearch}
                 className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-foreground-subtle hover:bg-foreground-surface-strong hover:text-foreground-soft"
-                aria-label="Clear ingredient search"
+                aria-label="Close search"
               >
-                <CloseIcon className="size-3.5" />
+                <CloseIcon className="size-4" />
               </button>
-            )}
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          {hasActiveFilters ? (
+            </div>
+          ) : (
             <>
-              {filters.mealTypes.map((mealType) => (
-                <ActiveFilterChip
-                  key={`meal-${mealType}`}
-                  label={MEAL_TYPE_LABELS[mealType]}
-                  icon={<MealTypeIcon mealType={mealType} className="size-3.5" />}
-                  onDismiss={() =>
-                    setMealTypes(filters.mealTypes.filter((value) => value !== mealType))
-                  }
+              <nav
+                aria-label="Courses"
+                className="flex min-w-0 flex-1 gap-1 overflow-x-auto pr-6 [scrollbar-width:none] [mask-image:linear-gradient(to_right,black_calc(100%-2rem),transparent)] sm:pr-0 sm:[mask-image:none]"
+              >
+                <CoursePill
+                  label="All"
+                  active={filters.mealTypes.length === 0}
+                  onClick={() => setMealType(null)}
                 />
-              ))}
-              {filters.categories.map((category) => (
-                <ActiveFilterChip
-                  key={`category-${category}`}
-                  label={formatRecipeLabel(category)}
-                  icon={<CategoryIcon category={category} className="size-3.5" />}
-                  onDismiss={() =>
-                    setCategories(filters.categories.filter((value) => value !== category))
-                  }
-                />
-              ))}
-              {trimmedQuery.length > 0 && (
-                <ActiveFilterChip
-                  label={`“${trimmedQuery}”`}
-                  icon={<SearchIcon className="size-3.5" />}
-                  onDismiss={() => setIngredientQuery("")}
-                />
-              )}
-              <span className="text-sm text-foreground-subtle ml-1" aria-live="polite">
-                {filteredRecipes.length}{" "}
-                {filteredRecipes.length === 1 ? "dish" : "dishes"}
-              </span>
+                {availableMealTypes.map((mealType) => (
+                  <CoursePill
+                    key={mealType}
+                    label={MEAL_TYPE_LABELS[mealType]}
+                    active={filters.mealTypes.includes(mealType)}
+                    onClick={() => setMealType(mealType)}
+                  />
+                ))}
+              </nav>
               <button
                 type="button"
-                onClick={clearFilters}
-                className="ml-auto inline-flex items-center gap-1.5 text-sm font-signika text-primary hover:text-primary-muted dark:text-foreground-soft"
+                onClick={openSearch}
+                className="shrink-0 rounded-full p-2.5 text-foreground-soft transition duration-150 hover:bg-foreground-surface-strong hover:text-primary"
+                aria-label="Search dishes or ingredients"
               >
-                <CloseIcon className="size-3.5" />
-                Clear
+                <SearchIcon className="size-5" />
               </button>
             </>
-          ) : (
-            <p className="text-sm text-foreground-subtle" aria-live="polite">
-              {filteredRecipes.length}{" "}
-              {filteredRecipes.length === 1 ? "dish" : "dishes"} on the board
-            </p>
+          )}
+          <button
+            type="button"
+            onClick={surpriseMe}
+            aria-label="Surprise me with a random dish"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-foreground-border bg-foreground-surface px-3 py-2 font-signika text-sm md:text-base text-foreground-soft transition duration-150 hover:border-primary/40 hover:text-primary sm:px-4"
+          >
+            <DiceIcon className="size-4" />
+            <span className="hidden sm:inline">Surprise me</span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3 px-1 text-sm text-foreground-subtle" aria-live="polite">
+          <span>
+            {filteredRecipes.length} {filteredRecipes.length === 1 ? "dish" : "dishes"}
+            {hasActiveFilters ? " match" : " on the menu"}
+          </span>
+          {hasActiveFilters && (
+            <button
+              type="button"
+              onClick={() => {
+                setFilters(EMPTY_MENU_FILTERS);
+                setSearchOpen(false);
+              }}
+              className="inline-flex items-center gap-1 font-signika text-primary hover:text-primary-muted dark:text-foreground-soft"
+            >
+              <CloseIcon className="size-3.5" />
+              Clear
+            </button>
           )}
         </div>
-      </div>
 
-      {filteredRecipes.length > 0 ? (
-        <section
-          aria-label="Recipes"
-          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8"
-        >
-          {filteredRecipes.map((recipe) => (
-            <ReactRecipeCard key={recipe.id} recipe={recipe} />
-          ))}
-        </section>
-      ) : (
-        <div className="flex flex-col items-center gap-3 py-14 text-center">
-          <SearchIcon className="size-8 text-foreground-subtle" />
-          <p className="text-lg md:text-xl text-foreground-subtle max-w-md">
-            Nothing matches those filters. Clear them and try again.
-          </p>
-        </div>
-      )}
+        {courses.length > 0 ? (
+          <div className="flex max-w-3xl flex-col gap-10 md:gap-12">
+            {courses.map(({ mealType, recipes: courseRecipes }) => (
+              <section key={mealType} aria-labelledby={`course-${mealType}`}>
+                <h2
+                  id={`course-${mealType}`}
+                  className="mb-2 flex items-center gap-4 font-sans text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-foreground-subtle"
+                >
+                  {MEAL_TYPE_LABELS[mealType]}
+                  <span aria-hidden className="h-px grow bg-foreground-border" />
+                </h2>
+                <ul className="flex flex-col">
+                  {courseRecipes.map((recipe) => (
+                    <MenuDishRow key={recipe.id} recipe={recipe} />
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        ) : (
+          <div className="flex max-w-3xl flex-col items-center gap-3 py-14 text-center">
+            <SearchIcon className="size-8 text-foreground-subtle" />
+            <p className="text-lg md:text-xl text-foreground-subtle max-w-md">
+              Nothing on the menu matches that. Try another course or ingredient.
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

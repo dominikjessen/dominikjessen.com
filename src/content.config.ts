@@ -36,8 +36,14 @@ const recipes = defineCollection({
       tags: z.array(z.string()).default([]),
       timeMinutes: z.number().int().positive().optional(),
       servings: z.number().int().positive().optional(),
-      heroImage: image(),
-      heroImageAlt: z.string(),
+      /** Shown as the "Chef's pick" at the top of the menu. First featured recipe wins. */
+      featured: z.boolean().default(false),
+      /** Italic one-liner under the dish on the menu. Falls back to the first few ingredients. */
+      menuLine: z.string().optional(),
+      /** Personal note, rendered as a "From Dominik" callout on the recipe page. */
+      note: z.string().optional(),
+      heroImage: image().optional(),
+      heroImageAlt: z.string().optional(),
       draft: z.boolean().default(false),
     }),
 });
