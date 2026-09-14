@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { ChatIcon, MealTypeIcon, TallyIcon } from '../../components/menu/MenuIcons';
+import { MealTypeIcon, TallyIcon, WhatsAppIcon } from '../../components/menu/MenuIcons';
 import IngredientsPanel from '../../components/menu/IngredientsPanel';
 import RecipeBadge from '../../components/menu/RecipeBadge';
 import { chefRequestUrl } from '../../components/menu/chefRequest';
@@ -167,15 +167,6 @@ const labels = [...new Set([...categories, ...tags])];
             </aside>
           )
         }
-        <a
-          href={chefRequestUrl(title)}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group mt-2 inline-flex w-fit items-center gap-2.5 rounded-full bg-primary px-5 py-3 font-signika text-lg font-semibold text-background transition duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
-          <ChatIcon className="size-5 transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
-          Have chef make you this
-        </a>
       </header>
     </div>
 
@@ -206,6 +197,30 @@ const labels = [...new Set([...categories, ...tags])];
         </div>
       </section>
     </div>
+
+    {/* Ask the chef once the recipe has done its job, rather than before anyone's read it. */}
+    <section
+      aria-label="Ask the chef"
+      class="flex flex-col items-center gap-5 rounded-3xl bg-primary-light px-6 py-8 text-center sm:flex-row sm:justify-between sm:px-10 sm:text-left"
+    >
+      <div class="flex flex-col gap-1">
+        <p class="font-hand text-3xl md:text-4xl text-primary dark:text-primary-muted">Fancy this one?</p>
+        <p class="text-base md:text-lg text-foreground-muted">
+          Send me a message and I'll put it on the menu next time.
+        </p>
+      </div>
+      <!-- WhatsApp green with dark text: white on this green is too low-contrast to read comfortably. -->
+      <a
+        href={chefRequestUrl(title)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-[#25D366] px-5 py-3 font-signika text-lg font-semibold text-[#0b2e17] transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#2ee072] hover:shadow-lg hover:shadow-[#25D366]/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
+      >
+        <WhatsAppIcon className="size-5 transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
+        Have chef make you this
+        <span class="sr-only"> (opens WhatsApp)</span>
+      </a>
+    </section>
 
     <nav
       aria-label="More from the menu"

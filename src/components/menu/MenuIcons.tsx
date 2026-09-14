@@ -382,13 +382,21 @@ export function PlusIcon({ className }: IconProps) {
   );
 }
 
-export function ChatIcon({ className }: IconProps) {
+/** WhatsApp-style chat bubble with a phone handset, for the "Have chef make you this" link. */
+export function WhatsAppIcon({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden {...strokeProps}>
-      <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12Z" />
-      <path d="M8.5 12h.01" />
-      <path d="M12 12h.01" />
-      <path d="M15.5 12h.01" />
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <path
+        d="M3.5 20.5l1.3-4.6A8.5 8.5 0 1 1 8.2 19.3Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.75}
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.1 7.9c.3-.5.8-.5 1.1-.2l1.1 1.6c.2.3.1.7-.2 1l-.6.4c.5 1.1 1.3 1.9 2.4 2.4l.4-.6c.2-.3.7-.4 1-.2l1.6 1.1c.3.2.3.7-.1 1.1-.6.6-1.5.9-2.3.6-2.2-.8-3.9-2.5-4.7-4.7-.3-.8 0-1.7.3-2.5Z"
+        fill="currentColor"
+      />
     </svg>
   );
 }
