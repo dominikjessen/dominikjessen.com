@@ -8,6 +8,8 @@
   --font-sans: "Inter Variable", system-ui, sans-serif;
   /* Handwritten accents (menu sign-off). Font is imported only on the pages that use it. */
   --font-hand: "Caveat Variable", "Bradley Hand", cursive;
+  /* Menu masthead name (Fraunces italic). Imported only on the menu page. */
+  --font-fraunces: "Fraunces Variable", Georgia, serif;
 
   /* Colors backed by CSS variables in Layout.astro */
   --color-background: hsl(var(--background));
@@ -28,6 +30,8 @@
   --color-accent_seagreen-hover: hsl(var(--accent_seagreen-hover));
   --color-surface-card: hsl(var(--surface-card));
   --color-brass: hsl(var(--brass));
+  --color-ink: hsl(var(--ink));
+  --color-ink-foreground: hsl(var(--ink-foreground));
   --color-rose: hsl(var(--rose));
   --color-mint: hsl(var(--mint));
   --color-blush: hsl(var(--blush));

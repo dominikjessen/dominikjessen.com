@@ -40,8 +40,8 @@ function CoursePill({
       onClick={onClick}
       className={`shrink-0 rounded-full px-4 py-2 font-signika text-sm md:text-base whitespace-nowrap transition duration-150 ease-out ${
         active
-          ? "bg-primary-soft text-primary ring-1 ring-inset ring-primary/20 dark:text-primary-muted"
-          : "text-foreground-soft hover:bg-foreground-surface-strong"
+          ? "bg-brass text-ink"
+          : "text-ink-foreground/75 hover:bg-ink-foreground/10 hover:text-ink-foreground"
       }`}
     >
       {label}
@@ -139,10 +139,11 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
         <ChefsChoice pool={surprisePool} onClose={closeChefsChoice} />
       )}
 
-      <div className="sticky top-4 z-20 flex items-center gap-2 rounded-full border border-foreground-border bg-background/95 p-1.5 backdrop-blur-md">
+      {/* Bottle-green bar: the page's colour anchor, with brass for the active course. */}
+      <div className="flex items-center gap-2 rounded-full bg-ink p-1.5 shadow-lg shadow-ink/25">
         {searchOpen ? (
           <div className="relative min-w-0 flex-1">
-            <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-foreground-subtle" />
+            <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-ink-foreground/60" />
             <input
               ref={searchRef}
               id="menu-search"
@@ -154,12 +155,12 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
               }}
               placeholder="Search dishes or ingredients…"
               aria-label="Search dishes or ingredients"
-              className="w-full rounded-full bg-foreground-surface py-2 pl-10 pr-10 text-sm md:text-base text-foreground-soft placeholder:text-foreground-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-search-cancel-button]:hidden"
+              className="w-full rounded-full bg-ink-foreground/10 py-2 pl-10 pr-10 text-sm md:text-base text-ink-foreground placeholder:text-ink-foreground/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass [&::-webkit-search-cancel-button]:hidden"
             />
             <button
               type="button"
               onClick={closeSearch}
-              className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-foreground-subtle hover:bg-foreground-surface-strong hover:text-foreground-soft"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-ink-foreground/60 hover:bg-ink-foreground/10 hover:text-ink-foreground"
               aria-label="Close search"
             >
               <CloseIcon className="size-4" />
@@ -188,7 +189,7 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
             <button
               type="button"
               onClick={openSearch}
-              className="shrink-0 rounded-full p-2.5 text-foreground-soft transition duration-150 hover:bg-foreground-surface-strong hover:text-primary"
+              className="shrink-0 rounded-full p-2.5 text-ink-foreground/75 transition duration-150 hover:bg-ink-foreground/10 hover:text-ink-foreground"
               aria-label="Search dishes or ingredients"
             >
               <SearchIcon className="size-5" />
@@ -199,7 +200,7 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
           type="button"
           onClick={() => setChoosing(true)}
           aria-label="Surprise me with a random dish"
-          className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-foreground-border bg-foreground-surface px-3 py-2 font-signika text-sm md:text-base text-foreground-soft transition duration-150 hover:border-primary/40 hover:text-primary sm:px-4"
+          className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-ink-foreground/10 px-3 py-2 font-signika text-sm md:text-base text-ink-foreground transition duration-150 hover:bg-brass hover:text-ink sm:px-4"
         >
           <DiceIcon className="size-4 transition-transform duration-300 ease-out group-hover:rotate-90" />
           <span className="hidden sm:inline">Surprise me</span>
