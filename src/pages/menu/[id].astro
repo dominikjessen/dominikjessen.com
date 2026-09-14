@@ -5,6 +5,7 @@ import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { ChatIcon, MealTypeIcon, TallyIcon } from '../../components/menu/MenuIcons';
+import IngredientsPanel from '../../components/menu/IngredientsPanel';
 import RecipeBadge from '../../components/menu/RecipeBadge';
 import { chefRequestUrl } from '../../components/menu/chefRequest';
 import { getMenuRecipes } from '../../components/menu/menuRecipes';
@@ -65,11 +66,10 @@ const {
   heroImageAlt,
 } = recipe.data;
 
-const details = [
-  timeMinutes !== undefined && `${timeMinutes} min`,
-  servings !== undefined && `${servings} ${servings === 1 ? 'serving' : 'servings'}`,
-  effort && RECIPE_EFFORT_LABELS[effort],
-].filter((detail): detail is string => Boolean(detail));
+// Time and servings live in the ingredients panel, where servings can be adjusted.
+const details = [effort && RECIPE_EFFORT_LABELS[effort]].filter(
+  (detail): detail is string => Boolean(detail)
+);
 
 // Categories and tags overlap (e.g. "vegetarian" in both) — show each label once.
 const labels = [...new Set([...categories, ...tags])];
@@ -181,26 +181,12 @@ const labels = [...new Set([...categories, ...tags])];
 
     <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,18rem)_1fr] gap-10 lg:gap-14 items-start">
       <section aria-labelledby="ingredients-heading">
-        <h2 id="ingredients-heading" class="text-2xl md:text-3xl text-primary mb-4">
-          Ingredients
-        </h2>
-        <ul class="flex flex-col gap-3">
-          {
-            ingredients.map((ingredient) => (
-              <li class="flex gap-3 text-base md:text-lg text-foreground-soft leading-snug border-b border-foreground-border pb-3 last:border-0">
-                <span class="grow">
-                  {ingredient.name}
-                  {ingredient.optional && (
-                    <span class="text-foreground-subtle"> (optional)</span>
-                  )}
-                </span>
-                {ingredient.amount && (
-                  <span class="shrink-0 text-foreground-muted tabular-nums">{ingredient.amount}</span>
-                )}
-              </li>
-            ))
-          }
-        </ul>
+        <IngredientsPanel
+          client:load
+          ingredients={ingredients}
+          servings={servings}
+          timeMinutes={timeMinutes}
+        />
         {
           pairsWith && (
             <p class="mt-6 flex items-center gap-2 text-base text-foreground-muted">
