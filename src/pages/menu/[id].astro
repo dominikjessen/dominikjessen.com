@@ -86,87 +86,98 @@ const labels = [...new Set([...categories, ...tags])];
       </a>
     </p>
 
-    {
-      heroImage && (
-        <div class="overflow-hidden rounded-3xl border border-foreground-border bg-primary-soft">
-          <Image
-            src={heroImage}
-            alt={heroImageAlt ?? ''}
-            width={1440}
-            height={900}
-            class="w-full aspect-[3/2] md:aspect-[5/2] object-cover"
-            loading="eager"
-            fetchpriority="high"
+    {/* Title block with a square photo: beside it on wide screens, stacked above it on smaller ones. */}
+    <div
+      class="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,28rem)]"
+    >
+      {/* Until a recipe has a photo, a faint placeholder of the same shape shows where it goes. */}
+      {
+        heroImage ? (
+          <div class="w-full max-w-md overflow-hidden rounded-3xl border border-foreground-border bg-primary-soft lg:order-last lg:max-w-none">
+            <Image
+              src={heroImage}
+              alt={heroImageAlt ?? ''}
+              width={960}
+              height={960}
+              class="aspect-square w-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+        ) : (
+          <div
+            aria-hidden="true"
+            class="aspect-square w-full max-w-md rounded-3xl border border-foreground-border bg-foreground-surface lg:order-last lg:max-w-none"
           />
-        </div>
-      )
-    }
+        )
+      }
 
-    <header class="flex flex-col gap-4 max-w-3xl">
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="px-3 py-1 text-sm rounded-full bg-foreground-surface text-foreground-soft">
-          {MEAL_TYPE_LABELS[mealType]}
-        </span>
-        {badges.map((badge) => <RecipeBadge badge={badge} />)}
+      <header class="flex flex-col gap-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="px-3 py-1 text-sm rounded-full bg-foreground-surface text-foreground-soft">
+            {MEAL_TYPE_LABELS[mealType]}
+          </span>
+          {badges.map((badge) => <RecipeBadge badge={badge} />)}
+          {
+            details.length > 0 && (
+              <span class="text-sm text-foreground-subtle">{details.join(' · ')}</span>
+            )
+          }
+          {
+            timesMade !== undefined && (
+              <span class="inline-flex items-center gap-1.5 text-sm text-foreground-subtle">
+                <TallyIcon className="size-4" />
+                Made {timesMade}+ times
+              </span>
+            )
+          }
+        </div>
+        <div class="flex flex-col gap-1">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h1>
+          {
+            marginNote && (
+              <p class="origin-left -rotate-2 font-hand text-2xl md:text-3xl text-primary dark:text-primary-muted">
+                {marginNote}
+              </p>
+            )
+          }
+        </div>
+        <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">{summary}</p>
         {
-          details.length > 0 && (
-            <span class="text-sm text-foreground-subtle">{details.join(' · ')}</span>
+          labels.length > 0 && (
+            <ul class="flex flex-wrap gap-2" aria-label="Categories and tags">
+              {labels.map((label) => (
+                <li class="px-3 py-1 text-sm rounded-full border border-foreground-border text-foreground-muted">
+                  {formatRecipeLabel(label)}
+                </li>
+              ))}
+            </ul>
           )
         }
         {
-          timesMade !== undefined && (
-            <span class="inline-flex items-center gap-1.5 text-sm text-foreground-subtle">
-              <TallyIcon className="size-4" />
-              Made {timesMade}+ times
-            </span>
+          note && (
+            <aside
+              aria-label="Note from Dominik"
+              class="mt-2 flex flex-col gap-1.5 rounded-2xl border border-primary/15 bg-primary-light px-5 py-4 md:px-6 md:py-5"
+            >
+              <span class="font-signika text-sm font-semibold text-primary dark:text-primary-muted">
+                From Dominik
+              </span>
+              <p class="text-base md:text-lg italic text-foreground-soft leading-relaxed">{note}</p>
+            </aside>
           )
         }
-      </div>
-      <div class="flex flex-col gap-1">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h1>
-        {
-          marginNote && (
-            <p class="origin-left -rotate-2 font-hand text-2xl md:text-3xl text-primary dark:text-primary-muted">
-              {marginNote}
-            </p>
-          )
-        }
-      </div>
-      <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">{summary}</p>
-      {
-        labels.length > 0 && (
-          <ul class="flex flex-wrap gap-2" aria-label="Categories and tags">
-            {labels.map((label) => (
-              <li class="px-3 py-1 text-sm rounded-full border border-foreground-border text-foreground-muted">
-                {formatRecipeLabel(label)}
-              </li>
-            ))}
-          </ul>
-        )
-      }
-      {
-        note && (
-          <aside
-            aria-label="Note from Dominik"
-            class="mt-2 flex flex-col gap-1.5 rounded-2xl border border-primary/15 bg-primary-light px-5 py-4 md:px-6 md:py-5"
-          >
-            <span class="font-signika text-sm font-semibold text-primary dark:text-primary-muted">
-              From Dominik
-            </span>
-            <p class="text-base md:text-lg italic text-foreground-soft leading-relaxed">{note}</p>
-          </aside>
-        )
-      }
-      <a
-        href={chefRequestUrl(title)}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group mt-2 inline-flex w-fit items-center gap-2.5 rounded-full bg-primary px-5 py-3 font-signika text-lg font-semibold text-background transition duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      >
-        <ChatIcon className="size-5 transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
-        Have chef make you this
-      </a>
-    </header>
+        <a
+          href={chefRequestUrl(title)}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group mt-2 inline-flex w-fit items-center gap-2.5 rounded-full bg-primary px-5 py-3 font-signika text-lg font-semibold text-background transition duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          <ChatIcon className="size-5 transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
+          Have chef make you this
+        </a>
+      </header>
+    </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,18rem)_1fr] gap-10 lg:gap-14 items-start">
       <section aria-labelledby="ingredients-heading">
