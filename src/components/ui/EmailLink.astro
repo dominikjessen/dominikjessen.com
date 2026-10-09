@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export interface Props extends HTMLAttributes<'a'> {}
+
+// The address is base64 in the page and only becomes a mailto: in the browser, to keep scrapers off it.
+// Falls back to the footer until the script runs.
+const { class: className, ...rest } = Astro.props as Props;
+---
+
+<a href="#footer" data-email class={className} {...rest}><slot /></a>
+
+<script>
+  const emailBase64 = 'ZG9taW5pa2plc3NlbmNvZGVzQGdtYWlsLmNvbQ==';
+  const mailto = `mailto:${atob(emailBase64)}?subject=👋 Just Saying Hi&body=You're doing great, keep it up!`;
+  document.querySelectorAll('a[data-email]').forEach((link) => link.setAttribute('href', mailto));
+</script>

@@ -1,18 +1,54 @@
 ---
-import AchievementCards from '../components/AchievementCards';
+import EmailLink from '../components/ui/EmailLink.astro';
 ---
 
-<section id="intro" class="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-end items-center pt-12 mt-24">
-  <div class="flex flex-col gap-6">
-    <span class="text-7xl animate-wave origin-[70%_70%] w-fit intersect-target">👋🏻</span>
-    <h1 class="font-bold text-7xl mb-4 text-primary intersect-target">Hi, I'm Dominik.</h1>
-    <p class="text-foreground_lighter text-2xl leading-relaxed">
-      I'm a <span class="text-primary font-signika">product engineer</span>. I used to build roadmaps and led 10+ person teams as a PM, then went back to building so I could build and ship. Now I do both: <span class="text-primary font-signika">turn real problems into software people enjoy using.</span>
+<section
+  id="intro"
+  class="grid grid-cols-1 gap-12 pt-10 pb-11 md:pt-[72px] md:pb-[104px] xl:grid-cols-[minmax(0,540px)_550px] xl:justify-between"
+>
+  <div class="flex flex-col max-w-[640px]">
+    <div class="flex items-start gap-[14px]">
+      <span class="text-[44px] md:text-[56px] leading-none animate-wave origin-[70%_70%]" role="img" aria-label="Waving hand">👋🏻</span>
+      <span class="mt-[10px] font-hand text-[21px] md:text-[25px] leading-tight text-pine -rotate-[4deg]">← yes, I wave at everyone</span>
+    </div>
+
+    <h1 class="mt-3 font-display font-normal text-[58px] md:text-[96px] leading-[0.98] tracking-[-0.02em] text-charcoal xl:whitespace-nowrap">
+      Hi, I'm <span class="italic">Dominik.</span>
+    </h1>
+
+    <p class="mt-[30px] text-[17px] leading-[1.65] md:text-[19px] md:leading-[1.72] text-body">
+      I'm a <strong class="font-semibold text-charcoal">product engineer</strong>. I used to build roadmaps and led 10+ person teams as a PM, then went
+      back to building so I could build and ship. Now I do both: <strong
+        class="font-semibold text-charcoal bg-parchment px-1 py-px rounded-[3px] box-decoration-clone"
+        >turn real problems into software people enjoy using.</strong
+      >
     </p>
-    <p class="text-foreground_lighter text-2xl leading-relaxed">
-      Currently, I'm a senior product engineer at <a href="https://n8n.io/" target="_blank" class="text-primary font-signika">n8n</a> helping people
-      automate all their workflows with ease.
+    <p class="mt-4 text-[17px] leading-[1.65] md:text-[19px] md:leading-[1.72] text-body">
+      Currently, I'm a senior product engineer at <a
+        href="https://n8n.io/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-semibold text-charcoal rounded-sm focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2">n8n</a
+      > helping people automate all their workflows with ease.
     </p>
+
+    <div class="mt-8 flex flex-wrap items-stretch gap-[14px]">
+      <EmailLink
+        class="inline-flex items-center gap-2.5 bg-pine text-white text-base leading-5 font-semibold px-5 py-[13px] rounded-[10px] focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2"
+      >
+        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4L10 6z" fill="currentColor"></path></svg>
+        Say hello
+      </EmailLink>
+      <a
+        href="/CV_DominikJessen.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center font-mono text-[13px] text-charcoal bg-white border border-charcoal/22 px-4 rounded-[10px] focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2"
+        >cv.pdf</a
+      >
+    </div>
   </div>
-  <AchievementCards client:load className="flex flex-col mx-auto"  />
+
+  <!-- CAREER GRAPH SLOT: CareerGraph.astro (PR 5) mounts here, with its header row. Centred while the hero is stacked. -->
+  <div id="career-graph-slot" class="w-full max-w-[550px] mx-auto xl:mx-0 empty:hidden"></div>
 </section>

@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import EmailLink from '../ui/EmailLink.astro';
 ---
 
 <footer id="footer" class="w-full py-16 flex flex-col gap-12 items-center bg-primary-light">
@@ -13,14 +14,8 @@ import { Image } from 'astro:assets';
     </div>
     <div class="flex flex-col gap-4 mb-auto">
       <h3 class="font-bold text-primary mb-2">Say Hello</h3>
-      <a id="email" href="">Email</a>
+      <EmailLink>Email</EmailLink>
     </div>
   </div>
   <div class="text-sm text-foreground-subtle">©️ 2026 Dominik Jessen. All rights reserved.</div>
 </footer>
-
-<script>
-  const emailBase64 = 'ZG9taW5pa2plc3NlbmNvZGVzQGdtYWlsLmNvbQ==';
-  const emailLink = document.getElementById('email');
-  emailLink?.setAttribute('href', `mailto:${atob(emailBase64)}?subject=👋 Just Saying Hi&body=You're doing great, keep it up!`);
-</script>

@@ -4,15 +4,11 @@ import Intro from '../sections/intro.astro';
 import Work from '../sections/work.astro';
 import Projects from '../sections/projects.astro';
 import CurrentlyReact from '../sections/currentlyReact';
-import Blob from '../components/Blob';
 ---
 
 <Layout title="Dominik Jessen - Product Engineer">
   <div class="flex flex-col gap-24">
-    <div class="bg-contain">
-      <Blob client:load />
-      <Intro />
-    </div>
+    <Intro />
     <Work />
     <Projects />
     <CurrentlyReact client:load />

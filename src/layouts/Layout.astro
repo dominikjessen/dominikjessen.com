@@ -35,8 +35,9 @@ const { title, showNav = true, paper = false } = Astro.props;
     <main
       class:list={[
         'relative z-0 mx-auto pb-24',
-        showNav ? 'pt-8' : 'pt-12 md:pt-16',
         paper ? 'w-5/6' : 'max-w-[1280px] px-5 md:px-10 xl:px-[72px]',
+        // Non-paper pages clear the fixed header bar (14px + 54px mobile, 20px + 56px from md).
+        !showNav ? 'pt-12 md:pt-16' : paper ? 'pt-8' : 'pt-[68px] md:pt-[76px]',
       ]}
     >
       <slot />
