@@ -1,5 +1,6 @@
 ---
 import EmailLink from '../components/ui/EmailLink.astro';
+import CareerGraph from '../components/graph/CareerGraph.astro';
 ---
 
 <section
@@ -49,6 +50,8 @@ import EmailLink from '../components/ui/EmailLink.astro';
     </div>
   </div>
 
-  <!-- CAREER GRAPH SLOT: CareerGraph.astro (PR 5) mounts here, with its header row. Centred while the hero is stacked. -->
-  <div id="career-graph-slot" class="w-full max-w-[550px] mx-auto xl:mx-0 empty:hidden"></div>
+  <!-- Career graph: centred while the hero is stacked, right column at xl. Two-lane layout from md; mobile layout follows. -->
+  <div class="hidden md:flex justify-center xl:justify-end">
+    <CareerGraph />
+  </div>
 </section>
