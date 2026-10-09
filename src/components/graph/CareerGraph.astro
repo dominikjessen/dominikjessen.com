@@ -45,6 +45,16 @@ const wires = placed.slice(1).map((step, i) => {
 
 const current = placed.find((step) => step.current) ?? placed[placed.length - 1];
 
+// Where Dominik's cursor wanders, relative to the current step's top-left. The first spot is where it starts.
+const DOMINIK_SPOTS = [
+  [247, 40],
+  [168, 30],
+  [214, 84],
+  [96, -20],
+  [232, 14],
+];
+const spots = DOMINIK_SPOTS.map(([dx, dy]) => [current.x + dx, current.y + dy]);
+
 const stepClass =
   'absolute flex items-center gap-3 px-3 rounded-xl border shadow-[0_6px_16px_rgb(26_26_23/0.06)] transition-[transform,box-shadow] duration-150';
 const linkClass =
@@ -60,7 +70,7 @@ const linkClass =
     </span>
   </div>
 
-  <div class="career-zone relative" style={`width:${GRAPH_W}px;height:${height}px`}>
+  <div class="career-zone relative" style={`width:${GRAPH_W}px;height:${height}px`} data-cursor-zone data-spots={JSON.stringify(spots)}>
     <div
       class="absolute top-0 h-full rounded-[14px] bg-sage border border-dashed border-[rgb(47_74_58/0.28)]"
       style="left:-10px;width:290px"
@@ -135,10 +145,63 @@ const linkClass =
       }
     </ol>
 
-    <Cursor name="Dominik" class="absolute left-0 top-0 z-10" style={`transform:translate3d(${current.x + 247}px, ${current.y + 40}px, 0)`} />
+    <Cursor
+      name="Dominik"
+      class="cursor-dominik absolute left-0 top-0 z-10"
+      style={`transform:translate3d(${spots[0][0]}px, ${spots[0][1]}px, 0)`}
+      data-cursor="dominik"
+    />
+    <Cursor name="you" color="visitor" class="cursor-you absolute left-0 top-0 z-20" data-cursor="you" />
   </div>
 
   <p class="pl-[144px] font-mono text-xs leading-normal text-muted">
     ↳ output: <span class="text-charcoal">turn real problems into software people enjoy using</span>
   </p>
 </div>
+
+<style>
+  /* Mouse and trackpad only: the visitor's pointer becomes the "you" cursor inside the graph. */
+  @media (hover: hover) and (pointer: fine) {
+    .career-zone,
+    .career-zone :global(*) {
+      cursor: none !important;
+    }
+  }
+
+  .career-zone :global(.cursor-you) {
+    opacity: 0;
+    transition: opacity 120ms;
+  }
+
+  .career-zone :global(.cursor-you.is-on) {
+    opacity: 1;
+  }
+
+  .career-zone :global(.cursor-dominik) {
+    transition: transform 1.4s cubic-bezier(0.45, 0.05, 0.25, 1);
+  }
+
+  .career-zone :global(.cursor-dominik.is-clicking svg) {
+    animation: cursor-tap 320ms ease;
+  }
+
+  @keyframes cursor-tap {
+    50% {
+      transform: scale(0.82);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .career-zone :global(.cursor-dominik) {
+      transition: none;
+    }
+
+    .career-zone :global(.cursor-dominik.is-clicking svg) {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import './cursors';
+</script>
