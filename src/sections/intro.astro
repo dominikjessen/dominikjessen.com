@@ -50,8 +50,6 @@ import CareerGraph from '../components/graph/CareerGraph.astro';
     </div>
   </div>
 
-  <!-- Career graph: centred while the hero is stacked, right column at xl. Two-lane layout from md; mobile layout follows. -->
-  <div class="hidden md:flex justify-center xl:justify-end">
-    <CareerGraph />
-  </div>
+  <!-- Career graph: vertical below md, two lanes from md (centred while the hero is stacked, right column at xl). -->
+  <CareerGraph className="xl:w-[550px] xl:justify-self-end" />
 </section>

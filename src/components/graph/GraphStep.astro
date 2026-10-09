@@ -1,0 +1,41 @@
+---
+import type { CareerStep } from '../../types/data';
+import CompanyLogo from '../CompanyLogo.astro';
+
+export interface Props {
+  step: CareerStep & { href?: string };
+  logoSize: number;
+  labelClass: string; // label colour on non-current steps
+  class?: string; // fill, border, size
+  style?: string;
+}
+
+// One step of the career graph: logo, LABEL · years, company. Links to its Work card when it has one.
+const { step, logoSize, labelClass, class: className, style } = Astro.props as Props;
+const Tag = step.href ? 'a' : 'div';
+---
+
+<Tag
+  href={step.href}
+  class:list={[
+    'flex items-center gap-3 px-3 rounded-xl border transition-[transform,box-shadow] duration-150',
+    step.href &&
+      'hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2',
+    step.current
+      ? 'bg-pine border-transparent shadow-[0_10px_22px_rgb(47_74_58/0.25)]'
+      : [
+          'shadow-[0_6px_16px_rgb(26_26_23/0.06)]',
+          step.href && 'hover:shadow-[0_10px_22px_rgb(26_26_23/0.10)] focus-visible:shadow-[0_10px_22px_rgb(26_26_23/0.10)]',
+        ],
+    className,
+  ]}
+  style={style}
+>
+  <CompanyLogo logo={step.logo} size={logoSize} className="rounded-[9px]" eager />
+  <span class="flex flex-col gap-[3px] min-w-0">
+    <span class:list={['font-mono text-[9.5px] uppercase tracking-[0.02em] truncate', step.current ? 'text-sage' : labelClass]}>
+      {step.label} · {step.years}
+    </span>
+    <span class:list={['text-base font-semibold truncate', step.current ? 'text-white' : 'text-charcoal']}>{step.company}</span>
+  </span>
+</Tag>
