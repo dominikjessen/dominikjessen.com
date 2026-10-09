@@ -1,0 +1,51 @@
+[
+  {
+    "id": "mannheim",
+    "company": "Uni Mannheim",
+    "label": "BUSINESS INFORMATICS",
+    "years": "2015–19",
+    "lane": "both",
+    "logo": "mannheim.webp"
+  },
+  {
+    "id": "sovanta",
+    "company": "Sovanta",
+    "label": "SOFTWARE ENGINEER",
+    "years": "2016",
+    "lane": "engineering",
+    "logo": "sovanta.webp"
+  },
+  {
+    "id": "unilife",
+    "company": "Uni-Life",
+    "label": "PRODUCT & GROWTH",
+    "years": "2019–21",
+    "lane": "product",
+    "logo": "unilife.webp"
+  },
+  {
+    "id": "tractable",
+    "company": "Tractable",
+    "label": "PRODUCT MANAGER",
+    "years": "2022–23",
+    "lane": "product",
+    "logo": "tractable.webp"
+  },
+  {
+    "id": "vesper",
+    "company": "Vesper",
+    "label": "SR SOFTWARE ENGINEER",
+    "years": "2024–26",
+    "lane": "engineering",
+    "logo": "vesper.svg"
+  },
+  {
+    "id": "n8n",
+    "company": "n8n",
+    "label": "SR PRODUCT ENGINEER",
+    "years": "NOW",
+    "lane": "both",
+    "logo": "n8n.png",
+    "current": true
+  }
+]

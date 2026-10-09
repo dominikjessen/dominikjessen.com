@@ -38,7 +38,7 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 
 - **Patterns**
   - **Static-first**: Astro components by default; React only where interactivity is required (`client:load` in `index.astro` for `CurrentlyReact` and `RevealCanvas`).
-  - **Data co-located with type**: JSON in `src/data/`, TypeScript types in `src/types/data.d.ts` (`Project`, `CurrentlyItem`). Sections and components import JSON and types directly.
+  - **Data co-located with type**: JSON in `src/data/`, TypeScript types in `src/types/data.d.ts` (`Project`, `CareerStep`, `WorkEntry`, `Run`, `CurrentlyItem`). Sections and components import JSON and types directly.
   - **SVG handling**: Astro `Icon.astro` uses `import.meta.glob` with `?raw` and `node-html-parser` to inline SVGs (e.g. in ProjectCard). React components use emojis or other assets as needed (e.g. Currently cards use per-item emoji).
   - **Layout**: Single `Layout.astro` wraps all pages; provides global CSS variables (light/dark), fonts, Tailwind, Nav, Footer, and Analytics. Page-level styles are scoped in `<style>` or use Tailwind.
 
@@ -47,11 +47,11 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
   - `src/layouts/` — `Layout.astro` (shell, theme, Nav, Footer).
   - `src/sections/` — Full-width sections composed by pages (e.g. `intro.astro`, `work.astro`, `projects.astro`, `currentlyReact.tsx`).
   - `src/components/` — Reusable pieces: `ProjectCard.astro`, `WorkCard.astro`, `Icon.astro`, `RevealCanvas.tsx`; `structure/Nav.astro`, `Footer.astro`; `ui/ThemeToggle.astro`, `ReactCurrentlyCard.tsx`.
-  - `src/data/` — `projects.json`, `work.json`, `currently.json`, `revealContent.json`.
+  - `src/data/` — `career.json` (career graph steps), `projects.json`, `work.json`, `currently.json`, `achievements.json` (legacy), `revealContent.json`.
   - `src/types/` — `data.d.ts` (shared types for data).
   - `src/styles/` — `tailwind.css` (Tailwind entry, `@theme`, keyframes).
   - `src/hooks/` — React-only hooks (none currently; add as needed for client logic).
-  - `src/images/` — SVG assets used by Icon.astro (e.g. logos for project cards).
+  - `src/images/` — SVG assets used by Icon.astro (e.g. logos for project cards); `src/images/companies/` holds the company logos referenced by `logo` in `career.json` and `work.json`.
   - `public/` — Favicon, PDFs, static assets served as-is.
 
 - **Boundaries to preserve**
@@ -117,9 +117,10 @@ Use this playbook when adding a feature end-to-end. There are no DB migrations o
    - No env vars are required for the current feature set. If you add something that needs env (e.g. a future API key), add a `.env.example` and document in README; use `import.meta.env` in Astro/Vite as appropriate.
 
 **Concrete paths**
-- New project: edit `src/data/projects.json` and ensure `Project` in `src/types/data.d.ts` matches; `ProjectCard.astro` and `src/sections/projects.astro` already consume it.
+- New project: edit `src/data/projects.json` and ensure `Project` in `src/types/data.d.ts` matches (`input`/`output` pills, `tagline`, optional `stat`, `tint` of `parchment` | `stone` | `sage`); `ProjectCard.astro` and `src/sections/projects.astro` already consume it. `bgColor` is legacy and only used by the old `ProjectCard`.
 - New “Currently” category or item: edit `src/data/currently.json`; ensure each item has `title`, `icon`, `iconType`, and optional `by`/`url`; `CurrentlyItem` and `currentlyReact.tsx` / `ReactCurrentlyCard.tsx` use it.
-- New work entry: edit `src/data/work.json`; each entry has `company`, `role`, `period`, `highlight`, and `url`; `WorkEntry` and `WorkCard.astro` / `src/sections/work.astro` use it.
+- New work entry: edit `src/data/work.json`; each entry has `id`, `company`, `role`, `period`, `lane`, `logo`, `highlight`, `url` and `runs` (achievements: `metric`, `detail`, `icon`, rendered with `RunIcon.astro`; empty means "first runs in progress"). `id` matches the step in `src/data/career.json` and is the `#work-<id>` anchor the career graph links to. `WorkEntry` and `WorkCard.astro` / `src/sections/work.astro` use it.
+- New career step: edit `src/data/career.json` (`CareerStep`); put the logo in `src/images/companies/`. The graph derives all positions and the "running since" year from this file.
 - New page: create `src/pages/<route>.astro`, use `<Layout title="...">`, add content; optionally add a link in `src/components/structure/Nav.astro`.
 
 - **Blog / thoughts (planned)**: The route `/thoughts` exists (`src/pages/thoughts.astro`) as a placeholder. When adding real blog or thought posts, use Astro Content Collections: add `src/content/thoughts/` (or `src/content/blog/`) with a collection schema, write posts in Markdown or MDX, then update `src/pages/thoughts.astro` (or a dedicated `src/pages/thoughts/[...slug].astro`) to fetch and render the collection. Add a type in `src/types/` if needed and link the thoughts index from Nav/Footer.

@@ -1,11 +1,32 @@
+export type Lane = "engineering" | "product" | "both";
+export type RunIcon = "building" | "shield" | "gauge" | "layers" | "coins" | "stack" | "chart" | "route";
+
+export type CareerStep = {
+  id: string; // "mannheim", "sovanta", … also used as the Work card anchor (#work-<id>)
+  company: string; // "Uni Mannheim"
+  label: string; // "BUSINESS INFORMATICS", shown uppercase in mono
+  years: string; // "2015–19", "2016", "NOW"
+  lane: Lane;
+  logo: string; // filename in src/images/companies/
+  current?: boolean; // the pine step with the "Dominik" cursor
+};
+
+export type Run = { metric: string; detail: string; icon: RunIcon };
+
 export type Project = {
   name: string;
-  description: string;
+  input: string; // IN pill
+  output: string; // OUT pill
+  tagline: string; // short copy shown on the card
+  description: string; // existing long copy, kept for later project pages
+  stat?: string; // optional pill, e.g. "150 monthly visits"
   url?: string;
   github?: string;
   imgSrc?: string;
   imgAlt?: string;
-  bgColor: string;
+  tint: "parchment" | "stone" | "sage"; // screenshot background; replaces bgColor
+  /** Legacy ProjectCard background; removed with the new Side projects section. */
+  bgColor?: string;
   techStack?: string[];
 };
 
@@ -42,9 +63,13 @@ export type Achievement = {
 };
 
 export type WorkEntry = {
+  id: string; // matches CareerStep.id
   company: string;
   role: string;
-  period: string;
+  period: string; // "2024 → 2026", "2026 → now"
+  lane: "engineering" | "product";
+  logo: string;
   highlight: string;
   url: string;
+  runs: Run[]; // empty = "first runs in progress"
 };
