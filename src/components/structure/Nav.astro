@@ -2,95 +2,74 @@
 
 ---
 
-<header class="fixed z-50 w-full">
-  <nav id="nav" class="relative mx-auto px-4 md:px-6 py-2 rounded-full w-2/5 md:w-4/6 xl:w-2/5 flex items-center justify-center md:justify-between mt-4">
-    <button
-      type="button"
-      id="nav-trigger"
-      class="md:hidden flex items-center gap-2 py-2 px-4 rounded-full text-primary dark:text-foreground text-base font-signika hover:bg-foreground-surface"
-      aria-controls="nav-dropdown"
-      aria-label="Open menu"
+<header class="fixed z-50 w-full pointer-events-none">
+  <div class="max-w-[1280px] mx-auto px-4 pt-[14px] md:px-10 md:pt-5 xl:px-[72px]">
+    <nav
+      id="nav"
+      class="relative pointer-events-auto flex items-center justify-between gap-4 bg-white border border-charcoal/14 rounded-xl py-1 pr-1 pl-4 md:pr-2 md:pl-5 shadow-[0_6px_18px_rgb(26_26_23/0.05)]"
     >
-      <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden>
-        <path d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-      <span>Menu</span>
-    </button>
-    <ul
-      id="nav-links-desktop"
-      class="hidden md:flex flex-1 gap-2 py-1 md:py-2 md:gap-3 lg:gap-5 xl:gap-6 justify-between items-center text-primary dark:text-foreground text-base md:text-lg font-signika"
-    >
-      <li>
-        <a href="/" data-ref="intro" class="px-5 md:px-6 py-2 md:py-3 rounded-full cursor-pointer hover:bg-foreground-surface" aria-label="Home">👋🏻</a>
-      </li>
-      <li>
-        <a href="/#work" data-ref="work" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground-surface">Work</a>
-      </li>
-      <li>
-        <a href="/#projects" data-ref="projects" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground-surface">Projects</a>
-      </li>
-      <li>
-        <a href="/#currently" data-ref="currently" class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground-surface">About</a>
-      </li>
-      <li>
-        <a
-          id="cv-nav"
-          href="/CV_DominikJessen.pdf"
-          data-ref="cv"
-          target="_blank"
-          class="px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-foreground-surface">CV</a
-        >
-      </li>
-    </ul>
-    <div
-      id="nav-dropdown"
-      class="nav-dropdown hidden absolute top-full left-0 right-0 mt-2 py-2 rounded-2xl border border-foreground-border shadow-lg md:hidden"
-      aria-hidden="true"
-    >
-      <ul class="flex flex-col text-primary dark:text-foreground text-base font-signika">
+      <a href="/" data-ref="intro" class="flex items-center gap-3 rounded-md text-charcoal focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2">
+        <span class="font-display text-[21px] md:text-2xl leading-none">Dominik Jessen</span>
+        <span class="hidden md:inline font-mono text-[11px] leading-none text-muted bg-chip rounded-md px-2 py-1">~/home</span>
+      </a>
+      <button
+        type="button"
+        id="nav-trigger"
+        class="md:hidden flex items-center justify-center size-11 rounded-lg bg-chip text-charcoal focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2"
+        aria-controls="nav-dropdown"
+        aria-label="Open menu"
+      >
+        <svg class="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M3.5 6h13M3.5 10h13M3.5 14h8" />
+        </svg>
+      </button>
+      <ul id="nav-links-desktop" class="hidden md:flex items-center gap-1 font-mono text-[13px] text-charcoal">
+        <li><a href="/#projects" data-ref="projects" class="nav-link block px-[14px] py-[13px] rounded-lg">projects</a></li>
+        <li><a href="/#work" data-ref="work" class="nav-link block px-[14px] py-[13px] rounded-lg">work</a></li>
+        <li><a href="/#currently" data-ref="currently" class="nav-link block px-[14px] py-[13px] rounded-lg">about</a></li>
         <li>
-          <a href="/" data-ref="intro" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface" aria-label="Home">👋🏻 Home</a>
-        </li>
-        <li>
-          <a href="/#work" data-ref="work" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface">Work</a>
-        </li>
-        <li>
-          <a href="/#projects" data-ref="projects" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface">Projects</a>
-        </li>
-        <li>
-          <a href="/#currently" data-ref="currently" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface">About</a>
-        </li>
-        <li>
-          <a href="/CV_DominikJessen.pdf" data-ref="cv" target="_blank" class="nav-dropdown-link block px-5 py-3 rounded-lg hover:bg-foreground-surface">CV</a>
+          <a
+            id="cv-nav"
+            href="/CV_DominikJessen.pdf"
+            data-ref="cv"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nav-link block px-[14px] py-[13px] rounded-lg">cv</a
+          >
         </li>
       </ul>
-    </div>
-  </nav>
+      <div
+        id="nav-dropdown"
+        class="hidden md:hidden absolute top-full left-0 right-0 mt-2 p-1 bg-white border border-charcoal/14 rounded-xl shadow-[0_6px_18px_rgb(26_26_23/0.05)]"
+        aria-hidden="true"
+      >
+        <ul class="flex flex-col font-mono text-sm text-charcoal">
+          <li><a href="/#projects" data-ref="projects" class="nav-link block px-4 py-3 rounded-lg">projects</a></li>
+          <li><a href="/#work" data-ref="work" class="nav-link block px-4 py-3 rounded-lg">work</a></li>
+          <li><a href="/#currently" data-ref="currently" class="nav-link block px-4 py-3 rounded-lg">about</a></li>
+          <li>
+            <a href="/CV_DominikJessen.pdf" data-ref="cv" target="_blank" rel="noopener noreferrer" class="nav-link block px-4 py-3 rounded-lg">cv</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </header>
 
 <style>
-  .navitem-active {
-    background-color: hsl(var(--foreground-surface));
+  .nav-link:hover,
+  .nav-link.navitem-active {
+    background-color: var(--chip);
   }
 
-  .nav-dropdown {
-    background-color: hsl(var(--header-background));
-  }
-
-  .nav-scrolled {
-    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-
-    background-color: hsl(var(--header-background));
-    border-width: 1px;
-    border-color: hsl(var(--foreground-border));
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  .nav-link:focus-visible {
+    outline: 2px solid var(--pine);
+    outline-offset: 2px;
   }
 </style>
 
 <script>
   const nav = document.getElementById('nav');
-  const navRect = nav?.getBoundingClientRect();
   const navDropdown = document.getElementById('nav-dropdown');
   const navTrigger = document.getElementById('nav-trigger');
 
@@ -122,44 +101,6 @@
   const highlightIO = new IntersectionObserver(highlightCallback, { threshold: 0.25 });
   sections.forEach((section) => highlightIO.observe(section));
 
-  //////////////////
-  // Nav scrolled //
-  //////////////////
-  const canvasVisible = window.matchMedia('(min-width: 1024px)');
-  const scrollTargets = canvasVisible.matches
-    ? [...document.querySelectorAll('.intersect-target')]
-    : [...document.querySelectorAll('.intersect-target:not(#revealCanvasWrapper)')];
-
-  if (nav && navRect && scrollTargets.length) {
-    const intersectRatios = new Map<string, number>();
-
-    const scrollCallback: IntersectionObserverCallback = (entries, _observer) => {
-      entries.forEach((entry) => {
-        intersectRatios.set(entry.target.nodeName, entry.intersectionRatio);
-
-        const itemsOverlapping = entry.target.getBoundingClientRect().y <= navRect.bottom;
-        if (itemsOverlapping) {
-          nav.classList.add('nav-scrolled');
-        }
-      });
-
-      let intersectSum = 0;
-      intersectRatios.forEach((value) => {
-        intersectSum += value;
-      });
-
-      if (intersectSum === scrollTargets.length) {
-        nav.classList.remove('nav-scrolled');
-      }
-    };
-
-    const scrollIO = new IntersectionObserver(scrollCallback, {
-      rootMargin: `-${navRect.bottom}px 0px 0px 0px`,
-      threshold: 1
-    });
-    scrollTargets.forEach((target) => scrollIO.observe(target));
-  }
-
   //////////////////////
   // Nav click scroll //
   //////////////////////
@@ -176,10 +117,11 @@
       return;
     }
 
-    e.preventDefault();
     const scrollTarget = document.getElementById(targetId);
 
+    // Off the homepage the section isn't here, so let the link navigate to it.
     if (!scrollTarget || !nav) return;
+    e.preventDefault();
 
     if (targetId === 'intro') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
