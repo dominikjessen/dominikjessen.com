@@ -1,0 +1,311 @@
+---
+import '@fontsource-variable/caveat';
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { MealTypeIcon, TallyIcon, WhatsAppIcon } from '../../components/menu/MenuIcons';
+import IngredientsPanel from '../../components/menu/IngredientsPanel';
+import RecipeBadge from '../../components/menu/RecipeBadge';
+import { chefRequestUrl } from '../../components/menu/chefRequest';
+import { getMenuRecipes } from '../../components/menu/menuRecipes';
+import {
+  MEAL_TYPE_LABELS,
+  RECIPE_EFFORT_LABELS,
+  formatRecipeLabel,
+  type MealType,
+} from '../../types/recipes';
+
+type NextDish = {
+  id: string;
+  title: string;
+  mealType: MealType;
+};
+
+export async function getStaticPaths() {
+  const recipes = await getMenuRecipes();
+  return recipes.map((recipe, index) => {
+    // Wrap around so the last dish points back to the first.
+    const next = recipes[(index + 1) % recipes.length];
+    return {
+      params: { id: recipe.id },
+      props: {
+        recipe,
+        next:
+          next.id === recipe.id
+            ? undefined
+            : { id: next.id, title: next.data.title, mealType: next.data.mealType },
+      },
+    };
+  });
+}
+
+interface Props {
+  recipe: CollectionEntry<'recipes'>;
+  next?: NextDish;
+}
+
+const { recipe, next } = Astro.props;
+const { Content } = await render(recipe);
+const {
+  title,
+  summary,
+  mealType,
+  categories,
+  ingredients,
+  tags,
+  timeMinutes,
+  servings,
+  note,
+  badges,
+  marginNote,
+  effort,
+  pairsWith,
+  timesMade,
+  heroImage,
+  heroImageAlt,
+} = recipe.data;
+
+// Time and servings live in the ingredients panel, where servings can be adjusted.
+const details = [effort && RECIPE_EFFORT_LABELS[effort]].filter(
+  (detail): detail is string => Boolean(detail)
+);
+
+// Categories and tags overlap (e.g. "vegetarian" in both) — show each label once.
+const labels = [...new Set([...categories, ...tags])];
+---
+
+<Layout title={`${title} - Chez Dom`} showNav={false} paper>
+  <article class="flex flex-col gap-10 md:gap-14">
+    <p>
+      <a
+        href="/menu"
+        class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+      >
+        ← Back to menu
+      </a>
+    </p>
+
+    {/* Title block with a square photo: beside it on wide screens, stacked above it on smaller ones. */}
+    <div
+      class="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,28rem)]"
+    >
+      {/* Until a recipe has a photo, a faint placeholder of the same shape shows where it goes. */}
+      {
+        heroImage ? (
+          <div class="w-full max-w-md overflow-hidden rounded-3xl border border-foreground-border bg-primary-soft lg:order-last lg:max-w-none">
+            <Image
+              src={heroImage}
+              alt={heroImageAlt ?? ''}
+              width={960}
+              height={960}
+              class="aspect-square w-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+        ) : (
+          <div
+            aria-hidden="true"
+            class="aspect-square w-full max-w-md rounded-3xl border border-foreground-border bg-foreground-surface lg:order-last lg:max-w-none"
+          />
+        )
+      }
+
+      <header class="flex flex-col gap-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="px-3 py-1 text-sm rounded-full bg-foreground-surface text-foreground-soft">
+            {MEAL_TYPE_LABELS[mealType]}
+          </span>
+          {badges.map((badge) => <RecipeBadge badge={badge} />)}
+          {
+            details.length > 0 && (
+              <span class="text-sm text-foreground-subtle">{details.join(' · ')}</span>
+            )
+          }
+          {
+            timesMade !== undefined && (
+              <span class="inline-flex items-center gap-1.5 text-sm text-foreground-subtle">
+                <TallyIcon className="size-4" />
+                Made {timesMade}+ times
+              </span>
+            )
+          }
+        </div>
+        <div class="flex flex-col gap-1">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h1>
+          {
+            marginNote && (
+              <p class="origin-left -rotate-2 font-hand text-2xl md:text-3xl text-primary dark:text-primary-muted">
+                {marginNote}
+              </p>
+            )
+          }
+        </div>
+        <p class="text-xl md:text-2xl text-foreground_lighter leading-relaxed">{summary}</p>
+        {
+          labels.length > 0 && (
+            <ul class="flex flex-wrap gap-2" aria-label="Categories and tags">
+              {labels.map((label) => (
+                <li class="px-3 py-1 text-sm rounded-full border border-foreground-border text-foreground-muted">
+                  {formatRecipeLabel(label)}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+        {
+          note && (
+            <aside
+              aria-label="Note from Dominik"
+              class="mt-2 flex flex-col gap-1.5 rounded-2xl border border-primary/15 bg-primary-light px-5 py-4 md:px-6 md:py-5"
+            >
+              <span class="font-signika text-sm font-semibold text-primary dark:text-primary-muted">
+                From Dominik
+              </span>
+              <p class="text-base md:text-lg italic text-foreground-soft leading-relaxed">{note}</p>
+            </aside>
+          )
+        }
+      </header>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,18rem)_1fr] gap-10 lg:gap-14 items-start">
+      <section aria-labelledby="ingredients-heading">
+        <IngredientsPanel
+          client:load
+          ingredients={ingredients}
+          servings={servings}
+          timeMinutes={timeMinutes}
+        />
+        {
+          pairsWith && (
+            <p class="mt-6 flex items-center gap-2 text-base text-foreground-muted">
+              <MealTypeIcon mealType="drink" className="size-5 shrink-0 text-primary dark:text-primary-muted" />
+              <span>
+                Pairs with <span class="text-foreground-soft">{pairsWith}</span>
+              </span>
+            </p>
+          )
+        }
+      </section>
+
+      <section aria-labelledby="method-heading" class="recipe-method min-w-0">
+        <h2 id="method-heading" class="text-2xl md:text-3xl text-primary mb-6">Method</h2>
+        <div class="text-lg md:text-xl text-foreground_lighter leading-relaxed">
+          <Content />
+        </div>
+      </section>
+    </div>
+
+    {/* Ask the chef once the recipe has done its job, rather than before anyone's read it. */}
+    <section
+      aria-label="Ask the chef"
+      class="flex flex-col items-center gap-5 rounded-3xl bg-primary-light px-6 py-8 text-center sm:flex-row sm:justify-between sm:px-10 sm:text-left"
+    >
+      <div class="flex flex-col gap-1">
+        <p class="font-hand text-3xl md:text-4xl text-primary dark:text-primary-muted">Fancy this one?</p>
+        <p class="text-base md:text-lg text-foreground-muted">
+          Send me a message and I'll put it on the menu next time.
+        </p>
+      </div>
+      <!-- WhatsApp green with dark text: white on this green is too low-contrast to read comfortably. -->
+      <a
+        href={chefRequestUrl(title)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex shrink-0 items-center gap-2.5 rounded-full bg-[#25D366] px-5 py-3 font-signika text-lg font-semibold text-[#0b2e17] transition duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#2ee072] hover:shadow-lg hover:shadow-[#25D366]/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
+      >
+        <WhatsAppIcon className="size-5 transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
+        Have chef make you this
+        <span class="sr-only"> (opens WhatsApp)</span>
+      </a>
+    </section>
+
+    <nav
+      aria-label="More from the menu"
+      class="flex flex-col gap-6 border-t border-foreground-border pt-10 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="flex flex-wrap gap-6">
+        <a
+          href="/menu"
+          class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+        >
+          ← Back to menu
+        </a>
+        <a
+          href="/"
+          class="font-signika text-lg text-primary hover:text-primary-muted dark:text-foreground-soft dark:hover:text-foreground-strong"
+        >
+          Go home
+        </a>
+      </p>
+      {
+        next && (
+          <a
+            href={`/menu/${next.id}`}
+            class="group flex flex-col gap-1 rounded-2xl border border-foreground-border bg-surface-card px-6 py-4 transition duration-200 ease-out hover:border-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:min-w-72 sm:text-right"
+          >
+            <span class="text-sm text-foreground-subtle">
+              Next up · {MEAL_TYPE_LABELS[next.mealType]}
+            </span>
+            <span class="font-signika text-xl md:text-2xl font-semibold text-foreground-strong leading-snug transition-colors group-hover:text-primary">
+              {next.title}
+              <span aria-hidden class="inline-block transition duration-150 group-hover:translate-x-1">
+                →
+              </span>
+            </span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</Layout>
+
+<style>
+  .recipe-method :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .recipe-method :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .recipe-method :global(ul) {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+  }
+
+  .recipe-method :global(ul > li) {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Numbered steps: big sage numbers so you can find your place mid-cook. */
+  .recipe-method :global(ol) {
+    list-style: none;
+    counter-reset: step;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  /* Number and step text sit in a two-column grid, aligned on the first line's baseline. */
+  .recipe-method :global(ol > li) {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  .recipe-method :global(ol > li::before) {
+    content: counter(step);
+    font-family: var(--font-signika, system-ui, sans-serif);
+    font-weight: 700;
+    font-size: 1.75em;
+    line-height: 1;
+    color: hsl(var(--primary));
+    font-variant-numeric: tabular-nums;
+  }
+</style>

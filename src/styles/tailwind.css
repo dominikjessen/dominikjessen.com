@@ -6,6 +6,10 @@
   /* Fonts */
   --font-signika: "Signika Variable", system-ui, sans-serif;
   --font-sans: "Inter Variable", system-ui, sans-serif;
+  /* Handwritten accents (menu sign-off). Font is imported only on the pages that use it. */
+  --font-hand: "Caveat Variable", "Bradley Hand", cursive;
+  /* Menu masthead name (Fraunces italic). Imported only on the menu page. */
+  --font-fraunces: "Fraunces Variable", Georgia, serif;
 
   /* Colors backed by CSS variables in Layout.astro */
   --color-background: hsl(var(--background));
@@ -26,6 +30,8 @@
   --color-accent_seagreen-hover: hsl(var(--accent_seagreen-hover));
   --color-surface-card: hsl(var(--surface-card));
   --color-brass: hsl(var(--brass));
+  --color-ink: hsl(var(--ink));
+  --color-ink-foreground: hsl(var(--ink-foreground));
   --color-rose: hsl(var(--rose));
   --color-mint: hsl(var(--mint));
   --color-blush: hsl(var(--blush));
@@ -138,6 +144,82 @@
   --animate-spin_move: spin_move 30s linear infinite;
   --animate-grow: grow 5s ease-in-out infinite;
   --animate-blob_breathe: blob_breathe 4.5s ease-in-out infinite;
+
+  /* Menu: entrances, the "Surprise me" dice moment, and the handwritten sign-off. */
+  @keyframes menu-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes menu-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes dice-roll {
+    0% {
+      transform: rotate(0deg) translateY(0);
+    }
+    25% {
+      transform: rotate(90deg) translateY(-14px);
+    }
+    50% {
+      transform: rotate(180deg) translateY(0);
+    }
+    75% {
+      transform: rotate(270deg) translateY(-8px);
+    }
+    100% {
+      transform: rotate(360deg) translateY(0);
+    }
+  }
+
+  @keyframes dice-land {
+    from {
+      transform: rotate(-40deg) scale(1.25);
+    }
+    to {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.85) translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Reveals text left to right, like it's being written. */
+  @keyframes write-in {
+    from {
+      clip-path: inset(-20% 100% -20% 0);
+    }
+    to {
+      clip-path: inset(-20% 0 -20% 0);
+    }
+  }
+
+  --animate-menu-fade-up: menu-fade-up 450ms cubic-bezier(0.2, 0, 0, 1) both;
+  --animate-menu-fade-in: menu-fade-in 200ms ease-out both;
+  --animate-dice-roll: dice-roll 600ms ease-in-out infinite;
+  --animate-dice-land: dice-land 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-pop-in: pop-in 450ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-write-in: write-in 900ms cubic-bezier(0.4, 0, 0.2, 1) 400ms both;
 }
 
 @keyframes achievement-fly-out {
@@ -224,4 +306,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Hand-drawn wavy rule for the menu's course dividers. The wave is a mask, so it takes `color`. */
+.menu-squiggle {
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4Q3 .8 6 4T12 4T18 4T24 4' fill='none' stroke='black' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E")
+    repeat-x left center / 24px 8px;
 }

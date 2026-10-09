@@ -7,9 +7,12 @@ import Footer from '../components/structure/Footer.astro';
 
 interface Props {
   title: string;
+  showNav?: boolean;
+  /** Plain white ground instead of the cream background (light mode only). */
+  paper?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, showNav = true, paper = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,9 +25,9 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-background text-foreground overflow-x-hidden">
-    <Nav />
-    <main class="relative z-0 w-5/6 mx-auto pt-8 pb-24">
+  <body class:list={['bg-background text-foreground overflow-x-hidden', { paper }]}>
+    {showNav && <Nav />}
+    <main class={`relative z-0 w-5/6 mx-auto pb-24 ${showNav ? 'pt-8' : 'pt-12 md:pt-16'}`}>
       <slot />
     </main>
     <Footer />
@@ -78,6 +81,16 @@ const { title } = Astro.props;
     --accent_seagreen-hover: 150 66% 68%;
     /* Card surface: soft mix of primary + background, very light (for Work + Currently cards). Light: ~rgb(237,240,230). */
     --surface-card: 78 25% 92%;
+    /* Deep bottle green + cream: the menu's filter bar and other "fine dining" accents. */
+    --ink: 155 32% 17%;
+    --ink-foreground: 45 45% 95%;
+  }
+
+  /* Paper pages (menu): white ground in light mode; dark mode keeps its palette. */
+  /* Tailwind's --color-background resolves at :root, so re-derive it here for the override to apply. */
+  html:not(.dark) body.paper {
+    --background: 0 0% 100%;
+    --color-background: hsl(var(--background));
   }
 
   html.dark {
@@ -116,6 +129,8 @@ const { title } = Astro.props;
     --foreground-border: 120 2% 22%;
     --accent_seagreen-hover: 150 66% 70%;
     --surface-card: 115 8% 18%;
+    --ink: 152 18% 20%;
+    --ink-foreground: 45 45% 95%;
   }
 
   ::selection {
