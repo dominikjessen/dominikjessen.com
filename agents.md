@@ -8,9 +8,9 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 
 - **Frontend**
   - **Framework**: Astro 7.x with Vite 8. Astro is the primary UI layer; React 19 is used only for interactive islands (e.g. the “Currently” section with client-side randomization, `RevealCanvas`).
-  - **UI / styling**: Tailwind CSS 4 (`@tailwindcss/vite`), custom theme and keyframes in `src/styles/tailwind.css`. Design tokens (e.g. `--background`, `--primary`, `--accent_seagreen`) are defined in `Layout.astro` and referenced via `@theme` in Tailwind. No component library; custom Astro and React components.
+  - **UI / styling**: Tailwind CSS 4 (`@tailwindcss/vite`), custom theme and keyframes in `src/styles/tailwind.css`. Design tokens are defined in `Layout.astro` and referenced via `@theme` in Tailwind. Two sets live side by side: the legacy HSL tokens (e.g. `--background`, `--primary`, `--ink`), still used by the menu, and the redesign's hex palette (`canvas`, `charcoal`, `body`, `muted`, `pine`, `pine-deep`, `sage`, `parchment`, `oat`, `wire`, `chip`, `visitor`, …; see `docs/redesign/REDESIGN.md`). Non-`paper` pages get the oat dot-grid background and the redesign body font; `paper` pages (the menu) keep the legacy look. Dark mode is paused: `ThemeToggle` is no longer rendered, but the `html.dark` block and component remain for a later dark version. No component library; custom Astro and React components.
   - **State**: No global state library. React components use local `useState`/`useEffect` where needed (e.g. `currentlyReact.tsx`).
-  - **Fonts**: `@fontsource-variable/signika`, `inter`, `josefin-sans`, `ubuntu` (see `package.json`).
+  - **Fonts**: Redesign: Instrument Serif (`font-display`), Instrument Sans (`font-body`), JetBrains Mono (`font-mono`) and Caveat (`font-hand`), all imported in `Layout.astro`. Legacy: Signika (menu headings), Fraunces (menu only). `inter`, `josefin-sans` and `ubuntu` are installed but unused (see `package.json`).
 
 - **Backend**
   - **None.** This is a static site. No server runtime, API routes, or auth. Data is read at build time from JSON under `src/data/`.

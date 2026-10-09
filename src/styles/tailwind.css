@@ -6,7 +6,11 @@
   /* Fonts */
   --font-signika: "Signika Variable", system-ui, sans-serif;
   --font-sans: "Inter Variable", system-ui, sans-serif;
-  /* Handwritten accents (menu sign-off). Font is imported only on the pages that use it. */
+  /* Redesign type: serif display, sans body, mono labels. Imported in Layout.astro. */
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Instrument Sans Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  /* Handwritten accents (menu sign-off, redesign notes). Imported globally in Layout.astro. */
   --font-hand: "Caveat Variable", "Bradley Hand", cursive;
   /* Menu masthead name (Fraunces italic). Imported only on the menu page. */
   --font-fraunces: "Fraunces Variable", Georgia, serif;
@@ -36,6 +40,26 @@
   --color-mint: hsl(var(--mint));
   --color-blush: hsl(var(--blush));
   --color-aliceblue: hsl(var(--aliceblue));
+
+  /* Redesign palette (pine and oat), backed by hex variables in Layout.astro */
+  --color-canvas: var(--canvas);
+  --color-canvas-dots: var(--canvas-dots);
+  --color-charcoal: var(--charcoal);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-pine: var(--pine);
+  --color-pine-deep: var(--pine-deep);
+  --color-sage: var(--sage);
+  --color-parchment: var(--parchment);
+  --color-parchment-text: var(--parchment-text);
+  --color-stone: var(--stone);
+  --color-oat: var(--oat);
+  --color-wire: var(--wire);
+  --color-wire-dash: var(--wire-dash);
+  --color-chip: var(--chip);
+  --color-card-head: var(--card-head);
+  --color-footer-muted: var(--footer-muted);
+  --color-visitor: var(--visitor);
 
   /* Achievement card palette */
   --color-achievement-blue: hsl(var(--achievement-blue));
@@ -137,7 +161,26 @@
     }
   }
 
+  /* Redesign: graph wires (use with stroke-dasharray: 6 6) and status dots. */
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+
   --animate-wave: wave 2s ease-in-out infinite;
+  --animate-flow: flow 1.2s linear infinite;
+  --animate-pulse-soft: pulse-soft 1.6s ease-in-out infinite;
   --animate-marquee_rtl: marquee_rtl 40s linear infinite;
   --animate-marquee_ltr: marquee_ltr 40s linear infinite;
   --animate-slow_spin: slow_spin 30s linear infinite;
@@ -220,6 +263,15 @@
   --animate-dice-land: dice-land 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
   --animate-pop-in: pop-in 450ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
   --animate-write-in: write-in 900ms cubic-bezier(0.4, 0, 0.2, 1) 400ms both;
+}
+
+/* Redesign motion is decorative; stop it for visitors who ask for less. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-wave,
+  .animate-flow,
+  .animate-pulse-soft {
+    animation: none;
+  }
 }
 
 @keyframes achievement-fly-out {

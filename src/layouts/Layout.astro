@@ -1,5 +1,10 @@
 ---
 import '@fontsource-variable/signika';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '@fontsource-variable/instrument-sans';
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/caveat';
 import '../styles/tailwind.css';
 import { Analytics } from '@vercel/analytics/react';
 import Nav from '../components/structure/Nav.astro';
@@ -27,7 +32,13 @@ const { title, showNav = true, paper = false } = Astro.props;
   </head>
   <body class:list={['bg-background text-foreground overflow-x-hidden', { paper }]}>
     {showNav && <Nav />}
-    <main class={`relative z-0 w-5/6 mx-auto pb-24 ${showNav ? 'pt-8' : 'pt-12 md:pt-16'}`}>
+    <main
+      class:list={[
+        'relative z-0 mx-auto pb-24',
+        showNav ? 'pt-8' : 'pt-12 md:pt-16',
+        paper ? 'w-5/6' : 'max-w-[1280px] px-5 md:px-10 xl:px-[72px]',
+      ]}
+    >
       <slot />
     </main>
     <Footer />
@@ -84,6 +95,26 @@ const { title, showNav = true, paper = false } = Astro.props;
     /* Deep bottle green + cream: the menu's filter bar and other "fine dining" accents. */
     --ink: 155 32% 17%;
     --ink-foreground: 45 45% 95%;
+
+    /* Redesign palette (pine and oat). Hex so Tailwind opacity modifiers work via color-mix. */
+    --canvas: #f5f2eb; /* page background */
+    --canvas-dots: #d8d2c5; /* dot grid */
+    --charcoal: #1a1a17; /* headings, strong text */
+    --body: #3d3c36; /* paragraph text */
+    --muted: #6a675e; /* labels, meta (5.1:1 on canvas) */
+    --pine: #2f4a3a; /* primary: buttons, links, current step */
+    --pine-deep: #22382b; /* footer, text on sage */
+    --sage: #dfe7dd; /* engineering tint */
+    --parchment: #f0e3cc; /* product tint; hero highlight */
+    --parchment-text: #65573a; /* text on parchment (5.6:1) */
+    --stone: #e6e3d6; /* neutral tint (Yes, Chef! screenshot bg) */
+    --oat: #e9d9ba; /* accents on pine-deep; footer button */
+    --wire: #8e8a7d; /* graph wires (decorative) */
+    --wire-dash: #a9a597; /* dashed borders, timeline */
+    --chip: #f1efe7; /* small chips and icon buttons */
+    --card-head: #fbfaf6; /* panel header strip */
+    --footer-muted: #b9b5a8; /* secondary text on pine-deep (6.1:1) */
+    --visitor: #8e6538; /* the "you?" cursor */
   }
 
   /* Paper pages (menu): white ground in light mode; dark mode keeps its palette. */
@@ -138,8 +169,17 @@ const { title, showNav = true, paper = false } = Astro.props;
     color: hsl(var(--background));
   }
 
-  h1,
-  h2 {
+  /* Redesign pages: oat dot grid and the new body font. Paper pages (menu) keep their own. */
+  body:not(.paper) {
+    background-color: var(--canvas);
+    background-image: radial-gradient(var(--canvas-dots) 1.2px, transparent 1.3px);
+    background-size: 24px 24px;
+    font-family: var(--font-body);
+  }
+
+  /* Legacy heading style, kept for the menu. The redesign styles its headings itself. */
+  body.paper h1,
+  body.paper h2 {
     font-family: 'Signika Variable', sans-serif;
     font-weight: 700;
   }
@@ -152,6 +192,12 @@ const { title, showNav = true, paper = false } = Astro.props;
     animation: fade-in 2s linear both;
     animation-timeline: view();
     animation-range: entry 20% cover 50%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-fade-in {
+      animation: none;
+    }
   }
 
   @keyframes fade-in {
