@@ -178,9 +178,53 @@
     }
   }
 
+  /* Currently section details (equaliser, caret, steam, track progress). */
+  @keyframes eq {
+    0%,
+    100% {
+      transform: scaleY(0.35);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes steam {
+    0% {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
   --animate-wave: wave 2s ease-in-out infinite;
   --animate-flow: flow 1.2s linear infinite;
   --animate-pulse-soft: pulse-soft 1.6s ease-in-out infinite;
+  --animate-eq: eq 0.9s ease-in-out infinite;
+  --animate-blink: blink 1.1s steps(1) infinite;
+  --animate-steam: steam 2.4s ease-out infinite;
+  --animate-progress: progress 28s linear infinite;
   --animate-marquee_rtl: marquee_rtl 40s linear infinite;
   --animate-marquee_ltr: marquee_ltr 40s linear infinite;
   --animate-slow_spin: slow_spin 30s linear infinite;
@@ -269,7 +313,11 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-wave,
   .animate-flow,
-  .animate-pulse-soft {
+  .animate-pulse-soft,
+  .animate-eq,
+  .animate-blink,
+  .animate-steam,
+  .animate-progress {
     animation: none;
   }
 }

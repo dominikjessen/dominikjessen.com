@@ -50,7 +50,7 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
   - `src/data/` — `career.json` (career graph steps), `projects.json`, `work.json`, `currently.json`, `achievements.json` (legacy), `revealContent.json`.
   - `src/types/` — `data.d.ts` (shared types for data).
   - `src/styles/` — `tailwind.css` (Tailwind entry, `@theme`, keyframes).
-  - `src/hooks/` — React-only hooks (none currently; add as needed for client logic).
+  - `src/hooks/` — React-only hooks: `useCurrentlyFields.ts` (picks one item per Currently category; first item on the server, random after hydration, `shuffle` to re-roll).
   - `src/images/` — SVG assets used by Icon.astro (e.g. logos for project cards); `src/images/companies/` holds the company logos referenced by `logo` in `career.json` and `work.json`.
   - `public/` — Favicon, PDFs, static assets served as-is.
 
@@ -118,7 +118,7 @@ Use this playbook when adding a feature end-to-end. There are no DB migrations o
 
 **Concrete paths**
 - New project: edit `src/data/projects.json` and ensure `Project` in `src/types/data.d.ts` matches (`input`/`output` pills, `tagline`, optional `stat`, `tint` of `parchment` | `stone` | `sage`); `src/sections/projects.astro` renders it (IN → card → OUT rows; screenshots live in `public/projects/`). `bgColor` is legacy and only used by the old, now unused `ProjectCard.astro` (deleted in the redesign's cleanup).
-- New “Currently” category or item: edit `src/data/currently.json`; ensure each item has `title`, `icon`, `iconType`, and optional `by`/`url`; `CurrentlyItem` and `currentlyReact.tsx` / `ReactCurrentlyCard.tsx` use it.
+- New “Currently” category or item: edit `src/data/currently.json`; each item has `title`, `emoji` (kept but not shown in the redesign) and optional `url`. `src/hooks/useCurrentlyFields.ts` turns it into one field per category (key = heading in snake_case); `currentlyReact.tsx` renders them as a "now playing" panel with a shuffle button and a small animated detail per category (`TILE`). A new category needs adding to `CurrentlyCategoryKey`, `CURRENTLY_ORDER` (in the hook) and `TILE`.
 - New work entry: edit `src/data/work.json`; each entry has `id`, `company`, `role`, `period`, `lane` (`engineering`, `product` or `both`), `logo`, `highlight`, `url` and `runs` (achievements: `metric`, `detail`, `icon`, rendered with `RunIcon.astro`; empty means "first runs in progress"). `id` matches the step in `src/data/career.json` and is the `#work-<id>` anchor the career graph links to. `WorkEntry` and `src/sections/work.astro` use it (one card per entry with `id="work-<id>"`; `WorkCard.astro` is the old, now unused card).
 - New career step: edit `src/data/career.json` (`CareerStep`); put the logo in `src/images/companies/`. The graph derives all positions and the "running since" year from this file.
 - New page: create `src/pages/<route>.astro`, use `<Layout title="...">`, add content; optionally add a link in `src/components/structure/Nav.astro`.
