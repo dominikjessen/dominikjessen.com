@@ -1,5 +1,5 @@
 export type Lane = "engineering" | "product" | "both";
-export type RunIcon = "building" | "shield" | "gauge" | "layers" | "coins" | "stack" | "chart" | "route";
+export type RunIcon = "building" | "shield" | "gauge" | "layers" | "coins" | "stack" | "chart" | "route" | "layout";
 
 export type CareerStep = {
   id: string; // "mannheim", "sovanta", … also used as the Work card anchor (#work-<id>)
@@ -67,7 +67,7 @@ export type WorkEntry = {
   company: string;
   role: string;
   period: string; // "2024 → 2026", "2026 → now"
-  lane: "engineering" | "product";
+  lane: Lane;
   logo: string;
   highlight: string;
   url: string;

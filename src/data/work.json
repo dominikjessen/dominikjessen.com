@@ -4,11 +4,15 @@
     "company": "n8n",
     "role": "Senior Product Engineer",
     "period": "2026 → now",
-    "lane": "engineering",
+    "lane": "both",
     "logo": "n8n.png",
     "highlight": "Building n8n Cloud - the best way to run n8n, helping you automate your workflows and orchestrate your AI agents with ease.",
     "url": "https://n8n.io/",
-    "runs": []
+    "runs": [
+      {"metric": "Hundreds of top-ups", "detail": "For AI credits, on billing UX and infra my team built", "icon": "coins"},
+      {"metric": "+10–15% activation", "detail": "From the AI features that billing made possible", "icon": "chart"},
+      {"metric": "Console redesign", "detail": "Shipped a new n8n Cloud Console", "icon": "layout"}
+    ]
   },
   {
     "id": "vesper",
