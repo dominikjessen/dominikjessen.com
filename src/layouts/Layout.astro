@@ -9,6 +9,7 @@ import '../styles/tailwind.css';
 import { Analytics } from '@vercel/analytics/react';
 import Nav from '../components/structure/Nav.astro';
 import Footer from '../components/structure/Footer.astro';
+import LegacyFooter from '../components/structure/LegacyFooter.astro';
 
 interface Props {
   title: string;
@@ -42,7 +43,7 @@ const { title, showNav = true, paper = false } = Astro.props;
     >
       <slot />
     </main>
-    <Footer />
+    {paper ? <LegacyFooter /> : <Footer />}
     <Analytics />
   </body>
 </html>
