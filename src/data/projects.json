@@ -1,32 +1,42 @@
 [
   {
     "name": "Rent/Buy wealth modeler",
+    "input": "rent or buy?",
+    "output": "net worth over time",
+    "tagline": "Compares how your net worth grows when you rent versus when you buy, across scenarios you configure.",
     "description": "A rent-vs-buy wealth simulator that compares net worth over time across multiple scenarios. Configure rent or buy legs with rent growth, home appreciation and more to see which scenario comes out ahead.",
     "url": "https://wealth-modeler.vercel.app/",
     "github": "https://github.com/dominikjessen/wealth-modeler",
-    "imgSrc": "/projects/wealth-modeler/01_WealthModeler_Desktop_Homescreen.png",
+    "imgSrc": "wealth-modeler/01_WealthModeler_Desktop_Homescreen.png",
     "imgAlt": "Wealth modeler home screen",
-    "bgColor": "bg-[hsl(var(--blush))]",
+    "tint": "parchment",
     "techStack": ["Next.js", "TypeScript", "Tailwind", "Recharts", "Zustand"]
   },
   {
     "name": "Yes, Chef!",
+    "input": "what's for dinner?",
+    "output": "a week of meals",
+    "tagline": "A meal-plan generator, random recipe discovery tool and personal recipe book in one.",
     "description": "With Yes, Chef! you never have to spend more than a few clicks on figuring out what to make for dinner this week. It's a mealplan generator, random recipe discovery tool, and can serve as your own recipe book - all in one.",
     "url": "https://yeschef.recipes/",
     "github": "https://github.com/dominikjessen/yeschef",
-    "imgSrc": "/projects/yeschef/01_YesChef_Mealplan.png",
+    "imgSrc": "yeschef/01_YesChef_Mealplan.png",
     "imgAlt": "Yes, Chef! mealplan screen",
-    "bgColor": "bg-[hsl(var(--aliceblue))]",
+    "tint": "stone",
     "techStack": ["Next.js", "Typescript", "MySQL", "Prisma", "Tailwind"]
   },
   {
     "name": "Cinemojis",
+    "input": "🦖🏝️🧬",
+    "output": "a movie title",
+    "tagline": "Guess the movie from one to five emojis, or build your own sets and challenge your friends.",
     "description": "Cinemojis is a game for movie buffs and emoji lovers. Guess a movie in 5 tries using 1 to 5 emojis. Users can also sign up and create their own movie-emoji sets to play or share with their friends and challenge them.",
+    "stat": "150 monthly visits",
     "url": "https://cinemojis.com/",
     "github": "https://github.com/dominikjessen/cinemojis",
-    "imgSrc": "/projects/cinemojis/03_Cinemojis_Home_Desktop.png",
+    "imgSrc": "cinemojis/03_Cinemojis_Home_Desktop.png",
     "imgAlt": "Cinemojis home screen",
-    "bgColor": "bg-[hsl(var(--mint))]",
+    "tint": "sage",
     "techStack": ["Next.js", "Typescript", "Tailwind", "Supabase"]
   }
 ]

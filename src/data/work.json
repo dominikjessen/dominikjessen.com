@@ -1,30 +1,120 @@
 [
   {
+    "id": "n8n",
     "company": "n8n",
     "role": "Senior Product Engineer",
-    "period": "2026 - present",
+    "period": "2026 → now",
+    "lane": "both",
+    "logo": "n8n.png",
     "highlight": "Building n8n Cloud - the best way to run n8n, helping you automate your workflows and orchestrate your AI agents with ease.",
-    "url": "https://n8n.io/"
+    "url": "https://n8n.io/",
+    "runs": [
+      {
+        "metric": ">$80k MRR",
+        "detail": "Via n8n's Gateway for AI features in workflows",
+        "icon": "coins"
+      },
+      {
+        "metric": "+10% user activation",
+        "detail": "From AI features accessible for every Cloud user",
+        "icon": "chart"
+      }
+    ]
   },
   {
+    "id": "vesper",
     "company": "Vesper",
     "role": "Senior Software Engineer",
-    "period": "2024 - 2026",
+    "period": "2024 → 2026",
+    "lane": "engineering",
+    "logo": "vesper.svg",
     "highlight": "Building product and infrastructure for professionals navigating commodities markets. Shipped enterprise features, 2FA, and RBAC; led discovery through to production.",
-    "url": "https://vespertool.com/"
+    "url": "https://vespertool.com/",
+    "runs": [
+      {
+        "metric": ">$1MM ARR",
+        "detail": "From Vesper's Cost modeling feature",
+        "icon": "building"
+      },
+      {
+        "metric": "95% drop",
+        "detail": "In account sharing, after shipping 2FA",
+        "icon": "shield"
+      },
+      {
+        "metric": "5x faster",
+        "detail": "Dashboards, after rebuilding the query layer",
+        "icon": "gauge"
+      },
+      {
+        "metric": "50% higher ACV",
+        "detail": "By building Enterprise features and RBAC",
+        "icon": "layers"
+      }
+    ]
   },
   {
+    "id": "tractable",
     "company": "Tractable",
     "role": "Product Manager",
-    "period": "2022 - 2023",
+    "period": "2022 → 2023",
+    "lane": "product",
+    "logo": "tractable.webp",
     "highlight": "Drove ML and tooling for the claims pipeline. Shipped internal tools that automated manual steps and scaled claim volume by an order of magnitude; cut intervention by 85%.",
-    "url": "https://tractable.com/"
+    "url": "https://tractable.com/",
+    "runs": [
+      {
+        "metric": "$2MM saved",
+        "detail": "Every year with an automated claims pipeline",
+        "icon": "coins"
+      },
+      {
+        "metric": "10x volume",
+        "detail": "In claims handled at the same quality bar",
+        "icon": "stack"
+      }
+    ]
   },
   {
+    "id": "unilife",
     "company": "Uni-Life",
-    "role": "Product & Growth",
-    "period": "2019 - 2021",
+    "role": "Head of Product",
+    "period": "2019 → 2021",
+    "lane": "product",
+    "logo": "unilife.webp",
     "highlight": "Led product and growth strategy across a 3-year stretch. Owned roadmap, prioritization, and the link between what we built and what we measured.",
-    "url": "https://uni-life.nl/"
+    "url": "https://uni-life.nl/",
+    "runs": [
+      {
+        "metric": "175% ARR growth",
+        "detail": "Year on year",
+        "icon": "chart"
+      },
+      {
+        "metric": "Roadmap owned",
+        "detail": "End to end, from what we built to what we measured",
+        "icon": "route"
+      }
+    ]
+  },
+  {
+    "id": "celonis",
+    "company": "Celonis",
+    "role": "Product Manager (Intern)",
+    "period": "2019",
+    "lane": "product",
+    "logo": "celonis.png",
+    "url": "https://www.celonis.com/",
+    "compact": true
+  },
+  {
+    "id": "sovanta",
+    "company": "Sovanta",
+    "role": "Software Engineer",
+    "period": "2016 → 2017",
+    "lane": "engineering",
+    "logo": "sovanta.webp",
+    "url": "https://www.sovanta.com/",
+    "compact": true
   }
 ]

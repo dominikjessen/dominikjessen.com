@@ -1,14 +1,160 @@
 ---
 import work from '../data/work.json';
-import WorkCard from '../components/WorkCard.astro';
+import type { WorkEntry } from '../types/data';
+import CompanyLogo from '../components/CompanyLogo.astro';
+import RunIcon from '../components/RunIcon.astro';
+
+// Each job is a card; its achievements are "runs" of a workflow. The career graph links here via #work-<id>.
+const entries = work as WorkEntry[];
+type FullEntry = Exclude<WorkEntry, { compact: true }>;
+type CompactEntry = Extract<WorkEntry, { compact: true }>;
+const full = entries.filter((entry): entry is FullEntry => !entry.compact);
+// Earlier, shorter roles share one step of the timeline as small side-by-side cards.
+const compact = entries.filter((entry): entry is CompactEntry => entry.compact === true);
+
+const LANE = {
+  engineering: { label: 'ENGINEERING', tag: 'bg-sage text-pine-deep', tile: 'bg-sage text-pine-deep' },
+  product: { label: 'PRODUCT', tag: 'bg-parchment text-parchment-text', tile: 'bg-parchment text-parchment-text' },
+  // Split tint, as on the mobile career graph.
+  both: {
+    label: 'ENGINEERING & PRODUCT',
+    tag: 'bg-[linear-gradient(105deg,var(--sage)_50%,var(--parchment)_50%)] text-pine-deep',
+    tile: 'bg-[linear-gradient(105deg,var(--sage)_50%,var(--parchment)_50%)] text-pine-deep',
+  },
+} as const;
+
+const focusRing = 'rounded-sm focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2';
 ---
 
-<section id="work" class="w-full flex flex-col self-center items-center gap-6">
-  <h2 class="text-5xl md:text-6xl text-primary text-center">Work</h2>
-  <p class="text-xl md:text-2xl text-foreground-subtle mb-4 md:mb-8 text-center">
-    Where I've been and what I took from it. For the full timeline, see my <a href="/CV_DominikJessen.pdf" target="_blank" class="text-primary font-signika">CV</a>.
-  </p>
-  {work.map((entry) => (
-    <WorkCard entry={entry} />
-  ))}
+<section id="work" class="pb-16 lg:pb-28">
+  <header class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
+    <div class="flex flex-col gap-2">
+      <p class="font-mono text-xs text-muted">02 · work</p>
+      <h2 class="font-display font-normal text-[44px] md:text-[60px] leading-none tracking-[-0.015em] text-charcoal">Work</h2>
+    </div>
+    <p class="max-w-[420px] text-[15px] leading-[1.6] md:text-base md:leading-[1.65] text-body md:text-right">
+      Where I've been and what I took from it. For the full timeline, see my <a
+        href="/CV_DominikJessen.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={['font-semibold text-charcoal underline decoration-pine underline-offset-4', focusRing]}>CV</a
+      >.
+    </p>
+  </header>
+
+  <div class="relative mt-9 md:pl-[38px]">
+    <!-- Timeline: a dashed line with one dot per card (md and up). -->
+    <div class="hidden md:block absolute left-[11px] top-9 bottom-9 border-l-[1.6px] border-dashed border-wire-dash" aria-hidden="true"></div>
+
+    <ol class="flex flex-col gap-4 md:gap-5">
+      {
+        full.map((entry, i) => {
+          const lane = LANE[entry.lane];
+          const dot = i === 0 ? 'bg-pine border-canvas' : 'bg-white border-charcoal';
+
+          return (
+            <li
+              id={`work-${entry.id}`}
+              class="relative scroll-mt-24 flex flex-col gap-5 lg:flex-row lg:gap-8 p-[18px] md:px-7 md:py-[26px] bg-white border border-charcoal/16 rounded-[14px] shadow-[0_6px_16px_rgb(26_26_23/0.04)]"
+            >
+              <span class:list={['hidden md:block absolute -left-[33px] top-[30px] size-3 rounded-full border-2', dot]} aria-hidden="true" />
+
+              {/* Job */}
+              <div class="flex flex-col gap-3 lg:w-[470px] lg:shrink-0">
+                <div class="flex items-center justify-between gap-3">
+                  <span class:list={['font-mono text-[11px] px-2 py-[3px] rounded-[5px]', lane.tag]}>{lane.label}</span>
+                  <span class="font-mono text-xs text-muted">{entry.period}</span>
+                </div>
+                {/* Company as a small eyebrow, the role as the heading. */}
+                <div class="flex flex-col gap-2">
+                  <a
+                    href={entry.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class:list={['flex items-center gap-2.5 self-start text-[17px] font-semibold text-charcoal', focusRing]}
+                  >
+                    <CompanyLogo logo={entry.logo} name={entry.company} size={32} className="rounded-[8px]" />
+                    {entry.company}
+                  </a>
+                  <h3 class="font-display font-normal text-2xl md:text-[26px] leading-[1.1] text-charcoal">{entry.role}</h3>
+                </div>
+                <p class="text-base leading-[1.6] text-body">{entry.highlight}</p>
+              </div>
+
+              {/* Runs */}
+              <div class="flex flex-col justify-center gap-[18px] pt-3 border-t border-dashed border-charcoal/18 lg:flex-1 lg:min-w-0 lg:pt-0 lg:pl-[30px] lg:border-t-0 lg:border-l">
+                {entry.runs.length > 0 ? (
+                  <>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-5">
+                      {entry.runs.map((run) => (
+                        <li class="flex items-start gap-[14px]">
+                          <span class:list={['flex shrink-0 items-center justify-center size-[38px] md:size-10 rounded-[10px]', lane.tile]}>
+                            <RunIcon icon={run.icon} />
+                          </span>
+                          <span class="flex flex-col gap-0.5 min-w-0">
+                            <span class="text-[17px] md:text-[19px] leading-tight font-semibold tracking-[-0.01em] text-charcoal">{run.metric}</span>
+                            <span class="text-[13px] leading-[1.4] text-muted">{run.detail}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <>
+                    <div class="flex items-center gap-[14px]">
+                      <span
+                        class="flex shrink-0 items-center justify-center gap-1 size-[38px] md:size-10 rounded-[10px] border-[1.5px] border-dashed border-wire-dash"
+                        aria-hidden="true"
+                      >
+                        {[0, 0.25, 0.5].map((delay) => (
+                          <span class="size-1 rounded-full bg-pine animate-pulse-soft" style={`animation-delay:${delay}s`} />
+                        ))}
+                      </span>
+                      <span class="text-[17px] md:text-[19px] font-semibold tracking-[-0.01em] text-muted">First runs in progress</span>
+                    </div>
+                  </>
+                )}
+              </div>
+            </li>
+          );
+        })
+      }
+      {
+        compact.length > 0 && (
+          <li class="relative">
+            <span class="hidden md:block absolute -left-[33px] top-[26px] size-3 rounded-full border-2 bg-white border-charcoal" aria-hidden="true" />
+            <div class="grid gap-4 md:grid-cols-2 md:gap-5">
+              {compact.map((entry) => {
+                const lane = LANE[entry.lane];
+                // The big card's job column, without the highlight and runs.
+                return (
+                  <article
+                    id={`work-${entry.id}`}
+                    class="scroll-mt-24 flex flex-col gap-3 p-[18px] md:px-7 md:py-[22px] bg-white border border-charcoal/16 rounded-[14px] shadow-[0_6px_16px_rgb(26_26_23/0.04)]"
+                  >
+                    <div class="flex items-center justify-between gap-3">
+                      <span class:list={['font-mono text-[11px] px-2 py-[3px] rounded-[5px]', lane.tag]}>{lane.label}</span>
+                      <span class="font-mono text-xs text-muted">{entry.period}</span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <a
+                        href={entry.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class:list={['flex items-center gap-2.5 self-start text-[17px] font-semibold text-charcoal', focusRing]}
+                      >
+                        <CompanyLogo logo={entry.logo} name={entry.company} size={32} className="rounded-[8px]" />
+                        {entry.company}
+                      </a>
+                      <h3 class="font-display font-normal text-2xl md:text-[26px] leading-[1.1] text-charcoal">{entry.role}</h3>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </li>
+        )
+      }
+    </ol>
+  </div>
 </section>

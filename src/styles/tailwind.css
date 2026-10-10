@@ -6,7 +6,11 @@
   /* Fonts */
   --font-signika: "Signika Variable", system-ui, sans-serif;
   --font-sans: "Inter Variable", system-ui, sans-serif;
-  /* Handwritten accents (menu sign-off). Font is imported only on the pages that use it. */
+  /* Redesign type: serif display, sans body, mono labels. Imported in Layout.astro. */
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Instrument Sans Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  /* Handwritten accents (menu sign-off, redesign notes). Imported globally in Layout.astro. */
   --font-hand: "Caveat Variable", "Bradley Hand", cursive;
   /* Menu masthead name (Fraunces italic). Imported only on the menu page. */
   --font-fraunces: "Fraunces Variable", Georgia, serif;
@@ -24,31 +28,31 @@
   --color-foreground-soft: hsl(var(--foreground-soft));
   --color-foreground-strong: hsl(var(--foreground-strong));
   --color-foreground-surface: hsl(var(--foreground-surface));
-  --color-foreground-surface-strong: hsl(var(--foreground-surface-strong));
   --color-foreground-border: hsl(var(--foreground-border));
-  --color-accent_seagreen: hsl(var(--accent_seagreen));
-  --color-accent_seagreen-hover: hsl(var(--accent_seagreen-hover));
   --color-surface-card: hsl(var(--surface-card));
   --color-brass: hsl(var(--brass));
   --color-ink: hsl(var(--ink));
   --color-ink-foreground: hsl(var(--ink-foreground));
-  --color-rose: hsl(var(--rose));
-  --color-mint: hsl(var(--mint));
-  --color-blush: hsl(var(--blush));
-  --color-aliceblue: hsl(var(--aliceblue));
 
-  /* Achievement card palette */
-  --color-achievement-blue: hsl(var(--achievement-blue));
-  --color-achievement-mint: hsl(var(--achievement-mint));
-  --color-achievement-yellow: hsl(var(--achievement-yellow));
-  --color-achievement-rose: hsl(var(--achievement-rose));
-  --color-achievement-peach: hsl(var(--achievement-peach));
-  --color-achievement-lavender: hsl(var(--achievement-lavender));
-  --color-achievement-sky: hsl(var(--achievement-sky));
-  --color-achievement-sage: hsl(var(--achievement-sage));
-
-  /* Achievement desc max-width */
-  --max-width-achievement-desc: 20rem;
+  /* Redesign palette (pine and oat), backed by hex variables in Layout.astro */
+  --color-canvas: var(--canvas);
+  --color-canvas-dots: var(--canvas-dots);
+  --color-charcoal: var(--charcoal);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-pine: var(--pine);
+  --color-pine-deep: var(--pine-deep);
+  --color-sage: var(--sage);
+  --color-parchment: var(--parchment);
+  --color-parchment-text: var(--parchment-text);
+  --color-stone: var(--stone);
+  --color-oat: var(--oat);
+  --color-wire: var(--wire);
+  --color-wire-dash: var(--wire-dash);
+  --color-chip: var(--chip);
+  --color-card-head: var(--card-head);
+  --color-footer-muted: var(--footer-muted);
+  --color-visitor: var(--visitor);
 
   /* Animations (names must match existing utility classes) */
   @keyframes wave {
@@ -74,76 +78,70 @@
     }
   }
 
-  @keyframes marquee_rtl {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-100% - 1rem));
+  /* Redesign: graph wires (use with stroke-dasharray: 6 6) and status dots. */
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -24;
     }
   }
 
-  @keyframes marquee_ltr {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  @keyframes slow_spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes spin_move {
-    0% {
-      transform: rotate(0deg) translate(-5%, -10%);
-    }
-    50% {
-      transform: rotate(180deg) translate(10%, 10%);
-    }
-    100% {
-      transform: rotate(360deg) translate(-5%, -10%);
-    }
-  }
-
-  @keyframes grow {
-    0% {
-      transform: scale(1);
-    }
-    30% {
-      transform: scale(1.1);
-    }
-    60% {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes blob_breathe {
+  @keyframes pulse-soft {
     0%,
     100% {
-      transform: scale(1);
-      opacity: 0.65;
+      opacity: 1;
     }
     50% {
-      transform: scale(1.05);
-      opacity: 0.8;
+      opacity: 0.35;
+    }
+  }
+
+  /* Currently section details (equaliser, caret, steam, track progress). */
+  @keyframes eq {
+    0%,
+    100% {
+      transform: scaleY(0.35);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes steam {
+    0% {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
     }
   }
 
   --animate-wave: wave 2s ease-in-out infinite;
-  --animate-marquee_rtl: marquee_rtl 40s linear infinite;
-  --animate-marquee_ltr: marquee_ltr 40s linear infinite;
-  --animate-slow_spin: slow_spin 30s linear infinite;
-  --animate-spin_move: spin_move 30s linear infinite;
-  --animate-grow: grow 5s ease-in-out infinite;
-  --animate-blob_breathe: blob_breathe 4.5s ease-in-out infinite;
+  --animate-flow: flow 1.2s linear infinite;
+  --animate-pulse-soft: pulse-soft 1.6s ease-in-out infinite;
+  --animate-eq: eq 0.9s ease-in-out infinite;
+  --animate-blink: blink 1.1s steps(1) infinite;
+  --animate-steam: steam 2.4s ease-out infinite;
+  --animate-progress: progress 28s linear infinite;
 
   /* Menu: entrances, the "Surprise me" dice moment, and the handwritten sign-off. */
   @keyframes menu-fade-up {
@@ -222,89 +220,16 @@
   --animate-write-in: write-in 900ms cubic-bezier(0.4, 0, 0.2, 1) 400ms both;
 }
 
-@keyframes achievement-fly-out {
-  0% {
-    transform: rotate(0deg) translateX(0) translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(12deg) translateX(120%) translateY(-1.875rem) scale(0.9);
-    opacity: 0;
-  }
-}
-
-/* Stack: cards behind the active one (Tailwind spacing scale: 1.5=0.375rem, 2=0.5rem, etc.) */
-.achievement-behind-1 {
-  transform: rotate(3deg) translateY(0.375rem) translateX(0.25rem);
-  z-index: 2;
-  opacity: 0.85;
-}
-.achievement-behind-2 {
-  transform: rotate(5.5deg) translateY(0.6875rem) translateX(0.5rem);
-  z-index: 1;
-  opacity: 0.55;
-}
-.achievement-behind-3 {
-  transform: rotate(-2deg) translateY(0.625rem) translateX(-0.1875rem);
-  z-index: 0;
-  opacity: 0.25;
-}
-@media (min-width: 1024px) {
-  .achievement-behind-1 {
-    transform: rotate(3deg) translateY(0.5rem) translateX(0.375rem);
-  }
-  .achievement-behind-2 {
-    transform: rotate(5.5deg) translateY(0.875rem) translateX(0.625rem);
-  }
-  .achievement-behind-3 {
-    transform: rotate(-2deg) translateY(0.75rem) translateX(-0.25rem);
-  }
-}
-
-.achievement-card-active {
-  z-index: 10;
-  opacity: 1;
-  transform: rotate(0deg) translateY(0) translateX(0);
-  box-shadow:
-    0 20px 60px hsl(var(--foreground) / 0.18),
-    0 4px 16px hsl(var(--foreground) / 0.1);
-}
-.achievement-card-active:hover {
-  box-shadow:
-    0 28px 70px hsl(var(--foreground) / 0.22),
-    0 8px 24px hsl(var(--foreground) / 0.12);
-}
-
-.achievement-exit {
-  transform-origin: right center;
-  animation: achievement-fly-out 380ms cubic-bezier(0.55, 0, 1, 0.45) forwards;
-  z-index: 20;
-  pointer-events: none;
-}
-
-@media (max-width: 768px) {
-  .achievement-exit {
-    animation: achievement-fly-out-mobile 380ms cubic-bezier(0.55, 0, 1, 0.45)
-      forwards;
-  }
-}
-@keyframes achievement-fly-out-mobile {
-  0% {
-    transform: rotate(0deg) translateX(0) translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(12deg) translateX(120%) translateY(-1.875rem) scale(1);
-    opacity: 0;
-  }
-}
-
-.achievement-emoji-spin {
-  animation: achievement-spin 2.5s linear infinite;
-}
-@keyframes achievement-spin {
-  to {
-    transform: rotate(360deg);
+/* Redesign motion is decorative; stop it for visitors who ask for less. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-wave,
+  .animate-flow,
+  .animate-pulse-soft,
+  .animate-eq,
+  .animate-blink,
+  .animate-steam,
+  .animate-progress {
+    animation: none;
   }
 }
 

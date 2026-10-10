@@ -1,0 +1,293 @@
+---
+import career from '../../data/career.json';
+import work from '../../data/work.json';
+import type { CareerStep, Lane } from '../../types/data';
+import Cursor from './Cursor.astro';
+import GraphStep from './GraphStep.astro';
+
+export interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props as Props;
+
+// Layout, in px. Everything below is derived from career.json, so adding a step needs no coordinates.
+const GRAPH_W = 550;
+const STEP_W = 262;
+const STEP_H = 64;
+const TOP = 44; // room for the lane labels
+const PITCH = 114; // vertical distance between step tops
+const LANE_X: Record<Lane, number> = { engineering: 0, both: 144, product: 288 };
+
+const steps = career as CareerStep[];
+const workIds = new Set(work.map((entry) => entry.id));
+const height = TOP + (steps.length - 1) * PITCH + STEP_H + 8;
+const since = steps[0].years.match(/\d{4}/)?.[0];
+
+const placed = steps.map((step, i) => ({
+  ...step,
+  x: LANE_X[step.lane],
+  y: TOP + i * PITCH,
+  // Steps without a Work card (school, early jobs) aren't links.
+  href: workIds.has(step.id) ? `#work-${step.id}` : undefined,
+}));
+
+// Each wire leaves the bottom-centre of one step and enters the top-centre of the next.
+const wires = placed.slice(1).map((step, i) => {
+  const prev = placed[i];
+  const px = prev.x + STEP_W / 2;
+  const py = prev.y + STEP_H;
+  const cx = step.x + STEP_W / 2;
+  const cy = step.y;
+  const mid = (py + cy) / 2;
+  return { d: `M${px} ${py} C${px} ${mid}, ${cx} ${mid}, ${cx} ${cy}`, from: [px, py], to: [cx, cy], current: !!step.current };
+});
+
+const current = placed.find((step) => step.current) ?? placed[placed.length - 1];
+
+// Where Dominik's cursor wanders, relative to the current step's top-left. The first spot is where it starts.
+const DOMINIK_SPOTS = [
+  [247, 40],
+  [168, 30],
+  [214, 84],
+  [96, -20],
+  [232, 14],
+];
+const spots = DOMINIK_SPOTS.map(([dx, dy]) => [current.x + dx, current.y + dy]);
+
+// Mobile (below md): a vertical list. Steps share one width and differ only by a left offset, so the wires
+// can be drawn from the offsets alone and line up at any screen width.
+const M_STEP_H = 60;
+const M_GAP = 30;
+const M_OFFSET: Record<Lane, number> = { engineering: 0, both: 14, product: 28 };
+const M_STEP_FILL: Record<Lane, string> = {
+  engineering: 'bg-sage border-[rgb(47_74_58/0.24)]',
+  product: 'bg-parchment border-[rgb(120_98_55/0.30)]',
+  both: 'bg-[linear-gradient(105deg,var(--sage)_50%,var(--parchment)_50%)] border-charcoal/16',
+};
+const M_LABEL: Record<Lane, string> = { engineering: 'text-pine-deep', product: 'text-parchment-text', both: 'text-body' };
+
+const mHeight = steps.length * M_STEP_H + (steps.length - 1) * M_GAP;
+const mPlaced = placed.map((step, i) => ({ ...step, offset: M_OFFSET[step.lane], top: i * (M_STEP_H + M_GAP) }));
+const mWires = mPlaced.slice(1).map((step, i) => {
+  const prev = mPlaced[i];
+  const py = prev.top + M_STEP_H;
+  const cy = step.top;
+  const mid = (py + cy) / 2;
+  return {
+    d: `M${prev.offset} ${py} C${prev.offset} ${mid}, ${step.offset} ${mid}, ${step.offset} ${cy}`,
+    from: [prev.offset, py],
+    to: [step.offset, cy],
+    current: !!step.current,
+  };
+});
+const mCurrent = mPlaced.find((step) => step.current) ?? mPlaced[mPlaced.length - 1];
+
+// On mobile Dominik's cursor sits near the current step's right edge; spots are relative to its top-right corner.
+const M_DOMINIK_SPOTS = [
+  [-77, 38],
+  [-128, 20],
+  [-52, 14],
+];
+---
+
+<div class:list={['w-full', className]}>
+  <!-- Two-lane layout, md and up -->
+  <div class="hidden md:flex flex-col gap-[14px] mx-auto" style={`width:${GRAPH_W}px`}>
+    <div class="flex items-center justify-between gap-3 font-mono text-xs text-muted">
+      <span>career.workflow</span>
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 font-mono text-[11px] text-pine-deep whitespace-nowrap">
+        <span class="size-[7px] rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
+        running since {since}
+      </span>
+    </div>
+
+    <div class="career-zone relative" style={`width:${GRAPH_W}px;height:${height}px`} data-cursor-zone data-spots={JSON.stringify(spots)}>
+      <div
+        class="absolute top-0 h-full rounded-[14px] bg-sage border border-dashed border-[rgb(47_74_58/0.28)]"
+        style="left:-10px;width:290px"
+        aria-hidden="true"
+      >
+        <span class="absolute top-3 left-[14px] font-mono text-[11px] text-pine-deep">engineering</span>
+      </div>
+      <div
+        class="absolute top-0 h-full rounded-[14px] bg-parchment border border-dashed border-[rgb(120_98_55/0.30)]"
+        style="left:278px;width:290px"
+        aria-hidden="true"
+      >
+        <span class="absolute top-3 right-[14px] font-mono text-[11px] text-parchment-text">product</span>
+      </div>
+
+      <svg class="absolute inset-0 overflow-visible" width={GRAPH_W} height={height} viewBox={`0 0 ${GRAPH_W} ${height}`} fill="none" aria-hidden="true">
+        {
+          wires.map((wire) => (
+            <path
+              d={wire.d}
+              class="animate-flow"
+              stroke={wire.current ? 'var(--pine)' : 'var(--wire)'}
+              stroke-width={wire.current ? 1.8 : 1.6}
+              stroke-dasharray="6 6"
+            />
+          ))
+        }
+        {
+          wires.map((wire) => (
+            <>
+              <circle cx={wire.from[0]} cy={wire.from[1]} r="4.5" fill="#ffffff" stroke="var(--charcoal)" stroke-width="1.4" />
+              <circle cx={wire.to[0]} cy={wire.to[1]} r="4.5" fill="#ffffff" stroke={wire.current ? 'var(--pine)' : 'var(--charcoal)'} stroke-width="1.4" />
+            </>
+          ))
+        }
+      </svg>
+
+      <ol class="list-none m-0 p-0" aria-label="Career, oldest to newest">
+        {
+          placed.map((step) => (
+            <li>
+              <GraphStep
+                step={step}
+                logoSize={40}
+                labelClass="text-muted"
+                class:list={['absolute', !step.current && 'bg-white border-charcoal/16']}
+                style={`left:${step.x}px;top:${step.y}px;width:${STEP_W}px;height:${STEP_H}px`}
+              />
+            </li>
+          ))
+        }
+      </ol>
+
+      <Cursor
+        name="Dominik"
+        class="cursor-dominik absolute left-0 top-0 z-10"
+        style={`transform:translate3d(${spots[0][0]}px, ${spots[0][1]}px, 0)`}
+        data-cursor="dominik"
+      />
+      <Cursor name="you" color="visitor" class="cursor-you absolute left-0 top-0 z-20" data-cursor="you" />
+    </div>
+
+    <p class="pl-[144px] font-mono text-xs leading-normal text-muted">
+      ↳ output: <span class="text-charcoal">turn real problems into software people enjoy using</span>
+    </p>
+  </div>
+
+  <!-- Vertical layout, below md -->
+  <div class="md:hidden flex flex-col">
+    <div class="flex items-center justify-between gap-3 font-mono text-xs text-muted">
+      <span>career.workflow</span>
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 font-mono text-[11px] text-pine-deep whitespace-nowrap">
+        <span class="size-[7px] rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
+        running since {since}
+      </span>
+    </div>
+    <div class="mt-3 flex items-center gap-[14px] font-mono text-[11px]" aria-hidden="true">
+      <span class="flex items-center gap-1.5 text-pine-deep">
+        <span class="size-3 rounded-[3px] bg-sage border border-[rgb(47_74_58/0.24)]"></span>engineering
+      </span>
+      <span class="flex items-center gap-1.5 text-parchment-text">
+        <span class="size-3 rounded-[3px] bg-parchment border border-[rgb(120_98_55/0.30)]"></span>product
+      </span>
+    </div>
+
+    <div class="relative mt-[14px]" style={`height:${mHeight}px`} data-cursor-zone data-spots={JSON.stringify(M_DOMINIK_SPOTS)}>
+      <!-- Left edge at the centre of an unshifted step; x values are the step offsets. -->
+      <svg class="absolute top-0 left-[calc(50%-14px)] overflow-visible" width="1" height={mHeight} fill="none" aria-hidden="true">
+        {
+          mWires.map((wire) => (
+            <path
+              d={wire.d}
+              class="animate-flow"
+              stroke={wire.current ? 'var(--pine)' : 'var(--wire)'}
+              stroke-width={wire.current ? 1.8 : 1.6}
+              stroke-dasharray="6 6"
+            />
+          ))
+        }
+        {
+          mWires.map((wire) => (
+            <>
+              <circle cx={wire.from[0]} cy={wire.from[1]} r="4" fill="#ffffff" stroke="var(--charcoal)" stroke-width="1.4" />
+              <circle cx={wire.to[0]} cy={wire.to[1]} r="4" fill="#ffffff" stroke={wire.current ? 'var(--pine)' : 'var(--charcoal)'} stroke-width="1.4" />
+            </>
+          ))
+        }
+      </svg>
+
+      <ol class="list-none m-0 p-0 flex flex-col" style={`gap:${M_GAP}px`} aria-label="Career, oldest to newest">
+        {
+          mPlaced.map((step) => (
+            <li>
+              <GraphStep
+                step={step}
+                logoSize={38}
+                labelClass={M_LABEL[step.lane]}
+                class:list={['relative w-[calc(100%-28px)]', !step.current && M_STEP_FILL[step.lane]]}
+                style={`margin-left:${step.offset}px;height:${M_STEP_H}px`}
+              />
+            </li>
+          ))
+        }
+      </ol>
+
+      <!-- Anchor at the current step's top-right corner; Dominik's spots are relative to it. -->
+      <div class="absolute" style={`top:${mCurrent.top}px;left:calc(${mCurrent.offset}px + 100% - 28px)`}>
+        <Cursor
+          name="Dominik"
+          class="cursor-dominik absolute left-0 top-0 z-10"
+          style={`transform:translate3d(${M_DOMINIK_SPOTS[0][0]}px, ${M_DOMINIK_SPOTS[0][1]}px, 0)`}
+          data-cursor="dominik"
+        />
+      </div>
+    </div>
+
+    <p class="mt-4 font-mono text-xs leading-normal text-muted">
+      ↳ output: <span class="text-charcoal">turn real problems into software people enjoy using</span>
+    </p>
+  </div>
+</div>
+
+<style>
+  /* Mouse and trackpad only: the visitor's pointer becomes the "you" cursor inside the graph. */
+  @media (hover: hover) and (pointer: fine) {
+    .career-zone,
+    .career-zone :global(*) {
+      cursor: none !important;
+    }
+  }
+
+  .career-zone :global(.cursor-you) {
+    opacity: 0;
+    transition: opacity 120ms;
+  }
+
+  .career-zone :global(.cursor-you.is-on) {
+    opacity: 1;
+  }
+
+  [data-cursor-zone] :global(.cursor-dominik) {
+    transition: transform 1.4s cubic-bezier(0.45, 0.05, 0.25, 1);
+  }
+
+  [data-cursor-zone] :global(.cursor-dominik.is-clicking svg) {
+    animation: cursor-tap 320ms ease;
+  }
+
+  @keyframes cursor-tap {
+    50% {
+      transform: scale(0.82);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-cursor-zone] :global(.cursor-dominik) {
+      transition: none;
+    }
+
+    [data-cursor-zone] :global(.cursor-dominik.is-clicking svg) {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import './cursors';
+</script>
