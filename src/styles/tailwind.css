@@ -28,18 +28,11 @@
   --color-foreground-soft: hsl(var(--foreground-soft));
   --color-foreground-strong: hsl(var(--foreground-strong));
   --color-foreground-surface: hsl(var(--foreground-surface));
-  --color-foreground-surface-strong: hsl(var(--foreground-surface-strong));
   --color-foreground-border: hsl(var(--foreground-border));
-  --color-accent_seagreen: hsl(var(--accent_seagreen));
-  --color-accent_seagreen-hover: hsl(var(--accent_seagreen-hover));
   --color-surface-card: hsl(var(--surface-card));
   --color-brass: hsl(var(--brass));
   --color-ink: hsl(var(--ink));
   --color-ink-foreground: hsl(var(--ink-foreground));
-  --color-rose: hsl(var(--rose));
-  --color-mint: hsl(var(--mint));
-  --color-blush: hsl(var(--blush));
-  --color-aliceblue: hsl(var(--aliceblue));
 
   /* Redesign palette (pine and oat), backed by hex variables in Layout.astro */
   --color-canvas: var(--canvas);
@@ -60,19 +53,6 @@
   --color-card-head: var(--card-head);
   --color-footer-muted: var(--footer-muted);
   --color-visitor: var(--visitor);
-
-  /* Achievement card palette */
-  --color-achievement-blue: hsl(var(--achievement-blue));
-  --color-achievement-mint: hsl(var(--achievement-mint));
-  --color-achievement-yellow: hsl(var(--achievement-yellow));
-  --color-achievement-rose: hsl(var(--achievement-rose));
-  --color-achievement-peach: hsl(var(--achievement-peach));
-  --color-achievement-lavender: hsl(var(--achievement-lavender));
-  --color-achievement-sky: hsl(var(--achievement-sky));
-  --color-achievement-sage: hsl(var(--achievement-sage));
-
-  /* Achievement desc max-width */
-  --max-width-achievement-desc: 20rem;
 
   /* Animations (names must match existing utility classes) */
   @keyframes wave {
@@ -95,69 +75,6 @@
     }
     62.5% {
       transform: rotate(16deg);
-    }
-  }
-
-  @keyframes marquee_rtl {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-100% - 1rem));
-    }
-  }
-
-  @keyframes marquee_ltr {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  @keyframes slow_spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes spin_move {
-    0% {
-      transform: rotate(0deg) translate(-5%, -10%);
-    }
-    50% {
-      transform: rotate(180deg) translate(10%, 10%);
-    }
-    100% {
-      transform: rotate(360deg) translate(-5%, -10%);
-    }
-  }
-
-  @keyframes grow {
-    0% {
-      transform: scale(1);
-    }
-    30% {
-      transform: scale(1.1);
-    }
-    60% {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes blob_breathe {
-    0%,
-    100% {
-      transform: scale(1);
-      opacity: 0.65;
-    }
-    50% {
-      transform: scale(1.05);
-      opacity: 0.8;
     }
   }
 
@@ -225,12 +142,6 @@
   --animate-blink: blink 1.1s steps(1) infinite;
   --animate-steam: steam 2.4s ease-out infinite;
   --animate-progress: progress 28s linear infinite;
-  --animate-marquee_rtl: marquee_rtl 40s linear infinite;
-  --animate-marquee_ltr: marquee_ltr 40s linear infinite;
-  --animate-slow_spin: slow_spin 30s linear infinite;
-  --animate-spin_move: spin_move 30s linear infinite;
-  --animate-grow: grow 5s ease-in-out infinite;
-  --animate-blob_breathe: blob_breathe 4.5s ease-in-out infinite;
 
   /* Menu: entrances, the "Surprise me" dice moment, and the handwritten sign-off. */
   @keyframes menu-fade-up {
@@ -319,92 +230,6 @@
   .animate-steam,
   .animate-progress {
     animation: none;
-  }
-}
-
-@keyframes achievement-fly-out {
-  0% {
-    transform: rotate(0deg) translateX(0) translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(12deg) translateX(120%) translateY(-1.875rem) scale(0.9);
-    opacity: 0;
-  }
-}
-
-/* Stack: cards behind the active one (Tailwind spacing scale: 1.5=0.375rem, 2=0.5rem, etc.) */
-.achievement-behind-1 {
-  transform: rotate(3deg) translateY(0.375rem) translateX(0.25rem);
-  z-index: 2;
-  opacity: 0.85;
-}
-.achievement-behind-2 {
-  transform: rotate(5.5deg) translateY(0.6875rem) translateX(0.5rem);
-  z-index: 1;
-  opacity: 0.55;
-}
-.achievement-behind-3 {
-  transform: rotate(-2deg) translateY(0.625rem) translateX(-0.1875rem);
-  z-index: 0;
-  opacity: 0.25;
-}
-@media (min-width: 1024px) {
-  .achievement-behind-1 {
-    transform: rotate(3deg) translateY(0.5rem) translateX(0.375rem);
-  }
-  .achievement-behind-2 {
-    transform: rotate(5.5deg) translateY(0.875rem) translateX(0.625rem);
-  }
-  .achievement-behind-3 {
-    transform: rotate(-2deg) translateY(0.75rem) translateX(-0.25rem);
-  }
-}
-
-.achievement-card-active {
-  z-index: 10;
-  opacity: 1;
-  transform: rotate(0deg) translateY(0) translateX(0);
-  box-shadow:
-    0 20px 60px hsl(var(--foreground) / 0.18),
-    0 4px 16px hsl(var(--foreground) / 0.1);
-}
-.achievement-card-active:hover {
-  box-shadow:
-    0 28px 70px hsl(var(--foreground) / 0.22),
-    0 8px 24px hsl(var(--foreground) / 0.12);
-}
-
-.achievement-exit {
-  transform-origin: right center;
-  animation: achievement-fly-out 380ms cubic-bezier(0.55, 0, 1, 0.45) forwards;
-  z-index: 20;
-  pointer-events: none;
-}
-
-@media (max-width: 768px) {
-  .achievement-exit {
-    animation: achievement-fly-out-mobile 380ms cubic-bezier(0.55, 0, 1, 0.45)
-      forwards;
-  }
-}
-@keyframes achievement-fly-out-mobile {
-  0% {
-    transform: rotate(0deg) translateX(0) translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(12deg) translateX(120%) translateY(-1.875rem) scale(1);
-    opacity: 0;
-  }
-}
-
-.achievement-emoji-spin {
-  animation: achievement-spin 2.5s linear infinite;
-}
-@keyframes achievement-spin {
-  to {
-    transform: rotate(360deg);
   }
 }
 

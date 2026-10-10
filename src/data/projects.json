@@ -7,10 +7,9 @@
     "description": "A rent-vs-buy wealth simulator that compares net worth over time across multiple scenarios. Configure rent or buy legs with rent growth, home appreciation and more to see which scenario comes out ahead.",
     "url": "https://wealth-modeler.vercel.app/",
     "github": "https://github.com/dominikjessen/wealth-modeler",
-    "imgSrc": "/projects/wealth-modeler/01_WealthModeler_Desktop_Homescreen.png",
+    "imgSrc": "wealth-modeler/01_WealthModeler_Desktop_Homescreen.png",
     "imgAlt": "Wealth modeler home screen",
     "tint": "parchment",
-    "bgColor": "bg-[hsl(var(--blush))]",
     "techStack": ["Next.js", "TypeScript", "Tailwind", "Recharts", "Zustand"]
   },
   {
@@ -21,10 +20,9 @@
     "description": "With Yes, Chef! you never have to spend more than a few clicks on figuring out what to make for dinner this week. It's a mealplan generator, random recipe discovery tool, and can serve as your own recipe book - all in one.",
     "url": "https://yeschef.recipes/",
     "github": "https://github.com/dominikjessen/yeschef",
-    "imgSrc": "/projects/yeschef/01_YesChef_Mealplan.png",
+    "imgSrc": "yeschef/01_YesChef_Mealplan.png",
     "imgAlt": "Yes, Chef! mealplan screen",
     "tint": "stone",
-    "bgColor": "bg-[hsl(var(--aliceblue))]",
     "techStack": ["Next.js", "Typescript", "MySQL", "Prisma", "Tailwind"]
   },
   {
@@ -36,10 +34,9 @@
     "stat": "150 monthly visits",
     "url": "https://cinemojis.com/",
     "github": "https://github.com/dominikjessen/cinemojis",
-    "imgSrc": "/projects/cinemojis/03_Cinemojis_Home_Desktop.png",
+    "imgSrc": "cinemojis/03_Cinemojis_Home_Desktop.png",
     "imgAlt": "Cinemojis home screen",
     "tint": "sage",
-    "bgColor": "bg-[hsl(var(--mint))]",
     "techStack": ["Next.js", "Typescript", "Tailwind", "Supabase"]
   }
 ]

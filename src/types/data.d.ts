@@ -22,11 +22,9 @@ export type Project = {
   stat?: string; // optional pill, e.g. "150 monthly visits"
   url?: string;
   github?: string;
-  imgSrc?: string;
+  imgSrc?: string; // path under src/images/projects/
   imgAlt?: string;
-  tint: "parchment" | "stone" | "sage"; // screenshot background; replaces bgColor
-  /** Legacy ProjectCard background; removed with the new Side projects section. */
-  bgColor?: string;
+  tint: "parchment" | "stone" | "sage"; // screenshot background
   techStack?: string[];
 };
 
@@ -47,19 +45,6 @@ export type CurrentlyCategoryKey =
 export type CurrentlyCategory = {
   heading: string;
   items: CurrentlyItem[];
-};
-
-export type Achievement = {
-  emoji: string;
-  company: string;
-  year: number | string;
-  metric: string;
-  description: string;
-  bgColor: string;
-  isCta?: boolean;
-  tagLabel?: string;
-  ctaLabel?: string;
-  ctaUrl?: string;
 };
 
 export type WorkEntry = {

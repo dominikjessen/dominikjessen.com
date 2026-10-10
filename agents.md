@@ -7,10 +7,10 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 ## 2. Tech Stack & Dependencies
 
 - **Frontend**
-  - **Framework**: Astro 7.x with Vite 8. Astro is the primary UI layer; React 19 is used only for interactive islands (e.g. the “Currently” section with client-side randomization, `RevealCanvas`).
+  - **Framework**: Astro 7.x with Vite 8. Astro is the primary UI layer; React 19 is used only for interactive islands (the “Currently” section, with client-side randomization and shuffle).
   - **UI / styling**: Tailwind CSS 4 (`@tailwindcss/vite`), custom theme and keyframes in `src/styles/tailwind.css`. Design tokens are defined in `Layout.astro` and referenced via `@theme` in Tailwind. Two sets live side by side: the legacy HSL tokens (e.g. `--background`, `--primary`, `--ink`), still used by the menu, and the redesign's hex palette (`canvas`, `charcoal`, `body`, `muted`, `pine`, `pine-deep`, `sage`, `parchment`, `oat`, `wire`, `chip`, `visitor`, …; see `docs/redesign/REDESIGN.md`). Non-`paper` pages get the oat dot-grid background and the redesign body font; `paper` pages (the menu) keep the legacy look. Dark mode is paused: `ThemeToggle` is no longer rendered, but the `html.dark` block and component remain for a later dark version. No component library; custom Astro and React components.
   - **State**: No global state library. React components use local `useState`/`useEffect` where needed (e.g. `currentlyReact.tsx`).
-  - **Fonts**: Redesign: Instrument Serif (`font-display`), Instrument Sans (`font-body`), JetBrains Mono (`font-mono`) and Caveat (`font-hand`), all imported in `Layout.astro`. Legacy: Signika (menu headings), Fraunces (menu only). `inter`, `josefin-sans` and `ubuntu` are installed but unused (see `package.json`).
+  - **Fonts**: Redesign: Instrument Serif (`font-display`), Instrument Sans (`font-body`), JetBrains Mono (`font-mono`) and Caveat (`font-hand`), all imported in `Layout.astro`. Legacy: Signika (menu headings), Fraunces (menu only). (see `package.json`).
 
 - **Backend**
   - **None.** This is a static site. No server runtime, API routes, or auth. Data is read at build time from JSON under `src/data/`.
@@ -20,11 +20,11 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
 
 - **Infrastructure**
   - **Build**: Astro build (`npm run build`) outputs to `dist/`.
-  - **Hosting**: Vercel. `.gitignore` includes `.env` and `.env.production`. `@vercel/analytics` is integrated in `Layout.astro`.
+  - **Hosting**: Vercel. `site` in `astro.config.mjs` is `https://dominikjessen.com` (used for canonical and Open Graph URLs). `Layout.astro` sets the description (overridable via a `description` prop), OG/Twitter tags and `public/og.png` (1200×630 share image, made from the hero), and preloads the above-the-fold fonts. `.gitignore` includes `.env` and `.env.production`. `@vercel/analytics` is integrated in `Layout.astro`.
   - **CI/CD**: No workflows under `.github/` and no `Makefile` in the repo. Deploy is via Vercel’s Git integration or manual deploy.
 
 - **Key third-party**
-  - **Vercel Analytics** (`@vercel/analytics`), **vite-plugin-svgr** (SVGs as React components with `?react`), **node-html-parser** (used in `Icon.astro` to inline SVG). TypeScript 5.x with Astro’s strict tsconfig (`extends: "astro/tsconfigs/strict"`). ESM only (`"type": "module"`). Node `>=24.0.0` in `package.json` engines.
+  - **Vercel Analytics** (`@vercel/analytics`), TypeScript 5.x with Astro’s strict tsconfig (`extends: "astro/tsconfigs/strict"`). ESM only (`"type": "module"`). Node `>=24.0.0` in `package.json` engines.
 
 ## 3. Architecture Overview
 
@@ -37,21 +37,21 @@ This repository is a **personal portfolio and marketing site** for Dominik Jesse
   4. No runtime API calls; analytics (Vercel) run in the browser after hydration where used.
 
 - **Patterns**
-  - **Static-first**: Astro components by default; React only where interactivity is required (`client:load` in `index.astro` for `CurrentlyReact` and `RevealCanvas`).
+  - **Static-first**: Astro components by default; React only where interactivity is required (`client:visible` in `index.astro` for `CurrentlyReact`, which is server-rendered first). Small client behaviour that isn't a whole island (nav, career graph cursors, email links) uses Astro `<script>` tags.
   - **Data co-located with type**: JSON in `src/data/`, TypeScript types in `src/types/data.d.ts` (`Project`, `CareerStep`, `WorkEntry`, `Run`, `CurrentlyItem`). Sections and components import JSON and types directly.
-  - **SVG handling**: Astro `Icon.astro` uses `import.meta.glob` with `?raw` and `node-html-parser` to inline SVGs (e.g. in ProjectCard). React components use emojis or other assets as needed (e.g. Currently cards use per-item emoji).
+  - **Images and icons**: raster images and logos go through `astro:assets` (`<Image>`, resolved with `import.meta.glob` from `src/images/`). Small icons are inline SVG in the component that uses them (e.g. `RunIcon.astro`, the Currently tiles).
   - **Layout**: Single `Layout.astro` wraps all pages; provides global CSS variables (light/dark), fonts, Tailwind, Nav, Footer, and Analytics. Page-level styles are scoped in `<style>` or use Tailwind.
 
 - **Folder structure**
   - `src/pages/` — Routes (`index.astro`, `thoughts.astro`).
   - `src/layouts/` — `Layout.astro` (shell, theme, Nav, Footer).
   - `src/sections/` — Full-width sections composed by pages (e.g. `intro.astro`, `work.astro`, `projects.astro`, `currentlyReact.tsx`).
-  - `src/components/` — Reusable pieces: `ProjectCard.astro`, `WorkCard.astro`, `Icon.astro`, `RevealCanvas.tsx`; `structure/Nav.astro`, `Footer.astro` (redesign footer, all non-paper pages), `LegacyFooter.astro` (old footer, kept for the menu's paper pages); `ui/ThemeToggle.astro` (not rendered while dark mode is paused), `ui/EmailLink.astro` (every mailto link; holds the base64 email obfuscation script), `ReactCurrentlyCard.tsx`; `RunIcon.astro` for achievement icons; `CompanyLogo.astro` (company logo in a white tile, sized per logo, from `src/images/companies/`); `graph/CareerGraph.astro` (the hero's career graph, every position calculated at build time from `career.json`; two lanes from `md`, a vertical list below it whose wires use only the step offsets so they line up at any width), `graph/GraphStep.astro` (one step, shared by both layouts) and `graph/Cursor.astro` (collaborator cursor, shared with the footer). `graph/cursors.ts` (loaded by CareerGraph's `<script>`) makes the cursors live: a "you" cursor follows a mouse over any `[data-cursor-zone]`, and Dominik's cursor wanders between the zone's `data-spots`; reduced motion keeps Dominik still.
-  - `src/data/` — `career.json` (career graph steps), `projects.json`, `work.json`, `currently.json`, `achievements.json` (legacy), `revealContent.json`.
+  - `src/components/` — Reusable pieces: `structure/Nav.astro`, `Footer.astro` (redesign footer, all non-paper pages), `LegacyFooter.astro` (old footer, kept for the menu's paper pages); `ui/ThemeToggle.astro` (not rendered while dark mode is paused), `ui/EmailLink.astro` (every mailto link; holds the base64 email obfuscation script); `RunIcon.astro` for achievement icons; `CompanyLogo.astro` (company logo in a white tile, sized per logo, from `src/images/companies/`); `graph/CareerGraph.astro` (the hero's career graph, every position calculated at build time from `career.json`; two lanes from `md`, a vertical list below it whose wires use only the step offsets so they line up at any width), `graph/GraphStep.astro` (one step, shared by both layouts) and `graph/Cursor.astro` (collaborator cursor, shared with the footer). `graph/cursors.ts` (loaded by CareerGraph's `<script>`) makes the cursors live: a "you" cursor follows a mouse over any `[data-cursor-zone]`, and Dominik's cursor wanders between the zone's `data-spots`; reduced motion keeps Dominik still.
+  - `src/data/` — `career.json` (career graph steps), `projects.json`, `work.json`, `currently.json`.
   - `src/types/` — `data.d.ts` (shared types for data).
   - `src/styles/` — `tailwind.css` (Tailwind entry, `@theme`, keyframes).
   - `src/hooks/` — React-only hooks: `useCurrentlyFields.ts` (picks one item per Currently category; first item on the server, random after hydration, `shuffle` to re-roll).
-  - `src/images/` — SVG assets used by Icon.astro (e.g. logos for project cards); `src/images/companies/` holds the company logos referenced by `logo` in `career.json` and `work.json`.
+  - `src/images/` — `companies/` (logos referenced by `logo` in `career.json` and `work.json`) and `projects/` (screenshots referenced by `imgSrc` in `projects.json`), all rendered through `astro:assets`.
   - `public/` — Favicon, PDFs, static assets served as-is.
 
 - **Boundaries to preserve**
@@ -117,9 +117,9 @@ Use this playbook when adding a feature end-to-end. There are no DB migrations o
    - No env vars are required for the current feature set. If you add something that needs env (e.g. a future API key), add a `.env.example` and document in README; use `import.meta.env` in Astro/Vite as appropriate.
 
 **Concrete paths**
-- New project: edit `src/data/projects.json` and ensure `Project` in `src/types/data.d.ts` matches (`input`/`output` pills, `tagline`, optional `stat`, `tint` of `parchment` | `stone` | `sage`); `src/sections/projects.astro` renders it (IN → card → OUT rows; screenshots live in `public/projects/`). `bgColor` is legacy and only used by the old, now unused `ProjectCard.astro` (deleted in the redesign's cleanup).
+- New project: edit `src/data/projects.json` and ensure `Project` in `src/types/data.d.ts` matches (`input`/`output` pills, `tagline`, optional `stat`, `tint` of `parchment` | `stone` | `sage`); `src/sections/projects.astro` renders it (IN → card → OUT rows; screenshots live in `src/images/projects/` and `imgSrc` is the path inside it, so Astro can resize them).
 - New “Currently” category or item: edit `src/data/currently.json`; each item has `title`, `emoji` (kept but not shown in the redesign) and optional `url`. `src/hooks/useCurrentlyFields.ts` turns it into one field per category (key = heading in snake_case); `currentlyReact.tsx` renders them as a "now playing" panel with a shuffle button and a small animated detail per category (`TILE`). A new category needs adding to `CurrentlyCategoryKey`, `CURRENTLY_ORDER` (in the hook) and `TILE`.
-- New work entry: edit `src/data/work.json`; each entry has `id`, `company`, `role`, `period`, `lane` (`engineering`, `product` or `both`), `logo`, `highlight`, `url` and `runs` (achievements: `metric`, `detail`, `icon`, rendered with `RunIcon.astro`; empty means "first runs in progress"). `id` matches the step in `src/data/career.json` and is the `#work-<id>` anchor the career graph links to. `WorkEntry` and `src/sections/work.astro` use it (one card per entry with `id="work-<id>"`; `WorkCard.astro` is the old, now unused card).
+- New work entry: edit `src/data/work.json`; each entry has `id`, `company`, `role`, `period`, `lane` (`engineering`, `product` or `both`), `logo`, `highlight`, `url` and `runs` (achievements: `metric`, `detail`, `icon`, rendered with `RunIcon.astro`; empty means "first runs in progress"). `id` matches the step in `src/data/career.json` and is the `#work-<id>` anchor the career graph links to. `WorkEntry` and `src/sections/work.astro` use it (one card per entry with `id="work-<id>"`).
 - New career step: edit `src/data/career.json` (`CareerStep`); put the logo in `src/images/companies/`. The graph derives all positions and the "running since" year from this file.
 - New page: create `src/pages/<route>.astro`, use `<Layout title="...">`, add content; optionally add a link in `src/components/structure/Nav.astro`.
 
@@ -150,7 +150,7 @@ Use this playbook when adding a feature end-to-end. There are no DB migrations o
 
 - **Don’t remove or stub without being asked**: Do not delete or comment out existing behavior (e.g. sections, nav items, or React islands) unless the user explicitly requests it.
 
-  - **Choose the approach already in the codebase**: When two options are both valid, use the one already used (e.g. Astro for static content; React only where client interactivity is needed; SVG via `Icon.astro` for Astro components).
+  - **Choose the approach already in the codebase**: When two options are both valid, use the one already used (e.g. Astro for static content; React only where client interactivity is needed; images via `astro:assets`).
 
 - **State assumptions**: If you assume something about the data shape, the meaning of a prop, or the deploy target, say so briefly (e.g. “Assumed `projects.json` is the single source of projects and is not fetched from an API.”).
 

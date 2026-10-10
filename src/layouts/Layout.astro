@@ -10,26 +10,61 @@ import { Analytics } from '@vercel/analytics/react';
 import Nav from '../components/structure/Nav.astro';
 import Footer from '../components/structure/Footer.astro';
 import LegacyFooter from '../components/structure/LegacyFooter.astro';
+// Fonts above the fold (hero headline serif + body sans), preloaded so they don't swap in late.
+// Same files the @fontsource CSS points at.
+import serifRegular from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import serifItalic from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
+import sansVariable from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
 
 interface Props {
   title: string;
+  description?: string;
   showNav?: boolean;
   /** Plain white ground instead of the cream background (light mode only). */
   paper?: boolean;
 }
 
-const { title, showNav = true, paper = false } = Astro.props;
+const {
+  title,
+  description = "Hi, I'm Dominik, a product engineer at n8n. I turn real problems into software people enjoy using.",
+  showNav = true,
+  paper = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Hey, I'm Dominik - a Software Engineer from Europe!" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    {
+      !paper && (
+        <>
+          <link rel="preload" href={serifRegular} as="font" type="font/woff2" crossorigin />
+          <link rel="preload" href={serifItalic} as="font" type="font/woff2" crossorigin />
+          <link rel="preload" href={sansVariable} as="font" type="font/woff2" crossorigin />
+        </>
+      )
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dominik Jessen" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hi, I'm Dominik. Product engineer, with a career graph from Uni Mannheim to n8n." />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body class:list={['bg-background text-foreground overflow-x-hidden', { paper }]}>
     {showNav && <Nav />}
@@ -54,33 +89,9 @@ const { title, showNav = true, paper = false } = Astro.props;
     --foreground: 70 5% 7%;
     --foreground_lighter: 70 11% 11%;
     --primary: 119 19% 42%;
-    --accent_seagreen: 150 66% 75%;
     --brass: 43 66% 66%;
-    --rose: 0 87% 91%;
-    --mint: 150 66% 97%;
-    --blush: 0 87% 97%;
-    --aliceblue: 208 100% 97%;
 
-    /* Achievement card palette  */
-    --achievement-blue: 208 52% 92%;
-    --achievement-mint: 142 44% 91%;
-    --achievement-yellow: 48 60% 90%;
-    --achievement-rose: 354 58% 92%;
-    --achievement-peach: 30 78% 91%;
-    --achievement-lavender: 263 52% 92%;
-    --achievement-sky: 198 70% 91%;
-    --achievement-sage: 120 20% 92%;
-
-    /* Achievement stack dimensions */
-    --width-achievement-stack-sm: 24rem;
-    --width-achievement-stack-lg: 30rem;
-    --height-achievement-stack-sm: 16rem;
-    --height-achievement-stack-lg: 20rem;
-    --max-width-achievement-desc: 20rem;
-
-    --header-background: 72 99% 98%; /* Light background for light mode */
-
-    /* Semantic tints/surfaces (no opacity; blob-friendly) */
+    /* Semantic tints/surfaces */
     --primary-light: 119 25% 96%;
     --primary-soft: 119 20% 92%;
     --primary-muted: 119 19% 52%;
@@ -89,9 +100,7 @@ const { title, showNav = true, paper = false } = Astro.props;
     --foreground-soft: 70 8% 22%;
     --foreground-strong: 70 5% 12%;
     --foreground-surface: 70 5% 97%;
-    --foreground-surface-strong: 70 5% 93%;
     --foreground-border: 70 5% 91%;
-    --accent_seagreen-hover: 150 66% 68%;
     /* Card surface: soft mix of primary + background, very light (for Work + Currently cards). Light: ~rgb(237,240,230). */
     --surface-card: 78 25% 92%;
     /* Deep bottle green + cream: the menu's filter bar and other "fine dining" accents. */
@@ -131,23 +140,7 @@ const { title, showNav = true, paper = false } = Astro.props;
     --foreground: 72 99% 98%;
     --foreground_lighter: 90 6% 93%;
     --primary: 120 19% 50%;
-    --accent_seagreen: 150 66% 75%;
     --brass: 43 66% 66%;
-    --rose: 0 87% 91%;
-    --mint: 150 66% 5%;
-    --blush: 354 53% 6%;
-    --aliceblue: 208 100% 6%;
-
-    --achievement-blue: 208 52% 18%;
-    --achievement-mint: 142 44% 16%;
-    --achievement-yellow: 48 60% 18%;
-    --achievement-rose: 354 58% 18%;
-    --achievement-peach: 30 78% 18%;
-    --achievement-lavender: 263 52% 18%;
-    --achievement-sky: 198 70% 16%;
-    --achievement-sage: 120 20% 16%;
-
-    --header-background: 119 19% 50%; /* Green background for dark mode */
 
     /* Semantic tints/surfaces (dark mode) */
     --primary-light: 120 19% 16%;
@@ -158,9 +151,7 @@ const { title, showNav = true, paper = false } = Astro.props;
     --foreground-soft: 90 6% 82%;
     --foreground-strong: 90 6% 96%;
     --foreground-surface: 120 2% 16%;
-    --foreground-surface-strong: 120 2% 20%;
     --foreground-border: 120 2% 22%;
-    --accent_seagreen-hover: 150 66% 70%;
     --surface-card: 115 8% 18%;
     --ink: 152 18% 20%;
     --ink-foreground: 45 45% 95%;
@@ -208,39 +199,6 @@ const { title, showNav = true, paper = false } = Astro.props;
     }
     to {
       opacity: 1;
-    }
-  }
-
-  .blob-fill {
-    background-color: hsl(var(--background));
-    background-image: radial-gradient(at 30% 34%, rgb(252, 212, 212) 0, transparent 78%),
-      radial-gradient(at 3% 57%, rgb(196, 181, 253) 0, transparent 72%),
-      radial-gradient(at 32% 67%, rgb(107, 114, 128) 0, transparent 18%),
-      radial-gradient(at 14% 19%, rgb(71, 85, 105) 0, transparent 61%),
-      radial-gradient(at 12% 31%, rgb(253, 186, 116) 0, transparent 5%),
-      radial-gradient(at 14% 46%, rgb(250, 232, 255) 0, transparent 6%);
-  }
-
-  html.dark .blob-fill {
-    background-color: hsl(var(--background));
-    background-image: radial-gradient(at 30% 34%, hsl(var(--primary) / 0.18) 0, transparent 78%),
-      radial-gradient(at 3% 57%, hsl(263 52% 45% / 0.2) 0, transparent 72%),
-      radial-gradient(at 32% 67%, hsl(var(--foreground_lighter) / 0.08) 0, transparent 18%),
-      radial-gradient(at 14% 19%, hsl(var(--accent_seagreen) / 0.12) 0, transparent 61%),
-      radial-gradient(at 12% 31%, hsl(var(--brass) / 0.1) 0, transparent 5%),
-      radial-gradient(at 14% 46%, hsl(263 52% 60% / 0.08) 0, transparent 6%);
-    animation: blob_breathe_dark 4.5s ease-in-out infinite;
-  }
-
-  @keyframes blob_breathe_dark {
-    0%,
-    100% {
-      transform: scale(1);
-      opacity: 0.45;
-    }
-    50% {
-      transform: scale(1.05);
-      opacity: 0.6;
     }
   }
 </style>
