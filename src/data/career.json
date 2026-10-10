@@ -11,14 +11,22 @@
     "id": "sovanta",
     "company": "Sovanta",
     "label": "SOFTWARE ENGINEER",
-    "years": "2016",
+    "years": "2016–17",
     "lane": "engineering",
     "logo": "sovanta.webp"
   },
   {
+    "id": "celonis",
+    "company": "Celonis",
+    "label": "PRODUCT MANAGER INTERN",
+    "years": "2019",
+    "lane": "product",
+    "logo": "celonis.png"
+  },
+  {
     "id": "unilife",
     "company": "Uni-Life",
-    "label": "PRODUCT & GROWTH",
+    "label": "HEAD OF PRODUCT",
     "years": "2019–21",
     "lane": "product",
     "logo": "unilife.webp"

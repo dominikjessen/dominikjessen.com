@@ -78,7 +78,7 @@
   {
     "id": "unilife",
     "company": "Uni-Life",
-    "role": "Product & Growth",
+    "role": "Head of Product",
     "period": "2019 → 2021",
     "lane": "product",
     "logo": "unilife.webp",
@@ -96,5 +96,25 @@
         "icon": "route"
       }
     ]
+  },
+  {
+    "id": "celonis",
+    "company": "Celonis",
+    "role": "Product Manager (Intern)",
+    "period": "2019",
+    "lane": "product",
+    "logo": "celonis.png",
+    "url": "https://www.celonis.com/",
+    "compact": true
+  },
+  {
+    "id": "sovanta",
+    "company": "Sovanta",
+    "role": "Software Engineer",
+    "period": "2016 → 2017",
+    "lane": "engineering",
+    "logo": "sovanta.webp",
+    "url": "https://www.sovanta.com/",
+    "compact": true
   }
 ]

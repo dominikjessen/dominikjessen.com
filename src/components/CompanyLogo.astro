@@ -3,7 +3,8 @@ import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
 export interface Props {
-  logo: string; // filename in src/images/companies/
+  logo?: string; // filename in src/images/companies/
+  name?: string; // shown as a monogram when there's no logo file
   size?: number; // tile size in px; the logo scales with it
   className?: string;
   eager?: boolean; // set for logos above the fold (the hero graph)
@@ -19,20 +20,29 @@ const sizeInTile: Record<string, number> = {
   unilife: 34,
   tractable: 30,
   vesper: 24,
+  celonis: 34,
 };
 
-const { logo, size = 40, className, eager = false } = Astro.props as Props;
+const { logo, name, size = 40, className, eager = false } = Astro.props as Props;
 
-const key = Object.keys(logos).find((k) => k.endsWith(`/${logo}`));
-if (!key) throw new Error(`CompanyLogo: no file "${logo}" in src/images/companies/`);
+const key = logo && Object.keys(logos).find((k) => k.endsWith(`/${logo}`));
+if (logo && !key) throw new Error(`CompanyLogo: no file "${logo}" in src/images/companies/`);
 
-const name = logo.replace(/\.[^.]+$/, '');
-const px = Math.round(((sizeInTile[name] ?? 32) * size) / 40);
+const base = logo?.replace(/\.[^.]+$/, '') ?? '';
+const px = Math.round(((sizeInTile[base] ?? 32) * size) / 40);
 ---
 
 <span
   class:list={['flex shrink-0 items-center justify-center overflow-hidden bg-white border border-charcoal/10', className]}
   style={`width:${size}px;height:${size}px`}
 >
-  <Image src={logos[key].default} alt="" width={px} height={px} densities={[1, 2]} loading={eager ? 'eager' : 'lazy'} class="object-contain" draggable="false" />
+  {
+    key ? (
+      <Image src={logos[key].default} alt="" width={px} height={px} densities={[1, 2]} loading={eager ? 'eager' : 'lazy'} class="object-contain" draggable="false" />
+    ) : (
+      <span class="font-display leading-none text-muted" style={`font-size:${Math.round(size * 0.55)}px`} aria-hidden="true">
+        {name?.charAt(0)}
+      </span>
+    )
+  }
 </span>

@@ -31,7 +31,7 @@ const Tag = step.href ? 'a' : 'div';
   ]}
   style={style}
 >
-  <CompanyLogo logo={step.logo} size={logoSize} className="rounded-[9px]" />
+  <CompanyLogo logo={step.logo} name={step.company} size={logoSize} className="rounded-[9px]" />
   <span class="flex flex-col gap-[3px] min-w-0">
     <span class:list={['font-mono text-[9.5px] uppercase tracking-[0.02em] truncate', step.current ? 'text-sage' : labelClass]}>
       {step.label} · {step.years}

@@ -7,7 +7,7 @@ export type CareerStep = {
   label: string; // "BUSINESS INFORMATICS", shown uppercase in mono
   years: string; // "2015–19", "2016", "NOW"
   lane: Lane;
-  logo: string; // filename in src/images/companies/
+  logo?: string; // filename in src/images/companies/; without one the tile shows the company's initial
   current?: boolean; // the pine step with the "Dominik" cursor
 };
 
@@ -47,14 +47,20 @@ export type CurrentlyCategory = {
   items: CurrentlyItem[];
 };
 
-export type WorkEntry = {
-  id: string; // matches CareerStep.id
+type WorkEntryBase = {
+  id: string; // matches CareerStep.id when the job is on the career graph
   company: string;
   role: string;
-  period: string; // "2024 → 2026", "2026 → now"
+  period: string; // "2024 → 2026", "2026 → now", "2019"
   lane: Lane;
-  logo: string;
-  highlight: string;
+  logo?: string; // filename in src/images/companies/; without one the logo tile shows the company's initial
   url: string;
-  runs: Run[]; // empty = "first runs in progress"
 };
+
+export type WorkEntry =
+  | (WorkEntryBase & {
+      compact?: false;
+      highlight: string;
+      runs: Run[]; // empty = "first runs in progress"
+    })
+  | (WorkEntryBase & { compact: true }); // a thin row: no highlight, no runs
