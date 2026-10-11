@@ -3,8 +3,8 @@
  * Hand-drawn kitchen doodles scattered across the whole menu background: knives, bread,
  * veggies, pans and friends at mixed sizes and tilts. Purely decorative.
  *
- * The layer spans the full viewport width (the page content is w-5/6, so -10% on each side
- * reaches the edges) and clips its children, so nothing can poke past the screen.
+ * The layer spans the full viewport width (it reaches from the centred page container out to
+ * both screen edges) and clips its children, so nothing can poke past the screen.
  * Placement is a jittered grid from a fixed seed: organic-looking, but identical on every visit.
  */
 
@@ -397,7 +397,7 @@ for (let row = 0; row < ROWS; row++) {
 
 <div
   aria-hidden="true"
-  class="pointer-events-none absolute inset-y-0 -left-[10%] -right-[10%] -z-10 overflow-hidden [--doodle-scale:0.75] md:[--doodle-scale:1]"
+  class="pointer-events-none absolute inset-y-0 left-[calc(50%-50vw)] right-[calc(50%-50vw)] -z-10 overflow-hidden [--doodle-scale:0.75] md:[--doodle-scale:1]"
 >
   {
     scatter.map(({ name, x, y, size, tilt, onPhones }) => {

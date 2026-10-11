@@ -9,7 +9,6 @@ import '../styles/tailwind.css';
 import { Analytics } from '@vercel/analytics/react';
 import Nav from '../components/structure/Nav.astro';
 import Footer from '../components/structure/Footer.astro';
-import LegacyFooter from '../components/structure/LegacyFooter.astro';
 // Fonts above the fold (hero headline serif + body sans), preloaded so they don't swap in late.
 // Same files the @fontsource CSS points at.
 import serifRegular from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
@@ -20,7 +19,7 @@ interface Props {
   title: string;
   description?: string;
   showNav?: boolean;
-  /** Plain white ground instead of the cream background (light mode only). */
+  /** Menu pages: keeps the legacy Signika headings while the menu moves to the new design. */
   paper?: boolean;
 }
 
@@ -45,15 +44,9 @@ const ogImage = new URL('/og.png', Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    {
-      !paper && (
-        <>
-          <link rel="preload" href={serifRegular} as="font" type="font/woff2" crossorigin />
-          <link rel="preload" href={serifItalic} as="font" type="font/woff2" crossorigin />
-          <link rel="preload" href={sansVariable} as="font" type="font/woff2" crossorigin />
-        </>
-      )
-    }
+    <link rel="preload" href={serifRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifItalic} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sansVariable} as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dominik Jessen" />
@@ -70,15 +63,14 @@ const ogImage = new URL('/og.png', Astro.site);
     {showNav && <Nav />}
     <main
       class:list={[
-        'relative z-0 mx-auto pb-24',
-        paper ? 'w-5/6' : 'max-w-[1280px] px-5 md:px-10 xl:px-[72px]',
-        // Non-paper pages clear the fixed header bar (14px + 54px mobile, 20px + 56px from md).
-        !showNav ? 'pt-12 md:pt-16' : paper ? 'pt-8' : 'pt-[68px] md:pt-[76px]',
+        'relative z-0 mx-auto pb-24 max-w-[1280px] px-5 md:px-10 xl:px-[72px]',
+        // Pages with the fixed header bar clear it (14px + 54px mobile, 20px + 56px from md).
+        showNav ? 'pt-[68px] md:pt-[76px]' : 'pt-12 md:pt-16',
       ]}
     >
       <slot />
     </main>
-    {paper ? <LegacyFooter /> : <Footer />}
+    <Footer />
     <Analytics />
   </body>
 </html>
@@ -128,13 +120,6 @@ const ogImage = new URL('/og.png', Astro.site);
     --visitor: #8e6538; /* the "you?" cursor */
   }
 
-  /* Paper pages (menu): white ground in light mode; dark mode keeps its palette. */
-  /* Tailwind's --color-background resolves at :root, so re-derive it here for the override to apply. */
-  html:not(.dark) body.paper {
-    --background: 0 0% 100%;
-    --color-background: hsl(var(--background));
-  }
-
   html.dark {
     --background: 120 2% 10%;
     --foreground: 72 99% 98%;
@@ -162,17 +147,17 @@ const ogImage = new URL('/og.png', Astro.site);
     color: hsl(var(--background));
   }
 
-  /* Redesign pages: oat dot grid and the new body font. Paper pages (menu) keep their own. */
-  body:not(.paper) {
+  /* Oat dot grid and the body font, on every page. */
+  body {
     background-color: var(--canvas);
     background-image: radial-gradient(var(--canvas-dots) 1.2px, transparent 1.3px);
     background-size: 24px 24px;
     font-family: var(--font-body);
   }
 
-  /* Legacy heading style, kept for the menu. The redesign styles its headings itself. */
-  body.paper h1,
-  body.paper h2 {
+  /* Legacy heading style, kept for the menu's content until its headings are restyled (not the footer). */
+  body.paper main h1,
+  body.paper main h2 {
     font-family: 'Signika Variable', sans-serif;
     font-weight: 700;
   }
