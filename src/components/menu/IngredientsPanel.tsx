@@ -29,9 +29,9 @@ function formatTime(minutes: number): string {
 function Fact({ icon, label, children }: { icon: ReactNode; label: string; children: ReactNode }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="shrink-0 text-primary dark:text-primary-muted">{icon}</span>
+      <span className="shrink-0 text-pine">{icon}</span>
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-foreground-subtle">{label}</p>
+        <p className="font-mono text-[11px] lowercase text-muted">{label}</p>
         {children}
       </div>
     </div>
@@ -55,7 +55,7 @@ function StepButton({
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className="flex size-8 items-center justify-center rounded-full border border-foreground-border bg-background text-foreground-soft transition duration-150 enabled:hover:border-primary/40 enabled:hover:text-primary disabled:opacity-40"
+      className="flex size-8 items-center justify-center rounded-full border border-charcoal/16 bg-white text-charcoal transition duration-150 enabled:hover:border-pine/50 enabled:hover:text-pine disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine"
     >
       {children}
     </button>
@@ -75,10 +75,10 @@ export default function IngredientsPanel({ ingredients, servings, timeMinutes }:
   return (
     <>
       {(timeMinutes !== undefined || servings !== undefined) && (
-        <div className="mb-8 flex flex-wrap items-center gap-x-8 gap-y-4 rounded-2xl border border-foreground-border bg-foreground-surface px-5 py-4">
+        <div className="mb-8 flex flex-wrap items-center gap-x-8 gap-y-4 rounded-[14px] border border-charcoal/16 bg-white px-5 py-4 shadow-[0_6px_16px_rgb(26_26_23/0.04)]">
           {timeMinutes !== undefined && (
             <Fact icon={<ClockIcon className="size-6" />} label="Time">
-              <p className="font-signika text-lg text-foreground-strong">{formatTime(timeMinutes)}</p>
+              <p className="text-[17px] font-semibold text-charcoal">{formatTime(timeMinutes)}</p>
             </Fact>
           )}
           {servings !== undefined && (
@@ -94,7 +94,7 @@ export default function IngredientsPanel({ ingredients, servings, timeMinutes }:
                 <output
                   aria-live="polite"
                   aria-label={`Serves ${count}`}
-                  className="min-w-6 text-center font-signika text-lg tabular-nums text-foreground-strong"
+                  className="min-w-6 text-center text-[17px] font-semibold tabular-nums text-charcoal"
                 >
                   {count}
                 </output>
@@ -112,15 +112,15 @@ export default function IngredientsPanel({ ingredients, servings, timeMinutes }:
             <button
               type="button"
               onClick={() => setCount(servings)}
-              className="font-signika text-sm text-primary underline-offset-4 hover:underline dark:text-primary-muted"
+              className="rounded-sm font-mono text-xs text-pine underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine"
             >
-              Reset to {servings}
+              reset to {servings}
             </button>
           )}
         </div>
       )}
 
-      <h2 id="ingredients-heading" className="text-2xl md:text-3xl text-primary mb-4">
+      <h2 id="ingredients-heading" className="mb-4 font-display font-normal text-[32px] md:text-[40px] leading-none text-charcoal">
         Ingredients
       </h2>
       <ul className="flex flex-col gap-3">
@@ -129,16 +129,16 @@ export default function IngredientsPanel({ ingredients, servings, timeMinutes }:
           return (
             <li
               key={ingredient.name}
-              className="flex gap-3 text-base md:text-lg text-foreground-soft leading-snug border-b border-foreground-border pb-3 last:border-0"
+              className="flex items-baseline gap-3 border-b border-charcoal/10 pb-3 text-base md:text-[17px] leading-snug text-body last:border-0"
             >
               <span className="grow">
                 {scaleIngredientName(ingredient.name, ingredient.amount, factor)}
-                {ingredient.optional && <span className="text-foreground-subtle"> (optional)</span>}
+                {ingredient.optional && <span className="text-muted"> (optional)</span>}
               </span>
               {ingredient.amount && (
                 <span
-                  className={`shrink-0 tabular-nums transition-colors duration-200 ${
-                    scaled ? "text-primary dark:text-primary-muted" : "text-foreground-muted"
+                  className={`shrink-0 font-mono text-[13px] tabular-nums transition-colors duration-200 ${
+                    scaled ? "text-pine" : "text-muted"
                   }`}
                 >
                   {scaleAmount(ingredient.amount, factor)}
@@ -149,7 +149,7 @@ export default function IngredientsPanel({ ingredients, servings, timeMinutes }:
         })}
       </ul>
       {scaling && hasUnscalable && (
-        <p className="mt-4 text-sm italic text-foreground-subtle">
+        <p className="mt-4 text-sm italic text-muted">
           Amounts like “a pinch” stay as written — go by taste.
         </p>
       )}
