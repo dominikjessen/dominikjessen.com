@@ -9,13 +9,10 @@ import {
   syncMenuFiltersToUrl,
   type MenuFilters,
 } from "../components/menu/menuFilters";
-import { CloseIcon, DiceIcon, RecipeTagIcon, SearchIcon } from "../components/menu/MenuIcons";
+import { CloseIcon, DiceIcon, SearchIcon } from "../components/menu/MenuIcons";
 import {
   MEAL_TYPE_LABELS,
   MEAL_TYPES,
-  MENU_ICON_TAGS,
-  formatRecipeLabel,
-  menuIconTags,
   type MealType,
   type RecipeListItem,
 } from "../types/recipes";
@@ -38,10 +35,8 @@ function CoursePill({
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`shrink-0 rounded-full px-4 py-2 font-signika text-sm md:text-base whitespace-nowrap transition duration-150 ease-out ${
-        active
-          ? "bg-brass text-ink"
-          : "text-ink-foreground/75 hover:bg-ink-foreground/10 hover:text-ink-foreground"
+      className={`shrink-0 rounded-full px-4 py-2 font-mono text-[13px] lowercase whitespace-nowrap transition duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat ${
+        active ? "bg-oat text-charcoal" : "text-canvas/75 hover:bg-canvas/10 hover:text-canvas"
       }`}
     >
       {label}
@@ -72,12 +67,6 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
   const availableMealTypes = useMemo(() => {
     const present = new Set(recipes.map((recipe) => recipe.mealType));
     return MEAL_TYPES.filter((mealType) => present.has(mealType));
-  }, [recipes]);
-
-  // Only explain the icons that actually appear on the menu.
-  const legendTags = useMemo(() => {
-    const used = new Set(recipes.flatMap((recipe) => menuIconTags(recipe.tags)));
-    return MENU_ICON_TAGS.filter((tag) => used.has(tag));
   }, [recipes]);
 
   const filteredRecipes = useMemo(() => {
@@ -139,11 +128,11 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
         <ChefsChoice pool={surprisePool} onClose={closeChefsChoice} />
       )}
 
-      {/* Bottle-green bar: the page's colour anchor, with brass for the active course. */}
-      <div className="flex items-center gap-2 rounded-full bg-ink p-1.5 shadow-lg shadow-ink/25">
+      {/* Pine bar: the page's colour anchor, with oat for the active course (as in the site footer). */}
+      <div className="flex items-center gap-2 rounded-full bg-pine-deep p-1.5 shadow-[0_8px_20px_rgb(34_56_43/0.22)]">
         {searchOpen ? (
           <div className="relative min-w-0 flex-1">
-            <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-ink-foreground/60" />
+            <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-canvas/60" />
             <input
               ref={searchRef}
               id="menu-search"
@@ -155,12 +144,12 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
               }}
               placeholder="Search dishes or ingredients…"
               aria-label="Search dishes or ingredients"
-              className="w-full rounded-full bg-ink-foreground/10 py-2 pl-10 pr-10 text-sm md:text-base text-ink-foreground placeholder:text-ink-foreground/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass [&::-webkit-search-cancel-button]:hidden"
+              className="w-full rounded-full bg-canvas/10 py-2 pl-10 pr-10 text-sm md:text-base text-canvas placeholder:text-canvas/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat [&::-webkit-search-cancel-button]:hidden"
             />
             <button
               type="button"
               onClick={closeSearch}
-              className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-ink-foreground/60 hover:bg-ink-foreground/10 hover:text-ink-foreground"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-canvas/60 hover:bg-canvas/10 hover:text-canvas focus-visible:outline-2 focus-visible:outline-oat"
               aria-label="Close search"
             >
               <CloseIcon className="size-4" />
@@ -189,7 +178,7 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
             <button
               type="button"
               onClick={openSearch}
-              className="shrink-0 rounded-full p-2.5 text-ink-foreground/75 transition duration-150 hover:bg-ink-foreground/10 hover:text-ink-foreground"
+              className="shrink-0 rounded-full p-2.5 text-canvas/75 transition duration-150 hover:bg-canvas/10 hover:text-canvas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat"
               aria-label="Search dishes or ingredients"
             >
               <SearchIcon className="size-5" />
@@ -200,14 +189,14 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
           type="button"
           onClick={() => setChoosing(true)}
           aria-label="Surprise me with a random dish"
-          className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-ink-foreground/10 px-3 py-2 font-signika text-sm md:text-base text-ink-foreground transition duration-150 hover:bg-brass hover:text-ink sm:px-4"
+          className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-canvas/10 px-3 py-2 font-mono text-[13px] text-canvas transition duration-150 hover:bg-oat hover:text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat sm:px-4"
         >
           <DiceIcon className="size-4 transition-transform duration-300 ease-out group-hover:rotate-90" />
-          <span className="hidden sm:inline">Surprise me</span>
+          <span className="hidden sm:inline">surprise me</span>
         </button>
       </div>
 
-      <div className="flex items-center gap-3 px-1 text-sm text-foreground-subtle" aria-live="polite">
+      <div className="flex items-center gap-3 px-1 font-mono text-xs text-muted" aria-live="polite">
         <span>
           {filteredRecipes.length} {filteredRecipes.length === 1 ? "dish" : "dishes"}
           {hasActiveFilters ? " match" : " on the menu"}
@@ -219,68 +208,52 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
               setFilters(EMPTY_MENU_FILTERS);
               setSearchOpen(false);
             }}
-            className="inline-flex items-center gap-1 font-signika text-primary hover:text-primary-muted dark:text-foreground-soft"
+            className="inline-flex items-center gap-1 rounded-sm text-pine underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2"
           >
             <CloseIcon className="size-3.5" />
-            Clear
+            clear
           </button>
         )}
       </div>
 
+      {/* Two columns on wide screens, filled top-to-bottom like a folded menu; courses never split.
+          A single course stays one column so it doesn't sit lopsided on the left. */}
       {courses.length > 0 ? (
-        <>
-          {/* Two columns on wide screens, filled top-to-bottom like a folded menu; courses never split.
-              A single course stays one column so it doesn't sit lopsided on the left. */}
-          <div
-            className={`max-w-3xl ${courses.length > 1 ? "lg:max-w-none lg:columns-2 lg:gap-x-16" : ""}`}
-          >
-            {courses.map(({ mealType, recipes: courseRecipes, startIndex }, courseIndex) => (
-              <section
-                key={mealType}
-                aria-labelledby={`course-${mealType}`}
-                className="mb-8 break-inside-avoid md:mb-10"
-              >
-                <h2
-                  id={`course-${mealType}`}
-                  className="mb-2 flex items-center gap-3 font-sans text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-foreground-subtle"
-                >
-                  {/* Alternate the tilt so the doodles look drawn, not stamped. */}
-                  <CourseDoodle
-                    mealType={mealType}
-                    className={`size-7 shrink-0 text-primary dark:text-primary-muted ${
-                      courseIndex % 2 === 0 ? "-rotate-6" : "rotate-6"
-                    }`}
-                  />
-                  {MEAL_TYPE_LABELS[mealType]}
-                  <span aria-hidden className="menu-squiggle ml-1 h-2 grow text-foreground-subtle/35" />
-                </h2>
-                <ul className="flex flex-col">
-                  {courseRecipes.map((recipe, i) => (
-                    <MenuDishRow key={recipe.id} recipe={recipe} index={startIndex + i} />
-                  ))}
-                </ul>
-              </section>
-            ))}
-          </div>
-
-          {legendTags.length > 0 && (
-            <ul
-              aria-label="Key"
-              className="flex max-w-3xl flex-wrap gap-x-5 gap-y-2 border-t border-foreground-border pt-5 text-sm text-foreground-subtle lg:max-w-none"
+        <div
+          className={`max-w-3xl ${courses.length > 1 ? "lg:max-w-none lg:columns-2 lg:gap-x-16" : ""}`}
+        >
+          {courses.map(({ mealType, recipes: courseRecipes, startIndex }, courseIndex) => (
+            <section
+              key={mealType}
+              aria-labelledby={`course-${mealType}`}
+              className="mb-8 break-inside-avoid md:mb-10"
             >
-              {legendTags.map((tag) => (
-                <li key={tag} className="inline-flex items-center gap-1.5">
-                  <RecipeTagIcon tag={tag} className="size-4 text-primary dark:text-primary-muted" />
-                  {formatRecipeLabel(tag)}
-                </li>
-              ))}
-            </ul>
-          )}
-        </>
+              <h2
+                id={`course-${mealType}`}
+                className="mb-2 flex items-center gap-3 font-mono text-xs font-normal lowercase text-muted"
+              >
+                {/* Alternate the tilt so the doodles look drawn, not stamped. */}
+                <CourseDoodle
+                  mealType={mealType}
+                  className={`size-7 shrink-0 text-pine ${courseIndex % 2 === 0 ? "-rotate-6" : "rotate-6"}`}
+                />
+                <span>
+                  {String(courseIndex + 1).padStart(2, "0")} · {MEAL_TYPE_LABELS[mealType]}
+                </span>
+                <span aria-hidden className="menu-squiggle ml-1 h-2 grow text-charcoal/20" />
+              </h2>
+              <ul className="flex flex-col">
+                {courseRecipes.map((recipe, i) => (
+                  <MenuDishRow key={recipe.id} recipe={recipe} index={startIndex + i} />
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
       ) : (
         <div className="flex max-w-3xl flex-col items-center gap-3 py-14 text-center">
-          <SearchIcon className="size-8 text-foreground-subtle" />
-          <p className="text-lg md:text-xl text-foreground-subtle max-w-md">
+          <SearchIcon className="size-8 text-muted" />
+          <p className="text-lg md:text-xl text-muted max-w-md">
             Nothing on the menu matches that. Try another course or ingredient.
           </p>
         </div>

@@ -16,7 +16,7 @@ type Doodle = {
   rings?: [number, number, number][];
   /** Filled dots: [cx, cy, r]. */
   dots?: [number, number, number][];
-  /** Warm brass instead of sage — for the bready, eggy, woody, lemony ones. */
+  /** Warm parchment brown instead of pine — for the bready, eggy, woody, lemony ones. */
   brass?: boolean;
 };
 
@@ -403,9 +403,7 @@ for (let row = 0; row < ROWS; row++) {
     scatter.map(({ name, x, y, size, tilt, onPhones }) => {
       const { paths, rings = [], dots = [], brass = false } = doodles[name] as Doodle;
       // Visible at a glance but still clearly background (16% vanished on bright screens).
-      const tone = brass
-        ? 'text-brass opacity-[0.5] dark:opacity-[0.35]'
-        : 'text-primary opacity-[0.28] dark:text-primary-muted dark:opacity-[0.24]';
+      const tone = brass ? 'text-parchment-text opacity-[0.3]' : 'text-pine opacity-[0.22]';
       return (
         <svg
           viewBox="0 0 64 64"

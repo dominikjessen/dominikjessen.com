@@ -143,7 +143,7 @@
   --animate-steam: steam 2.4s ease-out infinite;
   --animate-progress: progress 28s linear infinite;
 
-  /* Menu: entrances, the "Surprise me" dice moment, and the handwritten sign-off. */
+  /* Menu: entrances and the "Surprise me" dice moment. */
   @keyframes menu-fade-up {
     from {
       opacity: 0;
@@ -202,22 +202,18 @@
     }
   }
 
-  /* Reveals text left to right, like it's being written. */
-  @keyframes write-in {
-    from {
-      clip-path: inset(-20% 100% -20% 0);
-    }
-    to {
-      clip-path: inset(-20% 0 -20% 0);
-    }
-  }
-
   --animate-menu-fade-up: menu-fade-up 450ms cubic-bezier(0.2, 0, 0, 1) both;
   --animate-menu-fade-in: menu-fade-in 200ms ease-out both;
   --animate-dice-roll: dice-roll 600ms ease-in-out infinite;
   --animate-dice-land: dice-land 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
   --animate-pop-in: pop-in 450ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  --animate-write-in: write-in 900ms cubic-bezier(0.4, 0, 0.2, 1) 400ms both;
+}
+
+/* Pine band with a faint white dot grid: the site footer and the menu's closing section. */
+@utility pine-band {
+  background-color: var(--pine-deep);
+  background-image: radial-gradient(rgb(255 255 255 / 0.08) 1.2px, transparent 1.3px);
+  background-size: 24px 24px;
 }
 
 /* Redesign motion is decorative; stop it for visitors who ask for less. */

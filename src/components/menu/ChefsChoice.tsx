@@ -73,7 +73,7 @@ export default function ChefsChoice({ pool, onClose }: ChefsChoiceProps) {
       aria-modal="true"
       aria-label="The chef is choosing a dish"
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-background/85 p-6 backdrop-blur-sm motion-safe:animate-menu-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-canvas/90 p-6 backdrop-blur-sm motion-safe:animate-menu-fade-in"
     >
       <div
         onClick={(event) => event.stopPropagation()}
@@ -81,26 +81,24 @@ export default function ChefsChoice({ pool, onClose }: ChefsChoiceProps) {
       >
         <DiceIcon
           key={chosen ? "landed" : "rolling"}
-          className={`size-14 md:size-16 text-primary dark:text-primary-muted ${
+          className={`size-14 md:size-16 text-pine ${
             chosen ? "motion-safe:animate-dice-land" : "motion-safe:animate-dice-roll"
           }`}
         />
-        <p className="font-hand text-2xl md:text-3xl text-foreground-subtle">
+        <p className="font-hand text-2xl md:text-3xl text-muted">
           {chosen ? "The chef has chosen…" : "The chef is choosing…"}
         </p>
         <p
           key={chosen ? "chosen" : "shuffling"}
           aria-hidden={!chosen}
-          className={`font-signika text-3xl md:text-5xl font-bold leading-tight ${
-            chosen
-              ? "text-primary dark:text-primary-muted motion-safe:animate-pop-in"
-              : "text-foreground-subtle"
+          className={`font-display text-4xl md:text-6xl leading-tight ${
+            chosen ? "text-pine motion-safe:animate-pop-in" : "text-muted"
           }`}
         >
           {shown.title}
         </p>
         <p
-          className={`italic text-foreground-muted transition-opacity duration-300 ${
+          className={`italic text-body transition-opacity duration-300 ${
             chosen ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -113,9 +111,9 @@ export default function ChefsChoice({ pool, onClose }: ChefsChoiceProps) {
         <button
           type="button"
           onClick={onClose}
-          className="mt-2 text-sm text-foreground-subtle underline-offset-4 hover:text-foreground-soft hover:underline"
+          className="mt-2 rounded-sm font-mono text-xs text-muted underline-offset-4 hover:text-charcoal hover:underline focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2"
         >
-          Never mind
+          never mind
         </button>
       </div>
     </div>

@@ -70,7 +70,8 @@ const ogImage = new URL('/og.png', Astro.site);
     >
       <slot />
     </main>
-    <Footer />
+    <!-- Pages can bring their own ending (the menu does); everything else gets the pine footer. -->
+    <slot name="footer"><Footer /></slot>
     <Analytics />
   </body>
 </html>
