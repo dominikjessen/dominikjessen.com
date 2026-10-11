@@ -3,38 +3,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Fonts */
-  --font-signika: "Signika Variable", system-ui, sans-serif;
-  --font-sans: "Inter Variable", system-ui, sans-serif;
-  /* Redesign type: serif display, sans body, mono labels. Imported in Layout.astro. */
+  /* Type: serif display, sans body, mono labels. Imported in Layout.astro. */
   --font-display: "Instrument Serif", Georgia, serif;
   --font-body: "Instrument Sans Variable", system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
-  /* Handwritten accents (menu sign-off, redesign notes). Imported globally in Layout.astro. */
+  /* Handwritten accents (notes on the homepage, menu and recipes). */
   --font-hand: "Caveat Variable", "Bradley Hand", cursive;
-  /* Menu masthead name (Fraunces italic). Imported only on the menu page. */
-  --font-fraunces: "Fraunces Variable", Georgia, serif;
 
-  /* Colors backed by CSS variables in Layout.astro */
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-foreground_lighter: hsl(var(--foreground_lighter));
-  --color-primary: hsl(var(--primary));
-  --color-primary-light: hsl(var(--primary-light));
-  --color-primary-soft: hsl(var(--primary-soft));
-  --color-primary-muted: hsl(var(--primary-muted));
-  --color-foreground-subtle: hsl(var(--foreground-subtle));
-  --color-foreground-muted: hsl(var(--foreground-muted));
-  --color-foreground-soft: hsl(var(--foreground-soft));
-  --color-foreground-strong: hsl(var(--foreground-strong));
-  --color-foreground-surface: hsl(var(--foreground-surface));
-  --color-foreground-border: hsl(var(--foreground-border));
-  --color-surface-card: hsl(var(--surface-card));
-  --color-brass: hsl(var(--brass));
-  --color-ink: hsl(var(--ink));
-  --color-ink-foreground: hsl(var(--ink-foreground));
-
-  /* Redesign palette (pine and oat), backed by hex variables in Layout.astro */
+  /* Pine and oat palette, backed by hex variables in Layout.astro */
   --color-canvas: var(--canvas);
   --color-canvas-dots: var(--canvas-dots);
   --color-charcoal: var(--charcoal);
@@ -78,7 +54,7 @@
     }
   }
 
-  /* Redesign: graph wires (use with stroke-dasharray: 6 6) and status dots. */
+  /* Graph and project wires (use with stroke-dasharray: 6 6) and status dots. */
   @keyframes flow {
     to {
       stroke-dashoffset: -24;
@@ -216,7 +192,7 @@
   background-size: 24px 24px;
 }
 
-/* Redesign motion is decorative; stop it for visitors who ask for less. */
+/* This motion is decorative; stop it for visitors who ask for less. */
 @media (prefers-reduced-motion: reduce) {
   .animate-wave,
   .animate-flow,

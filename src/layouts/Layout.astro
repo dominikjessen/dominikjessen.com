@@ -1,5 +1,4 @@
 ---
-import '@fontsource-variable/signika';
 import '@fontsource/instrument-serif/400.css';
 import '@fontsource/instrument-serif/400-italic.css';
 import '@fontsource-variable/instrument-sans';
@@ -19,15 +18,12 @@ interface Props {
   title: string;
   description?: string;
   showNav?: boolean;
-  /** Menu pages: keeps the legacy Signika headings while the menu moves to the new design. */
-  paper?: boolean;
 }
 
 const {
   title,
   description = "Hi, I'm Dominik, a product engineer at n8n. I turn real problems into software people enjoy using.",
   showNav = true,
-  paper = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -59,7 +55,7 @@ const ogImage = new URL('/og.png', Astro.site);
     <meta property="og:image:alt" content="Hi, I'm Dominik. Product engineer, with a career graph from Uni Mannheim to n8n." />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
-  <body class:list={['bg-background text-foreground overflow-x-hidden', { paper }]}>
+  <body class="overflow-x-hidden">
     {showNav && <Nav />}
     <main
       class:list={[
@@ -77,30 +73,9 @@ const ogImage = new URL('/og.png', Astro.site);
 </html>
 
 <style is:global>
+  /* Pine and oat palette. Hex so Tailwind opacity modifiers work via color-mix.
+     Dark mode is paused; a dark version would redefine these under html.dark. */
   html {
-    --background: 72 99% 98%;
-    --foreground: 70 5% 7%;
-    --foreground_lighter: 70 11% 11%;
-    --primary: 119 19% 42%;
-    --brass: 43 66% 66%;
-
-    /* Semantic tints/surfaces */
-    --primary-light: 119 25% 96%;
-    --primary-soft: 119 20% 92%;
-    --primary-muted: 119 19% 52%;
-    --foreground-subtle: 70 5% 48%;
-    --foreground-muted: 70 6% 35%;
-    --foreground-soft: 70 8% 22%;
-    --foreground-strong: 70 5% 12%;
-    --foreground-surface: 70 5% 97%;
-    --foreground-border: 70 5% 91%;
-    /* Card surface: soft mix of primary + background, very light (for Work + Currently cards). Light: ~rgb(237,240,230). */
-    --surface-card: 78 25% 92%;
-    /* Deep bottle green + cream: the menu's filter bar and other "fine dining" accents. */
-    --ink: 155 32% 17%;
-    --ink-foreground: 45 45% 95%;
-
-    /* Redesign palette (pine and oat). Hex so Tailwind opacity modifiers work via color-mix. */
     --canvas: #f5f2eb; /* page background */
     --canvas-dots: #d8d2c5; /* dot grid */
     --charcoal: #1a1a17; /* headings, strong text */
@@ -121,70 +96,21 @@ const ogImage = new URL('/og.png', Astro.site);
     --visitor: #8e6538; /* the "you?" cursor */
   }
 
-  html.dark {
-    --background: 120 2% 10%;
-    --foreground: 72 99% 98%;
-    --foreground_lighter: 90 6% 93%;
-    --primary: 120 19% 50%;
-    --brass: 43 66% 66%;
-
-    /* Semantic tints/surfaces (dark mode) */
-    --primary-light: 120 19% 16%;
-    --primary-soft: 120 19% 22%;
-    --primary-muted: 120 19% 65%;
-    --foreground-subtle: 40 6% 70%;
-    --foreground-muted: 40 6% 70%;
-    --foreground-soft: 90 6% 82%;
-    --foreground-strong: 90 6% 96%;
-    --foreground-surface: 120 2% 16%;
-    --foreground-border: 120 2% 22%;
-    --surface-card: 115 8% 18%;
-    --ink: 152 18% 20%;
-    --ink-foreground: 45 45% 95%;
-  }
-
   ::selection {
-    background: hsl(var(--primary));
-    color: hsl(var(--background));
+    background: var(--pine);
+    color: var(--canvas);
   }
 
-  /* Oat dot grid and the body font, on every page. */
+  /* Oat dot grid, body font and default text colour, on every page. */
   body {
     background-color: var(--canvas);
     background-image: radial-gradient(var(--canvas-dots) 1.2px, transparent 1.3px);
     background-size: 24px 24px;
     font-family: var(--font-body);
-  }
-
-  /* Legacy heading style, kept for the menu's content until its headings are restyled (not the footer). */
-  body.paper main h1,
-  body.paper main h2 {
-    font-family: 'Signika Variable', sans-serif;
-    font-weight: 700;
+    color: var(--charcoal);
   }
 
   a:hover {
     opacity: 80%;
-  }
-
-  .scroll-fade-in {
-    animation: fade-in 2s linear both;
-    animation-timeline: view();
-    animation-range: entry 20% cover 50%;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-fade-in {
-      animation: none;
-    }
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
 </style>
