@@ -35,7 +35,7 @@ function CoursePill({
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`shrink-0 rounded-full px-4 py-2 font-mono text-[13px] lowercase whitespace-nowrap transition duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat ${
+      className={`shrink-0 rounded-full px-4 py-2 font-mono text-ui lowercase whitespace-nowrap transition duration-150 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat ${
         active ? "bg-oat text-charcoal" : "text-canvas/75 hover:bg-canvas/10 hover:text-canvas"
       }`}
     >
@@ -189,7 +189,7 @@ export default function MenuBrowse({ recipes }: MenuBrowseProps) {
           type="button"
           onClick={() => setChoosing(true)}
           aria-label="Surprise me with a random dish"
-          className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-canvas/10 px-3 py-2 font-mono text-[13px] text-canvas transition duration-150 hover:bg-oat hover:text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat sm:px-4"
+          className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-canvas/10 px-3 py-2 font-mono text-ui text-canvas transition duration-150 hover:bg-oat hover:text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat sm:px-4"
         >
           <DiceIcon className="size-4 transition-transform duration-300 ease-out group-hover:rotate-90" />
           <span className="hidden sm:inline">surprise me</span>

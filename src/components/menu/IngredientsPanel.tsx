@@ -31,7 +31,7 @@ function Fact({ icon, label, children }: { icon: ReactNode; label: string; child
     <div className="flex items-center gap-3">
       <span className="shrink-0 text-pine">{icon}</span>
       <div>
-        <p className="font-mono text-[11px] lowercase text-muted">{label}</p>
+        <p className="font-mono text-label lowercase text-muted">{label}</p>
         {children}
       </div>
     </div>
@@ -75,7 +75,7 @@ export default function IngredientsPanel({ ingredients, servings, timeMinutes }:
   return (
     <>
       {(timeMinutes !== undefined || servings !== undefined) && (
-        <div className="mb-8 flex flex-wrap items-center gap-x-8 gap-y-4 rounded-[14px] border border-charcoal/16 bg-white px-5 py-4 shadow-[0_6px_16px_rgb(26_26_23/0.04)]">
+        <div className="mb-8 flex flex-wrap items-center gap-x-8 gap-y-4 rounded-card border border-charcoal/16 bg-white px-5 py-4 shadow-card-sm">
           {timeMinutes !== undefined && (
             <Fact icon={<ClockIcon className="size-6" />} label="Time">
               <p className="text-[17px] font-semibold text-charcoal">{formatTime(timeMinutes)}</p>
@@ -137,7 +137,7 @@ export default function IngredientsPanel({ ingredients, servings, timeMinutes }:
               </span>
               {ingredient.amount && (
                 <span
-                  className={`shrink-0 font-mono text-[13px] tabular-nums transition-colors duration-200 ${
+                  className={`shrink-0 font-mono text-ui tabular-nums transition-colors duration-200 ${
                     scaled ? "text-pine" : "text-muted"
                   }`}
                 >

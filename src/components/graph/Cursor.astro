@@ -21,7 +21,7 @@ const { name, color = 'pine', class: className, ...rest } = Astro.props as Props
   </svg>
   <span
     class:list={[
-      'mt-[14px] px-2 py-[3px] rounded-[6px_6px_6px_2px] text-white text-xs font-semibold whitespace-nowrap',
+      'mt-3.5 px-2 py-0.75 rounded-[6px_6px_6px_2px] text-white text-xs font-semibold whitespace-nowrap',
       color === 'pine' ? 'bg-pine' : 'bg-visitor',
     ]}>{name}</span
   >

@@ -59,9 +59,9 @@ const ogImage = new URL('/og.png', Astro.site);
     {showNav && <Nav />}
     <main
       class:list={[
-        'relative z-0 mx-auto pb-24 max-w-[1280px] px-5 md:px-10 xl:px-[72px]',
+        'relative z-0 mx-auto pb-24 max-w-7xl px-5 md:px-10 xl:px-18',
         // Pages with the fixed header bar clear it (14px + 54px mobile, 20px + 56px from md).
-        showNav ? 'pt-[68px] md:pt-[76px]' : 'pt-12 md:pt-16',
+        showNav ? 'pt-17 md:pt-19' : 'pt-12 md:pt-16',
       ]}
     >
       <slot />

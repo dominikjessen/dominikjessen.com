@@ -93,29 +93,29 @@ const M_DOMINIK_SPOTS = [
 
 <div class:list={['w-full', className]}>
   <!-- Two-lane layout, md and up -->
-  <div class="hidden md:flex flex-col gap-[14px] mx-auto" style={`width:${GRAPH_W}px`}>
+  <div class="hidden md:flex flex-col gap-3.5 mx-auto" style={`width:${GRAPH_W}px`}>
     <div class="flex items-center justify-between gap-3 font-mono text-xs text-muted">
       <span>career.workflow</span>
-      <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 font-mono text-[11px] text-pine-deep whitespace-nowrap">
-        <span class="size-[7px] rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 font-mono text-label text-pine-deep whitespace-nowrap">
+        <span class="size-1.75 rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
         running since {since}
       </span>
     </div>
 
     <div class="career-zone relative" style={`width:${GRAPH_W}px;height:${height}px`} data-cursor-zone data-spots={JSON.stringify(spots)}>
       <div
-        class="absolute top-0 h-full rounded-[14px] bg-sage border border-dashed border-[rgb(47_74_58/0.28)]"
+        class="absolute top-0 h-full rounded-card bg-sage border border-dashed border-[rgb(47_74_58/0.28)]"
         style="left:-10px;width:290px"
         aria-hidden="true"
       >
-        <span class="absolute top-3 left-[14px] font-mono text-[11px] text-pine-deep">engineering</span>
+        <span class="absolute top-3 left-3.5 font-mono text-label text-pine-deep">engineering</span>
       </div>
       <div
-        class="absolute top-0 h-full rounded-[14px] bg-parchment border border-dashed border-[rgb(120_98_55/0.30)]"
+        class="absolute top-0 h-full rounded-card bg-parchment border border-dashed border-[rgb(120_98_55/0.30)]"
         style="left:278px;width:290px"
         aria-hidden="true"
       >
-        <span class="absolute top-3 right-[14px] font-mono text-[11px] text-parchment-text">product</span>
+        <span class="absolute top-3 right-3.5 font-mono text-label text-parchment-text">product</span>
       </div>
 
       <svg class="absolute inset-0 overflow-visible" width={GRAPH_W} height={height} viewBox={`0 0 ${GRAPH_W} ${height}`} fill="none" aria-hidden="true">
@@ -165,7 +165,7 @@ const M_DOMINIK_SPOTS = [
       <Cursor name="you" color="visitor" class="cursor-you absolute left-0 top-0 z-20" data-cursor="you" />
     </div>
 
-    <p class="pl-[144px] font-mono text-xs leading-normal text-muted">
+    <p class="pl-36 font-mono text-xs leading-normal text-muted">
       ↳ output: <span class="text-charcoal">turn real problems into software people enjoy using</span>
     </p>
   </div>
@@ -174,21 +174,21 @@ const M_DOMINIK_SPOTS = [
   <div class="md:hidden flex flex-col">
     <div class="flex items-center justify-between gap-3 font-mono text-xs text-muted">
       <span>career.workflow</span>
-      <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 font-mono text-[11px] text-pine-deep whitespace-nowrap">
-        <span class="size-[7px] rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 font-mono text-label text-pine-deep whitespace-nowrap">
+        <span class="size-1.75 rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
         running since {since}
       </span>
     </div>
-    <div class="mt-3 flex items-center gap-[14px] font-mono text-[11px]" aria-hidden="true">
+    <div class="mt-3 flex items-center gap-3.5 font-mono text-label" aria-hidden="true">
       <span class="flex items-center gap-1.5 text-pine-deep">
-        <span class="size-3 rounded-[3px] bg-sage border border-[rgb(47_74_58/0.24)]"></span>engineering
+        <span class="size-3 rounded-mark bg-sage border border-[rgb(47_74_58/0.24)]"></span>engineering
       </span>
       <span class="flex items-center gap-1.5 text-parchment-text">
-        <span class="size-3 rounded-[3px] bg-parchment border border-[rgb(120_98_55/0.30)]"></span>product
+        <span class="size-3 rounded-mark bg-parchment border border-[rgb(120_98_55/0.30)]"></span>product
       </span>
     </div>
 
-    <div class="relative mt-[14px]" style={`height:${mHeight}px`} data-cursor-zone data-spots={JSON.stringify(M_DOMINIK_SPOTS)}>
+    <div class="relative mt-3.5" style={`height:${mHeight}px`} data-cursor-zone data-spots={JSON.stringify(M_DOMINIK_SPOTS)}>
       <!-- Left edge at the centre of an unshifted step; x values are the step offsets. -->
       <svg class="absolute top-0 left-[calc(50%-14px)] overflow-visible" width="1" height={mHeight} fill="none" aria-hidden="true">
         {

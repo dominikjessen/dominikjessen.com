@@ -79,7 +79,7 @@ const labels = [...new Set([...categories, ...tags])];
     <p>
       <a
         href="/menu"
-        class="inline-flex items-center font-mono text-[13px] text-charcoal bg-white border border-charcoal/22 px-4 py-2.5 rounded-[10px] focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2"
+        class="inline-flex items-center font-mono text-ui text-charcoal bg-white border border-charcoal/22 px-4 py-2.5 rounded-button focus-visible:outline-2 focus-visible:outline-pine focus-visible:outline-offset-2"
       >
         ← menu
       </a>
@@ -92,7 +92,7 @@ const labels = [...new Set([...categories, ...tags])];
       {/* Until a recipe has a photo, a dashed placeholder of the same shape shows where it goes. */}
       {
         heroImage ? (
-          <div class="w-full max-w-md overflow-hidden rounded-[14px] border border-charcoal/16 bg-stone shadow-[0_8px_20px_rgb(26_26_23/0.05)] lg:order-last lg:max-w-none">
+          <div class="w-full max-w-md overflow-hidden rounded-card border border-charcoal/16 bg-stone shadow-card lg:order-last lg:max-w-none">
             <Image
               src={heroImage}
               alt={heroImageAlt ?? ''}
@@ -106,14 +106,14 @@ const labels = [...new Set([...categories, ...tags])];
         ) : (
           <div
             aria-hidden="true"
-            class="aspect-square w-full max-w-md rounded-[14px] border-[1.5px] border-dashed border-wire-dash bg-white/40 lg:order-last lg:max-w-none"
+            class="aspect-square w-full max-w-md rounded-card border-[1.5px] border-dashed border-wire-dash bg-white/40 lg:order-last lg:max-w-none"
           />
         )
       }
 
       <header class="flex flex-col gap-4">
         <div class="flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
-          <span class="rounded-[5px] bg-sage px-2 py-[3px] text-[11px] lowercase text-pine-deep">{MEAL_TYPE_LABELS[mealType]}</span>
+          <span class="rounded-tag bg-sage px-2 py-0.75 text-label lowercase text-pine-deep">{MEAL_TYPE_LABELS[mealType]}</span>
           {badges.map((badge) => <RecipeBadge badge={badge} />)}
           {details.length > 0 && <span class="lowercase">{details.join(' · ')}</span>}
           {
@@ -129,12 +129,12 @@ const labels = [...new Set([...categories, ...tags])];
           <h1 class="font-display font-normal text-[48px] md:text-[72px] leading-[0.98] tracking-[-0.02em] text-charcoal">{title}</h1>
           {marginNote && <p class="origin-left -rotate-2 font-hand text-2xl md:text-3xl text-pine">{marginNote}</p>}
         </div>
-        <p class="text-[17px] leading-[1.65] md:text-[19px] md:leading-[1.72] text-body">{summary}</p>
+        <p class="text-lead md:text-lead-lg text-body">{summary}</p>
         {
           labels.length > 0 && (
             <ul class="flex flex-wrap gap-2" aria-label="Categories and tags">
               {labels.map((label) => (
-                <li class="rounded-[5px] bg-chip px-2 py-[3px] font-mono text-[11px] lowercase text-muted">{formatRecipeLabel(label)}</li>
+                <li class="rounded-tag bg-chip px-2 py-0.75 font-mono text-label lowercase text-muted">{formatRecipeLabel(label)}</li>
               ))}
             </ul>
           )
@@ -143,9 +143,9 @@ const labels = [...new Set([...categories, ...tags])];
           note && (
             <aside
               aria-label="Note from Dominik"
-              class="mt-2 flex flex-col gap-1.5 rounded-[14px] border border-charcoal/16 bg-white px-5 py-4 shadow-[0_6px_16px_rgb(26_26_23/0.04)] md:px-6 md:py-5"
+              class="mt-2 flex flex-col gap-1.5 rounded-card border border-charcoal/16 bg-white px-5 py-4 shadow-card-sm md:px-6 md:py-5"
             >
-              <span class="font-mono text-[11px] text-pine-deep">from dominik</span>
+              <span class="font-mono text-label text-pine-deep">from dominik</span>
               <p class="text-base md:text-[17px] italic leading-relaxed text-body">{note}</p>
             </aside>
           )
@@ -179,7 +179,7 @@ const labels = [...new Set([...categories, ...tags])];
     {/* Ask the chef once the recipe has done its job, rather than before anyone's read it. */}
     <section
       aria-label="Ask the chef"
-      class="flex flex-col items-center gap-5 rounded-[14px] bg-parchment px-6 py-8 text-center sm:flex-row sm:justify-between sm:px-10 sm:text-left"
+      class="flex flex-col items-center gap-5 rounded-card bg-parchment px-6 py-8 text-center sm:flex-row sm:justify-between sm:px-10 sm:text-left"
     >
       <div class="flex flex-col gap-1">
         <p class="font-hand text-3xl md:text-4xl text-pine">Fancy this one?</p>
@@ -189,7 +189,7 @@ const labels = [...new Set([...categories, ...tags])];
         href={chefRequestUrl(title)}
         target="_blank"
         rel="noopener noreferrer"
-        class="group inline-flex shrink-0 items-center gap-2.5 rounded-[10px] bg-pine px-5 py-[13px] text-base font-semibold leading-5 text-white transition duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine"
+        class="group inline-flex shrink-0 items-center gap-2.5 rounded-button bg-pine px-5 py-3.25 text-base font-semibold leading-5 text-white transition duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine"
       >
         <WhatsAppIcon className="size-5 transition-transform duration-300 ease-out group-hover:-rotate-12 group-hover:scale-110" />
         Have chef make you this
@@ -201,18 +201,18 @@ const labels = [...new Set([...categories, ...tags])];
   <!-- Recipe pages end in the menu's pine band: the way back, and the next dish. -->
   <nav slot="footer" aria-label="More from the menu" class="pine-band w-full text-canvas">
     <div
-      class="max-w-[1280px] mx-auto flex flex-col gap-8 px-5 py-14 sm:flex-row sm:items-center sm:justify-between md:px-10 md:py-16 xl:px-[72px]"
+      class="max-w-7xl mx-auto flex flex-col gap-8 px-5 py-14 sm:flex-row sm:items-center sm:justify-between md:px-10 md:py-16 xl:px-18"
     >
       <p class="flex flex-wrap gap-3">
         <a
           href="/menu"
-          class="inline-flex items-center font-mono text-[13px] text-charcoal bg-oat px-4 py-2.5 rounded-[10px] focus-visible:outline-2 focus-visible:outline-oat focus-visible:outline-offset-2"
+          class="inline-flex items-center font-mono text-ui text-charcoal bg-oat px-4 py-2.5 rounded-button focus-visible:outline-2 focus-visible:outline-oat focus-visible:outline-offset-2"
         >
           ← back to menu
         </a>
         <a
           href="/"
-          class="inline-flex items-center font-mono text-[13px] text-canvas border border-canvas/25 px-4 py-2.5 rounded-[10px] focus-visible:outline-2 focus-visible:outline-oat focus-visible:outline-offset-2"
+          class="inline-flex items-center font-mono text-ui text-canvas border border-canvas/25 px-4 py-2.5 rounded-button focus-visible:outline-2 focus-visible:outline-oat focus-visible:outline-offset-2"
         >
           go home
         </a>
@@ -221,9 +221,9 @@ const labels = [...new Set([...categories, ...tags])];
         next && (
           <a
             href={`/menu/${next.id}`}
-            class="group flex flex-col gap-1 rounded-[14px] border border-canvas/15 bg-canvas/[0.06] px-6 py-4 transition duration-200 ease-out hover:bg-canvas/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat sm:min-w-72 sm:text-right"
+            class="group flex flex-col gap-1 rounded-card border border-canvas/15 bg-canvas/6 px-6 py-4 transition duration-200 ease-out hover:bg-canvas/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-oat sm:min-w-72 sm:text-right"
           >
-            <span class="font-mono text-[11px] lowercase text-footer-muted">next up · {MEAL_TYPE_LABELS[next.mealType]}</span>
+            <span class="font-mono text-label lowercase text-footer-muted">next up · {MEAL_TYPE_LABELS[next.mealType]}</span>
             <span class="font-display text-[26px] md:text-[30px] leading-tight text-canvas">
               {next.title}
               <span aria-hidden class="inline-block text-oat transition duration-150 group-hover:translate-x-1">→</span>

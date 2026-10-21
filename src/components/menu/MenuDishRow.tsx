@@ -36,7 +36,7 @@ export default function MenuDishRow({ recipe, index }: MenuDishRowProps) {
             Hover sweeps a parchment marker across the name (the site's highlight) and turns the leader, time and arrow pine. */}
         <div className="flex items-baseline-last gap-3">
           <h3 className="min-w-0 font-display font-normal text-[22px] md:text-2xl text-charcoal leading-tight">
-            <span className="-mx-1 rounded-[3px] px-1 box-decoration-clone bg-[linear-gradient(var(--parchment),var(--parchment))] bg-no-repeat bg-[length:0%_100%] transition-[background-size] duration-300 ease-out group-hover:bg-[length:100%_100%] group-focus-visible:bg-[length:100%_100%]">
+            <span className="-mx-1 rounded-mark px-1 box-decoration-clone bg-[linear-gradient(var(--parchment),var(--parchment))] bg-no-repeat bg-[length:0%_100%] transition-[background-size] duration-300 ease-out group-hover:bg-[length:100%_100%] group-focus-visible:bg-[length:100%_100%]">
               {title}
             </span>
             {iconTags.length > 0 && (

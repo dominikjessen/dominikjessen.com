@@ -31,19 +31,19 @@ const focusRing = 'focus-visible:outline-2 focus-visible:outline-pine focus-visi
 <section id="projects" class="pb-16 lg:pb-28">
   <header class="flex flex-col gap-2">
     <p class="font-mono text-xs text-muted">01 · side projects</p>
-    <h2 class="font-display font-normal text-[44px] md:text-[60px] leading-none tracking-[-0.015em] text-charcoal">
+    <h2 class="font-display font-normal text-heading md:text-heading-lg text-charcoal">
       Side <span class="italic">projects</span>
     </h2>
   </header>
 
-  <ul class="mt-[30px] flex flex-col gap-9 xl:gap-12">
+  <ul class="mt-7.5 flex flex-col gap-9 xl:gap-12">
     {
       items.map((project) => {
         const inLabel = emojiLabel(project.input);
         return (
           <li class="flex flex-col items-start xl:flex-row xl:items-center">
             {/* IN */}
-            <div class="inline-flex items-baseline gap-2 px-3 py-[9px] xl:flex xl:flex-col xl:items-start xl:gap-0.5 xl:w-40 xl:shrink-0 xl:px-[14px] xl:py-3 bg-white border border-dashed border-wire-dash rounded-[10px]">
+            <div class="inline-flex items-baseline gap-2 px-3 py-2.25 xl:flex xl:flex-col xl:items-start xl:gap-0.5 xl:w-40 xl:shrink-0 xl:px-3.5 xl:py-3 bg-white border border-dashed border-wire-dash rounded-button">
               <span class="font-mono text-[10px] text-muted">IN</span>
               <span class="text-[15px] font-semibold text-charcoal" role={inLabel ? 'img' : undefined} aria-label={inLabel}>
                 {project.input}
@@ -59,18 +59,18 @@ const focusRing = 'focus-visible:outline-2 focus-visible:outline-pine focus-visi
             </svg>
 
             {/* Card */}
-            <article class="w-full xl:flex-1 xl:min-w-0 flex flex-col md:flex-row gap-[22px] p-4 md:p-[22px] bg-white border border-charcoal/16 rounded-[14px] shadow-[0_8px_20px_rgb(26_26_23/0.05)]">
+            <article class="w-full xl:flex-1 xl:min-w-0 flex flex-col md:flex-row gap-5.5 p-4 md:p-5.5 bg-white border border-charcoal/16 rounded-card shadow-card">
               <div class="flex flex-col gap-2.5 md:flex-1 md:min-w-0">
                 <h3 class="font-display font-normal text-[28px] md:text-[32px] leading-[1.05] text-charcoal">{project.name}</h3>
                 <p class="text-[15px] leading-[1.6] text-body">{project.tagline}</p>
                 {project.stat && (
-                  <p class="inline-flex items-center gap-1.5 self-start rounded-full bg-sage px-2.5 py-1 font-mono text-[11px] text-pine-deep">
+                  <p class="inline-flex items-center gap-1.5 self-start rounded-full bg-sage px-2.5 py-1 font-mono text-label text-pine-deep">
                     <span class="size-1.5 rounded-full bg-pine" aria-hidden="true" />
                     {project.stat}
                   </p>
                 )}
                 {project.techStack && (
-                  <p class="font-mono text-[11px] leading-relaxed text-muted lowercase">{project.techStack.join(' · ')}</p>
+                  <p class="font-mono text-label leading-relaxed text-muted lowercase">{project.techStack.join(' · ')}</p>
                 )}
                 <div class="mt-1 flex flex-wrap items-stretch gap-2.5">
                   {project.url && (
@@ -78,7 +78,7 @@ const focusRing = 'focus-visible:outline-2 focus-visible:outline-pine focus-visi
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class:list={['inline-flex items-center bg-pine text-white text-sm font-semibold px-[14px] py-[9px] rounded-lg', focusRing]}
+                      class:list={['inline-flex items-center bg-pine text-white text-sm font-semibold px-3.5 py-2.25 rounded-lg', focusRing]}
                     >
                       Visit site<span class="sr-only">: {project.name}</span>
                       <span aria-hidden="true">&nbsp;→</span>
@@ -104,7 +104,7 @@ const focusRing = 'focus-visible:outline-2 focus-visible:outline-pine focus-visi
                   sizes="(min-width: 768px) 290px, calc(100vw - 72px)"
                   loading="lazy"
                   class:list={[
-                    'order-first md:order-last w-full h-[180px] md:w-[290px] md:h-[184px] md:shrink-0 rounded-[9px] object-cover object-left-top',
+                    'order-first md:order-last w-full h-45 md:w-72.5 md:h-46 md:shrink-0 rounded-[9px] object-cover object-left-top',
                     TINT[project.tint],
                   ]}
                 />
@@ -120,7 +120,7 @@ const focusRing = 'focus-visible:outline-2 focus-visible:outline-pine focus-visi
             </svg>
 
             {/* OUT */}
-            <div class="inline-flex items-baseline gap-2 px-3 py-[9px] xl:flex xl:flex-col xl:items-start xl:gap-0.5 xl:w-40 xl:shrink-0 xl:px-[14px] xl:py-3 bg-sage rounded-[10px]">
+            <div class="inline-flex items-baseline gap-2 px-3 py-2.25 xl:flex xl:flex-col xl:items-start xl:gap-0.5 xl:w-40 xl:shrink-0 xl:px-3.5 xl:py-3 bg-sage rounded-button">
               <span class="font-mono text-[10px] text-pine-deep">OUT</span>
               <span class="text-[15px] font-semibold text-charcoal">{project.output}</span>
             </div>

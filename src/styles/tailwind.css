@@ -10,6 +10,34 @@
   /* Handwritten accents (notes on the homepage, menu and recipes). */
   --font-hand: "Caveat Variable", "Bradley Hand", cursive;
 
+  /* Text sizes by role. Labels/UI leave line-height to the context, like an arbitrary size would. */
+  --text-label: 11px; /* mono labels, tags, chips */
+  --text-ui: 13px; /* mono buttons, nav links, amounts */
+  --text-intro: 15px; /* section intros (mobile) */
+  --text-intro--line-height: 1.6;
+  --text-intro-lg: 16px;
+  --text-intro-lg--line-height: 1.65;
+  --text-heading: 44px; /* section headings: Side projects, Work, Currently (mobile) */
+  --text-heading--line-height: 1;
+  --text-heading--letter-spacing: -0.015em;
+  --text-heading-lg: 60px;
+  --text-heading-lg--line-height: 1;
+  --text-heading-lg--letter-spacing: -0.015em;
+  --text-lead: 17px; /* lead paragraphs: hero, menu masthead, recipe summary (mobile) */
+  --text-lead--line-height: 1.65;
+  --text-lead-lg: 19px;
+  --text-lead-lg--line-height: 1.72;
+
+  /* Radii */
+  --radius-mark: 3px; /* parchment highlights */
+  --radius-tag: 5px; /* tags and chips */
+  --radius-button: 10px; /* buttons, IN/OUT boxes, icon tiles */
+  --radius-card: 14px; /* cards and panels */
+
+  /* Card shadows */
+  --shadow-card-sm: 0 6px 16px rgb(26 26 23 / 0.04);
+  --shadow-card: 0 8px 20px rgb(26 26 23 / 0.05);
+
   /* Pine and oat palette, backed by hex variables in Layout.astro */
   --color-canvas: var(--canvas);
   --color-canvas-dots: var(--canvas-dots);

@@ -43,8 +43,8 @@ const legendTags = MENU_ICON_TAGS.filter((tag) => usedTags.has(tag));
     <header class="flex flex-col items-center gap-4 px-4 py-8 text-center md:py-12">
       <p data-keep-clear class="flex items-center gap-3 font-mono text-xs text-muted">
         <span class="rounded-md bg-chip px-2 py-1">~/menu</span>
-        <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 text-[11px] text-pine-deep">
-          <span class="size-[7px] rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 text-label text-pine-deep">
+          <span class="size-1.75 rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
           open most nights
         </span>
       </p>
@@ -54,8 +54,8 @@ const legendTags = MENU_ICON_TAGS.filter((tag) => usedTags.has(tag));
       >
         Chez <span class="italic">Dom</span>
       </h1>
-      <p data-keep-clear class="max-w-xl text-[17px] leading-[1.65] md:text-[19px] md:leading-[1.72] text-body">
-        Pull up a chair and I'll <strong class="font-semibold text-charcoal bg-parchment px-1 py-px rounded-[3px] box-decoration-clone"
+      <p data-keep-clear class="max-w-xl text-lead md:text-lead-lg text-body">
+        Pull up a chair and I'll <strong class="font-semibold text-charcoal bg-parchment px-1 py-px rounded-mark box-decoration-clone"
           >whip us something up.</strong
         >
       </p>
@@ -66,7 +66,7 @@ const legendTags = MENU_ICON_TAGS.filter((tag) => usedTags.has(tag));
 
   <!-- The menu ends in its own pine band (key, fine print, way home) instead of the site footer. -->
   <footer slot="footer" class="pine-band w-full text-canvas">
-    <div class="max-w-[1280px] mx-auto flex flex-col items-center gap-8 px-5 py-14 text-center md:px-10 md:py-16 xl:px-[72px]">
+    <div class="max-w-7xl mx-auto flex flex-col items-center gap-8 px-5 py-14 text-center md:px-10 md:py-16 xl:px-18">
       {
         legendTags.length > 0 && (
           <ul aria-label="Key" class="flex flex-wrap justify-center gap-x-6 gap-y-2 font-mono text-xs lowercase text-footer-muted">
@@ -86,7 +86,7 @@ const legendTags = MENU_ICON_TAGS.filter((tag) => usedTags.has(tag));
       </ul>
       <a
         href="/"
-        class="inline-flex items-center font-mono text-[13px] text-charcoal bg-oat px-4 py-2.5 rounded-[10px] focus-visible:outline-2 focus-visible:outline-oat focus-visible:outline-offset-2"
+        class="inline-flex items-center font-mono text-ui text-charcoal bg-oat px-4 py-2.5 rounded-button focus-visible:outline-2 focus-visible:outline-oat focus-visible:outline-offset-2"
       >
         ← go home
       </a>

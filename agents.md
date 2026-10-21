@@ -158,4 +158,6 @@ Use this playbook when adding a feature end-to-end. There are no DB migrations o
 
 - **Scope changes**: Prefer one feature or one fix per change set. Avoid mixing unrelated refactors or new features in the same edit.
 
+- **Tailwind values**: Prefer the scale and theme tokens over arbitrary values. Spacing and sizes use the v4 spacing scale (any multiple of 1px works: `w-72.5` not `w-[290px]`, `py-3.25` not `py-[13px]`, `max-w-7xl` for the 1280px container). Repeated design values have tokens in the `@theme` block of `tailwind.css`: text `text-label` (11px mono labels), `text-ui` (13px mono buttons/links), `text-intro`/`text-intro-lg`, `text-lead`/`text-lead-lg`, `text-heading`/`text-heading-lg`; radii `rounded-mark`, `rounded-tag`, `rounded-button`, `rounded-card`; shadows `shadow-card-sm`, `shadow-card`. Keep arbitrary values (`[...]`) for genuine one-offs: gradients, `calc()`, grid templates, display sizes and single-use shadows. If a value starts repeating, add a token instead.
+
 - **Dependencies**: Do not add npm dependencies without flagging them and justifying (per `.cursorrules`: high bar for new deps; no dependency to avoid a small, self-contained function).

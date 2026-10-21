@@ -12,7 +12,7 @@ export type RecipeBadgeProps = {
 export default function RecipeBadge({ badge }: RecipeBadgeProps) {
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-[5px] px-2 py-[3px] font-mono text-[11px] uppercase ${BADGE_STYLES[badge]}`}
+      className={`inline-flex items-center gap-1 rounded-tag px-2 py-0.75 font-mono text-label uppercase ${BADGE_STYLES[badge]}`}
     >
       <RecipeBadgeIcon badge={badge} className="size-3" />
       {RECIPE_BADGE_LABELS[badge]}
