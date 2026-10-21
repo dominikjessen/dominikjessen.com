@@ -22,9 +22,9 @@ const TILE: Record<CurrentlyCategoryKey, { tint: string; icon: ReactNode }> = {
   listening: {
     tint: "bg-sage text-pine-deep",
     icon: (
-      <span className="flex h-5 items-end gap-[3px]" aria-hidden="true">
+      <span className="flex h-5 items-end gap-0.75" aria-hidden="true">
         {[0, 0.3, 0.15, 0.45].map((delay) => (
-          <span key={delay} className="w-[3px] h-full origin-bottom rounded-full bg-pine animate-eq" style={{ animationDelay: `${delay}s` }} />
+          <span key={delay} className="w-0.75 h-full origin-bottom rounded-full bg-pine animate-eq" style={{ animationDelay: `${delay}s` }} />
         ))}
       </span>
     ),
@@ -78,10 +78,10 @@ export default function CurrentlyReact() {
     <section id="currently" className="pb-16 lg:pb-28 lg:grid lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-14 lg:items-start">
       <CurrentlyHeader />
 
-      <div className="mt-8 lg:mt-0 overflow-hidden bg-white border border-charcoal/16 rounded-[14px] shadow-[0_8px_20px_rgb(26_26_23/0.05)]">
-        <div className="flex items-center justify-between gap-3 px-[22px] py-2 bg-card-head border-b border-charcoal/10 font-mono text-xs text-muted">
+      <div className="mt-8 lg:mt-0 overflow-hidden bg-white border border-charcoal/16 rounded-card shadow-card">
+        <div className="flex items-center justify-between gap-3 px-5.5 py-2 bg-card-head border-b border-charcoal/10 font-mono text-xs text-muted">
           <span className="flex items-center gap-2">
-            <span className="size-[7px] rounded-full bg-pine animate-pulse-soft" aria-hidden="true" />
+            <span className="size-1.75 rounded-full bg-pine animate-pulse-soft" aria-hidden="true" />
             now playing
           </span>
           <ShuffleButton onClick={shuffle} />
@@ -92,15 +92,15 @@ export default function CurrentlyReact() {
             const tile = TILE[category];
             return (
               <li key={key} className="flex items-start gap-3.5 bg-white px-4 py-4 md:px-5 md:py-5">
-                <span className={`flex shrink-0 items-center justify-center size-10 rounded-[10px] ${tile.tint}`}>{tile.icon}</span>
+                <span className={`flex shrink-0 items-center justify-center size-10 rounded-button ${tile.tint}`}>{tile.icon}</span>
                 <div key={item.title} className="flex flex-col gap-1 min-w-0 motion-safe:animate-menu-fade-up">
-                  <span className="font-mono text-[11px] text-muted">{key}</span>
+                  <span className="font-mono text-label text-muted">{key}</span>
                   <p className="text-[15px] md:text-base leading-snug font-semibold text-charcoal">
                     <FieldValue title={item.title} url={item.url} />
-                    {category === "building" && <span className="ml-0.5 inline-block w-[2px] h-[1.05em] align-[-0.15em] bg-pine animate-blink" aria-hidden="true" />}
+                    {category === "building" && <span className="ml-0.5 inline-block w-0.5 h-[1.05em] align-[-0.15em] bg-pine animate-blink" aria-hidden="true" />}
                   </p>
                   {category === "listening" && (
-                    <span className="mt-1.5 block h-[3px] w-full max-w-40 overflow-hidden rounded-full bg-sage" aria-hidden="true">
+                    <span className="mt-1.5 block h-0.75 w-full max-w-40 overflow-hidden rounded-full bg-sage" aria-hidden="true">
                       <span className="block h-full w-full origin-left rounded-full bg-pine animate-progress" />
                     </span>
                   )}
@@ -118,10 +118,10 @@ function CurrentlyHeader() {
   return (
     <header className="flex flex-col">
       <p className="font-mono text-xs text-muted">03 · currently</p>
-      <h2 className="mt-2 font-display font-normal text-[44px] md:text-[60px] leading-none tracking-[-0.015em] text-charcoal">
+      <h2 className="mt-2 font-display font-normal text-heading md:text-heading-lg text-charcoal">
         Currently
       </h2>
-      <p className="mt-4 text-[15px] leading-[1.6] md:text-base md:leading-[1.65] text-body">
+      <p className="mt-4 text-intro md:text-intro-lg text-body">
         Some of the things I'm enjoying these days and always down to chat about!
       </p>
       <p className="mt-3 self-start font-hand text-[22px] leading-tight text-pine -rotate-2">updated whenever I remember</p>

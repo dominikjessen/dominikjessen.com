@@ -15,29 +15,29 @@ const focusRing = 'rounded-sm focus-visible:outline-2 focus-visible:outline-oat 
 const linkClass = `text-base text-canvas hover:underline decoration-oat underline-offset-4 ${focusRing}`;
 ---
 
-<footer id="footer" class="footer-band w-full bg-pine-deep text-canvas">
-  <div class="max-w-[1280px] mx-auto px-5 pt-14 pb-7 md:px-10 md:pt-[88px] md:pb-9 xl:px-[72px]">
+<footer id="footer" class="pine-band w-full text-canvas">
+  <div class="max-w-7xl mx-auto px-5 pt-14 pb-7 md:px-10 md:pt-22 md:pb-9 xl:px-18">
     <div class="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
-      <div class="lg:max-w-[780px]">
+      <div class="lg:max-w-195">
         <p class="font-mono text-xs text-footer-muted">04 · next step</p>
         <h2 class="mt-6 font-display font-normal text-[42px] leading-[1.02] md:text-[68px] md:leading-none text-canvas">
           Building something interesting? <span class="italic text-oat">Let's grab coffee.</span>
         </h2>
         <div class="relative mt-9 inline-block">
           <EmailLink
-            class={`inline-flex items-center gap-2.5 bg-oat text-charcoal text-[17px] leading-5 font-semibold px-[22px] py-[14px] rounded-[10px] ${focusRing}`}
+            class={`inline-flex items-center gap-2.5 bg-oat text-charcoal text-[17px] leading-5 font-semibold px-5.5 py-3.5 rounded-button ${focusRing}`}
           >
             <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4L10 6z" fill="currentColor"></path></svg>
             Say hello
           </EmailLink>
           <!-- A visitor about to click. -->
-          <Cursor name="you?" color="visitor" class="absolute left-[104px] top-[30px]" />
+          <Cursor name="you?" color="visitor" class="absolute left-26 top-7.5" />
         </div>
       </div>
 
       <nav class="flex gap-14" aria-label="Footer">
         <div class="flex flex-col gap-2">
-          <p class="mb-1 font-mono text-[11px] text-footer-muted">links</p>
+          <p class="mb-1 font-mono text-label text-footer-muted">links</p>
           {
             links.map((link) => (
               <a href={link.href} target="_blank" rel="noopener noreferrer" class={linkClass}>
@@ -47,26 +47,19 @@ const linkClass = `text-base text-canvas hover:underline decoration-oat underlin
           }
         </div>
         <div class="flex flex-col gap-2">
-          <p class="mb-1 font-mono text-[11px] text-footer-muted">say hello</p>
+          <p class="mb-1 font-mono text-label text-footer-muted">say hello</p>
           <EmailLink class={linkClass}>Email</EmailLink>
         </div>
       </nav>
     </div>
 
     <div
-      class="mt-16 md:mt-[68px] flex flex-col gap-2 border-t border-[rgb(247_246_241/0.16)] pt-4 md:flex-row md:items-center md:justify-between"
+      class="mt-16 md:mt-17 flex flex-col gap-2 border-t border-[rgb(247_246_241/0.16)] pt-4 md:flex-row md:items-center md:justify-between"
     >
       <p class="flex items-center gap-2.5 font-display text-xl text-canvas">
         <span class="text-xl leading-none" aria-hidden="true">👋🏻</span>Dominik Jessen
       </p>
-      <p class="text-[13px] text-footer-muted">© {year} Dominik Jessen. All rights reserved.</p>
+      <p class="text-ui text-footer-muted">© {year} Dominik Jessen. All rights reserved.</p>
     </div>
   </div>
 </footer>
-
-<style>
-  .footer-band {
-    background-image: radial-gradient(rgb(255 255 255 / 0.08) 1.2px, transparent 1.3px);
-    background-size: 24px 24px;
-  }
-</style>
