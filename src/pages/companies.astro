@@ -1,0 +1,53 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import CompaniesBrowse from '../sections/companiesBrowse';
+import type { CompanyListItem } from '../components/companies/CompanyCard';
+import directory from '../data/companies.json';
+import type { CompanyDirectory } from '../types/data';
+
+const { industries, companies } = directory as CompanyDirectory;
+
+// Logos are resized here (the island can't use <Image>): 28px tiles, at 2x.
+const logos = import.meta.glob<{ default: ImageMetadata }>('../images/companies/directory/*', { eager: true });
+
+const items: CompanyListItem[] = await Promise.all(
+  companies.map(async (company) => {
+    if (!company.logo) return company;
+    const file = logos[`../images/companies/directory/${company.logo}`];
+    if (!file) throw new Error(`companies.json: no logo "${company.logo}" in src/images/companies/directory/`);
+    const image = await getImage({ src: file.default, width: 56, format: 'webp' });
+    return { ...company, logoSrc: image.src };
+  })
+);
+
+const current = companies.filter((company) => !company.status).length;
+---
+
+<Layout
+  title="Good company · Dominik Jessen"
+  description="A browsable directory of companies I think are building something worth paying attention to, by industry."
+>
+  <div class="flex flex-col gap-10 md:gap-14">
+    <header class="flex flex-col gap-5 pt-10 md:pt-16">
+      <p class="flex items-center gap-3 font-mono text-xs text-muted">
+        <span class="rounded-md bg-chip px-2 py-1">~/companies</span>
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-sage px-2.5 py-1 text-label text-pine-deep">
+          <span class="size-1.75 rounded-full bg-pine animate-pulse-soft" aria-hidden="true"></span>
+          {current} and counting
+        </span>
+      </p>
+      <h1 class="font-display font-normal text-[64px] md:text-[96px] leading-[0.95] tracking-[-0.02em] text-charcoal">
+        Good <span class="italic">company</span>
+      </h1>
+      <p class="max-w-2xl text-lead md:text-lead-lg text-body">
+        Companies I think are building something <strong
+          class="font-semibold text-charcoal bg-parchment px-1 py-px rounded-mark box-decoration-clone">worth paying attention to.</strong
+        > Browse by industry, or narrow it down to where they are, who they sell to and how big they are.
+      </p>
+    </header>
+
+    <CompaniesBrowse client:load industries={industries} companies={items} />
+  </div>
+</Layout>
