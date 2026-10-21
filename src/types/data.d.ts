@@ -64,3 +64,48 @@ export type WorkEntry =
       runs: Run[]; // empty = "first runs in progress"
     })
   | (WorkEntryBase & { compact: true }); // a thin row: no highlight, no runs
+
+export type CompanyIndustryId =
+  | "health"
+  | "education"
+  | "finance"
+  | "climate"
+  | "mobility"
+  | "travel"
+  | "commerce"
+  | "media"
+  | "work"
+  | "software"
+  | "tech"
+  | "industry";
+
+export type CompanyIndustry = {
+  id: CompanyIndustryId;
+  label: string; // section heading, "Health & wellbeing"
+  short: string; // filter pill, "Health"
+};
+
+export type CompanySize = "startup" | "scale-up" | "enterprise";
+
+// Tags are best-effort and editorial: a starting point, not a hiring guarantee.
+export type Company = {
+  id: string; // slug of the name
+  name: string;
+  industry: CompanyIndustryId;
+  sector: string; // "Healthcare", groups cards within an industry
+  focus: string; // "Clinical AI"
+  url?: string; // website
+  logo?: string; // filename in src/images/companies/directory/; without one the tile shows the initial
+  hq: { city: string; country?: string }; // city "Remote" for remote-first companies; country is ISO 3166 alpha-2
+  europe?: "hq" | "office"; // headquartered in Europe, or a European office
+  remote?: true; // remote-friendly hiring
+  customers: ("b2b" | "b2c")[];
+  size: CompanySize; // startup: early and small; scale-up: private and growing; enterprise: public or large
+  status?: "acquired"; // hidden unless "acquired" is on
+  note?: string; // "Now part of Okta", "Formerly TripActions"
+};
+
+export type CompanyDirectory = {
+  industries: CompanyIndustry[];
+  companies: Company[];
+};
